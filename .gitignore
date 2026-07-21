@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+
+# HTML converted assets
+HTML/_converted/
+HTML/_mermaid/
+HTML/*_files/
+
+# Zone.Identifier files (Windows)
+*Zone.Identifier

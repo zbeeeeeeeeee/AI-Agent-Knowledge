@@ -1,7 +1,7 @@
-\documentclass[10pt,a4paper]{ctexart}
+\documentclass[9pt,a4paper,twocolumn]{ctexart}
 
 % --- Packages ---
-\usepackage[top=1.5cm, bottom=1.5cm, left=1.8cm, right=1.8cm]{geometry}
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{float}
@@ -46,7 +46,7 @@
 }
 
 \lstset{
-  basicstyle=\ttfamily\footnotesize,
+  basicstyle=\ttfamily\scriptsize,
   keywordstyle=\color{codekw}\bfseries,
   commentstyle=\color{codecomment}\itshape,
   stringstyle=\color{codestring},
@@ -92,20 +92,20 @@
 }
 
 % --- Compact spacing ---
-\linespread{1.0}
-\setlength{\parskip}{2pt plus 1pt minus 1pt}
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
 \setlength{\parindent}{0pt}
 
 % --- Table styling ---
 \renewcommand{\arraystretch}{1.1}
 
 % --- Heading styling (numbered) ---
-\titleformat{\section}{\large\bfseries}{\thesection\quad}{0em}{}
-\titlespacing{\section}{0pt}{10pt}{5pt}
-\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection\quad}{0em}{}
-\titlespacing{\subsection}{0pt}{8pt}{4pt}
-\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection\quad}{0em}{}
-\titlespacing{\subsubsection}{0pt}{6pt}{3pt}
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
 
 % --- Page style ---
 \pagestyle{fancy}
@@ -134,36 +134,6 @@
 \maketitle
 \markboth{Agent 知识整理}{Agent 知识整理}
 
-\section{目录}
-
-{\footnotesize
-\begin{tabularx}{\textwidth}{|X|X|}
-\hline
-\textbf{章节} & \textbf{页码} \\
-\hline
-一、Agent 核心概念（12 题） & 第 1 页 \\
-\hline
-二、RAG 检索增强（8 题） & 第 4 页 \\
-\hline
-三、Agent 工程化（12 题） & 第 7 页 \\
-\hline
-四、系统设计（12 题） & 第 11 页 \\
-\hline
-五、LLM 基础与结构化输出（11 题） & 第 16 页 \\
-\hline
-附录：面试答题框架建议 & 第 20 页 \\
-\hline
-\end{tabularx}
-}
-
-
-
-\medskip
-\hrule
-\medskip
-
-
-
 \markboth{Agent 核心概念}{Agent 核心概念}
 
 
@@ -172,7 +142,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Agent 定义}：Agent 是一个能感知环境、做决策、执行动作的软件系统，LLM 负责推理决策，工具负责执行，记忆负责保存上下文和历史经验。
   \item \textbf{核心公式}：Agent = LLM + Planning + Memory + Tools。
   \item \textbf{与 Chatbot 的本质区别}：
@@ -195,16 +165,16 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{完整流程}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item 初始化：加载 System Prompt、可用工具列表、用户请求；
   \item 循环迭代：读取上下文 → LLM 推理下一步（调用工具 or 直接回复）→ 执行工具 → 将结果追加到上下文；
   \item 退出条件：LLM 判断任务完成，不再调用工具时退出；
   \item 安全兜底：设置最大迭代轮次上限（一般 10\textasciitilde\{\}20 轮）或 Token 消耗阈值。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{工程难点不在 while 循环本身，而在上下文管理}：
   \item 任务越跑越久，上下文越来越长，关键信息被稀释，模型容易跑偏；
   \item 这是 Context Engineering 要解决的核心问题；
@@ -223,7 +193,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{ReAct（Reasoning + Acting）}：
   \item 推理和行动交替进行，走一步看一步；
   \item 适合路径不确定、需要根据证据调整方向的任务（如故障排查、代码库探索）。
@@ -253,15 +223,15 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{模型只认结构化描述}：LLM 通过 Function Calling Schema（JSON Schema 格式）理解工具有什么用、什么时候该用、参数怎么填。
   \item \textbf{description 决定了两个核心行为}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item \textbf{是否调用}：模型根据 description 判断当前场景是否适合调用该工具；
   \item \textbf{参数怎么填}：每个参数的 description 告诉模型该字段的含义和合法值范围。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{最佳实践}：
   \item description 要写清楚工具的适用场景和不适用场景（"什么情况下别调这个"）；
   \item 参数描述要给出格式示例（如 \texttt{"时间范围，格式 HH:MM-HH:MM，比如 09:00-09:30"}）；
@@ -281,7 +251,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{短期记忆（Session 级）}：
   \item 当前单次会话中的暂存信息：用户提问、模型回复、工具调用中间结果；
   \item 依托 LLM 上下文窗口，会随 Session 结束而消失；
@@ -305,16 +275,16 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{核心问题清单}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item 记忆压缩：上下文窗口有限，历史对话需要压缩，但压缩会丢失细节（如精确错误码、关键数值）；
   \item 记忆过期：旧偏好和事实可能已不再适用，需要失效机制；
   \item 记忆冲突：新事实和旧记录矛盾，需要冲突检测与合并；
   \item 记忆检索准确性：向量检索不是精确匹配，语义相近不等于相关。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{工程策略}：
   \item 权重衰减公式：\texttt{score = relevance × importance × decay(time)}，低分记忆自动淘汰；
   \item 边失效机制（ZEP）：新事实和旧边时间重叠时，标记旧边失效并打时间戳；
@@ -334,7 +304,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{向量记忆}：
   \item 适合语义模糊匹配（"用户喜欢简洁的风格"）；
   \item 基于 Embedding + 向量检索，召回率高但不精确；
@@ -361,7 +331,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Prompt Engineering 的边界}：
   \item 解决"怎么把指令说清楚"的问题，聚焦于单次模型调用的输入质量；
   \item 在简单任务里效果显著，但在长链路 Agent 场景里作用递减。
@@ -387,7 +357,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{MCP 解决的问题}：
   \item 工具接入碎片化：每个 LLM 平台各自适配工具，维护成本高；
   \item 提供统一的 Client-Server 协议，让工具以标准化方式被发现和调用；
@@ -413,7 +383,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Skills 定义}：
   \item 很多任务不是一句 Prompt 能做好，而是需要固定流程、上下文、模板、脚本和校验规则；
   \item Skill 把这些方法封装下来，让 Agent 遇到类似任务时按既定流程执行。
@@ -444,17 +414,17 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{主要问题}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item 上下文污染：子 Agent 拿到不相关的历史信息，越跑越偏；
   \item 通信开销：Agent 之间的消息传递消耗大量 Token；
   \item 任务一致性：多个 Agent 对同一任务的理解可能不一致，产出矛盾；
   \item 局部最优陷阱：每个 Agent 都在自己的局部范围内做最优决策，组合起来全局可能很差；
   \item 调试困难：多 Agent 的决策链路复杂，排查问题困难。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{生产建议}：
   \item 先用单 Agent + 良好 Harness 把核心链路跑稳；
   \item 只在任务天然可拆解（如"规划→执行→检查"）时才引入多 Agent；
@@ -474,7 +444,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{40\% 阈值现象（Smart Zone / Dumb Zone）}：
   \item 来源：Dex Horthy 观察到 168K token 上下文窗口，用到约 40\% 时 Agent 输出质量开始明显下降；
   \item Smart Zone（0\textasciitilde\{\}40\%）：推理聚焦、工具调用准确、代码质量高；
@@ -504,7 +474,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{RAG 定义}：Retrieval-Augmented Generation，在 LLM 生成回答前，先从外部知识库检索相关内容，注入上下文后再生成。
   \item \textbf{解决什么问题}：
   \item LLM 知识陈旧（训练数据有截止日期）；
@@ -532,7 +502,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Chunk Size 的 Tradeoff}：
   \item \textbf{太小}（如 128 tokens）：语义完整性差，碎片化严重，检索召回率高但准确率低；
   \item \textbf{太大}（如 2048 tokens）：包含过多无关信息，检索精度下降，且会挤占上下文窗口；
@@ -559,7 +529,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{余弦相似度}：
   \item 比较向量方向，对模长不敏感；
   \item 适合大多数经过 L2 归一化的 Embedding 模型（如 OpenAI text-embedding-ada-002）；
@@ -587,7 +557,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{HNSW（Hierarchical Navigable Small World）}：
   \item 图索引，召回率高（Recall@10 ≥ 0.95），内存占用大；
   \item 适合低并发 + 高精度场景（如 QPS < 50，P99 数十毫秒）；
@@ -615,7 +585,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{为什么要分段评测}：
   \item 检索和生成是独立环节，问题可能出在任一环节；
   \item 检索不好 → 给 LLM 的上下文本身就是错的，生成再好也没用；
@@ -646,16 +616,16 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{长上下文不取代 RAG 的原因}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item \textbf{成本}：上下文越长，推理成本线性增长；RAG 只注入精选片段，Token 更省；
   \item \textbf{准确性}：Lost in the Middle 问题在长上下文中更严重，中间信息利用率低；
   \item \textbf{信息密度}：RAG 做了检索和排序，给模型的是高密度相关信息，而非海量原始文本；
   \item \textbf{知识更新}：长上下文不能实时更新知识源，RAG 可以随时切换向量库。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{选型决策}：
   \item 用 \textbf{RAG}：知识量远超上下文窗口、需要精确溯源、知识频繁更新；
   \item 用 \textbf{长上下文}：单文档深度分析（如合同审查）、需要理解全文结构、检索精度难以保证时；
@@ -674,16 +644,16 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{核心挑战}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item Embedding 模型不统一：文本用文本 Embedding，图片用 CLIP 等多模态 Embedding，分属不同向量空间；
   \item Chunk 策略复杂：一个 PPT 页里图表 + 文字 + 表格混排，怎么拆？图文关联怎么保留？
   \item 检索结果融合：用户纯文本 query，怎么召回图片？怎么把图文结果一起排序？
   \item 多模态生成：LLM 能否理解图表并给出文字回答？需要多模态 LLM 支持。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{工程应对}：
   \item 多向量库并存：文本库 + 图片库，用路由决定查哪个；
   \item 图文关联：图片 Chunk 里带上周围的文字描述或 Caption；
@@ -703,7 +673,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{相同之处}：
   \item 都用向量库和语义检索做相似性匹配；
   \item 都有"写入-检索"两条链路；
@@ -733,7 +703,7 @@
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Harness 定义}：
   \item 指模型之外的整套系统：系统提示词、工具调用、文件系统、沙箱环境、编排逻辑、钩子中间件、反馈回路、约束机制；
   \item 模型只提供推理和生成能力，Harness 把状态、工具、反馈、执行环境和安全边界串起来。
@@ -780,7 +750,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 }
 
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{类比}：L1=岗位说明，L2=办公工具，L3=标准操作流程，L4=项目管理系统，L5=质检，L6=红线规则。
   \item \textbf{实施建议}：不要一上来全搭齐，先做 L1（边界）和 L6（兜底），这两层投入不高但最容易见效。
 \end{itemize}
@@ -797,17 +767,17 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{实验证据}：can.ac 实验，同一个模型，只换了文件编辑接口的调用方式，编码基准分数从 6.7\% 跳到 68.3\%。
   \item \textbf{原因分析}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item 工具返回信息的格式和精度直接影响模型的下一步判断；
   \item 错误信息有没有给出修复方向，决定了模型能否自我纠正；
   \item 工具之间的衔接（如编辑后自动运行 lint，lint 结果自动反馈）形成有效闭环；
   \item 工具接口如果把无关信息也塞给模型，等于在被污染的信息上做推理。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{model-harness 耦合现象}：
   \item 模型和 Harness 一起调优会过拟合——模型习惯了某套工具逻辑；
   \item 换一个 Harness 表现可能变差；
@@ -826,7 +796,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Loop Engineering 定义}：
   \item 围绕 Agent 设计可持续运行的反馈循环，让其在明确目标、工具、上下文、验证信号和停止条件下反复行动；
   \item 关注的不再是"一句 Prompt 怎么写"，而是"谁来触发、带哪些材料、跑完拿什么证据判断"。
@@ -851,7 +821,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{关系}：
   \item Workflow 是最外层概念，描述"任务怎么做"的流程；
   \item Graph 是 Workflow 的形式化表示（节点 + 边），可以用 DAG（有向无环图）约束执行流程；
@@ -876,17 +846,17 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{多层防护策略}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item 最大迭代轮次上限（硬限制，一般 10\textasciitilde\{\}20 轮）；
   \item Token 消耗上限（防止烧钱）；
   \item 超时限制（防止单轮工具调用挂死）；
   \item 重复检测：如果连续 N 轮调用相同工具且参数相同 → 终止；
   \item 进展检测：如果工具返回结果连续无有效产出 → 终止。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{工程实现}：
   \item 每轮 loop 记录工具调用和结果摘要；
   \item 设置全局状态变量跟踪任务进展；
@@ -906,10 +876,10 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{核心能力清单}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item \textbf{多模型路由}：根据任务类型、成本、延迟要求路由到不同的模型（如简单任务用小模型，复杂任务用大模型）；
   \item \textbf{Fallback 与容错}：主模型不可用时自动切换到备用模型；
   \item \textbf{限流与流控}：同时看 RPM、TPM、并发数和租户预算四维限流；
@@ -918,7 +888,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
   \item \textbf{审计与可观测}：记录每次调用的模型、Token 用量、延迟、错误码；
   \item \textbf{协议统一}：屏蔽不同模型 API 的差异，对上游暴露统一接口。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{为什么不能只按 QPS 限流}：
   \item Token 消耗不均：一次调用可能 10 token 也可能 10K token；
   \item TPM 才是真正的吞吐瓶颈；
@@ -937,16 +907,16 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Fallback 层级设计}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item 同厂商同模型重试（瞬态错误）；
   \item 同厂商降级模型（主模型不可用，用同厂小模型）；
   \item 跨厂商切换（切换到另一个云厂商的同等能力模型）；
   \item 静态/缓存回答（所有模型都不可用时的兜底）。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{什么时候不能自动降级}：
   \item 安全/合规场景（模型回答涉及法律、医疗等高风险决策）；
   \item 结构化输出场景（小模型不保证 JSON Schema 合规）；
@@ -967,7 +937,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{归因维度设计}：
   \item \textbf{租户维度}：多租户平台必须按租户拆分 Token 用量；
   \item \textbf{用户维度}：租户内部的用户级别的消费统计；
@@ -992,7 +962,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{AGENTS.md 的定位}：
   \item Agent 每次启动自动加载，是项目级的知识入口；
   \item 应该像目录，而不是把所有规则塞进去。
@@ -1023,15 +993,15 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{中断恢复机制}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item 检查点（Checkpoint）：每个关键节点完成后保存 State 快照；
   \item 幂等重放（Replay）：从中断前的最近检查点回放执行；
   \item 人工接管：中断后保存当前状态和上下文，支持人工介入后继续。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{State 更新策略选择}：
   \item \textbf{Replace（替换）}：适合不变的事实型状态，如用户信息、任务目标；
   \item \textbf{Append（追加）}：适合过程记录型状态，如执行日志、对话历史；
@@ -1054,17 +1024,17 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{核心指标分类}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item \textbf{延迟指标}：TTFT（首 Token 时间）、端到端延迟、工具调用延迟、检索延迟；
   \item \textbf{质量指标}：任务成功率、幻觉率、用户反馈评分、LLM-as-Judge 评分；
   \item \textbf{成本指标}：Token 消耗、API 调用次数、异步任务开销；
   \item \textbf{可靠性指标}：API 错误率、超时率、Fallback 触发次数、循环异常终止率；
   \item \textbf{安全指标}：PII 检出次数、Prompt 注入尝试次数、高风险操作审计。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{追踪（Tracing）设计}：
   \item 每次请求生成 traceId，贯穿 Agent Loop 的每一轮；
   \item 记录每轮的输入上下文、LLM 输出、工具调用参数和结果；
@@ -1090,7 +1060,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{六层架构}（自外向内）：
 \end{itemize}
 
@@ -1115,10 +1085,10 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 }
 
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{请求链路}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item 用户请求进入 API Gateway → 鉴权 + 限流；
   \item 编排层分析意图，决定走简单问答/RAG/Agent Loop；
   \item Context 层注入相关记忆 + RAG 结果；
@@ -1154,7 +1124,7 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 }
 
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{选型建议}：
   \item 简单问答 → SSE 流式输出；
   \item Agent 长任务 → 异步模式，任务提交后返回 taskId，结果通过 WebSocket 推送或轮询获取；
@@ -1173,7 +1143,7 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{为什么不能只按 RPM 限流}：
   \item RPM（Request Per Minute）只控制了请求频率；
   \item 一次请求可能消耗 10 token，也可能消耗 10 万 token；
@@ -1201,7 +1171,7 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{超时策略}：
   \item 分级超时：LLM API 调用 30s，工具调用按工具类型设不同超时；
   \item 流式请求用首 Token 超时（如 5s 没收到首 Token 就 Fallback）。
@@ -1230,7 +1200,7 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{最大差距}：Demo 只验证"能不能跑"，生产需要"跑得稳、跑得对、跑得划算、跑得安全"。
   \item \textbf{要补齐的能力（按优先级）}：
 \end{itemize}
@@ -1250,7 +1220,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 }
 
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{架构演进路径}：
   \item Prompt Demo → 加上错误处理 → 引入 RAG → 模型网关 → Agent Loop → Harness → 完整评测体系；
   \item 核心原则：MVP 先跑通，再逐步补齐非功能需求。
@@ -1268,17 +1238,17 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{多层防御策略}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item \textbf{输入层}：检测和过滤可疑的 Prompt 注入模式（如"忽略之前的指令""你现在是 DAN"）；
   \item \textbf{权限层}：工具调用最小权限，高风险操作必须二次人工确认；
   \item \textbf{隔离层}：不可信输入和执行环境隔离（沙箱），Agent 代码执行在受限容器中；
   \item \textbf{上下文层}：System Prompt 使用特殊分隔符，明确区分"系统指令"和"用户输入"；
   \item \textbf{审计层}：记录所有 Prompt 注入检测日志和高风险操作审计。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{常见注入模式}：
   \item 直接覆盖：\texttt{Ignore all previous instructions and...}
   \item 间接注入：通过检索到的文档或网页内容注入（RAG 场景）→ 需要对检索结果做安全过滤；
@@ -1298,7 +1268,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{核心组件}：
   \item \textbf{ASR}：语音转文字（Whisper、Deepgram 等）；
   \item \textbf{LLM}：文本推理和决策（GPT-4o、Claude 等）；
@@ -1328,7 +1298,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Trace 应该记录的信息}：
   \item 每轮 Agent Loop：输入上下文、LLM 请求参数（model、temperature、messages）、LLM 原始输出；
   \item 每次工具调用：工具名、入参、返回结果、耗时；
@@ -1336,7 +1306,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
   \item 最终输出：经过后处理的返回给用户的回答。
   \item \textbf{回放排查步骤}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item 从用户反馈的 traceId 找到本次请求的完整链路；
   \item 检查 LLM 输出：幻觉？格式错误？工具调用参数填错？
   \item 检查检索结果：检索到的文档是否相关？是否包含了错误信息？
@@ -1344,7 +1314,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
   \item 定位根因后，用相同输入回放测试，验证修复方案；
   \item 将本次事故加入 Golden Set 作为回归用例。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{系统要求}：Trace 必须能覆盖全链路，不能只有 LLM 调用的日志。
 \end{itemize}
 
@@ -1360,7 +1330,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Golden Set 的覆盖维度}：
   \item 正常路径（Happy Path）：最常见的用户场景；
   \item 边缘场景（Edge Cases）：边界输入、模糊表达、长尾问题；
@@ -1368,13 +1338,13 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
   \item 高权重失败（High-Stakes）：答错后果严重的场景。
   \item \textbf{冷启动策略}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item 人工构造：产品经理 + 领域专家编写 50\textasciitilde\{\}100 条核心问答对；
   \item 文档采样：从知识库文档中抽取代表性段落，构造对应的问句；
   \item 历史数据迁移：如果已有旧的客服记录或 FAQ，清洗后使用；
   \item 红队测试：安全团队构造对抗样本，测试边界行为。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{持续迭代}：
   \item 将生产中发现的新问题持续加入 Golden Set；
   \item 定期人工抽检 LLM-as-Judge 评分，校准评测模型偏差；
@@ -1393,17 +1363,17 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{主要偏差类型}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item \textbf{位置偏差}：更倾向排在前面的候选答案；
   \item \textbf{冗长偏好}：更容易给长答案高分，即使信息密度不高；
   \item \textbf{自信偏好}：语气更自信的回答评分更高，即使事实错误；
   \item \textbf{自我增强偏差}：更偏向和自身训练数据风格一致的答案；
   \item \textbf{顺序效应}：评测顺序影响打分，前面的更容易得高分或低分。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{校准方法}：
   \item 答案位置随机交换后评两次，取平均；
   \item 评测 rubric 要具体，不用笼统的"好/不好"，而是按维度打分（忠实度、相关性、准确性）；
@@ -1425,17 +1395,17 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{复杂性来源}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item \textbf{多步推理}：Agent 不是单次问答，而是一个序列决策过程，每一步都可能出错；
   \item \textbf{工具调用链}：不仅评最终结果，还要评工具选择是否正确、调用参数是否合理、工具结果是否被正确利用；
   \item \textbf{非确定性}：Agent 执行路径随采样参数、上下文变化而不同，同一输入可能产生不同执行路径；
   \item \textbf{中间状态评估}：需要评估 Agent 是否陷入了死循环、是否做出了不必要的工具调用；
   \item \textbf{安全维度}：Agent 能执行代码、调 API、读写文件，评测要覆盖安全边界。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{评测维度扩展}：
   \item 除了最终答案质量，还要评：规划合理性、工具选择准确率、Loop 效率（轮次/Token 消耗）、安全合规得分。
   \item \textbf{评测方法}：
@@ -1456,7 +1426,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{本质差异}：
   \item \textbf{RAG} 评的是"检索对没对 + 生成对没对"，关注忠实度、召回率；
   \item \textbf{Agent} 评的是"决策链对不对 + 执行到位没有"，关注任务成功率、工具调用准确性、执行效率；
@@ -1483,7 +1453,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Token 定义}：
   \item LLM 处理文本的最小单元，不等于"一个字"或"一个词"；
   \item 取决于分词器（Tokenizer），常见方式：BPE（Byte Pair Encoding）。
@@ -1523,7 +1493,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 }
 
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{为什么 Temperature=0 输出仍可能不完全一致}：
   \item 浮点运算精度差异；
   \item 不同硬件/框架的矩阵运算顺序可能不同；
@@ -1546,7 +1516,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{为什么能改善体验}：
   \item 降低 TTFT（Time to First Token）：用户不用等完整回答，首字秒出；
   \item 给予心理反馈：用户知道系统"在干活"，不是卡住了。
@@ -1574,7 +1544,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{JSON Mode}：
   \item 只保证输出是合法的 JSON 格式；
   \item 不保证 JSON 的结构和字段符合约定 Schema；
@@ -1605,10 +1575,10 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Function Calling 完整链路}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item 组装请求：System Prompt + 工具列表（JSON Schema 描述）+ 用户消息；
   \item LLM 推理：决定是否需要调用工具，选择工具，填写参数 JSON；
   \item 框架解析 LLM 输出中的 tool\_call 字段；
@@ -1616,7 +1586,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
   \item 将工具结果追加到消息列表（role: tool）；
   \item 再次调用 LLM，让其基于工具结果继续推理或生成最终回答。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{三者关系}：
 \end{itemize}
 
@@ -1635,7 +1605,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 }
 
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{一句话概括}：Function Calling 定义方法签名，MCP 提供远程调用通道，Skill 把多个方法调用封装成可复用的任务模板。
 \end{itemize}
 
@@ -1651,17 +1621,17 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{安全风险}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item LLM 可能被诱导调用不该调的工具（Prompt 注入）；
   \item LLM 填写的参数可能不安全（文件路径穿越、SQL 注入、Shell 注入）；
   \item 工具调用结果可能包含敏感信息被带入后续上下文；
   \item 无人值守 Agent 可能反复调用昂贵接口（费用失控）；
   \item Agent 可能修改不应修改的代码或配置。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{安全边界设计}：
   \item \textbf{权限最小化}：每个 Agent 只能调用必需的、最小权限的工具集；
   \item \textbf{参数校验}：工具函数内部做严格的参数校验（白名单、正则、范围检查）；
@@ -1683,7 +1653,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{可重试错误}：
   \item 429 Rate Limit：等待 Retry-After 后重试；
   \item 5xx Server Error：瞬时故障，指数退避重试（最多 3 次）；
@@ -1711,26 +1681,26 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{幻觉的根本原因}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item LLM 本质是概率模型，不是知识库——它在预测下一个 token，不是检索事实；
   \item 训练数据中的错误和不一致会被模型学习；
   \item 模型不知道"自己不知道"，强答不擅长的问题；
   \item 上下文信息不足或矛盾时，模型倾向自己"补全"。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{缓解方案（从上到下优先级）}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item \textbf{RAG}：给模型注入权威的、可溯源的知识片段，最有效的缓释手段；
   \item \textbf{结构化约束}：用 JSON Schema / Structured Outputs 约束输出格式，减少自由发挥空间；
   \item \textbf{Prompt 引导}：明确告诉模型"不知道就说不知道"，禁止编造；
   \item \textbf{Truthfulness 校验}：用 LLM-as-Judge 对关键回答做事实核查；
   \item \textbf{人工审核}：高风险场景加入工 Review 环节。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{不能完全消灭幻觉}：RAG 减少幻觉但不能根除，LLM 仍可能在推理步骤里生成错误判断。
 \end{itemize}
 
@@ -1746,7 +1716,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Token 预算公式}：
 \end{itemize}
 
@@ -1754,7 +1724,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
   上下文窗口剩余 = 模型最大上下文 - System Prompt Token - 历史对话 Token - RAG 证据 Token - 预留输出 Token
 \end{lstlisting}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{各部分取舍策略}：
   \item \textbf{System Prompt}：尽量精简（200\textasciitilde\{\}500 tokens），长规则放 SKILL.md 按需加载；
   \item \textbf{历史对话}：滑动窗口保留最近 N 轮，更老的做摘要压缩；
@@ -1779,7 +1749,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{最小必录字段}：
   \item 基础：\texttt{timestamp}, \texttt{trace\_id}, \texttt{user\_id}, \texttt{tenant\_id}, \texttt{feature};
   \item 请求：\texttt{model}, \texttt{temperature}, \texttt{input\_tokens}, \texttt{system\_prompt\_hash}, \texttt{rag\_query}；
@@ -1809,19 +1779,19 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 \subsection{参考答案要点}
 
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{不一致的常见原因}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item 评测 rubric 不够具体，"好"的标准模糊；
   \item LLM-as-Judge 有系统性偏差（位置偏差、冗长偏好等）；
   \item 人工评测者有自己的主观偏好；
   \item 评测样本数量不足，结论不具有统计意义。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{处理流程}：
 \end{itemize}
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item \textbf{抽样对比}：从不一致的样本中随机抽 20\textasciitilde\{\}30 条，由多位人工评测者独立打分；
   \item \textbf{找出分歧模式}：LLM-as-Judge 是否系统性地高估/低估某一类回答？
   \item \textbf{调整 rubric}：细化评测维度（如把"回答质量"拆成忠实度、相关性、准确性三个子维度）；
@@ -1829,7 +1799,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
   \item \textbf{计算 IAA}：计算 LLM-as-Judge 与人工评测的 Inter-Annotator Agreement，目标 > 0.7；
   \item \textbf{持续迭代}：每次发现新的偏差类型后，更新评测 Prompt 和 rubric。
 \end{enumerate}
-\begin{itemize}[itemsep=2pt, topsep=4pt]
+\begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{兜底方案}：高权重决策（如安全、合规）最终以人工评测为准；LLM-as-Judge 用于快速过滤和趋势监控。
 \end{itemize}
 
@@ -1849,7 +1819,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 在面试中回答 AI Agent 相关问题，建议采用以下框架：
 
 
-\begin{enumerate}[itemsep=2pt, topsep=4pt]
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item \textbf{先给定义}：一句话说清楚这个技术是什么；
   \item \textbf{再讲原理}：为什么需要它，解决什么问题；
   \item \textbf{对比分析}：和相近技术有什么区别（如 RAG vs Memory | MCP vs Function Calling | Agent vs Workflow）；

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.7.7)  22 JUL 2026 00:19
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.7.7)  22 JUL 2026 00:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1136,6 +1136,10 @@ Package fontspec Info:
 \badgegaobox=\box83
 Package hyperref Info: Option `colorlinks' set `true' on input line 124.
 
+
+LaTeX Warning: Unused global option(s):
+    [9pt].
+
 (/home/zhang/demos/latex_demos/Agent知识/pdf/05-面试题汇总/模拟面试题库.aux)
 \openout1 = `模拟面试题库.aux'.
 
@@ -1227,27 +1231,27 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(51.21504pt, 495.07779pt, 51.21504pt)
-* v-part:(T,H,B)=(42.67912pt, 759.6886pt, 42.67912pt)
+* h-part:(L,W,R)=(34.14322pt, 529.22144pt, 34.14322pt)
+* v-part:(T,H,B)=(34.14322pt, 776.7604pt, 34.14322pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=495.07779pt
-* \textheight=759.6886pt
-* \oddsidemargin=-21.05495pt
-* \evensidemargin=-21.05495pt
-* \topmargin=-66.59087pt
+* \textwidth=529.22144pt
+* \textheight=776.7604pt
+* \oddsidemargin=-38.12677pt
+* \evensidemargin=-38.12677pt
+* \topmargin=-75.12677pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
 * \footskip=30.0pt
-* \marginparwidth=57.0pt
-* \marginparsep=11.0pt
-* \columnsep=10.0pt
+* \marginparwidth=4.0pt
+* \marginparsep=10.0pt
+* \columnsep=22.76228pt
 * \skip\footins=9.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
-* \@twocolumnfalse
+* \@twocolumntrue
 * \@twosidefalse
 * \@mparswitchfalse
 * \@reversemarginfalse
@@ -1266,14 +1270,6 @@ Package caption Info: End \AtBeginDocument code.
 
 LaTeX Warning: No \author given.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--158
-
- []
-
-[1
-
-]
 
 Package fontspec Info: 
 (fontspec)             Script 'CJK' not explicitly supported within font
@@ -1294,62 +1290,141 @@ Package fontspec Info:
 (fontspec)             <->"[FandolFang-Regular.otf]/OT:script=hani;language=dfl
 t;"
 
- [2] [3] [4] [5]
+
+Underfull \hbox (badness 1502) in paragraph at lines 237--238
+[]\TU/FandolSong-Regular(0)/m/n/10 参 数 描 述 要 给 出 格 式 示 例  |（如\TU/lmtt/m/n/10 " 
+\TU/FandolFang-Regular(0)/m/n/10 时 间 范 围，|  格 式
+ []
+
+[1
+
+
+]
+Underfull \hbox (badness 1874) in paragraph at lines 368--369
+[]\TU/lmr/bx/n/10 Function Calling \TU/FandolSong-Regular(0)/m/n/10 解 决 数 据 格 式
+ 问 题  |（\TU/lmr/m/n/10 OpenAI
+ []
+
+[2] [3]
 Missing character: There is no ≥ (U+2265) in font [lmroman10-regular]:mapping=t
 ex-text;!
-[6] [7]
-Underfull \hbox (badness 10000) in paragraph at lines 779--781
+[4]
+Overfull \hbox (275.99187pt too wide) in paragraph at lines 749--751
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 749--751
 
  []
 
-[8] [9] [10]
-Overfull \hbox (62.53111pt too wide) in paragraph at lines 977--978
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 947--948
 []\TU/FandolSong-Regular(0)/m/n/10 每 次 \TU/lmr/m/n/10 API \TU/FandolSong-Regula
-r(0)/m/n/10 调 用 日 志 记 录：| \TU/lmtt/m/n/10 {tenant_id, user_id, feature, prompt_
-version, model, input_tokens, output_tokens,
+r(0)/m/n/10 调 用 日 志 记 录：| \TU/lmtt/m/n/10 {tenant_id,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 947--948
+\TU/lmtt/m/n/10 user_id, feature, prompt_version, model,
+ []
+
+[6]
+Overfull \hbox (275.99187pt too wide) in paragraph at lines 1084--1086
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1084--1086
+
+ []
+
+
+Overfull \hbox (275.99187pt too wide) in paragraph at lines 1123--1125
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1123--1125
+
+ []
+
+[7]
+Overfull \hbox (275.99187pt too wide) in paragraph at lines 1219--1221
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1219--1221
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1253--1254
+[]\TU/FandolSong-Regular(0)/m/n/10 直 接 覆 盖：| \TU/lmtt/m/n/10 Ignore all previou
+s instructions
+ []
+
+[8] [9]
+Overfull \hbox (275.99187pt too wide) in paragraph at lines 1492--1494
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1492--1494
+
+ []
+
+
+Underfull \hbox (badness 1297) in paragraph at lines 1553--1554
+[]\TU/FandolSong-Regular(0)/m/n/10 在 \TU/lmr/m/n/10 API \TU/FandolSong-Regular(
+0)/m/n/10 层 面 强 约 束 输 出 必 须 符 合 给 定 的 \TU/lmr/m/n/10 JSON
+ []
+
+
+Overfull \hbox (275.99187pt too wide) in paragraph at lines 1604--1606
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1604--1606
+
+ []
+
+[10]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 1724.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1755--1756
+[]\TU/FandolSong-Regular(0)/m/n/10 请 求：| \TU/lmtt/m/n/10 model\TU/lmr/m/n/10 , 
+\TU/lmtt/m/n/10 temperature\TU/lmr/m/n/10 , \TU/lmtt/m/n/10 input_tokens\TU/lmr
+/m/n/10 ,
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 1114--1116
-
+Underfull \hbox (badness 1127) in paragraph at lines 1800--1801
+[]\TU/FandolSong-Regular(0)/b/n/10 持 续 迭 代\TU/FandolSong-Regular(0)/m/n/10 ：|  
+每 次 发 现 新 的 偏 差 类 型 后，|  更 新 评 测
  []
 
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 1153--1155
+[12
 
- []
-
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 1249--1251
-
- []
-
-[14] [15] [16]
-Underfull \hbox (badness 10000) in paragraph at lines 1522--1524
-
- []
-
-[17] [18]
-Underfull \hbox (badness 10000) in paragraph at lines 1634--1636
-
- []
-
-[19] [20] [21] (/home/zhang/demos/latex_demos/Agent知识/pdf/05-面试题汇总/模拟面试题库.aux)
+] (/home/zhang/demos/latex_demos/Agent知识/pdf/05-面试题汇总/模拟面试题库.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026/07/01>
  ***********
 Package rerunfilecheck Info: File `模拟面试题库.out' has not changed.
-(rerunfilecheck)             Checksum: 6A5284CD0C8FB55946B662285E55FFF6;24122.
+(rerunfilecheck)             Checksum: 67A7EBAA2FBE6BE310C32E7D3175B751;24058.
  ) 
 Here is how much of TeX's memory you used:
- 29504 strings out of 467814
- 651395 string characters out of 5425313
- 1118641 words of memory out of 5000000
- 58127 multiletter control sequences out of 15000+600000
- 631858 words of font info for 88 fonts, out of 8000000 for 9000
+ 29461 strings out of 467814
+ 647987 string characters out of 5425313
+ 1142689 words of memory out of 5000000
+ 58082 multiletter control sequences out of 15000+600000
+ 631866 words of font info for 89 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 93i,12n,112p,1192b,1109s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 93i,12n,112p,1192b,1100s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on /home/zhang/demos/latex_demos/Agent知识/pdf/05-面试题汇总/模拟面试题库.pdf
- (21 pages).
+ (12 pages).

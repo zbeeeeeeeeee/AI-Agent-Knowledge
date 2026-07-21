@@ -25,10 +25,10 @@ HTML_DIR = BASE_DIR / "HTML"
 TEXLIVE_BIN = "/home/zhang/texlive/bin/x86_64-linux"
 os.environ["PATH"] = f"{TEXLIVE_BIN}:{os.environ.get('PATH', '')}"
 
-LATEX_PREAMBLE = r"""\documentclass[10pt,a4paper]{ctexart}
+LATEX_PREAMBLE = r"""\documentclass[9pt,a4paper,twocolumn]{ctexart}
 
 % --- Packages ---
-\usepackage[top=1.5cm, bottom=1.5cm, left=1.8cm, right=1.8cm]{geometry}
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{float}
@@ -73,7 +73,7 @@ LATEX_PREAMBLE = r"""\documentclass[10pt,a4paper]{ctexart}
 }
 
 \lstset{
-  basicstyle=\ttfamily\footnotesize,
+  basicstyle=\ttfamily\scriptsize,
   keywordstyle=\color{codekw}\bfseries,
   commentstyle=\color{codecomment}\itshape,
   stringstyle=\color{codestring},
@@ -119,20 +119,20 @@ LATEX_PREAMBLE = r"""\documentclass[10pt,a4paper]{ctexart}
 }
 
 % --- Compact spacing ---
-\linespread{1.0}
-\setlength{\parskip}{2pt plus 1pt minus 1pt}
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
 \setlength{\parindent}{0pt}
 
 % --- Table styling ---
 \renewcommand{\arraystretch}{1.1}
 
 % --- Heading styling (numbered) ---
-\titleformat{\section}{\large\bfseries}{\thesection\quad}{0em}{}
-\titlespacing{\section}{0pt}{10pt}{5pt}
-\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection\quad}{0em}{}
-\titlespacing{\subsection}{0pt}{8pt}{4pt}
-\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection\quad}{0em}{}
-\titlespacing{\subsubsection}{0pt}{6pt}{3pt}
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
 
 % --- Page style ---
 \pagestyle{fancy}
@@ -742,7 +742,7 @@ def md_to_latex(text, title):
                 else:
                     break
             if list_items:
-                output.append('\\begin{itemize}[itemsep=2pt, topsep=4pt]')
+                output.append('\\begin{itemize}[itemsep=1pt, topsep=2pt]')
                 for item in list_items:
                     output.append(f'  \\item {item}')
                 output.append('\\end{itemize}')
@@ -763,7 +763,7 @@ def md_to_latex(text, title):
                 else:
                     break
             if list_items:
-                output.append('\\begin{enumerate}[itemsep=2pt, topsep=4pt]')
+                output.append('\\begin{enumerate}[itemsep=1pt, topsep=2pt]')
                 for item in list_items:
                     output.append(f'  \\item {item}')
                 output.append('\\end{enumerate}')
