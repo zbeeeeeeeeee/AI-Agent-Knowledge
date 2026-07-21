@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.7.7)  22 JUL 2026 00:31
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.7.7)  22 JUL 2026 00:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1291,7 +1291,7 @@ Package fontspec Info:
 t;"
 
 
-Underfull \hbox (badness 1502) in paragraph at lines 237--238
+Underfull \hbox (badness 1502) in paragraph at lines 234--235
 []\TU/FandolSong-Regular(0)/m/n/10 参 数 描 述 要 给 出 格 式 示 例  |（如\TU/lmtt/m/n/10 " 
 \TU/FandolFang-Regular(0)/m/n/10 时 间 范 围，|  格 式
  []
@@ -1300,7 +1300,7 @@ Underfull \hbox (badness 1502) in paragraph at lines 237--238
 
 
 ]
-Underfull \hbox (badness 1874) in paragraph at lines 368--369
+Underfull \hbox (badness 1874) in paragraph at lines 360--361
 []\TU/lmr/bx/n/10 Function Calling \TU/FandolSong-Regular(0)/m/n/10 解 决 数 据 格 式
  问 题  |（\TU/lmr/m/n/10 OpenAI
  []
@@ -1309,119 +1309,267 @@ Underfull \hbox (badness 1874) in paragraph at lines 368--369
 Missing character: There is no ≥ (U+2265) in font [lmroman10-regular]:mapping=t
 ex-text;!
 [4]
-Overfull \hbox (275.99187pt too wide) in paragraph at lines 749--751
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 712.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 712.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 712.
+
+Overfull \hbox (9.11133pt too wide) in paragraph at lines 714--714
+[]|\TU/FandolSong-Regular(0)/b/n/8 层
+ []
+
+
+Overfull \hbox (9.11133pt too wide) in paragraph at lines 714--714
+\TU/FandolSong-Regular(0)/b/n/8 级| 
+ []
+
+
+Overfull \hbox (10.67133pt too wide) in paragraph at lines 716--716
+[]|\TU/lmr/m/n/8 L1| 
+ []
+
+
+Underfull \hbox (badness 3240) in paragraph at lines 716--716
+[]|\TU/FandolSong-Regular(0)/m/n/8 信 息 边 界
+ []
+
+
+Overfull \hbox (10.67133pt too wide) in paragraph at lines 718--718
+[]|\TU/lmr/m/n/8 L2| 
+ []
+
+
+Underfull \hbox (badness 3240) in paragraph at lines 718--718
+[]|\TU/FandolSong-Regular(0)/m/n/8 工 具 系 统
+ []
+
+
+Overfull \hbox (10.67133pt too wide) in paragraph at lines 720--720
+[]|\TU/lmr/m/n/8 L3| 
+ []
+
+
+Underfull \hbox (badness 3240) in paragraph at lines 720--720
+[]|\TU/FandolSong-Regular(0)/m/n/8 执 行 编 排
+ []
+
+
+Overfull \hbox (10.67133pt too wide) in paragraph at lines 722--722
+[]|\TU/lmr/m/n/8 L4| 
+ []
+
+
+Underfull \hbox (badness 3240) in paragraph at lines 722--722
+[]|\TU/FandolSong-Regular(0)/m/n/8 记 忆 与 状
+ []
+
+
+Overfull \hbox (10.67133pt too wide) in paragraph at lines 724--724
+[]|\TU/lmr/m/n/8 L5| 
+ []
+
+
+Underfull \hbox (badness 3240) in paragraph at lines 724--724
+[]|\TU/FandolSong-Regular(0)/m/n/8 评 估 与 观
+ []
+
+
+Overfull \hbox (10.67133pt too wide) in paragraph at lines 726--726
+[]|\TU/lmr/m/n/8 L6| 
+ []
+
+
+Overfull \hbox (3.1074pt too wide) in paragraph at lines 712--730
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 749--751
+Underfull \hbox (badness 10000) in paragraph at lines 712--730
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 947--948
+Underfull \hbox (badness 10000) in paragraph at lines 919--920
 []\TU/FandolSong-Regular(0)/m/n/10 每 次 \TU/lmr/m/n/10 API \TU/FandolSong-Regula
 r(0)/m/n/10 调 用 日 志 记 录：| \TU/lmtt/m/n/10 {tenant_id,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 947--948
+Underfull \hbox (badness 10000) in paragraph at lines 919--920
 \TU/lmtt/m/n/10 user_id, feature, prompt_version, model,
  []
 
 [6]
-Overfull \hbox (275.99187pt too wide) in paragraph at lines 1084--1086
+Underfull \hbox (badness 10000) in paragraph at lines 1042--1043
+[]|\TU/FandolSong-Regular(0)/m/n/8 理 解 用 户 意 图 \TU/lmr/m/n/8 → \TU/FandolSong-R
+egular(0)/m/n/8 判 断 是 否 需 要
+ []
+
+
+Overfull \hbox (1.50333pt too wide) in paragraph at lines 1044--1044
+[]|\TU/lmr/m/n/8 Prompt/Context
+ []
+
+
+Overfull \hbox (13.83133pt too wide) in paragraph at lines 1046--1046
+[]|\TU/lmr/m/n/8 RAG/Memory/Tool
+ []
+
+
+Overfull \hbox (1.19997pt too wide) in paragraph at lines 1036--1054
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1084--1086
+Underfull \hbox (badness 10000) in paragraph at lines 1036--1054
 
  []
 
 
-Overfull \hbox (275.99187pt too wide) in paragraph at lines 1123--1125
+Underfull \hbox (badness 10000) in paragraph at lines 1084--1084
+[]|\TU/FandolSong-Regular(0)/m/n/8 同 步  |（\TU/lmr/m/n/8 Request-
+ []
+
+
+Underfull \hbox (badness 3271) in paragraph at lines 1086--1086
+[]|\TU/FandolSong-Regular(0)/m/n/8 对 话 式 \TU/lmr/m/n/8 AI\TU/FandolSong-Regular
+(0)/m/n/8 、|
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1088--1088
+[]|\TU/FandolSong-Regular(0)/m/n/8 长 任 务
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1088--1088
+|\TU/FandolSong-Regular(0)/m/n/8 （\TU/lmr/m/n/8 Agent\TU/FandolSong-Regular(0)/
+m/n/8 、|  报
+ []
+
+
+Overfull \hbox (1.85497pt too wide) in paragraph at lines 1080--1092
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1123--1125
+Underfull \hbox (badness 10000) in paragraph at lines 1080--1092
 
  []
 
 [7]
-Overfull \hbox (275.99187pt too wide) in paragraph at lines 1219--1221
+Underfull \hbox (badness 10000) in paragraph at lines 1175--1175
+[]|\TU/FandolSong-Regular(0)/b/n/8 阶
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1177
+[]|\TU/lmr/m/n/8 P0
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1179--1179
+[]|\TU/lmr/m/n/8 P1
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1181--1181
+[]|\TU/lmr/m/n/8 P2
+ []
+
+
+Overfull \hbox (1.19997pt too wide) in paragraph at lines 1173--1185
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1219--1221
+Underfull \hbox (badness 10000) in paragraph at lines 1173--1185
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1253--1254
+Underfull \hbox (badness 10000) in paragraph at lines 1216--1217
 []\TU/FandolSong-Regular(0)/m/n/10 直 接 覆 盖：| \TU/lmtt/m/n/10 Ignore all previou
 s instructions
  []
 
 [8] [9]
-Overfull \hbox (275.99187pt too wide) in paragraph at lines 1492--1494
+Overfull \hbox (8.0305pt too wide) in paragraph at lines 1441--1441
+[]|\TU/lmr/m/n/8 Temperature| 
+ []
+
+
+Overfull \hbox (1.59995pt too wide) in paragraph at lines 1437--1449
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1492--1494
+Underfull \hbox (badness 10000) in paragraph at lines 1437--1449
 
  []
 
 
-Underfull \hbox (badness 1297) in paragraph at lines 1553--1554
+Underfull \hbox (badness 1297) in paragraph at lines 1506--1507
 []\TU/FandolSong-Regular(0)/m/n/10 在 \TU/lmr/m/n/10 API \TU/FandolSong-Regular(
 0)/m/n/10 层 面 强 约 束 输 出 必 须 符 合 给 定 的 \TU/lmr/m/n/10 JSON
  []
 
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 1552--1552
+[]|\TU/FandolSong-Regular(0)/m/n/8 解 决
+ []
 
-Overfull \hbox (275.99187pt too wide) in paragraph at lines 1604--1606
+
+Underfull \hbox (badness 10000) in paragraph at lines 1552--1552
+\TU/FandolSong-Regular(0)/m/n/8 的 问
+ []
+
+
+Underfull \hbox (badness 2221) in paragraph at lines 1552--1553
+[]|\TU/FandolSong-Regular(0)/m/n/8 任 务\TU/lmr/m/n/8 ” \TU/FandolSong-Regular(0)
+/m/n/8 怎 么 做 一
+ []
+
+
+Overfull \hbox (1.99992pt too wide) in paragraph at lines 1546--1558
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1604--1606
+Underfull \hbox (badness 10000) in paragraph at lines 1546--1558
 
  []
 
-[10]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 1724.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1755--1756
+(Font)              <7> on input line 1672.
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 1702--1703
 []\TU/FandolSong-Regular(0)/m/n/10 请 求：| \TU/lmtt/m/n/10 model\TU/lmr/m/n/10 , 
 \TU/lmtt/m/n/10 temperature\TU/lmr/m/n/10 , \TU/lmtt/m/n/10 input_tokens\TU/lmr
 /m/n/10 ,
  []
 
-[11]
-Underfull \hbox (badness 1127) in paragraph at lines 1800--1801
+
+Underfull \hbox (badness 1127) in paragraph at lines 1746--1747
 []\TU/FandolSong-Regular(0)/b/n/10 持 续 迭 代\TU/FandolSong-Regular(0)/m/n/10 ：|  
 每 次 发 现 新 的 偏 差 类 型 后，|  更 新 评 测
  []
 
-[12
-
-] (/home/zhang/demos/latex_demos/Agent知识/pdf/05-面试题汇总/模拟面试题库.aux)
+[12] (/home/zhang/demos/latex_demos/Agent知识/pdf/05-面试题汇总/模拟面试题库.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026/07/01>
  ***********
 Package rerunfilecheck Info: File `模拟面试题库.out' has not changed.
-(rerunfilecheck)             Checksum: 67A7EBAA2FBE6BE310C32E7D3175B751;24058.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 29461 strings out of 467814
- 647987 string characters out of 5425313
- 1142689 words of memory out of 5000000
- 58082 multiletter control sequences out of 15000+600000
+ 29397 strings out of 467814
+ 647196 string characters out of 5425313
+ 1119774 words of memory out of 5000000
+ 58018 multiletter control sequences out of 15000+600000
  631866 words of font info for 89 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  93i,12n,112p,1192b,1100s stack positions out of 10000i,1000n,20000p,200000b,200000s

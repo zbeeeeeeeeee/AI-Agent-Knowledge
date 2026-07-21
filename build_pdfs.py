@@ -651,7 +651,7 @@ def md_to_latex(text, title):
             heading = heading.replace('<<<LVCHU>>>', '\\lvchu{}')
             heading = heading.replace('<<<LVZHONG>>>', '\\lvzhong{}')
             heading = heading.replace('<<<LVGAO>>>', '\\lvgao{}')
-            output.append(f'\n\\section{{{heading}}}')
+            output.append(f'\n\\section*{{{heading}}}')
             i += 1
             continue
 
@@ -659,7 +659,7 @@ def md_to_latex(text, title):
         if re.match(r'^###\s', stripped):
             heading = re.sub(r'^###\s+', '', stripped).strip()
             heading = re.sub(r'\s*\{#[^}]*\}\s*$', '', heading)
-            output.append(f'\n\\subsection{{{escape_latex(heading)}}}')
+            output.append(f'\n\\subsection*{{{escape_latex(heading)}}}')
             i += 1
             continue
 
@@ -707,7 +707,7 @@ def md_to_latex(text, title):
 
         # Horizontal rule
         if re.match(r'^---+\s*$', stripped) or re.match(r'^\* \* \*+\s*$', stripped):
-            output.append('\n\\medskip\n\\hrule\n\\medskip\n')
+            output.append('\n\\vspace{2pt}\n\\noindent\\rule{\\columnwidth}{0.3pt}\\vspace{2pt}\n')
             i += 1
             continue
 
@@ -801,7 +801,8 @@ def md_to_latex(text, title):
 
 
 def render_table(table_lines):
-    """Render a markdown table to LaTeX with controlled column widths."""
+    """Render a markdown table to LaTeX with controlled column widths.
+    In twocolumn mode, tables span full page width via onecolumn/twocolumn."""
     if len(table_lines) < 2:
         return []
 
@@ -819,7 +820,6 @@ def render_table(table_lines):
     col_max_chars = [0] * num_cols
     all_text = [list(header)]
     for row in rows:
-        # Pad to match header
         while len(row) < num_cols:
             row.append('')
         all_text.append(row[:num_cols])
@@ -827,31 +827,25 @@ def render_table(table_lines):
         for ci, cell in enumerate(r):
             col_max_chars[ci] = max(col_max_chars[ci], len(cell) if cell else 0)
 
-    # Calculate width fractions based on text length
     total_chars = sum(col_max_chars)
     if total_chars == 0:
         total_chars = 1
-    # Use p{} for precise width control; tabularx X for auto-wrap
     is_long = len(rows) > 25
 
     result = []
+    col_defs = '|' + '|'.join(
+        f'p{{\\dimexpr {col_max_chars[i]/total_chars:0.3f}\\columnwidth-2\\tabcolsep\\relax}}'
+        for i in range(num_cols)
+    ) + '|'
     if is_long:
-        # Longtable: use p{width} columns
-        col_defs = '|' + '|'.join(
-            f'p{{\\dimexpr {col_max_chars[i]/total_chars:0.3f}\\textwidth-2\\tabcolsep\\relax}}'
-            for i in range(num_cols)
-        ) + '|'
         result.append('{\\footnotesize')
         result.append(f'\\begin{{longtable}}{{{col_defs}}}')
     else:
-        # Tabularx: use X columns for auto-wrapping
-        col_defs = '|' + '|'.join(['X'] * num_cols) + '|'
         result.append('{\\footnotesize')
-        result.append(f'\\begin{{tabularx}}{{\\textwidth}}{{{col_defs}}}')
+        result.append(f'\\begin{{tabular}}{{{col_defs}}}')
 
     result.append('\\hline')
 
-    # Header
     hdr_cells = [f'\\textbf{{{escape_tex_cell(h)}}}' for h in header]
     result.append(' & '.join(hdr_cells) + ' \\\\')
     result.append('\\hline')
@@ -861,7 +855,6 @@ def render_table(table_lines):
         result.append('\\hline')
         result.append('\\endfoot')
 
-    # Rows
     for row in rows:
         while len(row) < num_cols:
             row.append('')
@@ -873,7 +866,7 @@ def render_table(table_lines):
     if is_long:
         result.append('\\end{longtable}')
     else:
-        result.append('\\end{tabularx}')
+        result.append('\\end{tabular}')
     result.append('}')
     result.append('')
 

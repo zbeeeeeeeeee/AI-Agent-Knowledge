@@ -137,10 +137,10 @@
 \markboth{Agent 核心概念}{Agent 核心概念}
 
 
-\section{1. 请用一句话概括 AI Agent 是什么？它和普通 Chatbot 有什么区别？ \lvchu{}}
+\section*{1. 请用一句话概括 AI Agent 是什么？它和普通 Chatbot 有什么区别？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Agent 定义}：Agent 是一个能感知环境、做决策、执行动作的软件系统，LLM 负责推理决策，工具负责执行，记忆负责保存上下文和历史经验。
@@ -154,16 +154,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{2. Agent Loop 的完整流程是什么？工程难点在哪里？ \lvchu{}}
+\section*{2. Agent Loop 的完整流程是什么？工程难点在哪里？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{完整流程}：
@@ -182,16 +181,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{3. ReAct、Plan-and-Execute、Reflection、Multi-Agent 这些范式分别适合什么场景？ \lvzhong{}}
+\section*{3. ReAct、Plan-and-Execute、Reflection、Multi-Agent 这些范式分别适合什么场景？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{ReAct（Reasoning + Acting）}：
@@ -212,16 +210,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{4. Tools 注册时，工具 description 为什么非常关键？ \lvzhong{}}
+\section*{4. Tools 注册时，工具 description 为什么非常关键？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{模型只认结构化描述}：LLM 通过 Function Calling Schema（JSON Schema 格式）理解工具有什么用、什么时候该用、参数怎么填。
@@ -240,16 +237,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{5. Agent 的短期记忆和长期记忆有什么区别？分别怎么落地？ \lvzhong{}}
+\section*{5. Agent 的短期记忆和长期记忆有什么区别？分别怎么落地？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{短期记忆（Session 级）}：
@@ -264,16 +260,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{6. 记忆系统需要解决哪些核心问题？如何避免记忆污染？ \lvgao{}}
+\section*{6. 记忆系统需要解决哪些核心问题？如何避免记忆污染？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{核心问题清单}：
@@ -293,16 +288,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{7. 向量记忆和 Markdown 记忆分别适合什么场景？ \lvzhong{}}
+\section*{7. 向量记忆和 Markdown 记忆分别适合什么场景？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{向量记忆}：
@@ -320,16 +314,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{8. 为什么 Agent 场景下只优化 Prompt 不够？Context Engineering 解决什么问题？ \lvgao{}}
+\section*{8. 为什么 Agent 场景下只优化 Prompt 不够？Context Engineering 解决什么问题？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Prompt Engineering 的边界}：
@@ -346,16 +339,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{9. MCP 协议解决什么问题？它和 Function Calling 有什么区别？ \lvzhong{}}
+\section*{9. MCP 协议解决什么问题？它和 Function Calling 有什么区别？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{MCP 解决的问题}：
@@ -372,16 +364,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{10. Agent Skills 是什么？Skill 路由怎么做？ \lvgao{}}
+\section*{10. Agent Skills 是什么？Skill 路由怎么做？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Skills 定义}：
@@ -403,16 +394,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{11. Multi-Agent 协作的主要问题是什么？为什么生产里不能盲目上多 Agent？ \lvzhong{}}
+\section*{11. Multi-Agent 协作的主要问题是什么？为什么生产里不能盲目上多 Agent？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{主要问题}：
@@ -433,16 +423,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{12. 上下文利用率为什么有一个 40\% 的阈值现象？怎么利用这个现象做工程优化？ \lvzhong{}}
+\section*{12. 上下文利用率为什么有一个 40\% 的阈值现象？怎么利用这个现象做工程优化？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{40\% 阈值现象（Smart Zone / Dumb Zone）}：
@@ -460,19 +449,18 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
 \markboth{RAG 检索增强}{RAG 检索增强}
 
 
-\section{13. 什么是 RAG？它和传统搜索引擎、微调有什么区别？ \lvchu{}}
+\section*{13. 什么是 RAG？它和传统搜索引擎、微调有什么区别？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{RAG 定义}：Retrieval-Augmented Generation，在 LLM 生成回答前，先从外部知识库检索相关内容，注入上下文后再生成。
@@ -491,16 +479,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{14. RAG 系统中 Chunk Size 怎么选？太大和太小分别有什么影响？ \lvchu{}}
+\section*{14. RAG 系统中 Chunk Size 怎么选？太大和太小分别有什么影响？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Chunk Size 的 Tradeoff}：
@@ -518,16 +505,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{15. 余弦相似度、内积、欧氏距离分别适合什么 Embedding 模型？ \lvchu{}}
+\section*{15. 余弦相似度、内积、欧氏距离分别适合什么 Embedding 模型？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{余弦相似度}：
@@ -546,16 +532,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{16. 向量索引 HNSW、IVF、DiskANN 分别适合什么场景？ \lvgao{}}
+\section*{16. 向量索引 HNSW、IVF、DiskANN 分别适合什么场景？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{HNSW（Hierarchical Navigable Small World）}：
@@ -574,16 +559,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{17. RAG 评测为什么必须分检索和生成两段？怎么打分？ \lvzhong{}}
+\section*{17. RAG 评测为什么必须分检索和生成两段？怎么打分？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{为什么要分段评测}：
@@ -605,16 +589,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{18. 长上下文窗口会不会取代 RAG？什么时候用 RAG，什么时候直接用长上下文？ \lvchu{}}
+\section*{18. 长上下文窗口会不会取代 RAG？什么时候用 RAG，什么时候直接用长上下文？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{长上下文不取代 RAG 的原因}：
@@ -633,16 +616,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{19. 多模态 RAG 相比纯文本 RAG 多了哪些挑战？ \lvgao{}}
+\section*{19. 多模态 RAG 相比纯文本 RAG 多了哪些挑战？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{核心挑战}：
@@ -662,16 +644,15 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{20. RAG 和 Agent 的记忆系统在技术上有哪些异同？ \lvgao{}}
+\section*{20. RAG 和 Agent 的记忆系统在技术上有哪些异同？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{相同之处}：
@@ -689,19 +670,18 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
 \markboth{Agent 工程化}{Agent 工程化}
 
 
-\section{21. Harness Engineering 是什么？为什么说 Agent = Model + Harness？ \lvzhong{}}
+\section*{21. Harness Engineering 是什么？为什么说 Agent = Model + Harness？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Harness 定义}：
@@ -718,19 +698,18 @@
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{22. Harness 的六层架构分别解决什么问题？ \lvgao{}}
+\section*{22. Harness 的六层架构分别解决什么问题？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 {\footnotesize
-\begin{tabularx}{\textwidth}{|X|X|X|X|}
+\begin{tabular}{|p{\dimexpr 0.043\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.191\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.383\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.383\columnwidth-2\tabcolsep\relax}|}
 \hline
 \textbf{层级} & \textbf{名称} & \textbf{解决的问题} & \textbf{关键设计} \\
 \hline
@@ -746,7 +725,7 @@ L5 & 评估与观测层 & Agent 怎么知道自己做对了没有 & 独立于生
 \hline
 L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误，重试、回滚或降级 \\
 \hline
-\end{tabularx}
+\end{tabular}
 }
 
 
@@ -756,16 +735,15 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{23. 为什么同一个模型换一套工具接口，效果能差 10 倍？ \lvzhong{}}
+\section*{23. 为什么同一个模型换一套工具接口，效果能差 10 倍？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{实验证据}：can.ac 实验，同一个模型，只换了文件编辑接口的调用方式，编码基准分数从 6.7\% 跳到 68.3\%。
@@ -785,16 +763,15 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{24. Loop Engineering 是什么？它和 Agent Loop、Workflow Graph 有什么区别？ \lvzhong{}}
+\section*{24. Loop Engineering 是什么？它和 Agent Loop、Workflow Graph 有什么区别？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Loop Engineering 定义}：
@@ -810,16 +787,15 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{25. Workflow、Graph、Loop 三者是什么关系？什么场景用哪种编排方式？ \lvzhong{}}
+\section*{25. Workflow、Graph、Loop 三者是什么关系？什么场景用哪种编排方式？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{关系}：
@@ -835,16 +811,15 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{26. 如何防止 Agent Loop 陷入死循环？ \lvzhong{}}
+\section*{26. 如何防止 Agent Loop 陷入死循环？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{多层防护策略}：
@@ -865,16 +840,15 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{27. 大模型网关需要承担哪些核心能力？ \lvgao{}}
+\section*{27. 大模型网关需要承担哪些核心能力？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{核心能力清单}：
@@ -896,16 +870,15 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{28. 模型 Fallback 策略怎么设计？什么时候不能自动降级？ \lvgao{}}
+\section*{28. 模型 Fallback 策略怎么设计？什么时候不能自动降级？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Fallback 层级设计}：
@@ -926,16 +899,15 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{29. Token 成本怎么归因到租户、用户、功能和 Prompt 版本？ \lvzhong{}}
+\section*{29. Token 成本怎么归因到租户、用户、功能和 Prompt 版本？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{归因维度设计}：
@@ -951,16 +923,15 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{30. Agent 的 AGENTS.md 应该怎么写？为什么不要写成超级 System Prompt？ \lvchu{}}
+\section*{30. Agent 的 AGENTS.md 应该怎么写？为什么不要写成超级 System Prompt？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{AGENTS.md 的定位}：
@@ -982,16 +953,15 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{31. 工作流中断后怎么恢复？State 更新策略怎么选？ \lvgao{}}
+\section*{31. 工作流中断后怎么恢复？State 更新策略怎么选？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{中断恢复机制}：
@@ -1013,16 +983,15 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{32. AI 应用的可观测性要看哪些指标？ \lvchu{}}
+\section*{32. AI 应用的可观测性要看哪些指标？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{核心指标分类}：
@@ -1046,26 +1015,25 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
 \markboth{系统设计}{系统设计}
 
 
-\section{33. 请设计一个生产级 AI 应用的整体架构，从入口到模型返回的完整链路是什么？ \lvgao{}}
+\section*{33. 请设计一个生产级 AI 应用的整体架构，从入口到模型返回的完整链路是什么？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{六层架构}（自外向内）：
 \end{itemize}
 
 {\footnotesize
-\begin{tabularx}{\textwidth}{|X|X|}
+\begin{tabular}{|p{\dimexpr 0.288\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.712\columnwidth-2\tabcolsep\relax}|}
 \hline
 \textbf{层级} & \textbf{职责} \\
 \hline
@@ -1081,7 +1049,7 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 \hline
 评测观测层 & 日志/Trace 采集、质量评测、成本归因、告警 \\
 \hline
-\end{tabularx}
+\end{tabular}
 }
 
 
@@ -1098,19 +1066,18 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 \end{enumerate}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{34. 同步、流式（SSE）、异步三种模式怎么选？ \lvchu{}}
+\section*{34. 同步、流式（SSE）、异步三种模式怎么选？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 {\footnotesize
-\begin{tabularx}{\textwidth}{|X|X|X|}
+\begin{tabular}{|p{\dimexpr 0.308\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.231\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.462\columnwidth-2\tabcolsep\relax}|}
 \hline
 \textbf{模式} & \textbf{适合场景} & \textbf{优缺点} \\
 \hline
@@ -1120,7 +1087,7 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 \hline
 异步（任务队列） & 长任务（Agent、报告生成） & 用户不阻塞，需轮询或 Webhook 通知结果，复杂度高 \\
 \hline
-\end{tabularx}
+\end{tabular}
 }
 
 
@@ -1132,16 +1099,15 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{35. 为什么大模型调用限流要同时看 RPM、TPM、并发数和租户预算？ \lvzhong{}}
+\section*{35. 为什么大模型调用限流要同时看 RPM、TPM、并发数和租户预算？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{为什么不能只按 RPM 限流}：
@@ -1160,16 +1126,15 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{36. AI 应用如何做超时、重试、限流、熔断和降级？ \lvgao{}}
+\section*{36. AI 应用如何做超时、重试、限流、熔断和降级？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{超时策略}：
@@ -1189,16 +1154,15 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{37. 从 Prompt Demo 到生产级架构，最大的差距在哪？要补齐哪些能力？ \lvgao{}}
+\section*{37. 从 Prompt Demo 到生产级架构，最大的差距在哪？要补齐哪些能力？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{最大差距}：Demo 只验证"能不能跑"，生产需要"跑得稳、跑得对、跑得划算、跑得安全"。
@@ -1206,7 +1170,7 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 \end{itemize}
 
 {\footnotesize
-\begin{tabularx}{\textwidth}{|X|X|}
+\begin{tabular}{|p{\dimexpr 0.090\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.910\columnwidth-2\tabcolsep\relax}|}
 \hline
 \textbf{阶段} & \textbf{补齐内容} \\
 \hline
@@ -1216,7 +1180,7 @@ P1（重要） & 模型网关（路由+Fallback+限流）、RAG 检索优化、�
 \hline
 P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B 实验、可观测（Trace + Metrics） \\
 \hline
-\end{tabularx}
+\end{tabular}
 }
 
 
@@ -1227,16 +1191,15 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{38. Prompt 注入攻击在系统设计层面怎么防？ \lvgao{}}
+\section*{38. Prompt 注入攻击在系统设计层面怎么防？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{多层防御策略}：
@@ -1257,16 +1220,15 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{39. 如何设计一个实时语音 Agent 系统？ \lvgao{}}
+\section*{39. 如何设计一个实时语音 Agent 系统？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{核心组件}：
@@ -1287,16 +1249,15 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{40. 出现模型输出事故后，如何通过 Trace 回放定位问题？ \lvgao{}}
+\section*{40. 出现模型输出事故后，如何通过 Trace 回放定位问题？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Trace 应该记录的信息}：
@@ -1319,16 +1280,15 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{41. 如何构建 Golden Set？冷启动阶段没有生产日志怎么办？ \lvzhong{}}
+\section*{41. 如何构建 Golden Set？冷启动阶段没有生产日志怎么办？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Golden Set 的覆盖维度}：
@@ -1352,16 +1312,15 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{42. LLM-as-Judge 有哪些主要偏差？怎么校准？ \lvgao{}}
+\section*{42. LLM-as-Judge 有哪些主要偏差？怎么校准？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{主要偏差类型}：
@@ -1384,16 +1343,15 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{43. Agent 评测为什么比普通 RAG 和问答评测复杂得多？ \lvzhong{}}
+\section*{43. Agent 评测为什么比普通 RAG 和问答评测复杂得多？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{复杂性来源}：
@@ -1415,16 +1373,15 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{44. RAG、Agent、结构化输出的评测指标为什么不能混用一套？ \lvchu{}}
+\section*{44. RAG、Agent、结构化输出的评测指标为什么不能混用一套？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{本质差异}：
@@ -1439,19 +1396,18 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
 \markboth{LLM 基础与结构化输出}{LLM 基础与结构化输出}
 
 
-\section{45. Token 是什么？为什么中文、英文、代码消耗的 Token 不一样？ \lvchu{}}
+\section*{45. Token 是什么？为什么中文、英文、代码消耗的 Token 不一样？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Token 定义}：
@@ -1467,19 +1423,18 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{46. Temperature、Top-P、Top-K 分别控制什么？生产环境怎么设置更稳？ \lvchu{}}
+\section*{46. Temperature、Top-P、Top-K 分别控制什么？生产环境怎么设置更稳？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 {\footnotesize
-\begin{tabularx}{\textwidth}{|X|X|X|}
+\begin{tabular}{|p{\dimexpr 0.204\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.352\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.444\columnwidth-2\tabcolsep\relax}|}
 \hline
 \textbf{参数} & \textbf{控制什么} & \textbf{生产建议} \\
 \hline
@@ -1489,7 +1444,7 @@ Top-P & 只考虑累积概率达到 P 的 token & 0.9\textasciitilde\{\}0.95，�
 \hline
 Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合需要多样性但不过分发散 \\
 \hline
-\end{tabularx}
+\end{tabular}
 }
 
 
@@ -1505,16 +1460,15 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{47. Streaming 为什么能改善用户体验？它能减少总耗时和 Token 成本吗？ \lvchu{}}
+\section*{47. Streaming 为什么能改善用户体验？它能减少总耗时和 Token 成本吗？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{为什么能改善体验}：
@@ -1533,16 +1487,15 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{48. JSON Mode 和 Structured Outputs 有什么区别？ \lvzhong{}}
+\section*{48. JSON Mode 和 Structured Outputs 有什么区别？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{JSON Mode}：
@@ -1564,16 +1517,15 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{49. Function Calling 的完整链路是什么？和 MCP Agent Skill 是什么关系？ \lvzhong{}}
+\section*{49. Function Calling 的完整链路是什么？和 MCP Agent Skill 是什么关系？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Function Calling 完整链路}：
@@ -1591,7 +1543,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 \end{itemize}
 
 {\footnotesize
-\begin{tabularx}{\textwidth}{|X|X|X|X|}
+\begin{tabular}{|p{\dimexpr 0.125\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.400\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.175\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.300\columnwidth-2\tabcolsep\relax}|}
 \hline
 \textbf{} & \textbf{Function Calling} & \textbf{MCP} & \textbf{Agent Skill} \\
 \hline
@@ -1601,7 +1553,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 \hline
 粒度 & 单次工具调用 & 工具发现+调用 & 工具+流程+上下文+校验 \\
 \hline
-\end{tabularx}
+\end{tabular}
 }
 
 
@@ -1610,16 +1562,15 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{50. 工具调用为什么必须做安全治理？安全边界在哪里？ \lvgao{}}
+\section*{50. 工具调用为什么必须做安全治理？安全边界在哪里？ \lvgao{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{安全风险}：
@@ -1642,16 +1593,15 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{51. 哪些大模型 API 错误可以重试？哪些不能重试？为什么必须做幂等？ \lvchu{}}
+\section*{51. 哪些大模型 API 错误可以重试？哪些不能重试？为什么必须做幂等？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{可重试错误}：
@@ -1670,16 +1620,15 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{52. 大模型为什么会产生幻觉？常见缓解方案有哪些？ \lvchu{}}
+\section*{52. 大模型为什么会产生幻觉？常见缓解方案有哪些？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{幻觉的根本原因}：
@@ -1705,16 +1654,15 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{53. Token 预算怎么估算？输入、输出、历史消息、RAG 证据如何取舍？ \lvzhong{}}
+\section*{53. Token 预算怎么估算？输入、输出、历史消息、RAG 证据如何取舍？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{Token 预算公式}：
@@ -1738,16 +1686,15 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{54. AI 应用调用日志里至少要记录哪些字段？为什么？ \lvchu{}}
+\section*{54. AI 应用调用日志里至少要记录哪些字段？为什么？ \lvchu{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{最小必录字段}：
@@ -1768,16 +1715,15 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
-\section{55. 如果 LLM-as-Judge 和人工评测结果不一致，应该怎么处理？ \lvzhong{}}
+\section*{55. 如果 LLM-as-Judge 和人工评测结果不一致，应该怎么处理？ \lvzhong{}}
 
 
-\subsection{参考答案要点}
+\subsection*{参考答案要点}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \textbf{不一致的常见原因}：
@@ -1804,16 +1750,15 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 \end{itemize}
 
 
-\medskip
-\hrule
-\medskip
+\vspace{2pt}
+\noindent\rule{\columnwidth}{0.3pt}\vspace{2pt}
 
 
 
 \markboth{附录}{附录}
 
 
-\section{附录：面试答题框架建议}
+\section*{附录：面试答题框架建议}
 
 
 在面试中回答 AI Agent 相关问题，建议采用以下框架：
