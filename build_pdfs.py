@@ -51,6 +51,26 @@ LATEX_PREAMBLE = r"""\documentclass[10pt,a4paper]{ctexart}
 \definecolor{codestring}{RGB}{163,21,21}
 \definecolor{codenum}{RGB}{128,0,128}
 \definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
 
 \lstset{
   basicstyle=\ttfamily\footnotesize,
@@ -117,9 +137,10 @@ LATEX_PREAMBLE = r"""\documentclass[10pt,a4paper]{ctexart}
 % --- Page style ---
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\emph{Agent 知识整理}}
+\fancyhead[L]{\small\emph{\leftmark}}
 \fancyhead[R]{\small\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
 
 % --- Hyperref setup ---
 \hypersetup{
@@ -579,6 +600,14 @@ def fix_image_paths(text, tex_filename):
     return text
 
 
+def _convert_badges(text):
+    """Convert HTML badge spans in headings to LaTeX badge commands."""
+    text = re.sub(r'<span class="badge badge-green">初级</span>', r'\\lvchu{}', text)
+    text = re.sub(r'<span class="badge badge-blue">中级</span>', r'\\lvzhong{}', text)
+    text = re.sub(r'<span class="badge badge-black">高级</span>', r'\\lvgao{}', text)
+    return text
+
+
 def md_to_latex(text, title):
     """Convert markdown text to LaTeX body."""
     lines = text.split('\n')
@@ -601,11 +630,28 @@ def md_to_latex(text, title):
             i += 1
             continue
 
+        # Chapter marker comment <!-- chapter:xxx -->
+        if stripped.startswith('<!-- chapter:'):
+            m = re.match(r'<!-- chapter:(.+?)-->', stripped)
+            if m:
+                chap = m.group(1).strip()
+                output.append(f'\n\\markboth{{{escape_latex(chap)}}}{{{escape_latex(chap)}}}')
+            i += 1
+            continue
+
         # H2 → \section
         if re.match(r'^##\s', stripped):
             heading = re.sub(r'^##\s+', '', stripped).strip()
             heading = re.sub(r'\s*\{#[^}]*\}\s*$', '', heading)
-            output.append(f'\n\\section{{{escape_latex(heading)}}}')
+            heading = _convert_badges(heading)
+            heading = heading.replace('\\lvchu{}', '<<<LVCHU>>>')
+            heading = heading.replace('\\lvzhong{}', '<<<LVZHONG>>>')
+            heading = heading.replace('\\lvgao{}', '<<<LVGAO>>>')
+            heading = escape_latex(heading)
+            heading = heading.replace('<<<LVCHU>>>', '\\lvchu{}')
+            heading = heading.replace('<<<LVZHONG>>>', '\\lvzhong{}')
+            heading = heading.replace('<<<LVGAO>>>', '\\lvgao{}')
+            output.append(f'\n\\section{{{heading}}}')
             i += 1
             continue
 
@@ -877,7 +923,7 @@ def process_file(md_path, cat_name, md_filename_base):
     latex_body = md_to_latex(body, title)
 
     # Step 4: Assemble full LaTeX
-    tex_content = LATEX_PREAMBLE + f'\n\\title{{{escape_latex(title)}}}\n\\date{{}}\n\\maketitle\n' + latex_body + LATEX_POSTAMBLE
+    tex_content = LATEX_PREAMBLE + f'\n\\title{{{escape_latex(title)}}}\n\\date{{}}\n\\maketitle\n\\markboth{{Agent 知识整理}}{{Agent 知识整理}}\n' + latex_body + LATEX_POSTAMBLE
 
     # Write .tex file
     tex_subdir = TEX_DIR / cat_name

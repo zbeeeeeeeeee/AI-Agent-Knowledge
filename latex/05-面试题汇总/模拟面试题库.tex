@@ -24,6 +24,26 @@
 \definecolor{codestring}{RGB}{163,21,21}
 \definecolor{codenum}{RGB}{128,0,128}
 \definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
 
 \lstset{
   basicstyle=\ttfamily\footnotesize,
@@ -90,9 +110,10 @@
 % --- Page style ---
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\emph{Agent 知识整理}}
+\fancyhead[L]{\small\emph{\leftmark}}
 \fancyhead[R]{\small\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
 
 % --- Hyperref setup ---
 \hypersetup{
@@ -111,10 +132,29 @@
 \title{AI Agent 模拟面试题库}
 \date{}
 \maketitle
+\markboth{Agent 知识整理}{Agent 知识整理}
 
-\begin{quote}
-基于 Agent 知识体系整理的 55 道模拟面试题，覆盖 Agent 核心、RAG、工程化、系统设计和 LLM 基础五大模块。 难度标注：⭐⭐ 中级 / ⭐⭐⭐ 高级
-\end{quote}
+\section{目录}
+
+{\footnotesize
+\begin{tabularx}{\textwidth}{|X|X|}
+\hline
+\textbf{章节} & \textbf{页码} \\
+\hline
+一、Agent 核心概念（12 题） & 第 1 页 \\
+\hline
+二、RAG 检索增强（8 题） & 第 4 页 \\
+\hline
+三、Agent 工程化（12 题） & 第 7 页 \\
+\hline
+四、系统设计（12 题） & 第 11 页 \\
+\hline
+五、LLM 基础与结构化输出（11 题） & 第 16 页 \\
+\hline
+附录：面试答题框架建议 & 第 20 页 \\
+\hline
+\end{tabularx}
+}
 
 
 
@@ -124,16 +164,10 @@
 
 
 
-\section*{一、Agent 核心概念（12 题）}
+\markboth{Agent 核心概念}{Agent 核心概念}
 
 
-\medskip
-\hrule
-\medskip
-
-
-
-\section{1. 请用一句话概括 AI Agent 是什么？它和普通 Chatbot 有什么区别？ ⭐⭐}
+\section{1. 请用一句话概括 AI Agent 是什么？它和普通 Chatbot 有什么区别？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -156,7 +190,7 @@
 
 
 
-\section{2. Agent Loop 的完整流程是什么？工程难点在哪里？ ⭐⭐}
+\section{2. Agent Loop 的完整流程是什么？工程难点在哪里？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -184,7 +218,7 @@
 
 
 
-\section{3. ReAct、Plan-and-Execute、Reflection、Multi-Agent 这些范式分别适合什么场景？ ⭐⭐⭐}
+\section{3. ReAct、Plan-and-Execute、Reflection、Multi-Agent 这些范式分别适合什么场景？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -214,7 +248,7 @@
 
 
 
-\section{4. Tools 注册时，工具 description 为什么非常关键？ ⭐⭐}
+\section{4. Tools 注册时，工具 description 为什么非常关键？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -242,7 +276,7 @@
 
 
 
-\section{5. Agent 的短期记忆和长期记忆有什么区别？分别怎么落地？ ⭐⭐}
+\section{5. Agent 的短期记忆和长期记忆有什么区别？分别怎么落地？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -266,7 +300,7 @@
 
 
 
-\section{6. 记忆系统需要解决哪些核心问题？如何避免记忆污染？ ⭐⭐⭐}
+\section{6. 记忆系统需要解决哪些核心问题？如何避免记忆污染？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -295,7 +329,7 @@
 
 
 
-\section{7. 向量记忆和 Markdown 记忆分别适合什么场景？ ⭐⭐}
+\section{7. 向量记忆和 Markdown 记忆分别适合什么场景？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -322,7 +356,7 @@
 
 
 
-\section{8. 为什么 Agent 场景下只优化 Prompt 不够？Context Engineering 解决什么问题？ ⭐⭐⭐}
+\section{8. 为什么 Agent 场景下只优化 Prompt 不够？Context Engineering 解决什么问题？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -348,7 +382,7 @@
 
 
 
-\section{9. MCP 协议解决什么问题？它和 Function Calling 有什么区别？ ⭐⭐}
+\section{9. MCP 协议解决什么问题？它和 Function Calling 有什么区别？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -374,7 +408,7 @@
 
 
 
-\section{10. Agent Skills 是什么？Skill 路由怎么做？ ⭐⭐⭐}
+\section{10. Agent Skills 是什么？Skill 路由怎么做？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -405,7 +439,7 @@
 
 
 
-\section{11. Multi-Agent 协作的主要问题是什么？为什么生产里不能盲目上多 Agent？ ⭐⭐⭐}
+\section{11. Multi-Agent 协作的主要问题是什么？为什么生产里不能盲目上多 Agent？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -435,7 +469,7 @@
 
 
 
-\section{12. 上下文利用率为什么有一个 40\% 的阈值现象？怎么利用这个现象做工程优化？ ⭐⭐⭐}
+\section{12. 上下文利用率为什么有一个 40\% 的阈值现象？怎么利用这个现象做工程优化？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -462,16 +496,10 @@
 
 
 
-\section*{二、RAG 检索增强（8 题）}
+\markboth{RAG 检索增强}{RAG 检索增强}
 
 
-\medskip
-\hrule
-\medskip
-
-
-
-\section{13. 什么是 RAG？它和传统搜索引擎、微调有什么区别？ ⭐⭐}
+\section{13. 什么是 RAG？它和传统搜索引擎、微调有什么区别？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -499,7 +527,7 @@
 
 
 
-\section{14. RAG 系统中 Chunk Size 怎么选？太大和太小分别有什么影响？ ⭐⭐}
+\section{14. RAG 系统中 Chunk Size 怎么选？太大和太小分别有什么影响？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -526,7 +554,7 @@
 
 
 
-\section{15. 余弦相似度、内积、欧氏距离分别适合什么 Embedding 模型？ ⭐⭐}
+\section{15. 余弦相似度、内积、欧氏距离分别适合什么 Embedding 模型？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -554,7 +582,7 @@
 
 
 
-\section{16. 向量索引 HNSW、IVF、DiskANN 分别适合什么场景？ ⭐⭐⭐}
+\section{16. 向量索引 HNSW、IVF、DiskANN 分别适合什么场景？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -582,7 +610,7 @@
 
 
 
-\section{17. RAG 评测为什么必须分检索和生成两段？怎么打分？ ⭐⭐⭐}
+\section{17. RAG 评测为什么必须分检索和生成两段？怎么打分？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -613,7 +641,7 @@
 
 
 
-\section{18. 长上下文窗口会不会取代 RAG？什么时候用 RAG，什么时候直接用长上下文？ ⭐⭐⭐}
+\section{18. 长上下文窗口会不会取代 RAG？什么时候用 RAG，什么时候直接用长上下文？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -641,7 +669,7 @@
 
 
 
-\section{19. 多模态 RAG 相比纯文本 RAG 多了哪些挑战？ ⭐⭐⭐}
+\section{19. 多模态 RAG 相比纯文本 RAG 多了哪些挑战？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -670,7 +698,7 @@
 
 
 
-\section{20. RAG 和 Agent 的记忆系统在技术上有哪些异同？ ⭐⭐⭐}
+\section{20. RAG 和 Agent 的记忆系统在技术上有哪些异同？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -697,16 +725,10 @@
 
 
 
-\section*{三、Agent 工程化（12 题）}
+\markboth{Agent 工程化}{Agent 工程化}
 
 
-\medskip
-\hrule
-\medskip
-
-
-
-\section{21. Harness Engineering 是什么？为什么说 Agent = Model + Harness？ ⭐⭐}
+\section{21. Harness Engineering 是什么？为什么说 Agent = Model + Harness？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -732,7 +754,7 @@
 
 
 
-\section{22. Harness 的六层架构分别解决什么问题？ ⭐⭐⭐}
+\section{22. Harness 的六层架构分别解决什么问题？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -770,7 +792,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 
 
-\section{23. 为什么同一个模型换一套工具接口，效果能差 10 倍？ ⭐⭐⭐}
+\section{23. 为什么同一个模型换一套工具接口，效果能差 10 倍？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -799,7 +821,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 
 
-\section{24. Loop Engineering 是什么？它和 Agent Loop、Workflow Graph 有什么区别？ ⭐⭐⭐}
+\section{24. Loop Engineering 是什么？它和 Agent Loop、Workflow Graph 有什么区别？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -824,7 +846,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 
 
-\section{25. Workflow、Graph、Loop 三者是什么关系？什么场景用哪种编排方式？ ⭐⭐⭐}
+\section{25. Workflow、Graph、Loop 三者是什么关系？什么场景用哪种编排方式？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -849,7 +871,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 
 
-\section{26. 如何防止 Agent Loop 陷入死循环？ ⭐⭐}
+\section{26. 如何防止 Agent Loop 陷入死循环？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -879,7 +901,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 
 
-\section{27. 大模型网关需要承担哪些核心能力？ ⭐⭐⭐}
+\section{27. 大模型网关需要承担哪些核心能力？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -910,7 +932,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 
 
-\section{28. 模型 Fallback 策略怎么设计？什么时候不能自动降级？ ⭐⭐⭐}
+\section{28. 模型 Fallback 策略怎么设计？什么时候不能自动降级？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -940,7 +962,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 
 
-\section{29. Token 成本怎么归因到租户、用户、功能和 Prompt 版本？ ⭐⭐⭐}
+\section{29. Token 成本怎么归因到租户、用户、功能和 Prompt 版本？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -965,7 +987,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 
 
-\section{30. Agent 的 AGENTS.md 应该怎么写？为什么不要写成超级 System Prompt？ ⭐⭐}
+\section{30. Agent 的 AGENTS.md 应该怎么写？为什么不要写成超级 System Prompt？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -996,7 +1018,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 
 
-\section{31. 工作流中断后怎么恢复？State 更新策略怎么选？ ⭐⭐⭐}
+\section{31. 工作流中断后怎么恢复？State 更新策略怎么选？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -1027,7 +1049,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 
 
-\section{32. AI 应用的可观测性要看哪些指标？ ⭐⭐}
+\section{32. AI 应用的可观测性要看哪些指标？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -1060,16 +1082,10 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 
 
 
-\section*{四、系统设计（12 题）}
+\markboth{系统设计}{系统设计}
 
 
-\medskip
-\hrule
-\medskip
-
-
-
-\section{33. 请设计一个生产级 AI 应用的整体架构，从入口到模型返回的完整链路是什么？ ⭐⭐⭐}
+\section{33. 请设计一个生产级 AI 应用的整体架构，从入口到模型返回的完整链路是什么？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -1118,7 +1134,7 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 
 
 
-\section{34. 同步、流式（SSE）、异步三种模式怎么选？ ⭐⭐}
+\section{34. 同步、流式（SSE）、异步三种模式怎么选？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -1152,7 +1168,7 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 
 
 
-\section{35. 为什么大模型调用限流要同时看 RPM、TPM、并发数和租户预算？ ⭐⭐⭐}
+\section{35. 为什么大模型调用限流要同时看 RPM、TPM、并发数和租户预算？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -1180,7 +1196,7 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 
 
 
-\section{36. AI 应用如何做超时、重试、限流、熔断和降级？ ⭐⭐⭐}
+\section{36. AI 应用如何做超时、重试、限流、熔断和降级？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -1209,7 +1225,7 @@ RAG/Memory/Tool 层 & 检索知识、召回记忆、执行工具调用、结果�
 
 
 
-\section{37. 从 Prompt Demo 到生产级架构，最大的差距在哪？要补齐哪些能力？ ⭐⭐⭐}
+\section{37. 从 Prompt Demo 到生产级架构，最大的差距在哪？要补齐哪些能力？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -1247,7 +1263,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 
 
-\section{38. Prompt 注入攻击在系统设计层面怎么防？ ⭐⭐⭐}
+\section{38. Prompt 注入攻击在系统设计层面怎么防？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -1277,7 +1293,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 
 
-\section{39. 如何设计一个实时语音 Agent 系统？ ⭐⭐⭐}
+\section{39. 如何设计一个实时语音 Agent 系统？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -1307,7 +1323,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 
 
-\section{40. 出现模型输出事故后，如何通过 Trace 回放定位问题？ ⭐⭐⭐}
+\section{40. 出现模型输出事故后，如何通过 Trace 回放定位问题？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -1339,7 +1355,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 
 
-\section{41. 如何构建 Golden Set？冷启动阶段没有生产日志怎么办？ ⭐⭐⭐}
+\section{41. 如何构建 Golden Set？冷启动阶段没有生产日志怎么办？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -1372,7 +1388,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 
 
-\section{42. LLM-as-Judge 有哪些主要偏差？怎么校准？ ⭐⭐⭐}
+\section{42. LLM-as-Judge 有哪些主要偏差？怎么校准？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -1404,7 +1420,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 
 
-\section{43. Agent 评测为什么比普通 RAG 和问答评测复杂得多？ ⭐⭐⭐}
+\section{43. Agent 评测为什么比普通 RAG 和问答评测复杂得多？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -1435,7 +1451,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 
 
-\section{44. RAG、Agent、结构化输出的评测指标为什么不能混用一套？ ⭐⭐}
+\section{44. RAG、Agent、结构化输出的评测指标为什么不能混用一套？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -1459,16 +1475,10 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 
 
-\section*{五、LLM 基础与结构化输出（11 题）}
+\markboth{LLM 基础与结构化输出}{LLM 基础与结构化输出}
 
 
-\medskip
-\hrule
-\medskip
-
-
-
-\section{45. Token 是什么？为什么中文、英文、代码消耗的 Token 不一样？ ⭐⭐}
+\section{45. Token 是什么？为什么中文、英文、代码消耗的 Token 不一样？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -1493,7 +1503,7 @@ P2（增强） & 记忆系统、工具调用安全治理、成本归因、A/B �
 
 
 
-\section{46. Temperature、Top-P、Top-K 分别控制什么？生产环境怎么设置更稳？ ⭐⭐}
+\section{46. Temperature、Top-P、Top-K 分别控制什么？生产环境怎么设置更稳？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -1531,7 +1541,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 
 
-\section{47. Streaming 为什么能改善用户体验？它能减少总耗时和 Token 成本吗？ ⭐⭐}
+\section{47. Streaming 为什么能改善用户体验？它能减少总耗时和 Token 成本吗？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -1559,7 +1569,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 
 
-\section{48. JSON Mode 和 Structured Outputs 有什么区别？ ⭐⭐⭐}
+\section{48. JSON Mode 和 Structured Outputs 有什么区别？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -1590,7 +1600,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 
 
-\section{49. Function Calling 的完整链路是什么？和 MCP Agent Skill 是什么关系？ ⭐⭐⭐}
+\section{49. Function Calling 的完整链路是什么？和 MCP Agent Skill 是什么关系？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -1636,7 +1646,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 
 
-\section{50. 工具调用为什么必须做安全治理？安全边界在哪里？ ⭐⭐⭐}
+\section{50. 工具调用为什么必须做安全治理？安全边界在哪里？ \lvgao{}}
 
 
 \subsection{参考答案要点}
@@ -1668,7 +1678,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 
 
-\section{51. 哪些大模型 API 错误可以重试？哪些不能重试？为什么必须做幂等？ ⭐⭐}
+\section{51. 哪些大模型 API 错误可以重试？哪些不能重试？为什么必须做幂等？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -1696,7 +1706,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 
 
-\section{52. 大模型为什么会产生幻觉？常见缓解方案有哪些？ ⭐⭐}
+\section{52. 大模型为什么会产生幻觉？常见缓解方案有哪些？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -1731,7 +1741,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 
 
-\section{53. Token 预算怎么估算？输入、输出、历史消息、RAG 证据如何取舍？ ⭐⭐⭐}
+\section{53. Token 预算怎么估算？输入、输出、历史消息、RAG 证据如何取舍？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -1764,7 +1774,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 
 
-\section{54. AI 应用调用日志里至少要记录哪些字段？为什么？ ⭐⭐}
+\section{54. AI 应用调用日志里至少要记录哪些字段？为什么？ \lvchu{}}
 
 
 \subsection{参考答案要点}
@@ -1794,7 +1804,7 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 
 
 
-\section{55. 如果 LLM-as-Judge 和人工评测结果不一致，应该怎么处理？ ⭐⭐⭐}
+\section{55. 如果 LLM-as-Judge 和人工评测结果不一致，应该怎么处理？ \lvzhong{}}
 
 
 \subsection{参考答案要点}
@@ -1828,6 +1838,9 @@ Top-K & 只考虑概率最高的 K 个 token & 40\textasciitilde\{\}60，适合�
 \hrule
 \medskip
 
+
+
+\markboth{附录}{附录}
 
 
 \section{附录：面试答题框架建议}
