@@ -6,6 +6,22 @@ __pycache__/
 *.log
 *.out
 *.toc
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.nav
+*.snm
+*.vrb
+*.xwm
+
+# pdf/ directory: only keep .pdf files
+/pdf/**/*
+!/pdf/**/
+!/pdf/**/*.pdf
 
 # HTML converted assets
 HTML/_converted/
