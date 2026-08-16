@@ -40,7 +40,7 @@ pip install beautifulsoup4 markdownify cairosvg Pillow
 
 ### Image handling
 - Initial paths: `./ArticleName _ JavaGuide_files/xxx.png`
-- Convert to relative: `../../HTML/ArticleName _ JavaGuide_files/xxx.png`
+- Convert to relative: `../../../HTML/ArticleName _ JavaGuide_files/xxx.png`
 - Skip chrome images: `logo.*`, `interview-guide-banner.*`, `favicon.*`
 - `fix_image_path` leaves already-resolved `../` paths untouched (used by extracted Mermaid diagrams).
 
@@ -179,7 +179,9 @@ xelatex -interaction=nonstopmode -output-directory=<pdf_dir> <tex_file>
 
 - Use `ctexart` documentclass (handles CJK via xeCJK + Fandol fonts)
 - `\includegraphics` can handle: PDF, PNG, JPEG (NOT SVG, NOT WebP)
-- Compile from `latex/category/` directory so relative `../../HTML/` paths resolve
+- Compile from `latex/<lang>/<category>/` so relative `../../../HTML/` paths resolve
+- `build_pdfs.py` walks each top-level tree under `markdown/` (`java`, `python`, `typescript`), skips `README.md`, and emits `latex/<lang>/…` + `pdf/<lang>/…`
+- `convert.py [java|python|typescript]` selects the target tree (default `java`); localization of code samples to Python/TypeScript is a separate manual/LLM step
 
 ## Common Issues & Fixes
 
@@ -219,21 +221,29 @@ Agent知识/
 │   └── _converted/          # cache for image conversions when _files/ is read-only
 │       └── ArticleName _ JavaGuide_files/
 │           └── diagram.pdf
-├── markdown/                # Output: cleaned markdown
-│   └── Category/
-│       └── ArticleName.md
+├── markdown/                # Output: cleaned markdown, one tree per language
+│   ├── README.md            # index + learning path
+│   ├── java/                # original Java-ecosystem version (convert.py default)
+│   │   └── <Category>/
+│   │       └── NN-ShortName.md
+│   ├── python/              # Python version (localized code samples)
+│   └── typescript/          # TypeScript version
 ├── latex/                   # Generated: LaTeX source
-│   └── Category/
-│       └── ArticleName.tex
+│   └── <lang>/<Category>/
+│       └── NN-ShortName.tex
 ├── pdf/                     # Final: compiled PDFs
-│   └── Category/
-│       └── ArticleName.pdf
-├── build_pdfs.py            # Full pipeline script
+│   └── <lang>/<Category>/
+│       └── NN-ShortName.pdf
+├── build_pdfs.py            # Full pipeline script (walks markdown/<lang>/ trees)
 ├── convert.py               # HTML→MD (+ lang recovery, Mermaid extraction)
 └── .opencode/
     └── skills/
         └── html-to-pdf.md   # This skill
 ```
+
+Categories: `01-LLM基础`, `02-Agent`, `03-RAG`, `04-工程实践`, `05-系统设计`, `06-面试`.
+Markdown image refs are `../../../HTML/…` (one level deeper than before) so they resolve from
+both `markdown/<lang>/<cat>/` and `latex/<lang>/<cat>/`.
 
 ## Running the pipeline
 

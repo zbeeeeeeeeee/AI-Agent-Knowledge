@@ -20,29 +20,31 @@ OUTPUT_DIR = BASE_DIR / "markdown"
 
 # Category mapping: filename keyword -> category dir
 CATEGORY_MAP = [
-    ("01-Agent核心", [
-        "AI Agent 核心概念",
-        "AI Agent 记忆系统",
+    ("01-LLM基础", [
         "LLM 运行机制",
         "大模型结构化输出",
     ]),
-    ("02-RAG", [
+    ("02-Agent", [
+        "AI Agent 核心概念",
+        "AI Agent 记忆系统",
+    ]),
+    ("03-RAG", [
         "RAG 基础概念",
         "RAG 向量索引算法",
-        "RAG 面试题",
     ]),
-    ("03-Agent工程", [
+    ("04-工程实践", [
         "Loop Engineering",
         "Harness Engineering",
         "大模型网关",
         "AI 工作流中的 Workflow",
     ]),
-    ("04-系统设计", [
+    ("05-系统设计", [
         "AI 应用系统设计",
         "AI 系统设计面试题",
     ]),
-    ("05-面试题汇总", [
+    ("06-面试", [
         "AI Agent 面试题",
+        "RAG 面试题",
         "大模型基础面试题",
         "AI 应用开发面试指南",
     ]),
@@ -115,9 +117,9 @@ def fix_image_path(img_src, html_filename, html_dir):
     img_src = img_src.lstrip("./")
 
     # The image is relative to HTML_DIR
-    # markdown file will be in OUTPUT_DIR/category/xxx.md
-    # So path should be: ../../HTML/xxx.jpg
-    return f"../../HTML/{img_src}"
+    # markdown file will be in OUTPUT_DIR/<lang>/category/xxx.md
+    # So path should be: ../../../HTML/xxx.jpg
+    return f"../../../HTML/{img_src}"
 
 
 def should_skip_image(img_src):
@@ -491,17 +493,21 @@ def main():
     print("JavaGuide HTML → Markdown Converter")
     print("=" * 60)
 
+    # Target language tree: java (default) / python / typescript.
+    # Language localization (code samples) is a separate step afterwards.
+    lang = "java"
+    if len(sys.argv) > 1 and sys.argv[1] in ("java", "python", "typescript"):
+        lang = sys.argv[1]
+    out_base = OUTPUT_DIR / lang
+
     # Find all HTML files
     html_files = sorted([
         f for f in os.listdir(HTML_DIR)
         if f.endswith(".html") and not f.endswith("Zone.Identifier")
     ])
 
-    print(f"\nFound {len(html_files)} HTML files.\n")
-
-    # Create output directory structure
-    for _, cat_dir, _ in os.walk(HTML_DIR):
-        pass  # not needed
+    print(f"\nFound {len(html_files)} HTML files.")
+    print(f"Output tree: {out_base}\n")
 
     success_count = 0
     fail_count = 0
@@ -510,7 +516,7 @@ def main():
         html_path = HTML_DIR / html_file
         category = get_category(html_file)
         out_filename = get_output_filename(html_file)
-        out_dir = OUTPUT_DIR / category
+        out_dir = out_base / category
         out_dir.mkdir(parents=True, exist_ok=True)
         out_path = out_dir / out_filename
 
@@ -540,7 +546,7 @@ def main():
 
     print("=" * 60)
     print(f"Done: {success_count} success, {fail_count} failed")
-    print(f"Output directory: {OUTPUT_DIR}")
+    print(f"Output tree: {out_base}")
     print("=" * 60)
 
 

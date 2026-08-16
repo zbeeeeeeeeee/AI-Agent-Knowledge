@@ -117,6 +117,15 @@ LATEX_PREAMBLE = r"""\documentclass[9pt,a4paper,twocolumn]{ctexart}
   morecomment=[l]{\#},
   morestring=[b]",
 }
+\lstdefinelanguage{TypeScript}{
+  morekeywords={abstract,any,as,async,await,break,case,catch,class,const,continue,debugger,declare,default,delete,do,else,enum,export,extends,false,finally,for,from,function,get,if,implements,import,in,instanceof,interface,keyof,let,module,namespace,never,new,null,number,of,package,private,protected,public,readonly,return,set,static,string,super,switch,symbol,this,throw,true,try,type,typeof,undefined,unknown,var,void,while,with,yield,Record,Array,Promise,AsyncIterable,ReadableStream,Date,Error,Object,JSON},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`{`},
+}
 
 % --- Compact spacing ---
 \linespread{0.95}
@@ -418,10 +427,10 @@ LANG_MAP = {
     "python": "Python",
     "py": "Python",
     "java": "Java",
-    "javascript": "Java",
-    "js": "Java",
-    "typescript": "Java",
-    "ts": "Java",
+    "javascript": "TypeScript",
+    "js": "TypeScript",
+    "typescript": "TypeScript",
+    "ts": "TypeScript",
     "json": "json",
     "yaml": "yaml",
     "yml": "yaml",
@@ -881,7 +890,7 @@ def escape_tex_cell(text):
     return text
 
 
-def process_file(md_path, cat_name, md_filename_base):
+def process_file(md_path, cat_name, md_filename_base, lang):
     """Process one markdown file: clean TOC, generate tex, compile PDF."""
     with open(md_path, 'r', encoding='utf-8', errors='replace') as f:
         content = f.read()
@@ -916,10 +925,12 @@ def process_file(md_path, cat_name, md_filename_base):
     latex_body = md_to_latex(body, title)
 
     # Step 4: Assemble full LaTeX
-    tex_content = LATEX_PREAMBLE + f'\n\\title{{{escape_latex(title)}}}\n\\date{{}}\n\\maketitle\n\\markboth{{Agent 知识整理}}{{Agent 知识整理}}\n' + latex_body + LATEX_POSTAMBLE
+    LANG_LABELS = {"java": "Java", "python": "Python", "typescript": "TypeScript"}
+    lang_label = LANG_LABELS.get(lang, lang)
+    tex_content = LATEX_PREAMBLE + f'\n\\title{{{escape_latex(title)}}}\n\\date{{}}\n\\maketitle\n\\markboth{{{lang_label} 版 Agent 知识}}{{ {lang_label} 版 Agent 知识}}\n' + latex_body + LATEX_POSTAMBLE
 
     # Write .tex file
-    tex_subdir = TEX_DIR / cat_name
+    tex_subdir = TEX_DIR / lang / cat_name
     tex_subdir.mkdir(parents=True, exist_ok=True)
     tex_filename = md_filename_base + '.tex'
     tex_path = tex_subdir / tex_filename
@@ -933,12 +944,12 @@ def process_file(md_path, cat_name, md_filename_base):
     return tex_path, title
 
 
-def compile_tex(tex_path, cat_name, tex_basename):
+def compile_tex(tex_path, cat_name, tex_basename, lang):
     """Compile a .tex file to PDF using xelatex."""
     tex_dir = tex_path.parent
     stem = tex_basename.replace('.tex', '')
 
-    pdf_subdir = PDF_DIR / cat_name
+    pdf_subdir = PDF_DIR / lang / cat_name
     pdf_subdir.mkdir(parents=True, exist_ok=True)
 
     # Run xelatex twice for TOC/cross-refs
@@ -961,7 +972,7 @@ def compile_tex(tex_path, cat_name, tex_basename):
 
 def main():
     print("=" * 60)
-    print("Markdown → LaTeX + PDF Pipeline")
+    print("Markdown → LaTeX + PDF Pipeline (java / python / typescript)")
     print("=" * 60)
 
     success_md = 0
@@ -969,56 +980,68 @@ def main():
     success_pdf = 0
     results = []
 
-    for md_root, dirs, files in os.walk(MD_DIR):
-        cat_name = os.path.relpath(md_root, MD_DIR)
-        if cat_name == '.':
-            continue
+    # Language trees: top-level dirs under markdown/ (java, python, typescript, ...)
+    langs = sorted(
+        d.name for d in MD_DIR.iterdir()
+        if d.is_dir() and not d.name.startswith('.')
+    )
 
-        for f in sorted(files):
-            if not f.endswith('.md'):
+    for lang in langs:
+        lang_root = MD_DIR / lang
+        print(f"\n{'='*60}\nLanguage tree: {lang}\n{'='*60}")
+
+        for md_root, dirs, files in os.walk(lang_root):
+            cat_name = os.path.relpath(md_root, lang_root)
+            if cat_name == '.':
                 continue
 
-            md_path = os.path.join(md_root, f)
-            base_name = f.replace('.md', '')
-            short_name = f[:50] + ('...' if len(f) > 50 else '')
+            for f in sorted(files):
+                if not f.endswith('.md'):
+                    continue
+                if f == 'README.md':
+                    continue
 
-            print(f"\n--- {cat_name}/{short_name} ---")
+                md_path = os.path.join(md_root, f)
+                base_name = f.replace('.md', '')
+                short_name = f[:50] + ('...' if len(f) > 50 else '')
 
-            # Process (clean TOC + generate tex)
-            try:
-                tex_path, title = process_file(md_path, cat_name, base_name)
-                print(f"  ✓ MD cleaned: {md_path}")
-                print(f"  ✓ TEX generated: {tex_path}")
-                success_md += 1
-                success_tex += 1
-            except Exception as e:
-                print(f"  ✗ MD/TEX ERROR: {e}")
-                continue
+                print(f"\n--- [{lang}] {cat_name}/{short_name} ---")
 
-            # Compile PDF
-            try:
-                ok, err = compile_tex(tex_path, cat_name, os.path.basename(str(tex_path)))
-                if ok:
-                    pdf_path = PDF_DIR / cat_name / f'{base_name}.pdf'
-                    size_kb = os.path.getsize(str(pdf_path)) / 1024
-                    print(f"  ✓ PDF compiled: {pdf_path} ({size_kb:.0f} KB)")
-                    success_pdf += 1
-                    results.append((cat_name, base_name, 'OK', size_kb))
-                else:
-                    print(f"  ✗ PDF compile FAILED")
-                    # Show last part of log
-                    log_path = PDF_DIR / cat_name / f'{base_name}.log'
-                    if log_path.exists():
-                        with open(log_path, 'r') as lf:
-                            log_tail = lf.read()[-1000:]
-                        # Find error messages
-                        errors = re.findall(r'^!(.*)', log_tail, re.MULTILINE)
-                        for err_line in errors[-5:]:
-                            print(f"    Error: {err_line[:120]}")
-                    results.append((cat_name, base_name, 'PDF FAILED', 0))
-            except Exception as e:
-                print(f"  ✗ PDF ERROR: {e}")
-                results.append((cat_name, base_name, f'ERROR: {e}', 0))
+                # Process (clean TOC + generate tex)
+                try:
+                    tex_path, title = process_file(md_path, cat_name, base_name, lang)
+                    print(f"  ✓ MD cleaned: {md_path}")
+                    print(f"  ✓ TEX generated: {tex_path}")
+                    success_md += 1
+                    success_tex += 1
+                except Exception as e:
+                    print(f"  ✗ MD/TEX ERROR: {e}")
+                    continue
+
+                # Compile PDF
+                try:
+                    ok, err = compile_tex(tex_path, cat_name, os.path.basename(str(tex_path)), lang)
+                    if ok:
+                        pdf_path = PDF_DIR / lang / cat_name / f'{base_name}.pdf'
+                        size_kb = os.path.getsize(str(pdf_path)) / 1024
+                        print(f"  ✓ PDF compiled: {pdf_path} ({size_kb:.0f} KB)")
+                        success_pdf += 1
+                        results.append((lang, cat_name, base_name, 'OK', size_kb))
+                    else:
+                        print(f"  ✗ PDF compile FAILED")
+                        # Show last part of log
+                        log_path = PDF_DIR / lang / cat_name / f'{base_name}.log'
+                        if log_path.exists():
+                            with open(log_path, 'r') as lf:
+                                log_tail = lf.read()[-1000:]
+                            # Find error messages
+                            errors = re.findall(r'^!(.*)', log_tail, re.MULTILINE)
+                            for err_line in errors[-5:]:
+                                print(f"    Error: {err_line[:120]}")
+                        results.append((lang, cat_name, base_name, 'PDF FAILED', 0))
+                except Exception as e:
+                    print(f"  ✗ PDF ERROR: {e}")
+                    results.append((lang, cat_name, base_name, f'ERROR: {e}', 0))
 
     print("\n" + "=" * 60)
     print("SUMMARY")
@@ -1027,10 +1050,10 @@ def main():
     print(f"  LaTeX files generated: {success_tex}")
     print(f"  PDF files compiled: {success_pdf}")
 
-    for cat, name, status, size in results:
+    for lang, cat, name, status, size in results:
         icon = "✓" if status == 'OK' else "✗"
         size_str = f" ({size:.0f} KB)" if size else ""
-        print(f"  {icon} [{cat}] {name}{size_str}  {status}")
+        print(f"  {icon} [{lang}/{cat}] {name}{size_str}  {status}")
 
 
 if __name__ == "__main__":
