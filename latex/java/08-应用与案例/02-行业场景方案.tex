@@ -1,0 +1,305 @@
+\documentclass[9pt,a4paper,twocolumn]{ctexart}
+
+% --- Packages ---
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{caption}
+
+% --- Code block styling ---
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{220,220,220}
+\definecolor{codekw}{RGB}{0,0,192}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{codenum}{RGB}{128,0,128}
+\definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=4pt,
+  belowskip=4pt,
+  extendedchars=true,
+  literate={，}{{，}}1 {；}{{；}}1 {！}{{！}}1 {？}{{？}}1 {“}{{“}}1 {”}{{”}}1 {（}{{（}}1 {）}{{）}}1 {《}{{《}}1 {》}{{》}}1,
+}
+
+% --- Extra language definitions (no built-in listings support) ---
+\lstdefinelanguage{json}{
+  morekeywords={true,false,null},
+  sensitive=true,
+  morestring=[b]",
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+\lstdefinelanguage{yaml}{
+  morekeywords={true,false,null,yes,no,on,off},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[d]',
+}
+\lstdefinelanguage{http}{
+  morekeywords={GET,POST,PUT,DELETE,PATCH,HEAD,OPTIONS,HTTP,Host,Accept,Authorization,Content-Type,Content-Length,User-Agent},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+\lstdefinelanguage{TypeScript}{
+  morekeywords={abstract,any,as,async,await,break,case,catch,class,const,continue,debugger,declare,default,delete,do,else,enum,export,extends,false,finally,for,from,function,get,if,implements,import,in,instanceof,interface,keyof,let,module,namespace,never,new,null,number,of,package,private,protected,public,readonly,return,set,static,string,super,switch,symbol,this,throw,true,try,type,typeof,undefined,unknown,var,void,while,with,yield,Record,Array,Promise,AsyncIterable,ReadableStream,Date,Error,Object,JSON},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`{`},
+}
+
+% --- Compact spacing ---
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% --- Table styling ---
+\renewcommand{\arraystretch}{1.1}
+
+% --- Heading styling (numbered) ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
+
+% --- Page style ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\emph{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
+
+% --- Hyperref setup ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+}
+
+% --- Caption format ---
+\DeclareCaptionFormat{myformat}{\small\bfseries #1#2#3}
+\captionsetup{format=myformat}
+
+\begin{document}
+
+\title{Agent 行业场景方案：金融、医疗、电商、企业服务}
+\date{}
+\maketitle
+\markboth{Java 版 Agent 知识}{ Java 版 Agent 知识}
+
+\begin{quote}
+语言策略：\texttt{shared}。三语言内容一致，Java 为 canonical。 地图节点：\texttt{07 应用与案例 / 行业解决方案}。本文给四个行业的\textbf{方案模板}，落地时按企业实际系统替换工具与数据边界。
+\end{quote}
+
+
+
+\section*{0. 使用说明}
+
+
+每个行业模板按同一结构展开：核心任务、架构选择、工具白名单、自主性、安全与评测、关键指标、常见坑。模板用于方案评审，不能替代具体业务设计。
+
+
+
+\section*{1. 通用架构}
+
+
+\begin{lstlisting}
+入口层 → 身份/租户/权限 → 任务卡
+  → 编排层（Workflow 优先，局部 Agent）
+  → 模型网关（路由/限流/成本）
+  → 工具层（只读优先，高危审批）
+  → RAG / Memory（行业知识隔离）
+  → 评测与审计（全链路留痕）
+\end{lstlisting}
+
+
+
+\section*{2. 金融行业}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.133\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.867\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{维度} & \textbf{建议} \\
+\hline
+核心任务 & 研报摘要、合规问答、反洗钱线索初筛、工单分派 \\
+\hline
+架构 & Workflow 为主；投研问答可用局部 ReAct \\
+\hline
+工具 & 只读查询优先；交易/转账/权限变更禁止直连 \\
+\hline
+自主性 & L1–L2；任何资金动作 L3 禁止 \\
+\hline
+安全 & 数据分级、租户隔离、审批留痕、Prompt 注入回归 \\
+\hline
+指标 & 引用准确率、误拒率、高危动作率、单任务成本 \\
+\hline
+常见坑 & 把模型输出当投资建议；知识库跨租户污染 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{3. 医疗行业}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.138\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.862\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{维度} & \textbf{建议} \\
+\hline
+核心任务 & 病历摘要、指南检索、预问诊、报告结构化 \\
+\hline
+架构 & 固定 Workflow + 强 Schema 输出 \\
+\hline
+工具 & 知识库、EMR 只读接口；诊断与开药禁止自动执行 \\
+\hline
+自主性 & L1 为主；患者沟通最多 L2 \\
+\hline
+安全 & 脱敏、隐私合规、幻觉控制、人工复核 \\
+\hline
+指标 & 结构化准确率、引用准确率、漏报率、复核通过率 \\
+\hline
+常见坑 & 用通用模型做专科诊断；脱敏后仍保留可识别信息 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{4. 电商行业}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.138\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.862\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{维度} & \textbf{建议} \\
+\hline
+核心任务 & 智能客服、退换货审核、商品摘要、评论分析 \\
+\hline
+架构 & 客服用 Swarm 交接；审核用 Workflow \\
+\hline
+工具 & 订单/物流/售后查询；退款执行必须审批 \\
+\hline
+自主性 & 查询 L2；售后建议 L2；资金动作人工审批 \\
+\hline
+安全 & 防越权查询他人订单；防价格/优惠规则注入 \\
+\hline
+指标 & 解决率、转人工率、退款准确率、处理时长 \\
+\hline
+常见坑 & 模型直接承诺赔偿；大促期间限流不足 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{5. 企业服务}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.143\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.857\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{维度} & \textbf{建议} \\
+\hline
+核心任务 & 工单分类、知识库问答、会议纪要、合同审查 \\
+\hline
+架构 & 通用 Workflow；多租户知识库 + RAG \\
+\hline
+工具 & 文档、CRM、工单系统；外发邮件可配置审批 \\
+\hline
+自主性 & L1–L2；批量外发与权限变更禁止 \\
+\hline
+安全 & 租户隔离、权限继承、导出审计 \\
+\hline
+指标 & 工单准确率、知识命中率、人工确认率、SLA \\
+\hline
+常见坑 & 跨租户记忆串线；把内部知识暴露给外部租户 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{6. 四行业对比}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.114\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.543\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.143\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.200\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{行业} & \textbf{主架构} & \textbf{最高自主级} & \textbf{最大风险} \\
+\hline
+金融 & Workflow + 局部 ReAct & L2 & 资金与合规 \\
+\hline
+医疗 & Workflow + Schema & L1 & 患者安全与隐私 \\
+\hline
+电商 & Swarm + Workflow & L2 & 资金与订单越权 \\
+\hline
+企业服务 & Workflow + RAG & L2 & 租户数据隔离 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{7. 延伸阅读}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item \href{01-案例库与反模式索引.md}{案例库与反模式索引}
+  \item \href{../06-安全与治理/01-Agent安全护栏清单.md}{Agent 安全护栏清单}
+  \item \href{../07-系统设计/01-AI应用系统设计.md}{AI 应用系统设计}
+\end{itemize}
+
+\end{document}

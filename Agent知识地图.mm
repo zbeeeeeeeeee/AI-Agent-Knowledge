@@ -153,6 +153,16 @@
         <node TEXT="🟢 三语言上下文组装器 · TypeScript 实现" LINK="markdown/typescript/04-工程实践/08-上下文工程.md"/>
       </node>
     </node>
+    <node TEXT="🟢 成本与性能优化 ≡" LINK="markdown/java/04-工程实践/09-成本与性能优化.md">
+      <node TEXT="🟢 成本归因 ≡" LINK="markdown/java/04-工程实践/09-成本与性能优化.md"/>
+      <node TEXT="🟢 模型分级与缓存 ≡" LINK="markdown/java/04-工程实践/09-成本与性能优化.md"/>
+      <node TEXT="🟢 限流与并发 ≡" LINK="markdown/java/04-工程实践/09-成本与性能优化.md"/>
+      <node TEXT="三语言成本限流示例">
+        <node TEXT="🟢 三语言成本限流示例 · Java 实现" LINK="markdown/java/04-工程实践/09-成本与性能优化.md"/>
+        <node TEXT="🟢 三语言成本限流示例 · Python 实现" LINK="markdown/python/04-工程实践/09-成本与性能优化.md"/>
+        <node TEXT="🟢 三语言成本限流示例 · TypeScript 实现" LINK="markdown/typescript/04-工程实践/09-成本与性能优化.md"/>
+      </node>
+    </node>
     <node TEXT="🟢 系统设计 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md">
       <node TEXT="🟢 生产级分层架构 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
       <node TEXT="🟢 同步 流式 异步模式 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
@@ -261,11 +271,11 @@
       <node TEXT="🔴 数据分析 Agent"/>
       <node TEXT="🔴 办公自动化 Agent"/>
     </node>
-    <node TEXT="🔴 行业解决方案">
-      <node TEXT="🔴 金融"/>
-      <node TEXT="🔴 医疗"/>
-      <node TEXT="🔴 电商"/>
-      <node TEXT="🔴 企业服务"/>
+    <node TEXT="🟢 行业解决方案 ≡" LINK="markdown/java/08-应用与案例/02-行业场景方案.md">
+      <node TEXT="🟢 金融 ≡" LINK="markdown/java/08-应用与案例/02-行业场景方案.md"/>
+      <node TEXT="🟢 医疗 ≡" LINK="markdown/java/08-应用与案例/02-行业场景方案.md"/>
+      <node TEXT="🟢 电商 ≡" LINK="markdown/java/08-应用与案例/02-行业场景方案.md"/>
+      <node TEXT="🟢 企业服务 ≡" LINK="markdown/java/08-应用与案例/02-行业场景方案.md"/>
     </node>
     <node TEXT="🟢 案例库 ≡" LINK="markdown/java/08-应用与案例/01-案例库与反模式索引.md">
       <node TEXT="🟢 案例索引 ≡" LINK="markdown/java/08-应用与案例/01-案例库与反模式索引.md"/>
@@ -276,21 +286,21 @@
       <node TEXT="🟢 失败案例与反模式 ≡" LINK="markdown/java/08-应用与案例/01-案例库与反模式索引.md"/>
     </node>
   </node>
-  <node TEXT="🔴 08 生态与前沿 ≡" LINK="markdown/java/02-Agent/01-Agent核心概念.md">
-    <node TEXT="🟡 协议与标准 ≡" LINK="markdown/java/02-Agent/01-Agent核心概念.md">
-      <node TEXT="🟡 MCP 标准 ≡" LINK="markdown/java/02-Agent/01-Agent核心概念.md"/>
-      <node TEXT="🟡 A2A 标准 ≡" LINK="markdown/java/02-Agent/01-Agent核心概念.md"/>
-      <node TEXT="🟡 Skills 标准 ≡" LINK="markdown/java/02-Agent/01-Agent核心概念.md"/>
+  <node TEXT="🟡 08 生态与前沿 ≡" LINK="markdown/java/09-生态与前沿/01-Agent技术雷达.md">
+    <node TEXT="🟡 协议与标准 ≡" LINK="markdown/java/09-生态与前沿/01-Agent技术雷达.md">
+      <node TEXT="🟢 MCP 标准 ≡" LINK="markdown/java/09-生态与前沿/01-Agent技术雷达.md"/>
+      <node TEXT="🟡 A2A 标准 ≡" LINK="markdown/java/09-生态与前沿/01-Agent技术雷达.md"/>
+      <node TEXT="🟢 Skills 标准 ≡" LINK="markdown/java/09-生态与前沿/01-Agent技术雷达.md"/>
     </node>
-    <node TEXT="🔴 技术雷达">
-      <node TEXT="🔴 论文清单"/>
-      <node TEXT="🔴 框架动态"/>
-      <node TEXT="🔴 产品平台动态"/>
+    <node TEXT="🟢 技术雷达 ≡" LINK="markdown/java/09-生态与前沿/01-Agent技术雷达.md">
+      <node TEXT="🟢 论文清单 ≡" LINK="markdown/java/09-生态与前沿/02-论文精读清单.md"/>
+      <node TEXT="🟢 框架动态 ≡" LINK="markdown/java/09-生态与前沿/01-Agent技术雷达.md"/>
+      <node TEXT="🟢 产品平台动态 ≡" LINK="markdown/java/09-生态与前沿/01-Agent技术雷达.md"/>
     </node>
-    <node TEXT="🔴 趋势判断">
-      <node TEXT="🟡 Harness 趋势 ≡" LINK="markdown/java/04-工程实践/03-Harness工程.md"/>
-      <node TEXT="🔴 多智能体趋势"/>
-      <node TEXT="🔴 评测与治理趋势"/>
+    <node TEXT="🟡 趋势判断 ≡" LINK="markdown/java/09-生态与前沿/01-Agent技术雷达.md">
+      <node TEXT="🟢 Harness 趋势 ≡" LINK="markdown/java/04-工程实践/03-Harness工程.md"/>
+      <node TEXT="🟡 多智能体趋势 ≡" LINK="markdown/java/09-生态与前沿/01-Agent技术雷达.md"/>
+      <node TEXT="🟢 评测与治理趋势 ≡" LINK="markdown/java/09-生态与前沿/01-Agent技术雷达.md"/>
     </node>
   </node>
 </node>

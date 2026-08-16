@@ -1,0 +1,203 @@
+\documentclass[9pt,a4paper,twocolumn]{ctexart}
+
+% --- Packages ---
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{caption}
+
+% --- Code block styling ---
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{220,220,220}
+\definecolor{codekw}{RGB}{0,0,192}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{codenum}{RGB}{128,0,128}
+\definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=4pt,
+  belowskip=4pt,
+  extendedchars=true,
+  literate={，}{{，}}1 {；}{{；}}1 {！}{{！}}1 {？}{{？}}1 {“}{{“}}1 {”}{{”}}1 {（}{{（}}1 {）}{{）}}1 {《}{{《}}1 {》}{{》}}1,
+}
+
+% --- Extra language definitions (no built-in listings support) ---
+\lstdefinelanguage{json}{
+  morekeywords={true,false,null},
+  sensitive=true,
+  morestring=[b]",
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+\lstdefinelanguage{yaml}{
+  morekeywords={true,false,null,yes,no,on,off},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[d]',
+}
+\lstdefinelanguage{http}{
+  morekeywords={GET,POST,PUT,DELETE,PATCH,HEAD,OPTIONS,HTTP,Host,Accept,Authorization,Content-Type,Content-Length,User-Agent},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+\lstdefinelanguage{TypeScript}{
+  morekeywords={abstract,any,as,async,await,break,case,catch,class,const,continue,debugger,declare,default,delete,do,else,enum,export,extends,false,finally,for,from,function,get,if,implements,import,in,instanceof,interface,keyof,let,module,namespace,never,new,null,number,of,package,private,protected,public,readonly,return,set,static,string,super,switch,symbol,this,throw,true,try,type,typeof,undefined,unknown,var,void,while,with,yield,Record,Array,Promise,AsyncIterable,ReadableStream,Date,Error,Object,JSON},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`{`},
+}
+
+% --- Compact spacing ---
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% --- Table styling ---
+\renewcommand{\arraystretch}{1.1}
+
+% --- Heading styling (numbered) ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
+
+% --- Page style ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\emph{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
+
+% --- Hyperref setup ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+}
+
+% --- Caption format ---
+\DeclareCaptionFormat{myformat}{\small\bfseries #1#2#3}
+\captionsetup{format=myformat}
+
+\begin{document}
+
+\title{Agent 论文精读清单}
+\date{}
+\maketitle
+\markboth{TypeScript 版 Agent 知识}{ TypeScript 版 Agent 知识}
+
+\begin{quote}
+语言策略：\texttt{shared}。三语言内容一致，Java 为 canonical。 地图节点：\texttt{08 生态与前沿 / 技术雷达 / 论文清单}。本清单只收录\textbf{影响工程决策}的论文，不追求数量。
+\end{quote}
+
+
+
+\section*{0. 阅读方法}
+
+
+每篇论文按三个问题读：它改变了什么组件？它适合什么场景？它给当前知识库带来什么约束？
+
+
+
+\section*{1. 精读清单}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.270\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.063\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.190\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.286\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.190\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{论文} & \textbf{年份} & \textbf{核心思想} & \textbf{工程影响} & \textbf{对应文档} \\
+\hline
+ReAct & 2022 & 推理与行动交替 & Agent Loop 与工具反馈闭环 & Agent 核心概念 \\
+\hline
+Toolformer & 2023 & 模型自学习调用工具 & 工具调用是基础能力 & 大模型结构化输出 \\
+\hline
+Plan-and-Execute & 2023 & 先全局计划再执行 & 长任务不易迷路 & Agent 核心概念 \\
+\hline
+Reflexion & 2023 & 口头反思存入记忆 & 失败经验跨任务复用 & Agent 核心概念 \\
+\hline
+Self-Refine & 2023 & 生成后自我审查迭代 & Reflection 的轻量实现 & Agent 核心概念 \\
+\hline
+CRITIC & 2023 & 外部工具验证输出 & 用执行器做事实校验 & Agent 核心概念 \\
+\hline
+RAG & 2020 & 检索增强生成 & 外部知识与生成分离 & RAG 基础概念 \\
+\hline
+GraphRAG & 2024 & 实体关系图 + 社区摘要 & 多跳问答与全局总结 & RAG 高级检索 \\
+\hline
+Voyager & 2023 & 技能库持续积累 & Skill 化与终身学习思路 & Agent Skills \\
+\hline
+SWE-bench & 2023 & 代码任务评测集 & 评测集设计的工程模板 & Agent 评测体系 \\
+\hline
+Constitutional AI & 2022 & 原则约束模型行为 & 安全护栏与红线设计 & Agent 安全护栏清单 \\
+\hline
+A Survey on MCP & 2025 & MCP 生态与安全 & 工具接入标准选型 & Agent 核心概念 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{2. 延伸阅读}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item \href{01-Agent技术雷达.md}{Agent 技术雷达}
+  \item \href{../04-工程实践/07-Agent框架选型对比.md}{Agent 框架与平台横评}
+  \item \href{../00-概念与术语/01-Agent术语表与概念边界.md}{Agent 术语表与概念边界}
+\end{itemize}
+
+\end{document}

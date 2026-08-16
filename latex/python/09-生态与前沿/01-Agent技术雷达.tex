@@ -1,0 +1,267 @@
+\documentclass[9pt,a4paper,twocolumn]{ctexart}
+
+% --- Packages ---
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{caption}
+
+% --- Code block styling ---
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{220,220,220}
+\definecolor{codekw}{RGB}{0,0,192}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{codenum}{RGB}{128,0,128}
+\definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=4pt,
+  belowskip=4pt,
+  extendedchars=true,
+  literate={，}{{，}}1 {；}{{；}}1 {！}{{！}}1 {？}{{？}}1 {“}{{“}}1 {”}{{”}}1 {（}{{（}}1 {）}{{）}}1 {《}{{《}}1 {》}{{》}}1,
+}
+
+% --- Extra language definitions (no built-in listings support) ---
+\lstdefinelanguage{json}{
+  morekeywords={true,false,null},
+  sensitive=true,
+  morestring=[b]",
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+\lstdefinelanguage{yaml}{
+  morekeywords={true,false,null,yes,no,on,off},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[d]',
+}
+\lstdefinelanguage{http}{
+  morekeywords={GET,POST,PUT,DELETE,PATCH,HEAD,OPTIONS,HTTP,Host,Accept,Authorization,Content-Type,Content-Length,User-Agent},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+\lstdefinelanguage{TypeScript}{
+  morekeywords={abstract,any,as,async,await,break,case,catch,class,const,continue,debugger,declare,default,delete,do,else,enum,export,extends,false,finally,for,from,function,get,if,implements,import,in,instanceof,interface,keyof,let,module,namespace,never,new,null,number,of,package,private,protected,public,readonly,return,set,static,string,super,switch,symbol,this,throw,true,try,type,typeof,undefined,unknown,var,void,while,with,yield,Record,Array,Promise,AsyncIterable,ReadableStream,Date,Error,Object,JSON},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`{`},
+}
+
+% --- Compact spacing ---
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% --- Table styling ---
+\renewcommand{\arraystretch}{1.1}
+
+% --- Heading styling (numbered) ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
+
+% --- Page style ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\emph{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
+
+% --- Hyperref setup ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+}
+
+% --- Caption format ---
+\DeclareCaptionFormat{myformat}{\small\bfseries #1#2#3}
+\captionsetup{format=myformat}
+
+\begin{document}
+
+\title{Agent 技术雷达}
+\date{}
+\maketitle
+\markboth{Python 版 Agent 知识}{ Python 版 Agent 知识}
+
+\begin{quote}
+语言策略：\texttt{shared}。三语言内容一致，Java 为 canonical。 地图节点：\texttt{08 生态与前沿 / 技术雷达}。本雷达为知识库基线（2026.08），季度更新；采用 Adopt / Trial / Assess / Hold 四级。
+\end{quote}
+
+
+
+\section*{0. 使用说明}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item \textbf{Adopt}：知识库已有实践，默认采用；
+  \item \textbf{Trial}：值得试点，但有前提；
+  \item \textbf{Assess}：值得观察，暂不投入；
+  \item \textbf{Hold}：当前不建议生产采用。
+\end{itemize}
+
+
+\section*{1. 协议与标准}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.396\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.125\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.479\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{项目} & \textbf{级别} & \textbf{说明} \\
+\hline
+MCP & Adopt & 工具/资源/提示词接入标准，知识库已纳入工具层 \\
+\hline
+Agent Skills & Adopt & 经验包与延迟加载模式，适合团队知识沉淀 \\
+\hline
+A2A & Assess & 多智能体任务交换方向正确，生态仍在收敛 \\
+\hline
+OpenTelemetry GenAI & Trial & Trace 语义正在稳定，可用于供应商无关采集 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{2. 框架与库}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.411\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.107\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.482\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{项目} & \textbf{级别} & \textbf{说明} \\
+\hline
+LangGraph & Adopt & Python 生产级 Graph + Agent 基线 \\
+\hline
+LangGraph.js & Adopt & TypeScript 生产级基线 \\
+\hline
+Spring AI Alibaba Graph & Adopt & Java 生态基线 \\
+\hline
+OpenAI Agents SDK & Trial & 原型快，注意供应商绑定 \\
+\hline
+AutoGen & Assess & 多智能体研究价值高，生产运维需自建 \\
+\hline
+CrewAI & Assess & 角色化流水线友好，复杂控制流要评估 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{3. 平台与产品}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.483\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.100\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.417\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{项目} & \textbf{级别} & \textbf{说明} \\
+\hline
+Claude Code / Codex 类编码 Agent & Adopt & 已有 Harness/Loop 实践素材 \\
+\hline
+LangSmith / Langfuse 类观测平台 & Trial & 与自建 Trace 二选一，先定义 Span 模型 \\
+\hline
+通用 Agent 托管平台 & Assess & 关注锁定、数据边界与单位成本 \\
+\hline
+低代码 Agent 平台 & Hold & 复杂控制与可观测性不足时不要硬上 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{4. 研究趋势}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.490\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.122\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.388\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{趋势} & \textbf{级别} & \textbf{对工程的影响} \\
+\hline
+Agentic Workflows & Adopt & 固定骨架 + 局部自主是当前生产主流 \\
+\hline
+Context Engineering & Adopt & 决定效果上限，优先于换模型 \\
+\hline
+Memory 分层 & Trial & 短期上下文 + 长期检索 + 项目记忆 \\
+\hline
+Multi-Agent & Assess & 只在单 Agent 证明不足后采用 \\
+\hline
+Agent 评测与安全 & Adopt & 没有回归门禁与护栏不允许上线 \\
+\hline
+GUI / Computer Use Agent & Assess & 观察沙箱与审计成熟度 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{5. 更新规则}
+
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
+  \item 季度评审一次，更新级别和说明；
+  \item 每个项目必须有对应文档或实践记录，不允许只贴链接；
+  \item 从 Assess 升到 Trial 需要 PoC 记录；升到 Adopt 需要评测与回滚方案。
+\end{enumerate}
+
+
+\section*{6. 延伸阅读}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item \href{../04-工程实践/07-Agent框架选型对比.md}{Agent 框架与平台横评}
+  \item \href{02-论文精读清单.md}{论文精读清单}
+  \item \href{../../../知识地图总索引.md}{知识地图总索引}
+\end{itemize}
+
+\end{document}

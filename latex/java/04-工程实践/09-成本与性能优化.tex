@@ -1,0 +1,279 @@
+\documentclass[9pt,a4paper,twocolumn]{ctexart}
+
+% --- Packages ---
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{caption}
+
+% --- Code block styling ---
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{220,220,220}
+\definecolor{codekw}{RGB}{0,0,192}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{codenum}{RGB}{128,0,128}
+\definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=4pt,
+  belowskip=4pt,
+  extendedchars=true,
+  literate={，}{{，}}1 {；}{{；}}1 {！}{{！}}1 {？}{{？}}1 {“}{{“}}1 {”}{{”}}1 {（}{{（}}1 {）}{{）}}1 {《}{{《}}1 {》}{{》}}1,
+}
+
+% --- Extra language definitions (no built-in listings support) ---
+\lstdefinelanguage{json}{
+  morekeywords={true,false,null},
+  sensitive=true,
+  morestring=[b]",
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+\lstdefinelanguage{yaml}{
+  morekeywords={true,false,null,yes,no,on,off},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[d]',
+}
+\lstdefinelanguage{http}{
+  morekeywords={GET,POST,PUT,DELETE,PATCH,HEAD,OPTIONS,HTTP,Host,Accept,Authorization,Content-Type,Content-Length,User-Agent},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+\lstdefinelanguage{TypeScript}{
+  morekeywords={abstract,any,as,async,await,break,case,catch,class,const,continue,debugger,declare,default,delete,do,else,enum,export,extends,false,finally,for,from,function,get,if,implements,import,in,instanceof,interface,keyof,let,module,namespace,never,new,null,number,of,package,private,protected,public,readonly,return,set,static,string,super,switch,symbol,this,throw,true,try,type,typeof,undefined,unknown,var,void,while,with,yield,Record,Array,Promise,AsyncIterable,ReadableStream,Date,Error,Object,JSON},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`{`},
+}
+
+% --- Compact spacing ---
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% --- Table styling ---
+\renewcommand{\arraystretch}{1.1}
+
+% --- Heading styling (numbered) ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
+
+% --- Page style ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\emph{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
+
+% --- Hyperref setup ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+}
+
+% --- Caption format ---
+\DeclareCaptionFormat{myformat}{\small\bfseries #1#2#3}
+\captionsetup{format=myformat}
+
+\begin{document}
+
+\title{Agent 成本与性能优化：Token 预算、限流与成本归因}
+\date{}
+\maketitle
+\markboth{Java 版 Agent 知识}{ Java 版 Agent 知识}
+
+\begin{quote}
+语言策略：\texttt{code}。正文三语言一致；成本追踪与滑动窗口限流代码按 Java 生态实现。 地图节点：\texttt{04 开发与工程化 / 成本与性能优化}。配套文档：\href{04-大模型网关.md}{大模型网关}、\href{05-Agent可观测与追踪.md}{Agent 可观测与追踪}。
+\end{quote}
+
+
+
+\section*{0. 结论先说}
+
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
+  \item Agent 成本首先来自\textbf{上下文膨胀}，其次才是模型单价；先做上下文预算，再谈模型路由。
+  \item 性能优化顺序：先测 P95 与 TTFT，再优化最慢的工具和最长上下文，最后才换更贵的模型。
+  \item 任何优化都要绑定成本、延迟、成功率三个指标，防止“省了钱、坏了效果”。
+\end{enumerate}
+
+
+\section*{1. 成本公式}
+
+
+\begin{lstlisting}
+单任务成本 = 输入 Token × 输入单价
+           + 输出 Token × 输出单价
+           + 工具调用成本
+           + 缓存命中节省
+           + 分摊基础设施成本
+\end{lstlisting}
+
+
+
+成本归因必须带 \texttt{task\_id}、\texttt{model}、\texttt{prompt\_version}、\texttt{toolset\_version}，否则无法定位是哪个版本变贵。
+
+
+
+\section*{2. 成本优化杠杆}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.261\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.630\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.109\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{杠杆} & \textbf{做法} & \textbf{典型收益} \\
+\hline
+上下文预算 & 每轮计算预算，裁剪低优先级内容 & 高 \\
+\hline
+模型分级 & 简单任务走小模型，复杂任务走强模型 & 高 \\
+\hline
+Prompt Cache & System Prompt 与工具 Schema 固定前缀 & 中高 \\
+\hline
+工具返回压缩 & 只保留结构化摘要 & 高 \\
+\hline
+轮次上限 & 降低无效循环 & 中 \\
+\hline
+语义缓存 & 相似问题直接复用结果 & 中，需防错 \\
+\hline
+批处理 & 离线任务合并调用 & 中 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{3. 性能优化顺序}
+
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
+  \item 建立基线：P50 / P95 / TTFT / TPOT / 单任务 Token；
+  \item 找出最慢工具并设置超时与并行；
+  \item 缩短上下文：裁剪历史、压缩工具返回；
+  \item 流式输出降低首字延迟；
+  \item 模型路由：强模型只处理复杂任务；
+  \item 缓存与预取：Prompt Cache、检索预取。
+\end{enumerate}
+
+
+\section*{4. 成本与性能门禁}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item 单任务成本超预算 130\% 告警；
+  \item P95 超过 SLO 120\% 告警；
+  \item 成本优化上线前必须过评测门禁，成功率下降即回滚；
+  \item 每月输出成本归因报告：按租户、任务类型、模型、Prompt 版本、工具。
+\end{itemize}
+
+
+\section*{5. Java 版成本追踪与限流}
+
+
+\begin{lstlisting}[language=Java]
+public record TokenUsage(long inputTokens, long outputTokens, double inputPrice,
+                         double outputPrice, double toolCost) {
+    public double cost() {
+        return inputTokens * inputPrice + outputTokens * outputPrice + toolCost;
+    }
+}
+
+public class SlidingWindowLimiter {
+    private final int maxRequests;
+    private final long windowMillis;
+    private final Deque<Long> timestamps = new ArrayDeque<>();
+
+    public SlidingWindowLimiter(int maxRequests, long windowMillis) {
+        this.maxRequests = maxRequests;
+        this.windowMillis = windowMillis;
+    }
+
+    public synchronized boolean tryAcquire(long now) {
+        while (!timestamps.isEmpty() && now - timestamps.peekFirst() >= windowMillis) {
+            timestamps.pollFirst();
+        }
+        if (timestamps.size() >= maxRequests) return false;
+        timestamps.addLast(now);
+        return true;
+    }
+}
+\end{lstlisting}
+
+
+
+\section*{6. 上线检查单}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item [ ] 有单任务 Token 与成本预算；
+  \item [ ] 有滑动窗口限流与并发上限；
+  \item [ ] 有模型分级路由与降级策略；
+  \item [ ] 有成本/延迟/成功率三个维度的回归对比；
+  \item [ ] 缓存命中与错误率同时监控。
+\end{itemize}
+
+
+\section*{7. 延伸阅读}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item \href{04-大模型网关.md}{大模型网关}
+  \item \href{05-Agent可观测与追踪.md}{Agent 可观测与追踪}
+  \item \href{../05-评测与质量/01-Agent评测体系.md}{Agent 评测体系}
+\end{itemize}
+
+\end{document}

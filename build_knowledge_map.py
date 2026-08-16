@@ -66,10 +66,14 @@ DOC_INVENTORY = [
     ("Agent 部署与发布", "04-工程实践/06-Agent部署与发布.md", "code"),
     ("Agent 框架选型对比", "04-工程实践/07-Agent框架选型对比.md", "shared"),
     ("上下文工程", "04-工程实践/08-上下文工程.md", "code"),
+    ("成本与性能优化", "04-工程实践/09-成本与性能优化.md", "code"),
     ("Agent 评测体系", "05-评测与质量/01-Agent评测体系.md", "code"),
     ("Agent 安全护栏清单", "06-安全与治理/01-Agent安全护栏清单.md", "code"),
     ("AI 应用系统设计", "07-系统设计/01-AI应用系统设计.md", "code"),
     ("案例库与反模式索引", "08-应用与案例/01-案例库与反模式索引.md", "shared"),
+    ("行业场景方案", "08-应用与案例/02-行业场景方案.md", "shared"),
+    ("Agent 技术雷达", "09-生态与前沿/01-Agent技术雷达.md", "shared"),
+    ("论文精读清单", "09-生态与前沿/02-论文精读清单.md", "shared"),
     ("AI Agent 面试题", "10-面试/01-AI-Agent面试题.md", "shared"),
     ("RAG 面试题", "10-面试/02-RAG面试题.md", "shared"),
     ("AI 系统设计面试题", "10-面试/03-AI系统设计面试题.md", "shared"),
@@ -259,6 +263,12 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("Token 预算与上下文压缩", "full", f"{J}/04-工程实践/08-上下文工程.md"),
             LANG3("三语言上下文组装器", "04-工程实践/08-上下文工程.md"),
         ]),
+        N("成本与性能优化", "full", f"{J}/04-工程实践/09-成本与性能优化.md", [
+            N("成本归因", "full", f"{J}/04-工程实践/09-成本与性能优化.md"),
+            N("模型分级与缓存", "full", f"{J}/04-工程实践/09-成本与性能优化.md"),
+            N("限流与并发", "full", f"{J}/04-工程实践/09-成本与性能优化.md"),
+            LANG3("三语言成本限流示例", "04-工程实践/09-成本与性能优化.md"),
+        ]),
         N("系统设计", "full", f"{J}/07-系统设计/01-AI应用系统设计.md", [
             N("生产级分层架构", "full", f"{J}/07-系统设计/01-AI应用系统设计.md"),
             N("同步 流式 异步模式", "full", f"{J}/07-系统设计/01-AI应用系统设计.md"),
@@ -343,11 +353,11 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("数据分析 Agent", "gap"),
             N("办公自动化 Agent", "gap"),
         ]),
-        N("行业解决方案", "gap", None, [
-            N("金融", "gap"),
-            N("医疗", "gap"),
-            N("电商", "gap"),
-            N("企业服务", "gap"),
+        N("行业解决方案", "full", f"{J}/08-应用与案例/02-行业场景方案.md", [
+            N("金融", "full", f"{J}/08-应用与案例/02-行业场景方案.md"),
+            N("医疗", "full", f"{J}/08-应用与案例/02-行业场景方案.md"),
+            N("电商", "full", f"{J}/08-应用与案例/02-行业场景方案.md"),
+            N("企业服务", "full", f"{J}/08-应用与案例/02-行业场景方案.md"),
         ]),
         N("案例库", "full", f"{J}/08-应用与案例/01-案例库与反模式索引.md", [
             N("案例索引", "full", f"{J}/08-应用与案例/01-案例库与反模式索引.md"),
@@ -358,21 +368,21 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("失败案例与反模式", "full", f"{J}/08-应用与案例/01-案例库与反模式索引.md"),
         ]),
     ]),
-    N("08 生态与前沿", "gap", f"{J}/02-Agent/01-Agent核心概念.md", [
-        N("协议与标准", "partial", f"{J}/02-Agent/01-Agent核心概念.md", [
-            N("MCP 标准", "partial", f"{J}/02-Agent/01-Agent核心概念.md"),
-            N("A2A 标准", "partial", f"{J}/02-Agent/01-Agent核心概念.md"),
-            N("Skills 标准", "partial", f"{J}/02-Agent/01-Agent核心概念.md"),
+    N("08 生态与前沿", "partial", f"{J}/09-生态与前沿/01-Agent技术雷达.md", [
+        N("协议与标准", "partial", f"{J}/09-生态与前沿/01-Agent技术雷达.md", [
+            N("MCP 标准", "full", f"{J}/09-生态与前沿/01-Agent技术雷达.md"),
+            N("A2A 标准", "partial", f"{J}/09-生态与前沿/01-Agent技术雷达.md"),
+            N("Skills 标准", "full", f"{J}/09-生态与前沿/01-Agent技术雷达.md"),
         ]),
-        N("技术雷达", "gap", None, [
-            N("论文清单", "gap"),
-            N("框架动态", "gap"),
-            N("产品平台动态", "gap"),
+        N("技术雷达", "full", f"{J}/09-生态与前沿/01-Agent技术雷达.md", [
+            N("论文清单", "full", f"{J}/09-生态与前沿/02-论文精读清单.md"),
+            N("框架动态", "full", f"{J}/09-生态与前沿/01-Agent技术雷达.md"),
+            N("产品平台动态", "full", f"{J}/09-生态与前沿/01-Agent技术雷达.md"),
         ]),
-        N("趋势判断", "gap", None, [
-            N("Harness 趋势", "partial", f"{J}/04-工程实践/03-Harness工程.md"),
-            N("多智能体趋势", "gap"),
-            N("评测与治理趋势", "gap"),
+        N("趋势判断", "partial", f"{J}/09-生态与前沿/01-Agent技术雷达.md", [
+            N("Harness 趋势", "full", f"{J}/04-工程实践/03-Harness工程.md"),
+            N("多智能体趋势", "partial", f"{J}/09-生态与前沿/01-Agent技术雷达.md"),
+            N("评测与治理趋势", "full", f"{J}/09-生态与前沿/01-Agent技术雷达.md"),
         ]),
     ]),
 ])
@@ -468,7 +478,7 @@ def render_xmind_topics():
 
 def write_xmind(path):
     content = json.dumps(render_xmind_topics(), ensure_ascii=False, indent=2)
-    metadata = json.dumps({"creator": {"name": "AI Agent Knowledge Base", "version": "0.5.0"}}, ensure_ascii=False, indent=2)
+    metadata = json.dumps({"creator": {"name": "AI Agent Knowledge Base", "version": "0.6.0"}}, ensure_ascii=False, indent=2)
     manifest = json.dumps({"file-entries": {"content.json": {}, "metadata.json": {}}}, ensure_ascii=False, indent=2)
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr("manifest.json", manifest)
@@ -478,7 +488,7 @@ def write_xmind(path):
 
 def render_index_md():
     lines = []
-    lines.append("# AI Agent 知识总索引（三语言版 v0.5）")
+    lines.append("# AI Agent 知识总索引（三语言版 v0.6）")
     lines.append("")
     lines.append("> 本文件是知识库的**最外层索引**：脑图负责导航，文档负责承载内容，状态标识负责暴露缺口，语言矩阵负责三语言直达。")
     lines.append("> 由 `build_knowledge_map.py` 生成；修改结构请改脚本后重新生成，避免图与文档漂移。")
