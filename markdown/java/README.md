@@ -1,6 +1,6 @@
 # Java 版 AI Agent 知识手册（原版）
 
-> 本目录是知识手册的 **Java** 语言版本，即最初从 JavaGuide 整理的原版文档，完整保留未做删改。
+> 本目录是知识手册的 **Java** 语言版本，即最初从 JavaGuide 整理的原版文档，完整保留未做删改，并作为概念类文档的 canonical 版本。
 > 与 `../python/`、`../typescript/` 结构完全一致，方便跨语言对照阅读。
 
 ## 代码技术栈
@@ -20,15 +20,32 @@
 | `01-LLM基础/02-大模型结构化输出.md` | Java 服务端校验与分发：`ToolCallDispatcher`（Jackson + JSON Schema Validator） |
 | `04-工程实践/01-Workflow-Graph与Loop.md` | Spring AI Alibaba Graph 文章审核工作流（状态策略、四个节点、条件边、`MemorySaver`） |
 | `04-工程实践/04-大模型网关.md` | `LLMRequest`/`LLMResponse` record、`ProviderClient`/`LLMGateway`、`RuleBasedModelRouter`、`TokenBudget` + `LLMRateLimiter` |
-| `05-系统设计/01-AI应用系统设计.md` | 分层架构接口（`AiRequest`、`PromptService`、`AiTool`、`ToolRiskLevel`、`ModelGateway` 等 8 处） |
+| `07-系统设计/01-AI应用系统设计.md` | 分层架构接口（`AiRequest`、`PromptService`、`AiTool`、`ToolRiskLevel`、`ModelGateway` 等 8 处） |
+
+## 目录结构
+
+| 模块 | 说明 |
+| --- | --- |
+| `00-概念与术语` | 术语表与概念边界、自主性分级 |
+| `01-LLM基础` | LLM 运行机制、结构化输出 |
+| `02-Agent` | Agent 核心概念、记忆系统、多智能体编排 |
+| `03-RAG` | RAG 基础、向量索引与向量数据库 |
+| `04-工程实践` | Workflow/Graph/Loop、Loop Engineering、Harness Engineering、大模型网关 |
+| `05-评测与质量` | 待补全 |
+| `06-安全与治理` | 待补全 |
+| `07-系统设计` | AI 应用系统设计 |
+| `08-应用与案例` | 待补全 |
+| `09-生态与前沿` | 待补全 |
+| `10-面试` | 6 份面试题 + 模拟题库 |
 
 ## 学习路径
 
-1. `01-LLM基础`：LLM 运行机制 → 大模型结构化输出（Java 服务端校验与分发）
-2. `02-Agent`：Agent 核心概念 → 记忆系统
-3. `03-RAG`：RAG 基础概念 → 向量索引与向量数据库
-4. `04-工程实践`：Workflow/Graph/Loop（Spring AI Alibaba 实战）→ Loop Engineering → Harness Engineering → 大模型网关
-5. `05-系统设计`：AI 应用系统设计（Java 后端落地建议）
-6. `06-面试`：六份面试题 + 模拟题库
+1. `00-概念与术语`：先统一 Agent / Workflow / RAG 等术语边界，确认自主性等级
+2. `01-LLM基础`：LLM 运行机制 → 大模型结构化输出（Java 服务端校验与分发）
+3. `02-Agent`：Agent 核心概念 → 记忆系统 → 多智能体编排
+4. `03-RAG`：RAG 基础概念 → 向量索引与向量数据库
+5. `04-工程实践`：Workflow/Graph/Loop（Spring AI Alibaba 实战）→ Loop Engineering → Harness Engineering → 大模型网关
+6. `07-系统设计`：AI 应用系统设计（Java 后端落地建议）
+7. `10-面试`：六份面试题 + 模拟题库
 
 > PDF 版见 `../../pdf/java/`，由 `../../build_pdfs.py` 编译生成。

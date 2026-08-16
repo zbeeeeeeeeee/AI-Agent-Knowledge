@@ -1,0 +1,336 @@
+\documentclass[9pt,a4paper,twocolumn]{ctexart}
+
+% --- Packages ---
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{caption}
+
+% --- Code block styling ---
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{220,220,220}
+\definecolor{codekw}{RGB}{0,0,192}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{codenum}{RGB}{128,0,128}
+\definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=4pt,
+  belowskip=4pt,
+  extendedchars=true,
+  literate={，}{{，}}1 {；}{{；}}1 {！}{{！}}1 {？}{{？}}1 {“}{{“}}1 {”}{{”}}1 {（}{{（}}1 {）}{{）}}1 {《}{{《}}1 {》}{{》}}1,
+}
+
+% --- Extra language definitions (no built-in listings support) ---
+\lstdefinelanguage{json}{
+  morekeywords={true,false,null},
+  sensitive=true,
+  morestring=[b]",
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+\lstdefinelanguage{yaml}{
+  morekeywords={true,false,null,yes,no,on,off},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[d]',
+}
+\lstdefinelanguage{http}{
+  morekeywords={GET,POST,PUT,DELETE,PATCH,HEAD,OPTIONS,HTTP,Host,Accept,Authorization,Content-Type,Content-Length,User-Agent},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+\lstdefinelanguage{TypeScript}{
+  morekeywords={abstract,any,as,async,await,break,case,catch,class,const,continue,debugger,declare,default,delete,do,else,enum,export,extends,false,finally,for,from,function,get,if,implements,import,in,instanceof,interface,keyof,let,module,namespace,never,new,null,number,of,package,private,protected,public,readonly,return,set,static,string,super,switch,symbol,this,throw,true,try,type,typeof,undefined,unknown,var,void,while,with,yield,Record,Array,Promise,AsyncIterable,ReadableStream,Date,Error,Object,JSON},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`{`},
+}
+
+% --- Compact spacing ---
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% --- Table styling ---
+\renewcommand{\arraystretch}{1.1}
+
+% --- Heading styling (numbered) ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
+
+% --- Page style ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\emph{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
+
+% --- Hyperref setup ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+}
+
+% --- Caption format ---
+\DeclareCaptionFormat{myformat}{\small\bfseries #1#2#3}
+\captionsetup{format=myformat}
+
+\begin{document}
+
+\title{Agent 自主性分级}
+\date{}
+\maketitle
+\markboth{Python 版 Agent 知识}{ Python 版 Agent 知识}
+
+\begin{quote}
+不是所有“智能”都该被赋予同等的自主权。本文给出从规则自动化到全自主 Agent 的四级模型，用于选型、权限设计、风险控制和团队沟通。
+\end{quote}
+
+
+
+\section*{一、为什么需要统一分级}
+
+
+同一个“Agent”，在不同团队里可能意味着三种完全不同的东西：
+
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item 产品经理说的是“自动回复用户”；
+  \item 工程师说的是“模型可以调工具”；
+  \item 安全同事担心的是“它能自己删库”。
+\end{itemize}
+
+
+没有分级，就无法回答三个关键问题：\textbf{它能自己决定什么？它能执行什么动作？失败时谁兜底？}
+
+
+
+本文采用四级模型：\textbf{L0 规则自动化 → L1 Workflow → L2 半自主 Agent → L3 全自主 Agent}。
+
+
+
+\section*{二、四级定义}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.033\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.150\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.500\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.133\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.183\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{等级} & \textbf{名称} & \textbf{一句话定义} & \textbf{决策权} & \textbf{工具权限} \\
+\hline
+L0 & 规则自动化 & 无 LLM 决策，代码/规则决定执行路径 & 无 & 固定函数，按代码执行 \\
+\hline
+L1 & Workflow & LLM 在固定图结构的节点内做生成、分类或判断 & 节点内局部 & 图中预定义节点 \\
+\hline
+L2 & 半自主 Agent & LLM 动态选择工具和步骤，但高危动作需人工确认或受策略限制 & 受边界约束的自主 & 白名单 + 分级审批 \\
+\hline
+L3 & 全自主 Agent & 在明确目标和护栏内，端到端自主规划、执行、验证与交付 & 高 & 受沙箱、预算与审计约束 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{三、每个等级细看}
+
+
+\subsection*{L0：规则自动化}
+
+
+没有大模型参与决策，或 LLM 只是无反馈的文本处理器。
+
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item 典型例子：正则路由的客服分流、定时报表、规则化审核。
+  \item 优点：可预测、可审计、成本极低。
+  \item 局限：无法应对开放任务。
+\end{itemize}
+
+
+\subsection*{L1：Workflow}
+
+
+流程骨架固定，LLM 是图里的节点。控制权在 Node/Edge/State，不在模型。
+
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item 典型例子：文章审核流水线——生成初稿 → 质量评分 → 不通过则修改，最多 3 轮。
+  \item 关键设计：节点职责单一、条件边显式化、State 只放必要数据、循环配终止条件。
+  \item 适用判断：执行路径能提前确定，或拆解后能确定。
+\end{itemize}
+
+
+\subsection*{L2：半自主 Agent}
+
+
+模型在 Agent Loop 内动态决策“下一步调用哪个工具”，但权限与动作空间被严格限制。
+
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item 典型例子：故障排查 Agent——可以查监控、查日志、查知识库，但“发通知”“重启服务”“改配置”需要人工确认。
+  \item 关键设计：
+  \item 工具分风险等级：只读 / 可逆写 / 不可逆写；
+  \item 高危工具二次确认；
+  \item 预算与轮次上限；
+  \item 所有工具调用留痕。
+  \item 适用判断：路径不确定但动作风险可控，这是\textbf{生产环境最推荐的上限}。
+\end{itemize}
+
+
+\subsection*{L3：全自主 Agent}
+
+
+在长时间任务里自主规划、执行、验证，甚至自己修复失败。仅适合高收益且可控的封闭环境。
+
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item 典型例子：代码库内自动修简单 Bug 并跑完整回归测试；数据中心无人值守巡检与自动修复。
+  \item 前置条件：
+  \item 强护栏：沙箱、权限最小化、预算硬上限；
+  \item 强评测：任务成功率可量化，回归可自动验证；
+  \item 强可观测：完整 Trace 和回放；
+  \item 可回退：所有动作可撤销或环境可重建。
+\end{itemize}
+
+
+\section*{四、升级判断表}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.559\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.441\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{你面对的情况} & \textbf{建议等级} \\
+\hline
+需求明确、流程稳定 & L0 / L1 \\
+\hline
+流程有固定骨架，但某些节点需要模型判断 & L1 \\
+\hline
+路径不确定，动作只读或低风险 & L2 \\
+\hline
+路径不确定，包含写操作但可审批 & L2 \\
+\hline
+封闭环境、动作可回滚、有强评测 & L3（谨慎试点） \\
+\hline
+开放环境、不可逆动作、无法回滚 & 不允许 L3，回到 L1/L2 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{五、自主性不只是一个标签}
+
+
+同一系统内部不同环节可以有不同的自主性：
+
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.435\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.565\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{环节} & \textbf{推荐自主级} \\
+\hline
+信息检索、日志查询 & L2 全自主 \\
+\hline
+生成初稿、代码建议 & L2 全自主 \\
+\hline
+发消息、写工单 & L2 半自主（确认后执行） \\
+\hline
+重启服务、数据库变更 & L2 人工审批 \\
+\hline
+权限变更、批量删除 & 禁止 Agent 直接执行 \\
+\hline
+\end{tabular}
+}
+
+
+
+因此架构文档中不应只说“这是一个 Agent”，而要写清楚：\textbf{哪些工具可自主调用，哪些必须审批，哪些禁止调用。}
+
+
+
+\section*{六、落地检查清单}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item [ ] 是否给系统标注了 L0–L3 等级？
+  \item [ ] 是否按风险等级对工具分类？
+  \item [ ] 是否配置了轮次上限、Token 预算和超时？
+  \item [ ] 高危动作是否有人工确认或自动回滚？
+  \item [ ] 是否记录“谁、在何时、调用什么工具、参数是什么、结果如何”？
+  \item [ ] 是否在 L3 前具备评测集和回归机制？
+  \item [ ] 降级路径是否清晰：L3 失败能否降为 L2/L1？
+\end{itemize}
+
+
+\section*{七、与知识地图的关系}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item 概念边界见 \href{01-Agent术语表与概念边界.md}{Agent 术语表与概念边界}
+  \item 工具权限落地见 \href{../07-系统设计/01-AI应用系统设计.md}{AI 应用系统设计}
+  \item Agent Loop 与范式见 \href{../02-Agent/01-Agent核心概念.md}{AI Agent 核心概念}
+\end{itemize}
+
+
+\begin{quote}
+记忆口诀：\textbf{L0 不决策，L1 走图，L2 自主但有边界，L3 全自主必须强护栏。}
+\end{quote}
+
+
+\end{document}

@@ -47,13 +47,13 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("新手入门", "partial", f"{J}/README.md"),
             N("后端工程师", "partial", f"{J}/README.md"),
             N("算法工程师", "partial", f"{J}/02-Agent/01-Agent核心概念.md"),
-            N("架构师", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md"),
-            N("面试冲刺", "full", f"{J}/06-面试/04-AI应用开发面试指南.md"),
+            N("架构师", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
+            N("面试冲刺", "full", f"{J}/10-面试/04-AI应用开发面试指南.md"),
         ]),
         N("按生命周期", "nav", None, [
             N("概念入门", "full", f"{J}/README.md"),
             N("系统开发", "full", f"{J}/04-工程实践/01-Workflow-Graph与Loop.md"),
-            N("评测上线", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md"),
+            N("评测上线", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
             N("运营治理", "partial", f"{J}/04-工程实践/04-大模型网关.md"),
         ]),
         N("三语言版本", "nav", None, [
@@ -66,11 +66,11 @@ TREE = Node(ROOT_TITLE, "nav", None, [
     N("01 概念与分类", "partial", f"{J}/02-Agent/01-Agent核心概念.md", [
         N("Agent 定义与边界", "partial", f"{J}/02-Agent/01-Agent核心概念.md", [
             N("Agent 是什么", "full", f"{J}/02-Agent/01-Agent核心概念.md"),
-            N("Agent vs Chatbot", "partial", f"{J}/06-面试/06-模拟面试题库.md"),
+            N("Agent vs Chatbot", "partial", f"{J}/10-面试/06-模拟面试题库.md"),
             N("Agent vs Workflow", "full", f"{J}/02-Agent/01-Agent核心概念.md"),
             N("Agent vs RAG", "partial", f"{J}/02-Agent/02-Agent记忆系统.md"),
         ]),
-        N("自主性分级", "gap"),
+        N("自主性分级", "full", f"{J}/00-概念与术语/02-Agent自主性分级.md"),
         N("分类体系与范式", "partial", f"{J}/02-Agent/01-Agent核心概念.md", [
             N("ReAct", "full", f"{J}/02-Agent/01-Agent核心概念.md"),
             N("Plan-and-Execute", "full", f"{J}/02-Agent/01-Agent核心概念.md"),
@@ -80,7 +80,7 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("A2A 协议", "partial", f"{J}/02-Agent/01-Agent核心概念.md"),
             N("各范式选型", "full", f"{J}/02-Agent/01-Agent核心概念.md"),
         ]),
-        N("术语表", "gap"),
+        N("术语表", "full", f"{J}/00-概念与术语/01-Agent术语表与概念边界.md"),
     ]),
     N("02 能力模型", "partial", f"{J}/02-Agent/01-Agent核心概念.md", [
         N("感知与输入", "partial", f"{J}/01-LLM基础/01-LLM运行机制.md", [
@@ -106,7 +106,7 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("Agent Skills", "partial", f"{J}/02-Agent/01-Agent核心概念.md"),
         ]),
         N("协作与沟通", "partial", f"{J}/02-Agent/01-Agent核心概念.md", [
-            N("多智能体协作", "partial", f"{J}/02-Agent/01-Agent核心概念.md"),
+            N("多智能体协作", "full", f"{J}/02-Agent/03-多智能体编排.md"),
             N("A2A 通信", "partial", f"{J}/02-Agent/01-Agent核心概念.md"),
         ]),
     ]),
@@ -142,12 +142,12 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("六层架构", "full", f"{J}/04-工程实践/03-Harness工程.md"),
             N("一线团队案例", "full", f"{J}/04-工程实践/03-Harness工程.md"),
         ]),
-        N("多智能体编排", "gap", f"{J}/02-Agent/01-Agent核心概念.md", [
-            N("编排模式", "gap"),
-            N("通信协议", "partial", f"{J}/02-Agent/01-Agent核心概念.md"),
+        N("多智能体编排", "full", f"{J}/02-Agent/03-多智能体编排.md", [
+            N("编排模式", "full", f"{J}/02-Agent/03-多智能体编排.md"),
+            N("通信协议", "partial", f"{J}/02-Agent/03-多智能体编排.md"),
         ]),
     ]),
-    N("04 开发与工程化", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md", [
+    N("04 开发与工程化", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
         N("技术选型与框架", "partial", f"{J}/README.md", [
             N("Java 技术栈", "full", f"{J}/README.md"),
             N("Python 技术栈", "full", f"{PY}/README.md"),
@@ -159,15 +159,15 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("Loop Engineering", "full", f"{J}/04-工程实践/02-Loop工程.md"),
             N("Harness Engineering", "full", f"{J}/04-工程实践/03-Harness工程.md"),
         ]),
-        N("上下文工程", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md", [
-            N("Prompt 版本化", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md"),
+        N("上下文工程", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
+            N("Prompt 版本化", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
             N("RAG 与 Memory 边界", "full", f"{J}/02-Agent/02-Agent记忆系统.md"),
-            N("Token 预算与上下文压缩", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md"),
+            N("Token 预算与上下文压缩", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
         ]),
-        N("系统设计", "full", f"{J}/05-系统设计/01-AI应用系统设计.md", [
-            N("生产级分层架构", "full", f"{J}/05-系统设计/01-AI应用系统设计.md"),
-            N("同步 流式 异步模式", "full", f"{J}/05-系统设计/01-AI应用系统设计.md"),
-            N("工具调用与权限模型", "full", f"{J}/05-系统设计/01-AI应用系统设计.md"),
+        N("系统设计", "full", f"{J}/07-系统设计/01-AI应用系统设计.md", [
+            N("生产级分层架构", "full", f"{J}/07-系统设计/01-AI应用系统设计.md"),
+            N("同步 流式 异步模式", "full", f"{J}/07-系统设计/01-AI应用系统设计.md"),
+            N("工具调用与权限模型", "full", f"{J}/07-系统设计/01-AI应用系统设计.md"),
         ]),
         N("网关与基础设施", "full", f"{J}/04-工程实践/04-大模型网关.md", [
             N("多模型统一接入", "full", f"{J}/04-工程实践/04-大模型网关.md"),
@@ -181,19 +181,19 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("容量与扩展", "gap"),
         ]),
         N("可观测与调试", "partial", f"{J}/04-工程实践/04-大模型网关.md", [
-            N("Trace 记录", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md"),
+            N("Trace 记录", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
             N("日志与回放", "gap"),
             N("调试工具链", "gap"),
         ]),
     ]),
-    N("05 评测与质量", "gap", f"{J}/05-系统设计/01-AI应用系统设计.md", [
-        N("指标体系", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md", [
+    N("05 评测与质量", "gap", f"{J}/07-系统设计/01-AI应用系统设计.md", [
+        N("指标体系", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
             N("任务成功率", "gap"),
             N("轨迹质量", "gap"),
             N("工具调用准确率", "gap"),
             N("延迟与成本", "partial", f"{J}/04-工程实践/04-大模型网关.md"),
         ]),
-        N("评测方法", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md", [
+        N("评测方法", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
             N("离线评测集", "gap"),
             N("人工评测", "gap"),
             N("在线 A B 实验", "gap"),
@@ -205,26 +205,26 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("回归与 CI", "gap"),
         ]),
         N("持续改进", "partial", f"{J}/04-工程实践/03-Harness工程.md", [
-            N("Human-in-the-Loop", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md"),
+            N("Human-in-the-Loop", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
             N("反馈闭环", "partial", f"{J}/04-工程实践/03-Harness工程.md"),
         ]),
     ]),
-    N("06 安全与治理", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md", [
-        N("风险分类", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md", [
-            N("模型风险", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md"),
-            N("工具风险", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md"),
-            N("数据风险", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md"),
+    N("06 安全与治理", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
+        N("风险分类", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
+            N("模型风险", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
+            N("工具风险", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
+            N("数据风险", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
         ]),
-        N("护栏机制", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md", [
-            N("权限最小化", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md"),
+        N("护栏机制", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
+            N("权限最小化", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
             N("沙箱执行", "gap"),
             N("Prompt 注入防护", "gap"),
             N("内容安全", "gap"),
         ]),
         N("合规与审计", "partial", f"{J}/04-工程实践/04-大模型网关.md", [
-            N("隐私与数据边界", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md"),
+            N("隐私与数据边界", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
             N("审计日志", "partial", f"{J}/04-工程实践/04-大模型网关.md"),
-            N("第三方模型数据边界", "partial", f"{J}/05-系统设计/01-AI应用系统设计.md"),
+            N("第三方模型数据边界", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
         ]),
         N("责任与流程", "gap", None, [
             N("审批流程", "gap"),
@@ -362,7 +362,7 @@ def render_xmind_topics():
 
 def write_xmind(path):
     content = json.dumps(render_xmind_topics(), ensure_ascii=False, indent=2)
-    metadata = json.dumps({"creator": {"name": "AI Agent Knowledge Base", "version": "0.1.0"}}, ensure_ascii=False, indent=2)
+    metadata = json.dumps({"creator": {"name": "AI Agent Knowledge Base", "version": "0.2.0"}}, ensure_ascii=False, indent=2)
     manifest = json.dumps({"file-entries": {"content.json": {}, "metadata.json": {}}}, ensure_ascii=False, indent=2)
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr("manifest.json", manifest)
@@ -372,7 +372,7 @@ def write_xmind(path):
 
 def render_index_md():
     lines = []
-    lines.append("# AI Agent 知识总索引（审核版 v0.1）")
+    lines.append("# AI Agent 知识总索引（迭代一版 v0.2）")
     lines.append("")
     lines.append("> 本文件是知识库的**最外层索引**：脑图负责导航，文档负责承载内容，状态标识负责暴露缺口。")
     lines.append("> 由 `build_knowledge_map.py` 生成；修改结构请改脚本后重新生成，避免图与文档漂移。")
@@ -410,15 +410,15 @@ def render_index_md():
     lines.append("| 角色 | 建议路径 | 终点 |")
     lines.append("| --- | --- | --- |")
     lines.append(f"| 新手入门 | [01-LLM基础]({J}/01-LLM基础/01-LLM运行机制.md) → [02-Agent]({J}/02-Agent/01-Agent核心概念.md) → [03-RAG]({J}/03-RAG/01-RAG基础概念.md) | 建立完整概念地图 |")
-    lines.append(f"| 后端开发 | 新手路径 → [04-工程实践]({J}/04-工程实践/01-Workflow-Graph与Loop.md) → [05-系统设计]({J}/05-系统设计/01-AI应用系统设计.md) | 能落地生产级 Agent 服务 |")
-    lines.append(f"| 架构师 | [03 架构与运行机制]({J}/02-Agent/01-Agent核心概念.md) → [04 网关]({J}/04-工程实践/04-大模型网关.md) → [05 系统设计]({J}/05-系统设计/01-AI应用系统设计.md) | 能设计、拆解、治理 AI 系统 |")
-    lines.append(f"| 面试冲刺 | [AI 应用开发面试指南]({J}/06-面试/04-AI应用开发面试指南.md) → 6 份面试题 → [模拟题库]({J}/06-面试/06-模拟面试题库.md) | 能结构化答题 |")
+    lines.append(f"| 后端开发 | 新手路径 → [04-工程实践]({J}/04-工程实践/01-Workflow-Graph与Loop.md) → [07-系统设计]({J}/07-系统设计/01-AI应用系统设计.md) | 能落地生产级 Agent 服务 |")
+    lines.append(f"| 架构师 | [03 架构与运行机制]({J}/02-Agent/01-Agent核心概念.md) → [04 网关]({J}/04-工程实践/04-大模型网关.md) → [07 系统设计]({J}/07-系统设计/01-AI应用系统设计.md) | 能设计、拆解、治理 AI 系统 |")
+    lines.append(f"| 面试冲刺 | [AI 应用开发面试指南]({J}/10-面试/04-AI应用开发面试指南.md) → 6 份面试题 → [模拟题库]({J}/10-面试/06-模拟面试题库.md) | 能结构化答题 |")
     lines.append("")
     lines.append("## 4. 现状速览")
     lines.append("")
     lines.append("**已有强项**：LLM 运行机制、结构化输出、Agent Loop、记忆系统、RAG 基础与向量检索、Workflow/Graph/Loop、Harness、网关、系统设计。")
     lines.append("")
-    lines.append("**主要缺口**：自主性分级与术语表、多智能体编排专项、部署与可观测专项、评测体系、安全护栏专项、行业案例库、生态技术雷达。")
+    lines.append("**本轮已补齐**：术语表、自主性分级、多智能体编排。\n\n**主要缺口**：部署与可观测专项、评测体系、安全护栏专项、行业案例库、生态技术雷达。")
     lines.append("")
     lines.append("详见 [`知识地图-内容映射与成熟度.md`](知识地图-内容映射与成熟度.md) 与 [`知识地图-缺口与补全计划.md`](知识地图-缺口与补全计划.md)。")
     return "\n".join(lines) + "\n"
