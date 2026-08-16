@@ -1,0 +1,184 @@
+mindmap
+  root((AI Agent 知识总索引))
+    00 阅读入口
+      按角色阅读
+        🟡 新手入门
+        🟡 后端工程师
+        🟡 算法工程师
+        🟡 架构师
+        🟢 面试冲刺
+      按生命周期
+        🟢 概念入门
+        🟢 系统开发
+        🟡 评测上线
+        🟡 运营治理
+      三语言版本
+        🟢 Java 原版
+        🟢 Python 版
+        🟢 TypeScript 版
+        🟢 PDF 版
+    🟡 01 概念与分类
+      🟡 Agent 定义与边界
+        🟢 Agent 是什么
+        🟡 Agent vs Chatbot
+        🟢 Agent vs Workflow
+        🟡 Agent vs RAG
+      🔴 自主性分级
+      🟡 分类体系与范式
+        🟢 ReAct
+        🟢 Plan-and-Execute
+        🟡 Reflection
+        🟡 Multi-Agent
+        🟢 Agentic Workflows
+        🟡 A2A 协议
+        🟢 各范式选型
+      🔴 术语表
+    🟡 02 能力模型
+      🟡 感知与输入
+        🟡 多模态 Token 化
+        🟢 上下文窗口边界
+      🟢 记忆系统
+        🟢 短期记忆
+        🟢 长期记忆
+        🟢 记忆生命周期
+        🟢 记忆检索优化
+        🟢 Markdown 记忆
+      🟡 规划与决策
+        🟢 任务分解
+        🟡 反思与自评
+        🟡 成本约束决策
+      🟢 工具使用与行动
+        🟢 Function Calling
+        🟢 Tools 注册与 Schema
+        🟡 MCP 工具接入
+        🟡 Agent Skills
+      🟡 协作与沟通
+        🟡 多智能体协作
+        🟡 A2A 通信
+    🟡 03 架构与运行机制
+      🟢 单 Agent 运行循环
+        🟢 Agent Loop
+        🟢 最小三层架构
+      🟡 上下文与提示词架构
+        🟢 Prompt Engineering
+        🟢 Context Engineering
+        🟢 上下文利用 40% 现象
+      🟢 工作流编排
+        🟢 Workflow
+        🟢 Graph
+        🟢 Loop
+        🟢 框架概念对照
+      🟢 模型接入层
+        🟢 LLM 运行机制
+        🟢 结构化输出
+        🟢 大模型网关
+        🟢 路由与 Fallback
+      🟢 检索架构 RAG
+        🟢 RAG 基础
+        🟢 Embedding
+        🟢 向量索引算法
+        🟢 向量数据库选型
+      🟢 Harness 工程
+        🟢 六层架构
+        🟢 一线团队案例
+      🔴 多智能体编排
+        🔴 编排模式
+        🟡 通信协议
+    🟡 04 开发与工程化
+      🟡 技术选型与框架
+        🟢 Java 技术栈
+        🟢 Python 技术栈
+        🟢 TypeScript 技术栈
+        🔴 框架与平台对比
+      🟢 设计模式与范式
+        🟢 Workflow Graph Loop
+        🟢 Loop Engineering
+        🟢 Harness Engineering
+      🟡 上下文工程
+        🟡 Prompt 版本化
+        🟢 RAG 与 Memory 边界
+        🟡 Token 预算与上下文压缩
+      🟢 系统设计
+        🟢 生产级分层架构
+        🟢 同步 流式 异步模式
+        🟢 工具调用与权限模型
+      🟢 网关与基础设施
+        🟢 多模型统一接入
+        🟢 限流与配额
+        🟢 成本统计与预算
+        🟡 缓存与语义缓存
+      🔴 部署与发布
+        🔴 部署形态
+        🔴 版本与回滚
+        🔴 容量与扩展
+      🟡 可观测与调试
+        🟡 Trace 记录
+        🔴 日志与回放
+        🔴 调试工具链
+    🔴 05 评测与质量
+      🟡 指标体系
+        🔴 任务成功率
+        🔴 轨迹质量
+        🔴 工具调用准确率
+        🟡 延迟与成本
+      🟡 评测方法
+        🔴 离线评测集
+        🔴 人工评测
+        🔴 在线 A B 实验
+        🔴 LLM-as-Judge
+      🔴 评测基座与回归
+        🔴 评测集构建
+        🔴 基准与榜单
+        🔴 回归与 CI
+      🟡 持续改进
+        🟡 Human-in-the-Loop
+        🟡 反馈闭环
+    🟡 06 安全与治理
+      🟡 风险分类
+        🟡 模型风险
+        🟡 工具风险
+        🟡 数据风险
+      🟡 护栏机制
+        🟡 权限最小化
+        🔴 沙箱执行
+        🔴 Prompt 注入防护
+        🔴 内容安全
+      🟡 合规与审计
+        🟡 隐私与数据边界
+        🟡 审计日志
+        🟡 第三方模型数据边界
+      🔴 责任与流程
+        🔴 审批流程
+        🔴 责任归属
+    🟡 07 应用与案例
+      🟡 选型决策
+        🟡 是否用 Agent 决策树
+        🟢 Workflow vs Agent
+      🟡 场景模式库
+        🟡 编码 Agent
+        🔴 客服 Agent
+        🔴 数据分析 Agent
+        🔴 办公自动化 Agent
+      🔴 行业解决方案
+        🔴 金融
+        🔴 医疗
+        🔴 电商
+        🔴 企业服务
+      🟡 案例库
+        🟢 OpenAI 三人团队
+        🟢 Anthropic 三智能体
+        🟢 Stripe 每周 1300 PR
+        🟡 失败案例与反模式
+    🔴 08 生态与前沿
+      🟡 协议与标准
+        🟡 MCP 标准
+        🟡 A2A 标准
+        🟡 Skills 标准
+      🔴 技术雷达
+        🔴 论文清单
+        🔴 框架动态
+        🔴 产品平台动态
+      🔴 趋势判断
+        🟡 Harness 趋势
+        🔴 多智能体趋势
+        🔴 评测与治理趋势
