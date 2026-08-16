@@ -57,15 +57,19 @@ DOC_INVENTORY = [
     ("多智能体编排", "02-Agent/03-多智能体编排.md", "shared"),
     ("RAG 基础概念", "03-RAG/01-RAG基础概念.md", "shared"),
     ("RAG 向量索引与向量数据库", "03-RAG/02-RAG向量索引与向量数据库.md", "shared"),
+    ("RAG 高级检索", "03-RAG/03-RAG高级检索.md", "code"),
     ("Workflow、Graph 与 Loop", "04-工程实践/01-Workflow-Graph与Loop.md", "code"),
     ("Loop Engineering", "04-工程实践/02-Loop工程.md", "shared"),
     ("Harness Engineering", "04-工程实践/03-Harness工程.md", "shared"),
     ("大模型网关", "04-工程实践/04-大模型网关.md", "code"),
     ("Agent 可观测与追踪", "04-工程实践/05-Agent可观测与追踪.md", "code"),
     ("Agent 部署与发布", "04-工程实践/06-Agent部署与发布.md", "code"),
+    ("Agent 框架选型对比", "04-工程实践/07-Agent框架选型对比.md", "shared"),
+    ("上下文工程", "04-工程实践/08-上下文工程.md", "code"),
     ("Agent 评测体系", "05-评测与质量/01-Agent评测体系.md", "code"),
     ("Agent 安全护栏清单", "06-安全与治理/01-Agent安全护栏清单.md", "code"),
     ("AI 应用系统设计", "07-系统设计/01-AI应用系统设计.md", "code"),
+    ("案例库与反模式索引", "08-应用与案例/01-案例库与反模式索引.md", "shared"),
     ("AI Agent 面试题", "10-面试/01-AI-Agent面试题.md", "shared"),
     ("RAG 面试题", "10-面试/02-RAG面试题.md", "shared"),
     ("AI 系统设计面试题", "10-面试/03-AI系统设计面试题.md", "shared"),
@@ -222,6 +226,11 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("Embedding", "full", f"{J}/03-RAG/01-RAG基础概念.md"),
             N("向量索引算法", "full", f"{J}/03-RAG/02-RAG向量索引与向量数据库.md"),
             N("向量数据库选型", "full", f"{J}/03-RAG/02-RAG向量索引与向量数据库.md"),
+            N("混合检索与 RRF", "full", f"{J}/03-RAG/03-RAG高级检索.md"),
+            N("Rerank 精排", "full", f"{J}/03-RAG/03-RAG高级检索.md"),
+            N("查询改写", "full", f"{J}/03-RAG/03-RAG高级检索.md"),
+            N("GraphRAG", "partial", f"{J}/03-RAG/03-RAG高级检索.md"),
+            LANG3("三语言检索实现", "03-RAG/03-RAG高级检索.md"),
         ]),
         N("Harness 工程", "full", f"{J}/04-工程实践/03-Harness工程.md", [
             N("六层架构", "full", f"{J}/04-工程实践/03-Harness工程.md"),
@@ -237,17 +246,18 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("Java 技术栈", "full", f"{J}/README.md", lang="java"),
             N("Python 技术栈", "full", f"{PY}/README.md", lang="python"),
             N("TypeScript 技术栈", "full", f"{TS}/README.md", lang="typescript"),
-            N("框架与平台对比", "gap"),
+            N("框架与平台对比", "full", f"{J}/04-工程实践/07-Agent框架选型对比.md"),
         ]),
         N("设计模式与范式", "full", f"{J}/04-工程实践/01-Workflow-Graph与Loop.md", [
             N("Workflow Graph Loop", "full", f"{J}/04-工程实践/01-Workflow-Graph与Loop.md"),
             N("Loop Engineering", "full", f"{J}/04-工程实践/02-Loop工程.md"),
             N("Harness Engineering", "full", f"{J}/04-工程实践/03-Harness工程.md"),
         ]),
-        N("上下文工程", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
-            N("Prompt 版本化", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
+        N("上下文工程", "full", f"{J}/04-工程实践/08-上下文工程.md", [
+            N("Prompt 版本化", "full", f"{J}/04-工程实践/08-上下文工程.md"),
             N("RAG 与 Memory 边界", "full", f"{J}/02-Agent/02-Agent记忆系统.md"),
-            N("Token 预算与上下文压缩", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
+            N("Token 预算与上下文压缩", "full", f"{J}/04-工程实践/08-上下文工程.md"),
+            LANG3("三语言上下文组装器", "04-工程实践/08-上下文工程.md"),
         ]),
         N("系统设计", "full", f"{J}/07-系统设计/01-AI应用系统设计.md", [
             N("生产级分层架构", "full", f"{J}/07-系统设计/01-AI应用系统设计.md"),
@@ -339,11 +349,13 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("电商", "gap"),
             N("企业服务", "gap"),
         ]),
-        N("案例库", "partial", f"{J}/04-工程实践/03-Harness工程.md", [
+        N("案例库", "full", f"{J}/08-应用与案例/01-案例库与反模式索引.md", [
+            N("案例索引", "full", f"{J}/08-应用与案例/01-案例库与反模式索引.md"),
+            N("可复用模式", "full", f"{J}/08-应用与案例/01-案例库与反模式索引.md"),
             N("OpenAI 三人团队", "full", f"{J}/04-工程实践/03-Harness工程.md"),
             N("Anthropic 三智能体", "full", f"{J}/04-工程实践/03-Harness工程.md"),
             N("Stripe 每周 1300 PR", "full", f"{J}/04-工程实践/03-Harness工程.md"),
-            N("失败案例与反模式", "partial", f"{J}/04-工程实践/02-Loop工程.md"),
+            N("失败案例与反模式", "full", f"{J}/08-应用与案例/01-案例库与反模式索引.md"),
         ]),
     ]),
     N("08 生态与前沿", "gap", f"{J}/02-Agent/01-Agent核心概念.md", [
@@ -456,7 +468,7 @@ def render_xmind_topics():
 
 def write_xmind(path):
     content = json.dumps(render_xmind_topics(), ensure_ascii=False, indent=2)
-    metadata = json.dumps({"creator": {"name": "AI Agent Knowledge Base", "version": "0.4.0"}}, ensure_ascii=False, indent=2)
+    metadata = json.dumps({"creator": {"name": "AI Agent Knowledge Base", "version": "0.5.0"}}, ensure_ascii=False, indent=2)
     manifest = json.dumps({"file-entries": {"content.json": {}, "metadata.json": {}}}, ensure_ascii=False, indent=2)
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr("manifest.json", manifest)
@@ -466,7 +478,7 @@ def write_xmind(path):
 
 def render_index_md():
     lines = []
-    lines.append("# AI Agent 知识总索引（三语言版 v0.4）")
+    lines.append("# AI Agent 知识总索引（三语言版 v0.5）")
     lines.append("")
     lines.append("> 本文件是知识库的**最外层索引**：脑图负责导航，文档负责承载内容，状态标识负责暴露缺口，语言矩阵负责三语言直达。")
     lines.append("> 由 `build_knowledge_map.py` 生成；修改结构请改脚本后重新生成，避免图与文档漂移。")

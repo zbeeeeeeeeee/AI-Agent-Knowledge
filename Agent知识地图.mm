@@ -112,6 +112,15 @@
       <node TEXT="🟢 Embedding ≡" LINK="markdown/java/03-RAG/01-RAG基础概念.md"/>
       <node TEXT="🟢 向量索引算法 ≡" LINK="markdown/java/03-RAG/02-RAG向量索引与向量数据库.md"/>
       <node TEXT="🟢 向量数据库选型 ≡" LINK="markdown/java/03-RAG/02-RAG向量索引与向量数据库.md"/>
+      <node TEXT="🟢 混合检索与 RRF ≡" LINK="markdown/java/03-RAG/03-RAG高级检索.md"/>
+      <node TEXT="🟢 Rerank 精排 ≡" LINK="markdown/java/03-RAG/03-RAG高级检索.md"/>
+      <node TEXT="🟢 查询改写 ≡" LINK="markdown/java/03-RAG/03-RAG高级检索.md"/>
+      <node TEXT="🟡 GraphRAG ≡" LINK="markdown/java/03-RAG/03-RAG高级检索.md"/>
+      <node TEXT="三语言检索实现">
+        <node TEXT="🟢 三语言检索实现 · Java 实现" LINK="markdown/java/03-RAG/03-RAG高级检索.md"/>
+        <node TEXT="🟢 三语言检索实现 · Python 实现" LINK="markdown/python/03-RAG/03-RAG高级检索.md"/>
+        <node TEXT="🟢 三语言检索实现 · TypeScript 实现" LINK="markdown/typescript/03-RAG/03-RAG高级检索.md"/>
+      </node>
     </node>
     <node TEXT="🟢 Harness 工程 ≡" LINK="markdown/java/04-工程实践/03-Harness工程.md">
       <node TEXT="🟢 六层架构 ≡" LINK="markdown/java/04-工程实践/03-Harness工程.md"/>
@@ -127,17 +136,22 @@
       <node TEXT="🟢 Java 技术栈" LINK="markdown/java/README.md"/>
       <node TEXT="🟢 Python 技术栈" LINK="markdown/python/README.md"/>
       <node TEXT="🟢 TypeScript 技术栈" LINK="markdown/typescript/README.md"/>
-      <node TEXT="🔴 框架与平台对比"/>
+      <node TEXT="🟢 框架与平台对比 ≡" LINK="markdown/java/04-工程实践/07-Agent框架选型对比.md"/>
     </node>
     <node TEXT="🟢 设计模式与范式 ≡" LINK="markdown/java/04-工程实践/01-Workflow-Graph与Loop.md">
       <node TEXT="🟢 Workflow Graph Loop ≡" LINK="markdown/java/04-工程实践/01-Workflow-Graph与Loop.md"/>
       <node TEXT="🟢 Loop Engineering ≡" LINK="markdown/java/04-工程实践/02-Loop工程.md"/>
       <node TEXT="🟢 Harness Engineering ≡" LINK="markdown/java/04-工程实践/03-Harness工程.md"/>
     </node>
-    <node TEXT="🟡 上下文工程 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md">
-      <node TEXT="🟡 Prompt 版本化 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
+    <node TEXT="🟢 上下文工程 ≡" LINK="markdown/java/04-工程实践/08-上下文工程.md">
+      <node TEXT="🟢 Prompt 版本化 ≡" LINK="markdown/java/04-工程实践/08-上下文工程.md"/>
       <node TEXT="🟢 RAG 与 Memory 边界 ≡" LINK="markdown/java/02-Agent/02-Agent记忆系统.md"/>
-      <node TEXT="🟡 Token 预算与上下文压缩 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
+      <node TEXT="🟢 Token 预算与上下文压缩 ≡" LINK="markdown/java/04-工程实践/08-上下文工程.md"/>
+      <node TEXT="三语言上下文组装器">
+        <node TEXT="🟢 三语言上下文组装器 · Java 实现" LINK="markdown/java/04-工程实践/08-上下文工程.md"/>
+        <node TEXT="🟢 三语言上下文组装器 · Python 实现" LINK="markdown/python/04-工程实践/08-上下文工程.md"/>
+        <node TEXT="🟢 三语言上下文组装器 · TypeScript 实现" LINK="markdown/typescript/04-工程实践/08-上下文工程.md"/>
+      </node>
     </node>
     <node TEXT="🟢 系统设计 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md">
       <node TEXT="🟢 生产级分层架构 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
@@ -253,11 +267,13 @@
       <node TEXT="🔴 电商"/>
       <node TEXT="🔴 企业服务"/>
     </node>
-    <node TEXT="🟡 案例库 ≡" LINK="markdown/java/04-工程实践/03-Harness工程.md">
+    <node TEXT="🟢 案例库 ≡" LINK="markdown/java/08-应用与案例/01-案例库与反模式索引.md">
+      <node TEXT="🟢 案例索引 ≡" LINK="markdown/java/08-应用与案例/01-案例库与反模式索引.md"/>
+      <node TEXT="🟢 可复用模式 ≡" LINK="markdown/java/08-应用与案例/01-案例库与反模式索引.md"/>
       <node TEXT="🟢 OpenAI 三人团队 ≡" LINK="markdown/java/04-工程实践/03-Harness工程.md"/>
       <node TEXT="🟢 Anthropic 三智能体 ≡" LINK="markdown/java/04-工程实践/03-Harness工程.md"/>
       <node TEXT="🟢 Stripe 每周 1300 PR ≡" LINK="markdown/java/04-工程实践/03-Harness工程.md"/>
-      <node TEXT="🟡 失败案例与反模式 ≡" LINK="markdown/java/04-工程实践/02-Loop工程.md"/>
+      <node TEXT="🟢 失败案例与反模式 ≡" LINK="markdown/java/08-应用与案例/01-案例库与反模式索引.md"/>
     </node>
   </node>
   <node TEXT="🔴 08 生态与前沿 ≡" LINK="markdown/java/02-Agent/01-Agent核心概念.md">

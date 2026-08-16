@@ -1,0 +1,312 @@
+\documentclass[9pt,a4paper,twocolumn]{ctexart}
+
+% --- Packages ---
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{caption}
+
+% --- Code block styling ---
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{220,220,220}
+\definecolor{codekw}{RGB}{0,0,192}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{codenum}{RGB}{128,0,128}
+\definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=4pt,
+  belowskip=4pt,
+  extendedchars=true,
+  literate={，}{{，}}1 {；}{{；}}1 {！}{{！}}1 {？}{{？}}1 {“}{{“}}1 {”}{{”}}1 {（}{{（}}1 {）}{{）}}1 {《}{{《}}1 {》}{{》}}1,
+}
+
+% --- Extra language definitions (no built-in listings support) ---
+\lstdefinelanguage{json}{
+  morekeywords={true,false,null},
+  sensitive=true,
+  morestring=[b]",
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+\lstdefinelanguage{yaml}{
+  morekeywords={true,false,null,yes,no,on,off},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[d]',
+}
+\lstdefinelanguage{http}{
+  morekeywords={GET,POST,PUT,DELETE,PATCH,HEAD,OPTIONS,HTTP,Host,Accept,Authorization,Content-Type,Content-Length,User-Agent},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+\lstdefinelanguage{TypeScript}{
+  morekeywords={abstract,any,as,async,await,break,case,catch,class,const,continue,debugger,declare,default,delete,do,else,enum,export,extends,false,finally,for,from,function,get,if,implements,import,in,instanceof,interface,keyof,let,module,namespace,never,new,null,number,of,package,private,protected,public,readonly,return,set,static,string,super,switch,symbol,this,throw,true,try,type,typeof,undefined,unknown,var,void,while,with,yield,Record,Array,Promise,AsyncIterable,ReadableStream,Date,Error,Object,JSON},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`{`},
+}
+
+% --- Compact spacing ---
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% --- Table styling ---
+\renewcommand{\arraystretch}{1.1}
+
+% --- Heading styling (numbered) ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
+
+% --- Page style ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\emph{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
+
+% --- Hyperref setup ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+}
+
+% --- Caption format ---
+\DeclareCaptionFormat{myformat}{\small\bfseries #1#2#3}
+\captionsetup{format=myformat}
+
+\begin{document}
+
+\title{RAG 高级检索：混合检索、Rerank 与 GraphRAG}
+\date{}
+\maketitle
+\markboth{Python 版 Agent 知识}{ Python 版 Agent 知识}
+
+\begin{quote}
+语言策略：\texttt{code}。正文三语言一致；检索融合与重排代码按 Python 生态实现。 地图节点：\texttt{03 架构与运行机制 / 检索架构 RAG}。配套文档：\href{../03-RAG/01-RAG基础概念.md}{RAG 基础概念}、\href{../03-RAG/02-RAG向量索引与向量数据库.md}{RAG 向量索引与向量数据库}。
+\end{quote}
+
+
+
+\section*{0. 结论先说}
+
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
+  \item 基础 RAG 的主要瓶颈不是“有没有检索”，而是\textbf{召回不准、上下文杂乱、问题表达不稳定}。
+  \item 生产上优先按顺序做三件事：\textbf{混合检索 + RRF 融合 → Rerank 精排 → 查询改写}；GraphRAG 只用于多跳关系问题。
+  \item 每条检索链路都要可评测、可回放：命中率、MRR、引用准确率必须进入回归门禁。
+\end{enumerate}
+
+
+\section*{1. 从基础 RAG 到高级检索}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.143\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.476\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.381\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{阶段} & \textbf{做法} & \textbf{解决什么} \\
+\hline
+基础 RAG & 单路向量召回 top-k & 语义相似问题 \\
+\hline
+混合检索 & 向量 + BM25 + 元数据过滤 & 专有名词、编号、时间范围 \\
+\hline
+融合 & RRF 或加权融合多路结果 & 多路排序尺度不统一 \\
+\hline
+精排 & Cross-Encoder Rerank & 前 50 条里选最相关的 5 条 \\
+\hline
+查询改写 & 改写、扩展、HyDE & 口语化、多义词、查询过短 \\
+\hline
+图检索 & GraphRAG & 多跳关系与全局总结 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{2. Chunk 策略}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.258\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.226\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.516\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{策略} & \textbf{适用场景} & \textbf{注意} \\
+\hline
+固定长度 & 快速起步 & 语义会被切断 \\
+\hline
+段落/标题 & 结构化文档 & 需要保留层级元数据 \\
+\hline
+句子窗口 & 精读任务 & 检索用小句，送入模型带上下文窗口 \\
+\hline
+父子文档 & 命中后扩上下文 & 父块要单独存储 \\
+\hline
+表格/代码独立切 & 技术文档 & 不要按行切开 \\
+\hline
+\end{tabular}
+}
+
+
+
+原则：\textbf{切分结构要与检索结构一致}；每次切分策略变更都要重跑评测集。
+
+
+
+\section*{3. 查询处理}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item 查询改写：把“上次那个报错怎么修”改写成“订单服务 OOM 报错修复方法”；
+  \item 查询扩展：生成同义词或多个子查询；
+  \item HyDE：先用 LLM 生成假设答案，再用答案向量去召回；
+  \item 多轮对话：先做指代消解，把“它”替换为具体对象，再检索；
+  \item 元数据过滤：时间、租户、文档类型先过滤，再做语义召回。
+\end{itemize}
+
+
+\section*{4. 混合检索与 RRF}
+
+
+BM25 擅长专有名词和编号，向量检索擅长语义。两路分数不可直接相加，常用 Reciprocal Rank Fusion：
+
+
+
+\begin{lstlisting}
+RRF_score(doc) = sum( 1 / (60 + rank_i(doc)) )
+\end{lstlisting}
+
+
+
+实现要点：先分别取每路 top-100，再融合取 top-20，最后交给 Rerank 取 top-5。
+
+
+
+\section*{5. Rerank}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item Cross-Encoder 比 Bi-Encoder 精度高、延迟高，所以只对候选集精排；
+  \item 离线评测用 MRR、nDCG 和引用准确率，不要只看“感觉更相关”；
+  \item 候选集通常 20–50 条，精排后送入上下文 3–8 条；
+  \item 工具选择、模型切换必须过回归门禁。
+\end{itemize}
+
+
+\section*{6. GraphRAG 什么时候上}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.333\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.286\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.381\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{问题类型} & \textbf{普通 RAG} & \textbf{GraphRAG} \\
+\hline
+单文档问答 & 够用 & 不需要 \\
+\hline
+专有名词/编号 & 混合检索 & 不需要 \\
+\hline
+多跳关系 & 容易断链 & 更适合 \\
+\hline
+全局总结 & 容易偏 & 社区摘要更有结构 \\
+\hline
+\end{tabular}
+}
+
+
+
+GraphRAG 成本高、更新难，先确认任务真的需要实体关系和社区摘要，再引入。
+
+
+
+\section*{7. 检索评测}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item 指标：命中率、MRR、nDCG、上下文引用准确率；
+  \item 评测集：真实问题 + 期望文档 ID + 禁止返回文档；
+  \item 每次改动 Chunk、Embedding、融合参数、Rerank 模型都必须回归；
+  \item 线上 Bad Case 回流：检索失败、引用错误要进入下一轮评测集。
+\end{itemize}
+
+
+\section*{8. Python 版检索融合实现}
+
+
+\begin{lstlisting}[language=Python]
+from collections import defaultdict
+
+def rrf_fusion(ranked_lists: list[list[tuple[str, float, str]]],
+               k: float = 60.0, top_n: int = 20) -> list[tuple[str, float, str]]:
+    """ranked_lists: 每路召回结果 [(doc_id, score, source), ...]，按分数降序。"""
+    scores: dict[str, float] = defaultdict(float)
+    sources: dict[str, str] = {}
+    for ranked in ranked_lists:
+        for i, (doc_id, _score, source) in enumerate(ranked):
+            scores[doc_id] += 1.0 / (k + i + 1)
+            sources.setdefault(doc_id, source)
+    fused = sorted(scores.items(), key=lambda item: item[1], reverse=True)[:top_n]
+    return [(doc_id, score, sources[doc_id]) for doc_id, score in fused]
+\end{lstlisting}
+
+
+
+\section*{9. 延伸阅读}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item \href{../10-面试/02-RAG面试题.md}{RAG 面试题}
+  \item \href{../05-评测与质量/01-Agent评测体系.md}{Agent 评测体系}
+  \item \href{../07-系统设计/01-AI应用系统设计.md}{AI 应用系统设计}
+\end{itemize}
+
+\end{document}

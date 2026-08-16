@@ -1,0 +1,267 @@
+\documentclass[9pt,a4paper,twocolumn]{ctexart}
+
+% --- Packages ---
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{caption}
+
+% --- Code block styling ---
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{220,220,220}
+\definecolor{codekw}{RGB}{0,0,192}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{codenum}{RGB}{128,0,128}
+\definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=4pt,
+  belowskip=4pt,
+  extendedchars=true,
+  literate={，}{{，}}1 {；}{{；}}1 {！}{{！}}1 {？}{{？}}1 {“}{{“}}1 {”}{{”}}1 {（}{{（}}1 {）}{{）}}1 {《}{{《}}1 {》}{{》}}1,
+}
+
+% --- Extra language definitions (no built-in listings support) ---
+\lstdefinelanguage{json}{
+  morekeywords={true,false,null},
+  sensitive=true,
+  morestring=[b]",
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+\lstdefinelanguage{yaml}{
+  morekeywords={true,false,null,yes,no,on,off},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[d]',
+}
+\lstdefinelanguage{http}{
+  morekeywords={GET,POST,PUT,DELETE,PATCH,HEAD,OPTIONS,HTTP,Host,Accept,Authorization,Content-Type,Content-Length,User-Agent},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+\lstdefinelanguage{TypeScript}{
+  morekeywords={abstract,any,as,async,await,break,case,catch,class,const,continue,debugger,declare,default,delete,do,else,enum,export,extends,false,finally,for,from,function,get,if,implements,import,in,instanceof,interface,keyof,let,module,namespace,never,new,null,number,of,package,private,protected,public,readonly,return,set,static,string,super,switch,symbol,this,throw,true,try,type,typeof,undefined,unknown,var,void,while,with,yield,Record,Array,Promise,AsyncIterable,ReadableStream,Date,Error,Object,JSON},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`{`},
+}
+
+% --- Compact spacing ---
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% --- Table styling ---
+\renewcommand{\arraystretch}{1.1}
+
+% --- Heading styling (numbered) ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
+
+% --- Page style ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\emph{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
+
+% --- Hyperref setup ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+}
+
+% --- Caption format ---
+\DeclareCaptionFormat{myformat}{\small\bfseries #1#2#3}
+\captionsetup{format=myformat}
+
+\begin{document}
+
+\title{Agent 案例库与反模式索引}
+\date{}
+\maketitle
+\markboth{Python 版 Agent 知识}{ Python 版 Agent 知识}
+
+\begin{quote}
+语言策略：\texttt{shared}。三语言内容一致，Java 为 canonical。 地图节点：\texttt{07 应用与案例}。本文是案例与反模式的\textbf{索引页}，详细内容链接到原文。
+\end{quote}
+
+
+
+\section*{0. 使用说明}
+
+
+本页解决两个问题：遇到问题先查哪个案例；设计评审时对照哪些反模式。
+
+
+
+案例编号规则：\texttt{CASE-领域-序号}；反模式编号规则：\texttt{AP-序号}。新增案例或反模式必须登记到本页。
+
+
+
+\section*{1. 案例库索引}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.107\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.259\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.196\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.438\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{编号} & \textbf{案例} & \textbf{关键做法} & \textbf{详细位置} \\
+\hline
+CASE-ENG-01 & OpenAI 三人团队 & 小团队 + 成熟 Harness，自动化优先 & \href{../04-工程实践/03-Harness工程.md}{Harness Engineering} \\
+\hline
+CASE-ENG-02 & Anthropic 三智能体 & 从上下文焦虑转向三智能体协作架构 & \href{../04-工程实践/03-Harness工程.md}{Harness Engineering} \\
+\hline
+CASE-ENG-03 & Stripe 每周 1300+ PR & 混合状态机编排，无人值守 PR & \href{../04-工程实践/03-Harness工程.md}{Harness Engineering} \\
+\hline
+CASE-ENG-04 & Mitchell Hashimoto 单人 Harness & 个人级约束、工具和上下文管理 & \href{../04-工程实践/03-Harness工程.md}{Harness Engineering} \\
+\hline
+CASE-LOOP-01 & Claude Code 的 /loop 与 /goal & 目标驱动的循环与自动修复边界 & \href{../04-工程实践/02-Loop工程.md}{Loop Engineering} \\
+\hline
+CASE-MEM-01 & Claude Code 的 CLAUDE.md & Markdown 作为项目记忆 & \href{../02-Agent/02-Agent记忆系统.md}{Agent 记忆系统} \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{2. 可复用模式}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.302\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.488\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.209\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{模式} & \textbf{一句话描述} & \textbf{适用场景} \\
+\hline
+小团队 + Harness & 不扩人，先扩自动化与护栏 & 早期 AI 产品 \\
+\hline
+混合状态机编排 & 固定流程管骨架，LLM 管节点内判断 & 高风险流程 \\
+\hline
+三智能体协作 & 生成、审查、验证角色分离 & 代码生成 \\
+\hline
+Markdown 记忆 & 项目事实放在版本库中 & 单人/团队开发工具 \\
+\hline
+目标循环 & /goal 定目标，/loop 受约束执行 & 多步自动化 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{3. 反模式索引}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.053\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.200\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.105\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.642\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{编号} & \textbf{反模式} & \textbf{后果} & \textbf{对策与来源} \\
+\hline
+AP-01 & 目标写得太虚 & Agent 反复绕圈 & 目标必须可验收，\href{../04-工程实践/02-Loop工程.md}{Loop Engineering} \\
+\hline
+AP-02 & 把 Agent 自评当验收 & 错误自动通过 & 结构化验收标准 + 独立评审，\href{../04-工程实践/02-Loop工程.md}{Loop Engineering} \\
+\hline
+AP-03 & 没有成本上限 & 一次任务烧光预算 & Token/轮次/金额硬上限，\href{../04-工程实践/02-Loop工程.md}{Loop Engineering} \\
+\hline
+AP-04 & 权限给得太大 & 高危动作误执行 & L0–L3 工具分级 + 审批，\href{../06-安全与治理/01-Agent安全护栏清单.md}{Agent 安全护栏清单} \\
+\hline
+AP-05 & 第一版就自动修 & 小错误变大事故 & 先输出建议，稳定后再自动执行，\href{../04-工程实践/02-Loop工程.md}{Loop Engineering} \\
+\hline
+AP-06 & 上下文喂得越多越好 & 40\\% 后效果下降 & 上下文预算与裁剪，\href{../04-工程实践/03-Harness工程.md}{Harness Engineering} \\
+\hline
+AP-07 & 没有降级路径 & 模型失败系统不可用 & Fallback 与固定 Workflow 兜底，\href{../04-工程实践/04-大模型网关.md}{大模型网关} \\
+\hline
+AP-08 & 为了多 Agent 而多 Agent & 通信与调试成本爆炸 & 先用单 Agent + Workflow，\href{../02-Agent/03-多智能体编排.md}{多智能体编排} \\
+\hline
+AP-09 & 改 Prompt 不跑回归 & 线上静默退化 & 离线黄金集 + 回归门禁，\href{../05-评测与质量/01-Agent评测体系.md}{Agent 评测体系} \\
+\hline
+AP-10 & 没有 Trace & 事故无法复盘 & 决策轨迹、工具调用、上下文留痕，\href{../04-工程实践/05-Agent可观测与追踪.md}{Agent 可观测与追踪} \\
+\hline
+AP-11 & 一次性全量发布 & 灰度问题影响全量用户 & 影子流量 → 灰度 → 全量，\href{../04-工程实践/06-Agent部署与发布.md}{Agent 部署与发布} \\
+\hline
+AP-12 & 工具 description 只写名字 & 模型乱调工具 & 写清何时用、何时不用，\href{../02-Agent/01-Agent核心概念.md}{Agent 核心概念} \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{4. 新增案例模板}
+
+
+\begin{lstlisting}
+## CASE-XXX-01 案例名
+- 背景：一句话说明业务场景
+- 架构：使用的编排模式与工具
+- 效果：可量化指标
+- 经验：可复用的 1-3 条
+- 反模式：踩过的坑（登记到 AP）
+- 来源：文档或链接
+\end{lstlisting}
+
+
+
+\section*{5. 延伸阅读}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item \href{../00-概念与术语/01-Agent术语表与概念边界.md}{Agent 术语表与概念边界}
+  \item \href{../../../知识地图总索引.md}{知识地图总索引}
+\end{itemize}
+
+\end{document}

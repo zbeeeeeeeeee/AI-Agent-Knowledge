@@ -1,0 +1,260 @@
+\documentclass[9pt,a4paper,twocolumn]{ctexart}
+
+% --- Packages ---
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{caption}
+
+% --- Code block styling ---
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{220,220,220}
+\definecolor{codekw}{RGB}{0,0,192}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{codenum}{RGB}{128,0,128}
+\definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=4pt,
+  belowskip=4pt,
+  extendedchars=true,
+  literate={，}{{，}}1 {；}{{；}}1 {！}{{！}}1 {？}{{？}}1 {“}{{“}}1 {”}{{”}}1 {（}{{（}}1 {）}{{）}}1 {《}{{《}}1 {》}{{》}}1,
+}
+
+% --- Extra language definitions (no built-in listings support) ---
+\lstdefinelanguage{json}{
+  morekeywords={true,false,null},
+  sensitive=true,
+  morestring=[b]",
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+\lstdefinelanguage{yaml}{
+  morekeywords={true,false,null,yes,no,on,off},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[d]',
+}
+\lstdefinelanguage{http}{
+  morekeywords={GET,POST,PUT,DELETE,PATCH,HEAD,OPTIONS,HTTP,Host,Accept,Authorization,Content-Type,Content-Length,User-Agent},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+\lstdefinelanguage{TypeScript}{
+  morekeywords={abstract,any,as,async,await,break,case,catch,class,const,continue,debugger,declare,default,delete,do,else,enum,export,extends,false,finally,for,from,function,get,if,implements,import,in,instanceof,interface,keyof,let,module,namespace,never,new,null,number,of,package,private,protected,public,readonly,return,set,static,string,super,switch,symbol,this,throw,true,try,type,typeof,undefined,unknown,var,void,while,with,yield,Record,Array,Promise,AsyncIterable,ReadableStream,Date,Error,Object,JSON},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`{`},
+}
+
+% --- Compact spacing ---
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% --- Table styling ---
+\renewcommand{\arraystretch}{1.1}
+
+% --- Heading styling (numbered) ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
+
+% --- Page style ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\emph{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
+
+% --- Hyperref setup ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+}
+
+% --- Caption format ---
+\DeclareCaptionFormat{myformat}{\small\bfseries #1#2#3}
+\captionsetup{format=myformat}
+
+\begin{document}
+
+\title{Agent 框架与平台横评}
+\date{}
+\maketitle
+\markboth{TypeScript 版 Agent 知识}{ TypeScript 版 Agent 知识}
+
+\begin{quote}
+语言策略：\texttt{shared}。三语言内容一致，Java 为 canonical。 地图节点：\texttt{04 开发与工程化 / 技术选型与框架}。选型结论会随版本快速变化，本页记录\textbf{选型方法}与当前基线，具体版本以官方文档为准。
+\end{quote}
+
+
+
+\section*{0. 结论先说}
+
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
+  \item 先选“控制模型”，再选框架：固定流程用 Graph，动态任务用 Agent Loop，混合用 Agentic Workflow。
+  \item 对本知识库三种语言生态，基线是：Java 用 Spring AI Alibaba Graph，Python 用 LangGraph，TypeScript 用 LangGraph.js。
+  \item 框架不是越新越好，优先看：\textbf{可观测、状态持久化、人工审批、成本控制、社区与许可}。
+\end{enumerate}
+
+
+\section*{1. 选型六维度}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.143\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.857\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{维度} & \textbf{关键问题} \\
+\hline
+语言适配 & 是否原生支持团队技术栈 \\
+\hline
+控制模型 & Graph / Agent Loop / Multi-Agent 支持度 \\
+\hline
+状态与持久化 & 是否支持 checkpoint、断点恢复 \\
+\hline
+可观测 & Trace、回放、人工审批能力 \\
+\hline
+运维 & 超时、重试、并发、流式、限流 \\
+\hline
+生态与许可 & 社区活跃度、维护方、License \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{2. 框架对比基线}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.237\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.196\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.227\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.175\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.165\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{框架} & \textbf{语言生态} & \textbf{控制模型} & \textbf{适合场景} & \textbf{注意点} \\
+\hline
+LangGraph & Python & Graph + Agent & 复杂状态机、生产级 Agent & 概念多，需团队学习 \\
+\hline
+LangGraph.js & TypeScript & Graph + Agent & Node 服务端生产级 Agent & 生态略小于 Python \\
+\hline
+Spring AI Alibaba Graph & Java & Graph + Agent & Java 后端、Spring 生态 & 按 Spring 体系选型 \\
+\hline
+OpenAI Agents SDK & Python / TypeScript & Agent Loop + Handoff & 快速原型、多 Agent 交接 & 与供应商绑定较深 \\
+\hline
+AutoGen & Python / .NET & Multi-Agent & 研究型多智能体 & 生产化需自行补运维 \\
+\hline
+CrewAI & Python & Role-based Multi-Agent & 内容生产流水线 & 复杂控制流要评估 \\
+\hline
+LlamaIndex Workflows & Python & Graph + RAG & 文档密集型应用 & 与 LangGraph 定位重叠 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{3. 按语言选型}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.143\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.329\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.243\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.286\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{技术栈} & \textbf{首选} & \textbf{备选} & \textbf{不建议一上来就用} \\
+\hline
+Java & Spring AI Alibaba Graph & 自研轻量 Agent Loop & 跨语言框架拼装 \\
+\hline
+Python & LangGraph & OpenAI Agents SDK & AutoGen/CrewAI 直接上生产 \\
+\hline
+TypeScript & LangGraph.js & OpenAI Agents SDK & 从 Python 框架翻译 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{4. 决策流程}
+
+
+\begin{lstlisting}
+任务能否拆成固定步骤？
+  ├─ 能 → Workflow / Graph（Spring AI Alibaba Graph、LangGraph、LangGraph.js）
+  └─ 不能 → 路径是否动态？
+            ├─ 动态 → Agent Loop（Agents SDK 或 Graph 内嵌 Agent）
+            └─ 需要多角色 → 先证明单 Agent 不够，再上多 Agent
+\end{lstlisting}
+
+
+
+\section*{5. 防锁定}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item Agent 逻辑与框架 API 之间加一层 \texttt{AgentRuntime} / \texttt{ToolRegistry} 接口；
+  \item 工具以 JSON Schema 注册，Prompt 与工具描述版本化；
+  \item 通过 LLM Gateway 隔离模型供应商；
+  \item 框架升级前用评测集回归，不直接追新版本。
+\end{itemize}
+
+
+\section*{6. 延伸阅读}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item \href{01-Workflow-Graph与Loop.md}{AI 工作流中的 Workflow、Graph 与 Loop}
+  \item \href{../02-Agent/03-多智能体编排.md}{多智能体编排}
+  \item \href{06-Agent部署与发布.md}{Agent 部署与发布}
+\end{itemize}
+
+\end{document}

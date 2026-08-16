@@ -1,0 +1,294 @@
+\documentclass[9pt,a4paper,twocolumn]{ctexart}
+
+% --- Packages ---
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{caption}
+
+% --- Code block styling ---
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{220,220,220}
+\definecolor{codekw}{RGB}{0,0,192}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{codenum}{RGB}{128,0,128}
+\definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=4pt,
+  belowskip=4pt,
+  extendedchars=true,
+  literate={，}{{，}}1 {；}{{；}}1 {！}{{！}}1 {？}{{？}}1 {“}{{“}}1 {”}{{”}}1 {（}{{（}}1 {）}{{）}}1 {《}{{《}}1 {》}{{》}}1,
+}
+
+% --- Extra language definitions (no built-in listings support) ---
+\lstdefinelanguage{json}{
+  morekeywords={true,false,null},
+  sensitive=true,
+  morestring=[b]",
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+\lstdefinelanguage{yaml}{
+  morekeywords={true,false,null,yes,no,on,off},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[d]',
+}
+\lstdefinelanguage{http}{
+  morekeywords={GET,POST,PUT,DELETE,PATCH,HEAD,OPTIONS,HTTP,Host,Accept,Authorization,Content-Type,Content-Length,User-Agent},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+\lstdefinelanguage{TypeScript}{
+  morekeywords={abstract,any,as,async,await,break,case,catch,class,const,continue,debugger,declare,default,delete,do,else,enum,export,extends,false,finally,for,from,function,get,if,implements,import,in,instanceof,interface,keyof,let,module,namespace,never,new,null,number,of,package,private,protected,public,readonly,return,set,static,string,super,switch,symbol,this,throw,true,try,type,typeof,undefined,unknown,var,void,while,with,yield,Record,Array,Promise,AsyncIterable,ReadableStream,Date,Error,Object,JSON},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`{`},
+}
+
+% --- Compact spacing ---
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% --- Table styling ---
+\renewcommand{\arraystretch}{1.1}
+
+% --- Heading styling (numbered) ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
+
+% --- Page style ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\emph{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
+
+% --- Hyperref setup ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+}
+
+% --- Caption format ---
+\DeclareCaptionFormat{myformat}{\small\bfseries #1#2#3}
+\captionsetup{format=myformat}
+
+\begin{document}
+
+\title{上下文工程：预算、裁剪、缓存与组装}
+\date{}
+\maketitle
+\markboth{Python 版 Agent 知识}{ Python 版 Agent 知识}
+
+\begin{quote}
+语言策略：\texttt{code}。正文三语言一致；上下文组装器按 Python 生态实现。 地图节点：\texttt{04 开发与工程化 / 上下文工程}。配套文档：\href{03-Harness工程.md}{Harness Engineering}、\href{../02-Agent/02-Agent记忆系统.md}{Agent 记忆系统}。
+\end{quote}
+
+
+
+\section*{0. 结论先说}
+
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
+  \item Agent 效果瓶颈常在 Context Engineering，不在模型。
+  \item 每一轮喂给模型的上下文应当是\textbf{预算内、按优先级排序、边界清晰}的组装结果。
+  \item 上下文工程 = 预算 + 选择 + 压缩 + 组装 + 缓存 + 版本化。
+\end{enumerate}
+
+
+\section*{1. 上下文预算公式}
+
+
+\begin{lstlisting}
+可用上下文 = 模型窗口 - 保留输出 Token - System Prompt - 工具 Schema
+每轮动态预算 = 可用上下文 - 历史对话预算 - 检索预算 - 记忆预算 - 安全余量
+\end{lstlisting}
+
+
+
+规则：保留输出 Token 按任务最大回复长度计算；工具 Schema 只注入本轮白名单工具；安全余量默认留 10\%。
+
+
+
+\section*{2. 内容优先级}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.083\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.389\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.528\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{优先级} & \textbf{内容} & \textbf{处理策略} \\
+\hline
+P0 & 任务目标、验收标准、安全规则 & 永不被裁剪 \\
+\hline
+P1 & 最近 N 轮观察 & 保留最近，更早做摘要 \\
+\hline
+P2 & 工具返回 & 截断长文本，保留结构化字段 \\
+\hline
+P3 & 检索片段 & 只保留 rerank 后的 top-k \\
+\hline
+P4 & 历史记忆 & 按相关度注入，低相关不注入 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{3. 压缩与裁剪}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item 工具返回先提取结构化摘要，再决定是否保留原文；
+  \item 历史对话超过预算时，把早期轮次压缩成状态摘要；
+  \item 代码和日志用行号范围截断，不从中部硬切；
+  \item 外部内容统一包裹为数据区，防止指令注入；
+  \item 达到 40\% 上下文利用率后，优先裁剪而不是继续塞入。
+\end{itemize}
+
+
+\section*{4. 缓存与版本化}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item System Prompt 固定部分放前缀，命中 Prompt Cache；
+  \item 工具 Schema 按 toolset\_version 缓存；
+  \item 检索缓存键 = query 归一化 + 知识库版本 + 租户；
+  \item 每次上下文模板变更要 bump \texttt{prompt\_version}，并跑评测回归。
+\end{itemize}
+
+
+\section*{5. 组装顺序}
+
+
+\begin{lstlisting}
+System Prompt（版本化）
+→ 任务卡与验收标准
+→ 本轮白名单工具 Schema
+→ 相关记忆（低相关不注入）
+→ 检索片段（标注来源）
+→ 最近观察（按预算截断）
+→ 用户当前输入（隔离包裹）
+\end{lstlisting}
+
+
+
+\section*{6. Python 版上下文组装器}
+
+
+\begin{lstlisting}[language=Python]
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class ContextBudget:
+    window_tokens: int
+    reserved_output: int
+    system_prompt: int
+    tool_schemas: int
+    safety_reserve: int
+
+    def available(self) -> int:
+        return (self.window_tokens - self.reserved_output
+                - self.system_prompt - self.tool_schemas - self.safety_reserve)
+
+@dataclass(frozen=True)
+class ContextSection:
+    name: str
+    priority: int
+    tokens: int
+    content: str
+
+class ContextAssembler:
+    @staticmethod
+    def assemble(budget: ContextBudget, sections: list[ContextSection], max_tokens: int) -> str:
+        cap = min(max_tokens, budget.available())
+        parts: list[str] = []
+        used = 0
+        for section in sorted(sections, key=lambda s: s.priority):
+            if used + section.tokens > cap and section.priority > 1:
+                continue
+            parts.append(f"<!-- section:{section.name} -->\n{section.content}")
+            used += section.tokens
+        return "\n".join(parts)
+\end{lstlisting}
+
+
+
+\section*{7. 上线检查单}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item [ ] 每次调用都计算预算，不超模型窗口；
+  \item [ ] 工具 Schema 只注入白名单工具；
+  \item [ ] 长文本按优先级裁剪，不丢失任务目标；
+  \item [ ] 外部数据有数据边界标记；
+  \item [ ] Prompt 版本与评测结果绑定；
+  \item [ ] 缓存命中率、单任务 Token、上下文利用率有监控。
+\end{itemize}
+
+
+\section*{8. 延伸阅读}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item \href{../02-Agent/02-Agent记忆系统.md}{Agent 记忆系统}
+  \item \href{04-大模型网关.md}{大模型网关}
+  \item \href{../05-评测与质量/01-Agent评测体系.md}{Agent 评测体系}
+\end{itemize}
+
+\end{document}
