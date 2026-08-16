@@ -160,60 +160,80 @@
         <node TEXT="🟢 网关三语言实现 · TypeScript 实现" LINK="markdown/typescript/04-工程实践/04-大模型网关.md"/>
       </node>
     </node>
-    <node TEXT="🔴 部署与发布">
-      <node TEXT="🔴 部署形态"/>
-      <node TEXT="🔴 版本与回滚"/>
-      <node TEXT="🔴 容量与扩展"/>
+    <node TEXT="🟢 部署与发布 ≡" LINK="markdown/java/04-工程实践/06-Agent部署与发布.md">
+      <node TEXT="🟢 部署形态 ≡" LINK="markdown/java/04-工程实践/06-Agent部署与发布.md"/>
+      <node TEXT="🟢 版本与回滚 ≡" LINK="markdown/java/04-工程实践/06-Agent部署与发布.md"/>
+      <node TEXT="🟡 容量与扩展 ≡" LINK="markdown/java/04-工程实践/06-Agent部署与发布.md"/>
+      <node TEXT="三语言部署示例">
+        <node TEXT="🟢 三语言部署示例 · Java 实现" LINK="markdown/java/04-工程实践/06-Agent部署与发布.md"/>
+        <node TEXT="🟢 三语言部署示例 · Python 实现" LINK="markdown/python/04-工程实践/06-Agent部署与发布.md"/>
+        <node TEXT="🟢 三语言部署示例 · TypeScript 实现" LINK="markdown/typescript/04-工程实践/06-Agent部署与发布.md"/>
+      </node>
     </node>
-    <node TEXT="🟡 可观测与调试 ≡" LINK="markdown/java/04-工程实践/04-大模型网关.md">
-      <node TEXT="🟡 Trace 记录 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
-      <node TEXT="🔴 日志与回放"/>
-      <node TEXT="🔴 调试工具链"/>
+    <node TEXT="🟢 可观测与调试 ≡" LINK="markdown/java/04-工程实践/05-Agent可观测与追踪.md">
+      <node TEXT="🟢 Trace 记录 ≡" LINK="markdown/java/04-工程实践/05-Agent可观测与追踪.md"/>
+      <node TEXT="🟢 日志与回放 ≡" LINK="markdown/java/04-工程实践/05-Agent可观测与追踪.md"/>
+      <node TEXT="🟡 调试工具链 ≡" LINK="markdown/java/04-工程实践/05-Agent可观测与追踪.md"/>
+      <node TEXT="三语言采集器">
+        <node TEXT="🟢 三语言采集器 · Java 实现" LINK="markdown/java/04-工程实践/05-Agent可观测与追踪.md"/>
+        <node TEXT="🟢 三语言采集器 · Python 实现" LINK="markdown/python/04-工程实践/05-Agent可观测与追踪.md"/>
+        <node TEXT="🟢 三语言采集器 · TypeScript 实现" LINK="markdown/typescript/04-工程实践/05-Agent可观测与追踪.md"/>
+      </node>
     </node>
   </node>
-  <node TEXT="🔴 05 评测与质量 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md">
-    <node TEXT="🟡 指标体系 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md">
-      <node TEXT="🔴 任务成功率"/>
-      <node TEXT="🔴 轨迹质量"/>
-      <node TEXT="🔴 工具调用准确率"/>
-      <node TEXT="🟡 延迟与成本 ≡" LINK="markdown/java/04-工程实践/04-大模型网关.md"/>
+  <node TEXT="🟡 05 评测与质量 ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md">
+    <node TEXT="🟢 指标体系 ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md">
+      <node TEXT="🟢 任务成功率 ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md"/>
+      <node TEXT="🟢 轨迹质量 ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md"/>
+      <node TEXT="🟢 工具调用准确率 ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md"/>
+      <node TEXT="🟢 延迟与成本 ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md"/>
     </node>
-    <node TEXT="🟡 评测方法 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md">
-      <node TEXT="🔴 离线评测集"/>
-      <node TEXT="🔴 人工评测"/>
-      <node TEXT="🔴 在线 A B 实验"/>
-      <node TEXT="🔴 LLM-as-Judge"/>
+    <node TEXT="🟡 评测方法 ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md">
+      <node TEXT="🟢 离线评测集 ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md"/>
+      <node TEXT="🟢 人工评测 ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md"/>
+      <node TEXT="🟡 在线 A B 实验 ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md"/>
+      <node TEXT="🟢 LLM-as-Judge ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md"/>
+      <node TEXT="三语言评测脚本">
+        <node TEXT="🟢 三语言评测脚本 · Java 实现" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md"/>
+        <node TEXT="🟢 三语言评测脚本 · Python 实现" LINK="markdown/python/05-评测与质量/01-Agent评测体系.md"/>
+        <node TEXT="🟢 三语言评测脚本 · TypeScript 实现" LINK="markdown/typescript/05-评测与质量/01-Agent评测体系.md"/>
+      </node>
     </node>
-    <node TEXT="🔴 评测基座与回归">
-      <node TEXT="🔴 评测集构建"/>
+    <node TEXT="🟡 评测基座与回归 ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md">
+      <node TEXT="🟢 评测集构建 ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md"/>
       <node TEXT="🔴 基准与榜单"/>
-      <node TEXT="🔴 回归与 CI"/>
+      <node TEXT="🟢 回归与 CI ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md"/>
     </node>
     <node TEXT="🟡 持续改进 ≡" LINK="markdown/java/04-工程实践/03-Harness工程.md">
       <node TEXT="🟡 Human-in-the-Loop ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
-      <node TEXT="🟡 反馈闭环 ≡" LINK="markdown/java/04-工程实践/03-Harness工程.md"/>
+      <node TEXT="🟢 反馈闭环 ≡" LINK="markdown/java/05-评测与质量/01-Agent评测体系.md"/>
     </node>
   </node>
-  <node TEXT="🟡 06 安全与治理 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md">
-    <node TEXT="🟡 风险分类 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md">
-      <node TEXT="🟡 模型风险 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
-      <node TEXT="🟡 工具风险 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
-      <node TEXT="🟡 数据风险 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
+  <node TEXT="🟡 06 安全与治理 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md">
+    <node TEXT="🟢 风险分类 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md">
+      <node TEXT="🟢 模型风险 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md"/>
+      <node TEXT="🟢 工具风险 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md"/>
+      <node TEXT="🟢 数据风险 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md"/>
     </node>
-    <node TEXT="🟡 护栏机制 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md">
-      <node TEXT="🟡 权限最小化 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
-      <node TEXT="🔴 沙箱执行"/>
-      <node TEXT="🔴 Prompt 注入防护"/>
-      <node TEXT="🔴 内容安全"/>
+    <node TEXT="🟡 护栏机制 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md">
+      <node TEXT="🟢 权限最小化 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md"/>
+      <node TEXT="🟡 沙箱执行 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md"/>
+      <node TEXT="🟢 Prompt 注入防护 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md"/>
+      <node TEXT="🟡 内容安全 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md"/>
+      <node TEXT="三语言工具风控实现">
+        <node TEXT="🟢 三语言工具风控实现 · Java 实现" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md"/>
+        <node TEXT="🟢 三语言工具风控实现 · Python 实现" LINK="markdown/python/06-安全与治理/01-Agent安全护栏清单.md"/>
+        <node TEXT="🟢 三语言工具风控实现 · TypeScript 实现" LINK="markdown/typescript/06-安全与治理/01-Agent安全护栏清单.md"/>
+      </node>
     </node>
-    <node TEXT="🟡 合规与审计 ≡" LINK="markdown/java/04-工程实践/04-大模型网关.md">
+    <node TEXT="🟡 合规与审计 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md">
       <node TEXT="🟡 隐私与数据边界 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
-      <node TEXT="🟡 审计日志 ≡" LINK="markdown/java/04-工程实践/04-大模型网关.md"/>
+      <node TEXT="🟢 审计日志 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md"/>
       <node TEXT="🟡 第三方模型数据边界 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
     </node>
-    <node TEXT="🔴 责任与流程">
-      <node TEXT="🔴 审批流程"/>
-      <node TEXT="🔴 责任归属"/>
+    <node TEXT="🟡 责任与流程 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md">
+      <node TEXT="🟢 审批流程 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md"/>
+      <node TEXT="🟡 责任归属 ≡" LINK="markdown/java/06-安全与治理/01-Agent安全护栏清单.md"/>
     </node>
   </node>
   <node TEXT="🟡 07 应用与案例 ≡" LINK="markdown/java/04-工程实践/03-Harness工程.md">

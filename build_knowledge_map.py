@@ -61,6 +61,10 @@ DOC_INVENTORY = [
     ("Loop Engineering", "04-工程实践/02-Loop工程.md", "shared"),
     ("Harness Engineering", "04-工程实践/03-Harness工程.md", "shared"),
     ("大模型网关", "04-工程实践/04-大模型网关.md", "code"),
+    ("Agent 可观测与追踪", "04-工程实践/05-Agent可观测与追踪.md", "code"),
+    ("Agent 部署与发布", "04-工程实践/06-Agent部署与发布.md", "code"),
+    ("Agent 评测体系", "05-评测与质量/01-Agent评测体系.md", "code"),
+    ("Agent 安全护栏清单", "06-安全与治理/01-Agent安全护栏清单.md", "code"),
     ("AI 应用系统设计", "07-系统设计/01-AI应用系统设计.md", "code"),
     ("AI Agent 面试题", "10-面试/01-AI-Agent面试题.md", "shared"),
     ("RAG 面试题", "10-面试/02-RAG面试题.md", "shared"),
@@ -258,60 +262,64 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("缓存与语义缓存", "partial", f"{J}/04-工程实践/04-大模型网关.md"),
             LANG3("网关三语言实现", "04-工程实践/04-大模型网关.md"),
         ]),
-        N("部署与发布", "gap", None, [
-            N("部署形态", "gap"),
-            N("版本与回滚", "gap"),
-            N("容量与扩展", "gap"),
+        N("部署与发布", "full", f"{J}/04-工程实践/06-Agent部署与发布.md", [
+            N("部署形态", "full", f"{J}/04-工程实践/06-Agent部署与发布.md"),
+            N("版本与回滚", "full", f"{J}/04-工程实践/06-Agent部署与发布.md"),
+            N("容量与扩展", "partial", f"{J}/04-工程实践/06-Agent部署与发布.md"),
+            LANG3("三语言部署示例", "04-工程实践/06-Agent部署与发布.md"),
         ]),
-        N("可观测与调试", "partial", f"{J}/04-工程实践/04-大模型网关.md", [
-            N("Trace 记录", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
-            N("日志与回放", "gap"),
-            N("调试工具链", "gap"),
+        N("可观测与调试", "full", f"{J}/04-工程实践/05-Agent可观测与追踪.md", [
+            N("Trace 记录", "full", f"{J}/04-工程实践/05-Agent可观测与追踪.md"),
+            N("日志与回放", "full", f"{J}/04-工程实践/05-Agent可观测与追踪.md"),
+            N("调试工具链", "partial", f"{J}/04-工程实践/05-Agent可观测与追踪.md"),
+            LANG3("三语言采集器", "04-工程实践/05-Agent可观测与追踪.md"),
         ]),
     ]),
-    N("05 评测与质量", "gap", f"{J}/07-系统设计/01-AI应用系统设计.md", [
-        N("指标体系", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
-            N("任务成功率", "gap"),
-            N("轨迹质量", "gap"),
-            N("工具调用准确率", "gap"),
-            N("延迟与成本", "partial", f"{J}/04-工程实践/04-大模型网关.md"),
+    N("05 评测与质量", "partial", f"{J}/05-评测与质量/01-Agent评测体系.md", [
+        N("指标体系", "full", f"{J}/05-评测与质量/01-Agent评测体系.md", [
+            N("任务成功率", "full", f"{J}/05-评测与质量/01-Agent评测体系.md"),
+            N("轨迹质量", "full", f"{J}/05-评测与质量/01-Agent评测体系.md"),
+            N("工具调用准确率", "full", f"{J}/05-评测与质量/01-Agent评测体系.md"),
+            N("延迟与成本", "full", f"{J}/05-评测与质量/01-Agent评测体系.md"),
         ]),
-        N("评测方法", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
-            N("离线评测集", "gap"),
-            N("人工评测", "gap"),
-            N("在线 A B 实验", "gap"),
-            N("LLM-as-Judge", "gap"),
+        N("评测方法", "partial", f"{J}/05-评测与质量/01-Agent评测体系.md", [
+            N("离线评测集", "full", f"{J}/05-评测与质量/01-Agent评测体系.md"),
+            N("人工评测", "full", f"{J}/05-评测与质量/01-Agent评测体系.md"),
+            N("在线 A B 实验", "partial", f"{J}/05-评测与质量/01-Agent评测体系.md"),
+            N("LLM-as-Judge", "full", f"{J}/05-评测与质量/01-Agent评测体系.md"),
+            LANG3("三语言评测脚本", "05-评测与质量/01-Agent评测体系.md"),
         ]),
-        N("评测基座与回归", "gap", None, [
-            N("评测集构建", "gap"),
+        N("评测基座与回归", "partial", f"{J}/05-评测与质量/01-Agent评测体系.md", [
+            N("评测集构建", "full", f"{J}/05-评测与质量/01-Agent评测体系.md"),
             N("基准与榜单", "gap"),
-            N("回归与 CI", "gap"),
+            N("回归与 CI", "full", f"{J}/05-评测与质量/01-Agent评测体系.md"),
         ]),
         N("持续改进", "partial", f"{J}/04-工程实践/03-Harness工程.md", [
             N("Human-in-the-Loop", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
-            N("反馈闭环", "partial", f"{J}/04-工程实践/03-Harness工程.md"),
+            N("反馈闭环", "full", f"{J}/05-评测与质量/01-Agent评测体系.md"),
         ]),
     ]),
-    N("06 安全与治理", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
-        N("风险分类", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
-            N("模型风险", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
-            N("工具风险", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
-            N("数据风险", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
+    N("06 安全与治理", "partial", f"{J}/06-安全与治理/01-Agent安全护栏清单.md", [
+        N("风险分类", "full", f"{J}/06-安全与治理/01-Agent安全护栏清单.md", [
+            N("模型风险", "full", f"{J}/06-安全与治理/01-Agent安全护栏清单.md"),
+            N("工具风险", "full", f"{J}/06-安全与治理/01-Agent安全护栏清单.md"),
+            N("数据风险", "full", f"{J}/06-安全与治理/01-Agent安全护栏清单.md"),
         ]),
-        N("护栏机制", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
-            N("权限最小化", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
-            N("沙箱执行", "gap"),
-            N("Prompt 注入防护", "gap"),
-            N("内容安全", "gap"),
+        N("护栏机制", "partial", f"{J}/06-安全与治理/01-Agent安全护栏清单.md", [
+            N("权限最小化", "full", f"{J}/06-安全与治理/01-Agent安全护栏清单.md"),
+            N("沙箱执行", "partial", f"{J}/06-安全与治理/01-Agent安全护栏清单.md"),
+            N("Prompt 注入防护", "full", f"{J}/06-安全与治理/01-Agent安全护栏清单.md"),
+            N("内容安全", "partial", f"{J}/06-安全与治理/01-Agent安全护栏清单.md"),
+            LANG3("三语言工具风控实现", "06-安全与治理/01-Agent安全护栏清单.md"),
         ]),
-        N("合规与审计", "partial", f"{J}/04-工程实践/04-大模型网关.md", [
+        N("合规与审计", "partial", f"{J}/06-安全与治理/01-Agent安全护栏清单.md", [
             N("隐私与数据边界", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
-            N("审计日志", "partial", f"{J}/04-工程实践/04-大模型网关.md"),
+            N("审计日志", "full", f"{J}/06-安全与治理/01-Agent安全护栏清单.md"),
             N("第三方模型数据边界", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
         ]),
-        N("责任与流程", "gap", None, [
-            N("审批流程", "gap"),
-            N("责任归属", "gap"),
+        N("责任与流程", "partial", f"{J}/06-安全与治理/01-Agent安全护栏清单.md", [
+            N("审批流程", "full", f"{J}/06-安全与治理/01-Agent安全护栏清单.md"),
+            N("责任归属", "partial", f"{J}/06-安全与治理/01-Agent安全护栏清单.md"),
         ]),
     ]),
     N("07 应用与案例", "partial", f"{J}/04-工程实践/03-Harness工程.md", [
@@ -448,7 +456,7 @@ def render_xmind_topics():
 
 def write_xmind(path):
     content = json.dumps(render_xmind_topics(), ensure_ascii=False, indent=2)
-    metadata = json.dumps({"creator": {"name": "AI Agent Knowledge Base", "version": "0.3.0"}}, ensure_ascii=False, indent=2)
+    metadata = json.dumps({"creator": {"name": "AI Agent Knowledge Base", "version": "0.4.0"}}, ensure_ascii=False, indent=2)
     manifest = json.dumps({"file-entries": {"content.json": {}, "metadata.json": {}}}, ensure_ascii=False, indent=2)
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr("manifest.json", manifest)
@@ -458,7 +466,7 @@ def write_xmind(path):
 
 def render_index_md():
     lines = []
-    lines.append("# AI Agent 知识总索引（三语言版 v0.3）")
+    lines.append("# AI Agent 知识总索引（三语言版 v0.4）")
     lines.append("")
     lines.append("> 本文件是知识库的**最外层索引**：脑图负责导航，文档负责承载内容，状态标识负责暴露缺口，语言矩阵负责三语言直达。")
     lines.append("> 由 `build_knowledge_map.py` 生成；修改结构请改脚本后重新生成，避免图与文档漂移。")

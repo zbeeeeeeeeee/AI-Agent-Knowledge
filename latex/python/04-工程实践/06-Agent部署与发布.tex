@@ -1,0 +1,352 @@
+\documentclass[9pt,a4paper,twocolumn]{ctexart}
+
+% --- Packages ---
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{caption}
+
+% --- Code block styling ---
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{220,220,220}
+\definecolor{codekw}{RGB}{0,0,192}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{codenum}{RGB}{128,0,128}
+\definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=4pt,
+  belowskip=4pt,
+  extendedchars=true,
+  literate={，}{{，}}1 {；}{{；}}1 {！}{{！}}1 {？}{{？}}1 {“}{{“}}1 {”}{{”}}1 {（}{{（}}1 {）}{{）}}1 {《}{{《}}1 {》}{{》}}1,
+}
+
+% --- Extra language definitions (no built-in listings support) ---
+\lstdefinelanguage{json}{
+  morekeywords={true,false,null},
+  sensitive=true,
+  morestring=[b]",
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+\lstdefinelanguage{yaml}{
+  morekeywords={true,false,null,yes,no,on,off},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[d]',
+}
+\lstdefinelanguage{http}{
+  morekeywords={GET,POST,PUT,DELETE,PATCH,HEAD,OPTIONS,HTTP,Host,Accept,Authorization,Content-Type,Content-Length,User-Agent},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+\lstdefinelanguage{TypeScript}{
+  morekeywords={abstract,any,as,async,await,break,case,catch,class,const,continue,debugger,declare,default,delete,do,else,enum,export,extends,false,finally,for,from,function,get,if,implements,import,in,instanceof,interface,keyof,let,module,namespace,never,new,null,number,of,package,private,protected,public,readonly,return,set,static,string,super,switch,symbol,this,throw,true,try,type,typeof,undefined,unknown,var,void,while,with,yield,Record,Array,Promise,AsyncIterable,ReadableStream,Date,Error,Object,JSON},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`{`},
+}
+
+% --- Compact spacing ---
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% --- Table styling ---
+\renewcommand{\arraystretch}{1.1}
+
+% --- Heading styling (numbered) ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
+
+% --- Page style ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\emph{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
+
+% --- Hyperref setup ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+}
+
+% --- Caption format ---
+\DeclareCaptionFormat{myformat}{\small\bfseries #1#2#3}
+\captionsetup{format=myformat}
+
+\begin{document}
+
+\title{Agent 部署与发布：从灰度到回滚}
+\date{}
+\maketitle
+\markboth{Python 版 Agent 知识}{ Python 版 Agent 知识}
+
+\begin{quote}
+语言策略：\texttt{code}。正文三语言一致；服务骨架与容器化示例按 Python 生态实现。 地图节点：\texttt{04 开发与工程化 / 部署与发布}。配套文档：\href{05-Agent可观测与追踪.md}{Agent 可观测与追踪}、\href{../05-评测与质量/01-Agent评测体系.md}{Agent 评测体系}。
+\end{quote}
+
+
+
+\section*{0. 结论先说}
+
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
+  \item Agent 的发布单元不止代码：\textbf{Prompt、工具、模型路由、记忆策略都会改变线上行为}，必须一起版本化。
+  \item 推荐路径：离线回归 → 影子流量 → 灰度 → 全量；每个阶段都有可观测指标和回滚条件。
+  \item 部署前先回答三个问题：任务能不能幂等？跑一半断了怎么办？回滚时旧 Prompt 和旧工具是否还在？
+\end{enumerate}
+
+
+\section*{1. 部署形态}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.424\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.212\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.364\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{形态} & \textbf{适用场景} & \textbf{注意点} \\
+\hline
+同步 API 服务 & 交互式助手 & 需要流式、超时与取消 \\
+\hline
+异步任务队列 & 长任务、批处理 & 任务状态、幂等、死信队列 \\
+\hline
+定时/事件驱动 Worker & 巡检、告警处理 & 并发控制、去重 \\
+\hline
+边端/混合部署 & 数据不出域 & 模型版本与配置下发 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{2. 发布单元与版本化}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.395\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.442\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.163\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{发布单元} & \textbf{版本标识} & \textbf{回滚方式} \\
+\hline
+应用代码 & Git commit / 镜像 tag & 回滚镜像 \\
+\hline
+System Prompt & prompt\_version & 配置回滚 \\
+\hline
+工具 Schema / Skill & toolset\_version & 注册表回滚 \\
+\hline
+模型路由策略 & route\_version & 网关配置回滚 \\
+\hline
+评测集与门禁 & eval\_version & 随发布记录关联 \\
+\hline
+\end{tabular}
+}
+
+
+
+发布包必须记录以上五个版本，Trace 中也要带上 \texttt{prompt\_version} 与 \texttt{toolset\_version}，否则线上问题无法归因。
+
+
+
+\section*{3. 发布流水线}
+
+
+\begin{lstlisting}
+代码/配置变更
+   │
+   ▼
+离线回归（成功率和工具准确率门禁）
+   │
+   ▼
+影子流量（只记录，不影响用户）
+   │
+   ▼
+灰度 5% → 25% → 100%
+   │
+   ▼
+观察 P95、成功率、成本、危险动作率
+   │
+   ▼
+通过则全量，否则自动回滚
+\end{lstlisting}
+
+
+
+灰度期间高危工具默认只读或审批升级；灰度时间不少于一个完整业务周期。
+
+
+
+\section*{4. 运行时要求}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item 健康检查：\texttt{/health} 同时检查模型供应商、向量库和工具依赖；
+  \item 超时与取消：Agent Loop 总超时、单工具超时、用户取消；
+  \item 幂等：同一 \texttt{task\_id} 重复提交只执行一次；
+  \item 限流：按用户、租户、工具设置配额；
+  \item 审计：部署事件、配置变更、回滚事件全部留痕。
+\end{itemize}
+
+
+\section*{5. Python 版服务骨架与容器化}
+
+
+\begin{lstlisting}[language=Python]
+from dataclasses import dataclass
+from typing import Protocol
+
+@dataclass
+class AgentRunRequest:
+    task_id: str
+    input: str
+    prompt_version: str
+    user_id: str
+
+@dataclass
+class AgentRunResponse:
+    task_id: str
+    status: str
+    result: str
+    elapsed_ms: int
+
+class AgentRuntime(Protocol):
+    def run(self, request: AgentRunRequest) -> AgentRunResponse: ...
+    def health(self) -> dict: ...
+
+from fastapi import FastAPI
+
+def build_app(runtime: AgentRuntime) -> FastAPI:
+    app = FastAPI()
+
+    @app.post("/run")
+    def run(request: AgentRunRequest) -> AgentRunResponse:
+        return runtime.run(request)
+
+    @app.get("/health")
+    def health() -> dict:
+        return runtime.health()
+
+    return app
+\end{lstlisting}
+
+
+
+\begin{lstlisting}
+FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+EXPOSE 8000
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+\end{lstlisting}
+
+
+
+\begin{lstlisting}
+健康检查：GET /health
+发布命令：docker build -t agent-service:<git-sha> . && docker push agent-service:<git-sha>
+回滚命令：kubectl set image deploy/agent-service agent-service=agent-service:<previous-sha>
+\end{lstlisting}
+
+
+
+\section*{6. 回滚决策表}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.231\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.500\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.269\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{信号} & \textbf{阈值示例} & \textbf{动作} \\
+\hline
+任务成功率 & 低于基线 5 个百分点 & 立即回滚 \\
+\hline
+P95 延迟 & 超过 SLO 的 120\\% & 回滚或扩容 \\
+\hline
+危险动作率 & 出现一次未授权高危动作 & 冻结 + 回滚 \\
+\hline
+单任务成本 & 超过预算 130\\% & 回滚并复盘 \\
+\hline
+用户投诉 & 同主题短时激增 & 暂停灰度 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{7. 上线 Runbook 检查单}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item [ ] 发布包记录了代码、Prompt、工具、模型路由、评测集五个版本；
+  \item [ ] 离线回归门禁通过；
+  \item [ ] 回滚镜像和旧配置可用；
+  \item [ ] 高危工具已配置审批；
+  \item [ ] 监控面板和告警已就绪；
+  \item [ ] 灰度比例、时长、回滚触发条件已明确；
+  \item [ ] 事故联系人已确认。
+\end{itemize}
+
+
+\section*{8. 延伸阅读}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item \href{04-大模型网关.md}{大模型网关}
+  \item \href{05-Agent可观测与追踪.md}{Agent 可观测与追踪}
+  \item \href{../07-系统设计/01-AI应用系统设计.md}{AI 应用系统设计}
+\end{itemize}
+
+\end{document}

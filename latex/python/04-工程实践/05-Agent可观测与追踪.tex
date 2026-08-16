@@ -1,0 +1,325 @@
+\documentclass[9pt,a4paper,twocolumn]{ctexart}
+
+% --- Packages ---
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{caption}
+
+% --- Code block styling ---
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{220,220,220}
+\definecolor{codekw}{RGB}{0,0,192}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{codenum}{RGB}{128,0,128}
+\definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=4pt,
+  belowskip=4pt,
+  extendedchars=true,
+  literate={，}{{，}}1 {；}{{；}}1 {！}{{！}}1 {？}{{？}}1 {“}{{“}}1 {”}{{”}}1 {（}{{（}}1 {）}{{）}}1 {《}{{《}}1 {》}{{》}}1,
+}
+
+% --- Extra language definitions (no built-in listings support) ---
+\lstdefinelanguage{json}{
+  morekeywords={true,false,null},
+  sensitive=true,
+  morestring=[b]",
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+\lstdefinelanguage{yaml}{
+  morekeywords={true,false,null,yes,no,on,off},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[d]',
+}
+\lstdefinelanguage{http}{
+  morekeywords={GET,POST,PUT,DELETE,PATCH,HEAD,OPTIONS,HTTP,Host,Accept,Authorization,Content-Type,Content-Length,User-Agent},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+\lstdefinelanguage{TypeScript}{
+  morekeywords={abstract,any,as,async,await,break,case,catch,class,const,continue,debugger,declare,default,delete,do,else,enum,export,extends,false,finally,for,from,function,get,if,implements,import,in,instanceof,interface,keyof,let,module,namespace,never,new,null,number,of,package,private,protected,public,readonly,return,set,static,string,super,switch,symbol,this,throw,true,try,type,typeof,undefined,unknown,var,void,while,with,yield,Record,Array,Promise,AsyncIterable,ReadableStream,Date,Error,Object,JSON},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`{`},
+}
+
+% --- Compact spacing ---
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% --- Table styling ---
+\renewcommand{\arraystretch}{1.1}
+
+% --- Heading styling (numbered) ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
+
+% --- Page style ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\emph{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
+
+% --- Hyperref setup ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+}
+
+% --- Caption format ---
+\DeclareCaptionFormat{myformat}{\small\bfseries #1#2#3}
+\captionsetup{format=myformat}
+
+\begin{document}
+
+\title{Agent 可观测与追踪：Trace、指标与回放}
+\date{}
+\maketitle
+\markboth{Python 版 Agent 知识}{ Python 版 Agent 知识}
+
+\begin{quote}
+语言策略：\texttt{code}。正文三语言一致；采集器代码按 Python 生态实现。 地图节点：\texttt{04 开发与工程化 / 可观测与调试}。配套文档：\href{06-Agent部署与发布.md}{Agent 部署与发布}、\href{04-大模型网关.md}{大模型网关}。
+\end{quote}
+
+
+
+\section*{0. 结论先说}
+
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
+  \item 普通服务监控只能告诉你“接口慢不慢”，Agent 可观测必须回答“它为什么这么走”。
+  \item 最小可用能力是三项：\textbf{Trace 记录决策轨迹、指标聚合趋势、回放复现问题}。
+  \item 可观测不是上线后补，而是在 Agent Loop 里埋点：LLM 调用、工具调用、状态变更、审批事件都必须留痕。
+\end{enumerate}
+
+
+\section*{1. 与普通服务可观测的区别}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.182\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.182\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.636\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{维度} & \textbf{普通服务} & \textbf{Agent} \\
+\hline
+一次请求 & 一次调用 & 多轮 LLM + 多轮工具 \\
+\hline
+关键对象 & 接口延迟 & 轨迹、工具、上下文 \\
+\hline
+错误定位 & 堆栈 & 哪一轮、哪个工具、哪段上下文 \\
+\hline
+复现 & 重放请求 & 重放完整状态与上下文 \\
+\hline
+成本 & 机器资源 & Token 与工具费用 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{2. Trace 语义模型}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.204\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.796\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{Span 类型} & \textbf{记录内容} \\
+\hline
+task & task\_id、用户、租户、目标、最终状态 \\
+\hline
+agent\_loop & 轮次、本轮思考摘要、停止原因 \\
+\hline
+llm\_call & model、prompt\_version、输入输出 Token、延迟、采样参数 \\
+\hline
+tool\_call & 工具名、参数摘要、返回摘要、风险等级、审批状态 \\
+\hline
+memory & 写入/读取的 memory key 与来源 \\
+\hline
+retrieval & 查询、命中数、rerank 前后顺序 \\
+\hline
+\end{tabular}
+}
+
+
+
+一个 Span 最小属性：\texttt{trace\_id}、\texttt{task\_id}、\texttt{parent\_span\_id}、\texttt{span\_id}、\texttt{node}、\texttt{model}、\texttt{prompt\_version}、\texttt{tool\_name}、\texttt{status}、\texttt{latency\_ms}、\texttt{input\_tokens}、\texttt{output\_tokens}。
+
+
+
+\textbf{上下文必须脱敏后记录}：密钥、手机号、邮箱、身份证号等先做 redaction，再写日志或导出。
+
+
+
+\section*{3. 指标清单}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.439\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.268\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.293\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{指标} & \textbf{含义} & \textbf{告警建议} \\
+\hline
+task\_success\_rate & 任务成功率 & 低于 0.90 告警 \\
+\hline
+avg\_steps & 平均 Agent 轮次 & 突增说明计划变差 \\
+\hline
+tool\_error\_rate & 工具调用错误率 & 超过 0.05 告警 \\
+\hline
+approval\_rate & 高危动作审批率 & 突增要排查注入 \\
+\hline
+tokens\_per\_task & 单任务 Token & 超预算告警 \\
+\hline
+cost\_per\_task & 单任务成本 & 超预算告警 \\
+\hline
+p95\_task\_latency & 任务 P95 延迟 & 超 SLO 告警 \\
+\hline
+loop\_exit\_by\_limit & 因轮次上限退出的比例 & 持续大于 0.01 要修 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{4. 回放与调试}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item 保存每个任务的输入、上下文快照、工具返回和最终输出；
+  \item 按 \texttt{task\_id} 重放，注入同一份上下文，观察模型是否做出不同决策；
+  \item 回放数据必须脱敏并按保留周期清理；
+  \item 生产事故复盘顺序：看最终输出 → 看工具轨迹 → 看上下文 → 重放验证。
+\end{itemize}
+
+
+\section*{5. Python 版采集器}
+
+
+\begin{lstlisting}[language=Python]
+from dataclasses import dataclass, field
+
+@dataclass
+class AgentSpan:
+    trace_id: str
+    task_id: str
+    span_id: str
+    parent_span_id: str | None
+    node: str
+    model: str | None = None
+    prompt_version: str | None = None
+    tool_name: str | None = None
+    status: str = "ok"
+    latency_ms: int = 0
+    input_tokens: int = 0
+    output_tokens: int = 0
+
+class AgentTelemetry:
+    def __init__(self) -> None:
+        self.spans: list[AgentSpan] = []
+
+    def record(self, span: AgentSpan) -> None:
+        self.spans.append(span)
+
+    def task_count(self) -> int:
+        return len({s.task_id for s in self.spans})
+
+    def tool_error_rate(self) -> float:
+        tool_spans = [s for s in self.spans if s.tool_name]
+        errors = [s for s in tool_spans if s.status == "error"]
+        return len(errors) / len(tool_spans) if tool_spans else 0.0
+
+    def total_tokens(self) -> int:
+        return sum(s.input_tokens + s.output_tokens for s in self.spans)
+\end{lstlisting}
+
+
+
+\section*{6. 典型故障排查表}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.111\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.467\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.422\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{现象} & \textbf{先查什么} & \textbf{常见原因} \\
+\hline
+任务变慢 & P95、平均步数、工具延迟 & 计划变长、工具超时、模型切换 \\
+\hline
+成功率突降 & 失败任务轨迹与上下文 & Prompt/工具描述变更、知识库污染 \\
+\hline
+成本突增 & 单任务 Token、缓存命中率 & 上下文膨胀、路由到贵模型 \\
+\hline
+工具报错多 & tool\_error\_rate 按工具分列 & Schema 变更、权限不足 \\
+\hline
+循环退出多 & loop\_exit\_by\_limit & 目标不清晰、工具返回不可用 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{7. 延伸阅读}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item \href{04-大模型网关.md}{大模型网关}
+  \item \href{06-Agent部署与发布.md}{Agent 部署与发布}
+  \item \href{../05-评测与质量/01-Agent评测体系.md}{Agent 评测体系}
+\end{itemize}
+
+\end{document}

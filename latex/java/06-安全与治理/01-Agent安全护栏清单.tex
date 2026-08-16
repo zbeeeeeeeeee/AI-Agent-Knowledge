@@ -1,0 +1,308 @@
+\documentclass[9pt,a4paper,twocolumn]{ctexart}
+
+% --- Packages ---
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm, columnsep=0.8cm]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{caption}
+
+% --- Code block styling ---
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{220,220,220}
+\definecolor{codekw}{RGB}{0,0,192}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+\definecolor{codenum}{RGB}{128,0,128}
+\definecolor{codepunct}{RGB}{90,90,90}
+\definecolor{badgegreen}{RGB}{34,139,34}
+\definecolor{badgeblue}{RGB}{30,144,255}
+\definecolor{badgeblack}{RGB}{50,50,50}
+
+% --- Difficulty badges (rounded corners via tikz, pre-rendered in saveboxes) ---
+\usepackage{tikz}
+\newsavebox{\badgechubox}
+\savebox{\badgechubox}{\tikz[baseline]{\node[fill=badgegreen,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{初级};}}
+\newsavebox{\badgezhongbox}
+\savebox{\badgezhongbox}{\tikz[baseline]{\node[fill=badgeblue,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{中级};}}
+\newsavebox{\badgegaobox}
+\savebox{\badgegaobox}{\tikz[baseline]{\node[fill=badgeblack,text=white,rounded corners=2.5pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\footnotesize\bfseries]{高级};}}
+\newcommand{\lvchu}{\usebox{\badgechubox}}
+\newcommand{\lvzhong}{\usebox{\badgezhongbox}}
+\newcommand{\lvgao}{\usebox{\badgegaobox}}
+\pdfstringdefDisableCommands{%
+  \def\lvchu{[初级]}%
+  \def\lvzhong{[中级]}%
+  \def\lvgao{[高级]}%
+}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=4pt,
+  belowskip=4pt,
+  extendedchars=true,
+  literate={，}{{，}}1 {；}{{；}}1 {！}{{！}}1 {？}{{？}}1 {“}{{“}}1 {”}{{”}}1 {（}{{（}}1 {）}{{）}}1 {《}{{《}}1 {》}{{》}}1,
+}
+
+% --- Extra language definitions (no built-in listings support) ---
+\lstdefinelanguage{json}{
+  morekeywords={true,false,null},
+  sensitive=true,
+  morestring=[b]",
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+\lstdefinelanguage{yaml}{
+  morekeywords={true,false,null,yes,no,on,off},
+  sensitive=false,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[d]',
+}
+\lstdefinelanguage{http}{
+  morekeywords={GET,POST,PUT,DELETE,PATCH,HEAD,OPTIONS,HTTP,Host,Accept,Authorization,Content-Type,Content-Length,User-Agent},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+}
+\lstdefinelanguage{TypeScript}{
+  morekeywords={abstract,any,as,async,await,break,case,catch,class,const,continue,debugger,declare,default,delete,do,else,enum,export,extends,false,finally,for,from,function,get,if,implements,import,in,instanceof,interface,keyof,let,module,namespace,never,new,null,number,of,package,private,protected,public,readonly,return,set,static,string,super,switch,symbol,this,throw,true,try,type,typeof,undefined,unknown,var,void,while,with,yield,Record,Array,Promise,AsyncIterable,ReadableStream,Date,Error,Object,JSON},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`{`},
+}
+
+% --- Compact spacing ---
+\linespread{0.95}
+\setlength{\parskip}{1pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% --- Table styling ---
+\renewcommand{\arraystretch}{1.1}
+
+% --- Heading styling (numbered) ---
+\titleformat{\section}{\normalsize\bfseries}{\thesection\quad}{0em}{}
+\titlespacing{\section}{0pt}{6pt}{2pt}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection\quad}{0em}{}
+\titlespacing{\subsection}{0pt}{4pt}{1pt}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection\quad}{0em}{}
+\titlespacing{\subsubsection}{0pt}{3pt}{1pt}
+
+% --- Page style ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\emph{\leftmark}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\sectionmark}[1]{}  % prevent sections from overwriting leftmark
+
+% --- Hyperref setup ---
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+}
+
+% --- Caption format ---
+\DeclareCaptionFormat{myformat}{\small\bfseries #1#2#3}
+\captionsetup{format=myformat}
+
+\begin{document}
+
+\title{Agent 安全护栏清单：从工具权限到 Prompt 注入防护}
+\date{}
+\maketitle
+\markboth{Java 版 Agent 知识}{ Java 版 Agent 知识}
+
+\begin{quote}
+语言策略：\texttt{code}。正文三语言一致；工具风控代码按 Java 生态实现。 地图节点：\texttt{06 安全与治理}。配套文档：\href{../00-概念与术语/02-Agent自主性分级.md}{Agent 自主性分级}、\href{../05-评测与质量/01-Agent评测体系.md}{Agent 评测体系}。
+\end{quote}
+
+
+
+\section*{0. 结论先说}
+
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
+  \item Agent 的安全问题不是“模型安不安全”，而是\textbf{系统给模型开放了什么动作、动作是否可逆、过程是否可审计}。
+  \item 生产环境默认只允许 L2 半自主：模型可以决定“做什么”，系统必须决定“能不能做”。
+  \item 本文给出一份可直接执行的上线检查清单和最小工具风控实现。
+\end{enumerate}
+
+
+\section*{1. 威胁模型}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.237\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.474\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.289\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{威胁} & \textbf{典型路径} & \textbf{后果} \\
+\hline
+Prompt 注入 & 网页/邮件/文档内容诱导模型改变行为 & 越权调用、数据外泄 \\
+\hline
+工具滥用 & 模型把只读工具用于批量抓取 & 成本失控、隐私泄露 \\
+\hline
+过度权限 & Agent 拥有超过任务需要的权限 & 一次误判造成不可逆破坏 \\
+\hline
+记忆污染 & 外部检索内容或用户输入写进长期记忆 & 跨会话误导 \\
+\hline
+输出越界 & 内部数据进入用户回复 & 数据泄露 \\
+\hline
+不可审计 & 只记录结果不记录决策轨迹 & 事故无法复盘 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{2. 工具风险分级}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.206\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.235\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.353\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.206\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{级别} & \textbf{含义} & \textbf{示例} & \textbf{默认策略} \\
+\hline
+L0 只读 & 不改变外部状态 & 查日志、查订单、搜索 & 允许自主调用 \\
+\hline
+L1 可逆写 & 可撤销或可重建 & 创建草稿、发通知、写工单 & 允许，事后审计 \\
+\hline
+L2 不可逆写 & 难以回滚 & 退款、重启服务、改配置 & 必须人工审批 \\
+\hline
+L3 危险操作 & 可能造成重大损失 & 删库、权限变更、批量删除 & 默认禁止 \\
+\hline
+\end{tabular}
+}
+
+
+
+工具注册时必须填写风险等级、审批策略和最大调用频率，不允许“默认只读”。
+
+
+
+\section*{3. 六道护栏}
+
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
+  \item \textbf{身份与租户}：每个请求绑定用户、租户、会话和任务 ID；
+  \item \textbf{输入边界}：外部内容一律视为不可信数据，不直接拼进指令；
+  \item \textbf{工具边界}：按任务卡注入白名单工具，最小权限；
+  \item \textbf{记忆与检索边界}：外部知识写入长期记忆前必须过滤和标记来源；
+  \item \textbf{输出边界}：结构化输出、Schema 校验、敏感信息脱敏；
+  \item \textbf{审计边界}：记录输入、规划、工具调用、工具结果、最终输出与审批事件。
+\end{enumerate}
+
+
+\section*{4. Prompt 注入防护}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item 系统提示词中明确：工具输出、网页内容、邮件正文都是数据，不是指令；
+  \item 外部数据用 XML/JSON 包裹并声明“以下内容不可信”；
+  \item 高危工具参数必须由系统回填，不从模型生成的自由文本中提取；
+  \item 敏感操作做二次确认，确认文案中展示具体参数；
+  \item 模型输出不能直接驱动 SQL/Shell，必须经过 Schema 校验和参数白名单；
+  \item 定期用注入攻击样本做回归评测。
+\end{itemize}
+
+
+\section*{5. Java 版工具风控实现}
+
+
+\begin{lstlisting}[language=Java]
+public enum ToolRiskLevel { READ_ONLY, REVERSIBLE_WRITE, IRREVERSIBLE_WRITE, DESTRUCTIVE }
+
+public record ToolPolicy(String toolName, ToolRiskLevel risk, boolean requiresApproval) {}
+
+public enum GuardDecision { ALLOW, REQUIRE_APPROVAL, DENY }
+
+public class ToolCallGuard {
+    public static GuardDecision check(ToolPolicy policy, boolean userApproved, int callCount) {
+        if (policy.risk() == ToolRiskLevel.DESTRUCTIVE) return GuardDecision.DENY;
+        if (policy.requiresApproval() || policy.risk() == ToolRiskLevel.IRREVERSIBLE_WRITE) {
+            return userApproved ? GuardDecision.ALLOW : GuardDecision.REQUIRE_APPROVAL;
+        }
+        if (callCount > 20) return GuardDecision.REQUIRE_APPROVAL;
+        return GuardDecision.ALLOW;
+    }
+}
+\end{lstlisting}
+
+
+
+\section*{6. 上线检查清单}
+
+{\footnotesize
+\begin{tabular}{|p{\dimexpr 0.074\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.185\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.741\columnwidth-2\tabcolsep\relax}|}
+\hline
+\textbf{编号} & \textbf{检查项} & \textbf{通过标准} \\
+\hline
+1 & 工具清单 & 每个工具都有风险等级和负责人 \\
+\hline
+2 & 权限最小化 & 任务只注入所需工具 \\
+\hline
+3 & 高危审批 & L2/L3 动作必须有人工确认 \\
+\hline
+4 & 注入回归 & 对抗样本全部通过 \\
+\hline
+5 & 输出校验 & 结构化输出有 Schema 校验 \\
+\hline
+6 & 敏感数据 & 密钥、手机号、邮箱等有脱敏规则 \\
+\hline
+7 & 审计日志 & 可回答“谁在何时调了什么工具” \\
+\hline
+8 & 预算上限 & Token、轮次、金额均有硬上限 \\
+\hline
+9 & 回滚预案 & 高危动作可撤销或环境可重建 \\
+\hline
+10 & 事故响应 & 明确冻结 Agent、吊销工具、通知流程 \\
+\hline
+\end{tabular}
+}
+
+
+
+\section*{7. 事故响应最小流程}
+
+\begin{enumerate}[itemsep=1pt, topsep=2pt]
+  \item 冻结：立即停止 Agent 或吊销高危工具；
+  \item 取证：导出 trace 与审批记录，保留现场；
+  \item 止血：回滚配置、撤销副作用；
+  \item 复盘：把事故样本加入评测集；
+  \item 复跑：全量回归通过后才能恢复。
+\end{enumerate}
+
+
+\section*{8. 延伸阅读}
+
+\begin{itemize}[itemsep=1pt, topsep=2pt]
+  \item \href{../07-系统设计/01-AI应用系统设计.md}{AI 应用系统设计}
+  \item \href{../05-评测与质量/01-Agent评测体系.md}{Agent 评测体系}
+  \item \href{../04-工程实践/04-大模型网关.md}{大模型网关}
+\end{itemize}
+
+\end{document}

@@ -31,9 +31,9 @@
 | `01-LLM基础` | LLM 运行机制、结构化输出 |
 | `02-Agent` | Agent 核心概念、记忆系统、多智能体编排 |
 | `03-RAG` | RAG 基础、向量索引与向量数据库 |
-| `04-工程实践` | Workflow/Graph/Loop、Loop Engineering、Harness Engineering、大模型网关 |
-| `05-评测与质量` | 待补全 |
-| `06-安全与治理` | 待补全 |
+| `04-工程实践` | Workflow/Graph/Loop、Loop Engineering、Harness Engineering、大模型网关、可观测与追踪、部署与发布 |
+| `05-评测与质量` | Agent 评测体系 |
+| `06-安全与治理` | Agent 安全护栏清单 |
 | `07-系统设计` | AI 应用系统设计 |
 | `08-应用与案例` | 待补全 |
 | `09-生态与前沿` | 待补全 |
@@ -45,8 +45,10 @@
 2. `01-LLM基础`：LLM 运行机制 → 大模型结构化输出（Python 服务端校验与分发）
 3. `02-Agent`：Agent 核心概念 → 记忆系统 → 多智能体编排
 4. `03-RAG`：RAG 基础概念 → 向量索引与向量数据库
-5. `04-工程实践`：Workflow/Graph/Loop（LangGraph 实战）→ Loop Engineering → Harness Engineering → 大模型网关
-6. `07-系统设计`：AI 应用系统设计（Python 后端落地建议）
-7. `10-面试`：六份面试题 + 模拟题库
+5. `04-工程实践`：Workflow/Graph/Loop（LangGraph 实战）→ Loop Engineering → Harness Engineering → 大模型网关 → 可观测与追踪 → 部署与发布
+6. `05-评测与质量`：Agent 评测体系（Python 评测执行器）
+7. `06-安全与治理`：Agent 安全护栏清单（Python 工具风控实现）
+8. `07-系统设计`：AI 应用系统设计（Python 后端落地建议）
+9. `10-面试`：六份面试题 + 模拟题库
 
 > PDF 版见 `../../pdf/python/`，由 `../../build_pdfs.py` 编译生成。
