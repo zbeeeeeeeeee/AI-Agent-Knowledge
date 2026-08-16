@@ -48,6 +48,6 @@
 | `knowledge-map-review-v0.1` | 知识地图审核版 v0.1 |
 | `iteration-1-start` | 第一迭代开始前的标记 |
 | `iteration-1-complete` | 第一迭代完成后的标记 |
-| `map-language-aware-v0.3` | 三语言地图升级完成（提交后） |
+| `map-language-aware-v0.3.1` | 三语言地图升级完成（含语言叶子归属精修） |
 
 > 远程推送需要本机配置 Gitee 凭证，命令：`git push origin master --tags`。

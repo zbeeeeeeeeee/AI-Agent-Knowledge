@@ -92,7 +92,7 @@
       <node TEXT="🟢 Loop ≡" LINK="markdown/java/04-工程实践/01-Workflow-Graph与Loop.md"/>
       <node TEXT="🟢 框架概念对照 ≡" LINK="markdown/java/04-工程实践/01-Workflow-Graph与Loop.md"/>
       <node TEXT="Workflow 三语言实现">
-        <node TEXT="🟢 Workflow 三语言实现 · Java 实现 ≡" LINK="markdown/java/04-工程实践/01-Workflow-Graph与Loop.md"/>
+        <node TEXT="🟢 Workflow 三语言实现 · Java 实现" LINK="markdown/java/04-工程实践/01-Workflow-Graph与Loop.md"/>
         <node TEXT="🟢 Workflow 三语言实现 · Python 实现" LINK="markdown/python/04-工程实践/01-Workflow-Graph与Loop.md"/>
         <node TEXT="🟢 Workflow 三语言实现 · TypeScript 实现" LINK="markdown/typescript/04-工程实践/01-Workflow-Graph与Loop.md"/>
       </node>
@@ -100,7 +100,7 @@
     <node TEXT="🟢 模型接入层 ≡" LINK="markdown/java/04-工程实践/04-大模型网关.md">
       <node TEXT="🟢 LLM 运行机制 ≡" LINK="markdown/java/01-LLM基础/01-LLM运行机制.md"/>
       <node TEXT="结构化输出">
-        <node TEXT="🟢 结构化输出 · Java 实现 ≡" LINK="markdown/java/01-LLM基础/02-大模型结构化输出.md"/>
+        <node TEXT="🟢 结构化输出 · Java 实现" LINK="markdown/java/01-LLM基础/02-大模型结构化输出.md"/>
         <node TEXT="🟢 结构化输出 · Python 实现" LINK="markdown/python/01-LLM基础/02-大模型结构化输出.md"/>
         <node TEXT="🟢 结构化输出 · TypeScript 实现" LINK="markdown/typescript/01-LLM基础/02-大模型结构化输出.md"/>
       </node>
@@ -144,7 +144,7 @@
       <node TEXT="🟢 同步 流式 异步模式 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
       <node TEXT="🟢 工具调用与权限模型 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
       <node TEXT="系统设计三语言接口实现">
-        <node TEXT="🟢 系统设计三语言接口实现 · Java 实现 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
+        <node TEXT="🟢 系统设计三语言接口实现 · Java 实现" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
         <node TEXT="🟢 系统设计三语言接口实现 · Python 实现" LINK="markdown/python/07-系统设计/01-AI应用系统设计.md"/>
         <node TEXT="🟢 系统设计三语言接口实现 · TypeScript 实现" LINK="markdown/typescript/07-系统设计/01-AI应用系统设计.md"/>
       </node>
@@ -155,7 +155,7 @@
       <node TEXT="🟢 成本统计与预算 ≡" LINK="markdown/java/04-工程实践/04-大模型网关.md"/>
       <node TEXT="🟡 缓存与语义缓存 ≡" LINK="markdown/java/04-工程实践/04-大模型网关.md"/>
       <node TEXT="网关三语言实现">
-        <node TEXT="🟢 网关三语言实现 · Java 实现 ≡" LINK="markdown/java/04-工程实践/04-大模型网关.md"/>
+        <node TEXT="🟢 网关三语言实现 · Java 实现" LINK="markdown/java/04-工程实践/04-大模型网关.md"/>
         <node TEXT="🟢 网关三语言实现 · Python 实现" LINK="markdown/python/04-工程实践/04-大模型网关.md"/>
         <node TEXT="🟢 网关三语言实现 · TypeScript 实现" LINK="markdown/typescript/04-工程实践/04-大模型网关.md"/>
       </node>

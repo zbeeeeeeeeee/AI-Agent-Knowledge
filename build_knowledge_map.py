@@ -25,15 +25,16 @@ ROOT_TITLE = "AI Agent 知识总索引"
 
 
 class Node:
-    def __init__(self, title, status="nav", link=None, children=None):
+    def __init__(self, title, status="nav", link=None, children=None, lang=None):
         self.title = title
         self.status = status
         self.link = link
         self.children = children or []
+        self.lang = lang
 
 
-def N(title, status="nav", link=None, children=None):
-    return Node(title, status, link, children)
+def N(title, status="nav", link=None, children=None, lang=None):
+    return Node(title, status, link, children, lang)
 
 
 # 相对仓库根目录的权威入口。约定：概念/面试以 Java 版为 canonical，语言化代码按语言链接。
@@ -74,9 +75,9 @@ CODE_DOCS = {rel for _, rel, mode in DOC_INVENTORY if mode == "code"}
 def LANG3(title, rel_path, status="full"):
     """为一个 code 类文档生成三个语言实现子节点（标题带主题前缀，保证脑图节点唯一）。"""
     return N(title, "nav", None, [
-        N(f"{title} · Java 实现", status, f"{J}/{rel_path}"),
-        N(f"{title} · Python 实现", status, f"{PY}/{rel_path}"),
-        N(f"{title} · TypeScript 实现", status, f"{TS}/{rel_path}"),
+        N(f"{title} · Java 实现", status, f"{J}/{rel_path}", lang="java"),
+        N(f"{title} · Python 实现", status, f"{PY}/{rel_path}", lang="python"),
+        N(f"{title} · TypeScript 实现", status, f"{TS}/{rel_path}", lang="typescript"),
     ])
 
 
@@ -85,11 +86,11 @@ def lang_links(node):
     links = {lang: None for lang in LANGS}
     if not node.link:
         return links
-    if node.title.startswith("Java"):
+    if node.lang == "java":
         return {"java": node.link, "python": None, "typescript": None}
-    if node.title.startswith("Python"):
+    if node.lang == "python":
         return {"java": None, "python": node.link, "typescript": None}
-    if node.title.startswith("TypeScript"):
+    if node.lang == "typescript":
         return {"java": None, "python": None, "typescript": node.link}
     if node.link.startswith(f"{J}/"):
         rel = node.link[len(J) + 1:]
@@ -129,16 +130,16 @@ TREE = Node(ROOT_TITLE, "nav", None, [
         ]),
         N("按语言阅读", "nav", None, [
             N("Java 版", "nav", None, [
-                N("Java 全部文档", "full", f"{J}/README.md"),
-                N("Java PDF 版", "full", "pdf/java"),
+                N("Java 全部文档", "full", f"{J}/README.md", lang="java"),
+                N("Java PDF 版", "full", "pdf/java", lang="java"),
             ]),
             N("Python 版", "nav", None, [
-                N("Python 全部文档", "full", f"{PY}/README.md"),
-                N("Python PDF 版", "full", "pdf/python"),
+                N("Python 全部文档", "full", f"{PY}/README.md", lang="python"),
+                N("Python PDF 版", "full", "pdf/python", lang="python"),
             ]),
             N("TypeScript 版", "nav", None, [
-                N("TypeScript 全部文档", "full", f"{TS}/README.md"),
-                N("TypeScript PDF 版", "full", "pdf/typescript"),
+                N("TypeScript 全部文档", "full", f"{TS}/README.md", lang="typescript"),
+                N("TypeScript PDF 版", "full", "pdf/typescript", lang="typescript"),
             ]),
         ]),
     ]),
@@ -229,9 +230,9 @@ TREE = Node(ROOT_TITLE, "nav", None, [
     ]),
     N("04 开发与工程化", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md", [
         N("技术选型与框架", "partial", f"{J}/README.md", [
-            N("Java 技术栈", "full", f"{J}/README.md"),
-            N("Python 技术栈", "full", f"{PY}/README.md"),
-            N("TypeScript 技术栈", "full", f"{TS}/README.md"),
+            N("Java 技术栈", "full", f"{J}/README.md", lang="java"),
+            N("Python 技术栈", "full", f"{PY}/README.md", lang="python"),
+            N("TypeScript 技术栈", "full", f"{TS}/README.md", lang="typescript"),
             N("框架与平台对比", "gap"),
         ]),
         N("设计模式与范式", "full", f"{J}/04-工程实践/01-Workflow-Graph与Loop.md", [
@@ -362,7 +363,7 @@ def display_title(node):
         return node.title
     emoji = STATUS[node.status][0]
     title = f"{emoji} {node.title}"
-    if node.link and node.link.startswith(f"{J}/") and not node.title.startswith(("Java", "Python", "TypeScript")):
+    if node.link and node.link.startswith(f"{J}/") and node.lang is None:
         title += " ≡"
     return title
 
