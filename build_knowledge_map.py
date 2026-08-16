@@ -40,6 +40,77 @@ def N(title, status="nav", link=None, children=None):
 J = "markdown/java"
 PY = "markdown/python"
 TS = "markdown/typescript"
+LANGS = ["java", "python", "typescript"]
+
+# 三种语言策略：
+#   shared = 三语言内容完全一致，Java 为 canonical，Python/TS 为同路径副本
+#   code   = 同一主题有三套语言化实现，地图显式展开 Java/Python/TypeScript 三个叶子
+#   single = 仓库级资源（如顶层 README）
+DOC_INVENTORY = [
+    ("Agent 术语表与概念边界", "00-概念与术语/01-Agent术语表与概念边界.md", "shared"),
+    ("Agent 自主性分级", "00-概念与术语/02-Agent自主性分级.md", "shared"),
+    ("LLM 运行机制", "01-LLM基础/01-LLM运行机制.md", "shared"),
+    ("大模型结构化输出", "01-LLM基础/02-大模型结构化输出.md", "code"),
+    ("Agent 核心概念", "02-Agent/01-Agent核心概念.md", "shared"),
+    ("Agent 记忆系统", "02-Agent/02-Agent记忆系统.md", "shared"),
+    ("多智能体编排", "02-Agent/03-多智能体编排.md", "shared"),
+    ("RAG 基础概念", "03-RAG/01-RAG基础概念.md", "shared"),
+    ("RAG 向量索引与向量数据库", "03-RAG/02-RAG向量索引与向量数据库.md", "shared"),
+    ("Workflow、Graph 与 Loop", "04-工程实践/01-Workflow-Graph与Loop.md", "code"),
+    ("Loop Engineering", "04-工程实践/02-Loop工程.md", "shared"),
+    ("Harness Engineering", "04-工程实践/03-Harness工程.md", "shared"),
+    ("大模型网关", "04-工程实践/04-大模型网关.md", "code"),
+    ("AI 应用系统设计", "07-系统设计/01-AI应用系统设计.md", "code"),
+    ("AI Agent 面试题", "10-面试/01-AI-Agent面试题.md", "shared"),
+    ("RAG 面试题", "10-面试/02-RAG面试题.md", "shared"),
+    ("AI 系统设计面试题", "10-面试/03-AI系统设计面试题.md", "shared"),
+    ("AI 应用开发面试指南", "10-面试/04-AI应用开发面试指南.md", "shared"),
+    ("大模型基础面试题", "10-面试/05-大模型基础面试题.md", "shared"),
+    ("模拟面试题库", "10-面试/06-模拟面试题库.md", "shared"),
+]
+CODE_DOCS = {rel for _, rel, mode in DOC_INVENTORY if mode == "code"}
+
+
+def LANG3(title, rel_path, status="full"):
+    """为一个 code 类文档生成三个语言实现子节点（标题带主题前缀，保证脑图节点唯一）。"""
+    return N(title, "nav", None, [
+        N(f"{title} · Java 实现", status, f"{J}/{rel_path}"),
+        N(f"{title} · Python 实现", status, f"{PY}/{rel_path}"),
+        N(f"{title} · TypeScript 实现", status, f"{TS}/{rel_path}"),
+    ])
+
+
+def lang_links(node):
+    """返回节点在三种语言下的链接。shared 文档自动展开为三语言同路径链接。"""
+    links = {lang: None for lang in LANGS}
+    if not node.link:
+        return links
+    if node.title.startswith("Java"):
+        return {"java": node.link, "python": None, "typescript": None}
+    if node.title.startswith("Python"):
+        return {"java": None, "python": node.link, "typescript": None}
+    if node.title.startswith("TypeScript"):
+        return {"java": None, "python": None, "typescript": node.link}
+    if node.link.startswith(f"{J}/"):
+        rel = node.link[len(J) + 1:]
+        links = {lang: f"markdown/{lang}/{rel}" for lang in LANGS}
+    elif node.link.startswith(f"{PY}/"):
+        rel = node.link[len(PY) + 1:]
+        links = {"python": f"markdown/python/{rel}", "java": f"markdown/java/{rel}", "typescript": f"markdown/typescript/{rel}"}
+    elif node.link.startswith(f"{TS}/"):
+        rel = node.link[len(TS) + 1:]
+        links = {"typescript": f"markdown/typescript/{rel}", "java": f"markdown/java/{rel}", "python": f"markdown/python/{rel}"}
+    elif node.link.startswith("pdf/java"):
+        links = {"java": "pdf/java", "python": None, "typescript": None}
+    elif node.link.startswith("pdf/python"):
+        links = {"java": None, "python": "pdf/python", "typescript": None}
+    elif node.link.startswith("pdf/typescript"):
+        links = {"java": None, "python": None, "typescript": "pdf/typescript"}
+    else:
+        links = {lang: None for lang in LANGS}
+        links["java"] = node.link
+    return links
+
 
 TREE = Node(ROOT_TITLE, "nav", None, [
     N("00 阅读入口", "nav", "markdown/README.md", [
@@ -56,11 +127,19 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("评测上线", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
             N("运营治理", "partial", f"{J}/04-工程实践/04-大模型网关.md"),
         ]),
-        N("三语言版本", "nav", None, [
-            N("Java 原版", "full", f"{J}/README.md"),
-            N("Python 版", "full", f"{PY}/README.md"),
-            N("TypeScript 版", "full", f"{TS}/README.md"),
-            N("PDF 版", "full", "pdf"),
+        N("按语言阅读", "nav", None, [
+            N("Java 版", "nav", None, [
+                N("Java 全部文档", "full", f"{J}/README.md"),
+                N("Java PDF 版", "full", "pdf/java"),
+            ]),
+            N("Python 版", "nav", None, [
+                N("Python 全部文档", "full", f"{PY}/README.md"),
+                N("Python PDF 版", "full", "pdf/python"),
+            ]),
+            N("TypeScript 版", "nav", None, [
+                N("TypeScript 全部文档", "full", f"{TS}/README.md"),
+                N("TypeScript PDF 版", "full", "pdf/typescript"),
+            ]),
         ]),
     ]),
     N("01 概念与分类", "partial", f"{J}/02-Agent/01-Agent核心概念.md", [
@@ -125,10 +204,11 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("Graph", "full", f"{J}/04-工程实践/01-Workflow-Graph与Loop.md"),
             N("Loop", "full", f"{J}/04-工程实践/01-Workflow-Graph与Loop.md"),
             N("框架概念对照", "full", f"{J}/04-工程实践/01-Workflow-Graph与Loop.md"),
+            LANG3("Workflow 三语言实现", "04-工程实践/01-Workflow-Graph与Loop.md"),
         ]),
         N("模型接入层", "full", f"{J}/04-工程实践/04-大模型网关.md", [
             N("LLM 运行机制", "full", f"{J}/01-LLM基础/01-LLM运行机制.md"),
-            N("结构化输出", "full", f"{J}/01-LLM基础/02-大模型结构化输出.md"),
+            LANG3("结构化输出", "01-LLM基础/02-大模型结构化输出.md"),
             N("大模型网关", "full", f"{J}/04-工程实践/04-大模型网关.md"),
             N("路由与 Fallback", "full", f"{J}/04-工程实践/04-大模型网关.md"),
         ]),
@@ -168,12 +248,14 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("生产级分层架构", "full", f"{J}/07-系统设计/01-AI应用系统设计.md"),
             N("同步 流式 异步模式", "full", f"{J}/07-系统设计/01-AI应用系统设计.md"),
             N("工具调用与权限模型", "full", f"{J}/07-系统设计/01-AI应用系统设计.md"),
+            LANG3("系统设计三语言接口实现", "07-系统设计/01-AI应用系统设计.md"),
         ]),
         N("网关与基础设施", "full", f"{J}/04-工程实践/04-大模型网关.md", [
             N("多模型统一接入", "full", f"{J}/04-工程实践/04-大模型网关.md"),
             N("限流与配额", "full", f"{J}/04-工程实践/04-大模型网关.md"),
             N("成本统计与预算", "full", f"{J}/04-工程实践/04-大模型网关.md"),
             N("缓存与语义缓存", "partial", f"{J}/04-工程实践/04-大模型网关.md"),
+            LANG3("网关三语言实现", "04-工程实践/04-大模型网关.md"),
         ]),
         N("部署与发布", "gap", None, [
             N("部署形态", "gap"),
@@ -279,7 +361,10 @@ def display_title(node):
     if node.status == "nav":
         return node.title
     emoji = STATUS[node.status][0]
-    return f"{emoji} {node.title}"
+    title = f"{emoji} {node.title}"
+    if node.link and node.link.startswith(f"{J}/") and not node.title.startswith(("Java", "Python", "TypeScript")):
+        title += " ≡"
+    return title
 
 
 def iter_leaves(node, path=()):
@@ -362,7 +447,7 @@ def render_xmind_topics():
 
 def write_xmind(path):
     content = json.dumps(render_xmind_topics(), ensure_ascii=False, indent=2)
-    metadata = json.dumps({"creator": {"name": "AI Agent Knowledge Base", "version": "0.2.0"}}, ensure_ascii=False, indent=2)
+    metadata = json.dumps({"creator": {"name": "AI Agent Knowledge Base", "version": "0.3.0"}}, ensure_ascii=False, indent=2)
     manifest = json.dumps({"file-entries": {"content.json": {}, "metadata.json": {}}}, ensure_ascii=False, indent=2)
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr("manifest.json", manifest)
@@ -372,18 +457,22 @@ def write_xmind(path):
 
 def render_index_md():
     lines = []
-    lines.append("# AI Agent 知识总索引（迭代一版 v0.2）")
+    lines.append("# AI Agent 知识总索引（三语言版 v0.3）")
     lines.append("")
-    lines.append("> 本文件是知识库的**最外层索引**：脑图负责导航，文档负责承载内容，状态标识负责暴露缺口。")
+    lines.append("> 本文件是知识库的**最外层索引**：脑图负责导航，文档负责承载内容，状态标识负责暴露缺口，语言矩阵负责三语言直达。")
     lines.append("> 由 `build_knowledge_map.py` 生成；修改结构请改脚本后重新生成，避免图与文档漂移。")
     lines.append("")
-    lines.append("## 0. 状态图例")
+    lines.append("## 0. 图例与语言策略")
     lines.append("")
     lines.append("| 标识 | 含义 |")
     lines.append("| --- | --- |")
     for key in ("full", "partial", "gap", "later", "nav"):
         emoji, desc = STATUS[key]
         lines.append(f"| {emoji} | {desc} |")
+    lines.append("| ≡ | 三语言内容一致：Java 为 canonical，Python / TypeScript 为同路径副本，索引表中三列均可直达 |")
+    lines.append("| Java / Python / TypeScript 实现 | 同一主题有 4 篇语言化代码文档，在地图中显式展开为三个语言叶子 |")
+    lines.append("")
+    lines.append("**语言组织原则**：知识地图按“知识主题”组织，不按语言复制整棵树。每个节点的语言策略只有三类：`shared` 三语言同文、`code` 三语言实现、`single` 仓库级资源。")
     lines.append("")
     lines.append("## 1. 思维导图总图")
     lines.append("")
@@ -393,19 +482,41 @@ def render_index_md():
     lines.append("")
     lines.append("> 同一个脑图还提供：`Agent知识地图.xmind`（XMind 直接打开）、`Agent知识地图.mm`（FreeMind / XMind 导入）、`知识地图总索引.mmd`（Mermaid 源码）。")
     lines.append("")
-    lines.append("## 2. 可点击索引")
+    lines.append("## 2. 可点击索引（三语言链接）")
     lines.append("")
-    lines.append("约定：概念与面试内容以 **Java 版为权威入口**；含代码文档按语言分别链接。路径均相对于仓库根目录。")
+    lines.append("约定：Java 为 canonical；所有存在的语言副本均给出直接链接；`code` 类文档已在脑图中展开为三个实现节点。")
     lines.append("")
-    lines.append("| 节点路径 | 状态 | 权威内容入口 |")
-    lines.append("| --- | --- | --- |")
+    lines.append("| 节点路径 | 状态 | Java | Python | TypeScript |")
+    lines.append("| --- | --- | --- | --- | --- |")
     for path, node in iter_leaves(TREE):
         title = " / ".join(path)
         emoji, desc = STATUS[node.status]
-        link = f"[{node.link}]({node.link})" if node.link else "— 待建 —"
-        lines.append(f"| {title} | {emoji} {desc} | {link} |")
+        links = lang_links(node)
+        cells = []
+        for lang in LANGS:
+            link = links.get(lang)
+            lang_label = {"java": "Java", "python": "Python", "typescript": "TypeScript"}[lang]
+            if link:
+                cells.append(f"[{lang_label}]({link})")
+            else:
+                cells.append("—")
+        lines.append(f"| {title} | {emoji} {desc} | " + " | ".join(cells) + " |")
     lines.append("")
-    lines.append("## 3. 四类阅读入口")
+    lines.append("## 3. 语言覆盖矩阵（20 篇 × 3 语言）")
+    lines.append("")
+    lines.append("| # | 文档 | 语言策略 | Java | Python | TypeScript |")
+    lines.append("| --- | --- | --- | --- | --- | --- |")
+    for i, (doc_title, rel, mode) in enumerate(DOC_INVENTORY, 1):
+        if mode == "code":
+            strategy = "code：三套语言化实现"
+        else:
+            strategy = "shared：三语言同文"
+        links = [f"[{lang}](markdown/{lang}/{rel})" for lang in LANGS]
+        lines.append(f"| {i} | {doc_title} | {strategy} | " + " | ".join(links) + " |")
+    lines.append("")
+    lines.append("> 使用建议：阅读概念看任意一版即可（推荐 Java canonical）；写代码直接点自己技术栈对应的列。")
+    lines.append("")
+    lines.append("## 4. 四类阅读入口")
     lines.append("")
     lines.append("| 角色 | 建议路径 | 终点 |")
     lines.append("| --- | --- | --- |")
@@ -414,11 +525,11 @@ def render_index_md():
     lines.append(f"| 架构师 | [03 架构与运行机制]({J}/02-Agent/01-Agent核心概念.md) → [04 网关]({J}/04-工程实践/04-大模型网关.md) → [07 系统设计]({J}/07-系统设计/01-AI应用系统设计.md) | 能设计、拆解、治理 AI 系统 |")
     lines.append(f"| 面试冲刺 | [AI 应用开发面试指南]({J}/10-面试/04-AI应用开发面试指南.md) → 6 份面试题 → [模拟题库]({J}/10-面试/06-模拟面试题库.md) | 能结构化答题 |")
     lines.append("")
-    lines.append("## 4. 现状速览")
+    lines.append("## 5. 现状速览")
     lines.append("")
     lines.append("**已有强项**：LLM 运行机制、结构化输出、Agent Loop、记忆系统、RAG 基础与向量检索、Workflow/Graph/Loop、Harness、网关、系统设计。")
     lines.append("")
-    lines.append("**本轮已补齐**：术语表、自主性分级、多智能体编排。\n\n**主要缺口**：部署与可观测专项、评测体系、安全护栏专项、行业案例库、生态技术雷达。")
+    lines.append("**本轮已补齐**：术语表、自主性分级、多智能体编排；地图已升级为三语言视图。\n\n**主要缺口**：部署与可观测专项、评测体系、安全护栏专项、行业案例库、生态技术雷达。")
     lines.append("")
     lines.append("详见 [`知识地图-内容映射与成熟度.md`](知识地图-内容映射与成熟度.md) 与 [`知识地图-缺口与补全计划.md`](知识地图-缺口与补全计划.md)。")
     return "\n".join(lines) + "\n"
