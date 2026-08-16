@@ -143,34 +143,6 @@
 \maketitle
 \markboth{Python 版 Agent 知识}{ Python 版 Agent 知识}
 
-这几天 Loop Engineering 突然火起来，我第一反应是：这又是哪个新名词？怎么天天造新词？
-
-
-
-看了一圈之后，感觉它确实有点新瓶装旧酒。Agent Loop、Workflow Graph、Context Engineering、Skills、MCP、CI、测试验证，这些东西 JavaGuide 之前其实都聊过。换个名字重新包装一下，味道很熟悉了。
-
-
-
-代码 Agent 真能连续读文件、改代码、跑命令、处理 PR 之后，我们确实不能只盯着“下一句 Prompt 怎么写”。以前是人守在对话框前，一轮一轮补充提示；现在越来越多任务会由 \texttt{/loop}、\texttt{/goal}、CI、PR 评论或者定时任务触发。Agent 被叫醒后自己读材料、跑命令、写状态，卡住再把问题抛回来。
-
-
-
-说白了就是多让你花一些 Token，少一些人工成本。这下好懂了吧？
-
-
-
-这篇文章不站队，也不跟着造词。我会把 Loop Engineering 放回已有的几个概念里看：它借了哪些老东西，哪些地方只是换了个说法，哪些部分确实值得在项目里补上。
-
-
-
-从公开讨论看，这个词大概在 \textbf{2026 年 6 月上旬} 开始热起来。Addy Osmani 在 2026 年 6 月 7 日写了篇 Loop Engineering，随后 AI 圈开始反复讨论“让系统去提示 Agent”。
-
-
-
-我个人的感觉是：新鲜的是名字，能力早就在往这个方向走了。Claude Code、Codex 里的 \texttt{/loop}、\texttt{/goal}、Automations、Skills、Sub-agent、工作区隔离、MCP/Connector，解决的都是一类问题：\textbf{别让 Agent 只停在一轮回答里，给它边界，让它继续干活。}
-
-
-
 \section*{Loop Engineering 到底是什么？}
 
 
@@ -216,10 +188,10 @@
 
 
 
-\section*{它其实借了哪些老概念？}
+\section*{它借了哪些老概念？}
 
 
-Loop Engineering 其实很好理解，就是一些老概念的融合。
+Loop Engineering 很好理解，就是一些老概念的融合。
 
 
 
@@ -274,7 +246,7 @@ ReAct 也是这个思路：Reasoning 和 Acting 交替进行，模型走一步�
 \subsection*{Workflow / Graph / Loop：可控回边早就有}
 
 
-在工作流图里，Loop 其实就是回边。
+在工作流图里，Loop 就是回边。
 
 
 

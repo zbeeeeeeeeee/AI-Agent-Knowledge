@@ -1,9 +1,8 @@
 # Agent 框架与平台横评
 
-> 语言策略：`shared`。三语言内容一致，Java 为 canonical。
-> 地图节点：`04 开发与工程化 / 技术选型与框架`。选型结论会随版本快速变化，本页记录**选型方法**与当前基线，具体版本以官方文档为准。
+> 语言策略：shared（Java canonical，P/T 同文）
 
-## 0. 结论先说
+## TL;DR
 
 1. 先选“控制模型”，再选框架：固定流程用 Graph，动态任务用 Agent Loop，混合用 Agentic Workflow。
 2. 对本知识库三种语言生态，基线是：Java 用 Spring AI Alibaba Graph，Python 用 LangGraph，TypeScript 用 LangGraph.js。

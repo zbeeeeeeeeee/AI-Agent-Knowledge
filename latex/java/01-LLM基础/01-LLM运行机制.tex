@@ -143,34 +143,6 @@
 \maketitle
 \markboth{Java 版 Agent 知识}{ Java 版 Agent 知识}
 
-在探讨 RAG、Agent 工作流、MCP 协议这些高深概念之前，我想先聊聊一个让小 G 踩过不少坑的基础问题：明明设置了温度为 0，结构化输出还是崩；往模型里塞了一堆文档，它好像直接失忆，关键指令全当空气。
-
-
-
-说到底，还是底层原理没搞清楚。
-
-
-
-万丈高楼平地起。这篇文章就是来填这个坑的。我们暂时把顶层架构放一放，回到 LLM 的基本面上来：Token 怎么算、上下文窗口怎么管、采样参数怎么调。
-
-
-
-本文会沿着一条主线展开：先看模型为什么被 Token 和上下文窗口限制，再看采样参数如何影响输出稳定性，最后落到 Token 预算和参数配置建议。
-
-
-
-具体会讲清楚：
-
-
-\begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item 大模型（LLM）到底在做什么？
-  \item Token 是什么？为什么中文和英文的 Token 消耗差很多？
-  \item 上下文窗口是什么？为什么会有上限？
-  \item Temperature、Top-p、Top-k 这些采样参数怎么影响输出？
-  \item Token 预算怎么做？
-\end{enumerate}
-
-
 \section*{⭐️ Token 和上下文为什么决定成本与效果？}
 
 
@@ -936,7 +908,7 @@ JSON / 结构化输出 & 0 \textasciitilde\{\} 0.3 & 1.0 & 保持默认 & 配合
 \section*{总结}
 
 
-回顾这篇扫盲内容，核心其实就是处理好三个维度的工程权衡：
+回顾这篇扫盲内容，核心就是处理好三个维度的工程权衡：
 
 
 \begin{enumerate}[itemsep=1pt, topsep=2pt]

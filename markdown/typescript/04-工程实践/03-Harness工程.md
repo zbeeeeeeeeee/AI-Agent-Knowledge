@@ -1,21 +1,5 @@
 # 一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战
 
-别只盯模型。
-
-很多人第一次做 Agent，直觉都是先买更贵的模型。结果模型换了，Agent 还是会重复犯错，做到一半放弃，上下文一长就开始不稳定。这个时候继续调 Prompt，收益往往也很有限，因为问题可能根本不在模型本身。
-
-有个实验挺能说明这件事：同一个模型，只换了文件编辑接口的调用方式，编码基准分数从 6.7% 跳到了 68.3%。模型没有变，变的是它外面那套系统。也就是说，Agent 能不能稳定干活，很多时候取决于模型之外的环境、工具、反馈和约束。
-
-最近 AI Agent 开发圈里经常提到一个词：Harness Engineering。它讨论的就是这件事：决定 Agent 表现上限的，可能不是模型，而是你给模型搭的那套工作环境。
-
-这篇文章会把 Harness Engineering 拆开讲清楚。全文接近 7800 字，主要看这几块：
-
-1. Harness 是什么，为什么可以把 Agent 理解成 Model + Harness
-2. 为什么同一个模型换一套接口，分数能从 6.7% 变成 68.3%
-3. Harness 的六层架构分别解决什么问题
-4. 从零搭 Harness 时，哪些事情应该先做，哪些可以后面再补
-5. OpenAI、Anthropic、Stripe 这些团队到底怎么用 Harness
-
 ## Harness 基本概念
 
 ### Harness 到底是什么？
@@ -202,7 +186,7 @@ OpenAI 的 `AGENTS.md` 大约只有 100 行，作用更像目录，指向 `docs/
 
 这和到一个新城市很像。你不需要一上来背完整本旅游指南，先给一张地图，再告诉你想了解某个景点时去翻哪一页，就够用了。
 
-Agent Skills 也可以看成渐进式披露的一种实现。它保留少量元数据，比如名称和描述，详细规则和执行流程只在触发时再加载进上下文。这个思路和 OpenAI 把 `AGENTS.md` 当目录很接近，只是 Skills 把这个模式标准化了。相关阅读可以看这篇：Agent Skills 详解：是什么？怎么用？和 Prompt、MCP 有什么区别？。
+Agent Skills 也可以看成渐进式披露的一种实现。它保留少量元数据，比如名称和描述，详细规则和执行流程只在触发时再加载进上下文。这个思路和 OpenAI 把 `AGENTS.md` 当目录很接近，只是 Skills 把这个模式标准化了。相关阅读：《Agent Skills 详解：是什么？怎么用？和 Prompt、MCP 有什么区别？》。
 
 #### 架构约束要靠工具执行
 
@@ -302,7 +286,7 @@ Anthropic 发现 Sonnet 4.5 在上下文快满时会变得犹豫，甚至提前�
 
 但他们还有一个重要发现：把模型从 Sonnet 4.5 换成 Opus 4.6 后，Sprint 机制可以完全移除，Evaluator 从每个 Sprint 检查变成最后只检查一次。Anthropic 的总结很准确：Every component in a harness encodes an assumption about what the model can't do on its own, and those assumptions are worth stress testing.
 
-换句话说，Harness 里的每个组件都在假设"模型自己做不到这个"。模型变强后，这些假设要重新测试。Anthropic 也提到，模型越强，Harness 的设计空间会移动，旧的保护机制可能会变成冗余，所以 Harness 也要定期简化。
+即，Harness 里的每个组件都在假设"模型自己做不到这个"。模型变强后，这些假设要重新测试。Anthropic 也提到，模型越强，Harness 的设计空间会移动，旧的保护机制可能会变成冗余，所以 Harness 也要定期简化。
 
 ### Stripe：每周 1300+ 个 PR 的无人值守模式
 
@@ -358,7 +342,7 @@ Birgitta Böckeler 是 Thoughtworks 的 Distinguished Engineer，她在 Martin F
 
 Böckeler 还提了几个判断，我觉得比案例本身更值得关注。
 
-她认为 Harness 可能会变成新的服务模板。很多组织其实只有两三个主要技术栈，未来团队可能会从一组预制 Harness 中选择，就像今天从服务模板里创建新服务一样。
+她认为 Harness 可能会变成新的服务模板。很多组织只有两三个主要技术栈，未来团队可能会从一组预制 Harness 中选择，就像今天从服务模板里创建新服务一样。
 
 棕地项目改造会是最大挑战。公开成功案例大多是绿地项目，而把一个十年历史、没有清晰架构约束的代码库接入 Harness，要难得多。她把它比作在从没用过静态分析工具的代码库上运行静态分析，结果很可能是被警报淹没。她还提出 Ambient Affordances 这个概念：环境本身的结构特性会影响 Harness 能做多好。比如强类型语言天然有类型检查作为 sensor，清晰模块边界方便定义架构约束，Spring 这类框架也会抽象掉很多细节。
 

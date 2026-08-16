@@ -143,34 +143,14 @@
 \maketitle
 \markboth{TypeScript 版 Agent 知识}{ TypeScript 版 Agent 知识}
 
-\begin{quote}
-不是所有“智能”都该被赋予同等的自主权。本文给出从规则自动化到全自主 Agent 的四级模型，用于选型、权限设计、风险控制和团队沟通。
-\end{quote}
+\section*{分级模型}
+
+
+L0 规则自动化 → L1 Workflow → L2 半自主 Agent → L3 全自主 Agent。
 
 
 
-\section*{一、为什么需要统一分级}
-
-
-同一个“Agent”，在不同团队里可能意味着三种完全不同的东西：
-
-
-\begin{itemize}[itemsep=1pt, topsep=2pt]
-  \item 产品经理说的是“自动回复用户”；
-  \item 工程师说的是“模型可以调工具”；
-  \item 安全同事担心的是“它能自己删库”。
-\end{itemize}
-
-
-没有分级，就无法回答三个关键问题：\textbf{它能自己决定什么？它能执行什么动作？失败时谁兜底？}
-
-
-
-本文采用四级模型：\textbf{L0 规则自动化 → L1 Workflow → L2 半自主 Agent → L3 全自主 Agent}。
-
-
-
-\section*{二、四级定义}
+\section*{四级定义}
 
 {\footnotesize
 \begin{tabular}{|p{\dimexpr 0.033\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.150\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.500\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.133\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.183\columnwidth-2\tabcolsep\relax}|}
@@ -190,7 +170,7 @@ L3 & 全自主 Agent & 在明确目标和护栏内，端到端自主规划、执
 
 
 
-\section*{三、每个等级细看}
+\section*{每个等级细看}
 
 
 \subsection*{L0：规则自动化}
@@ -252,7 +232,7 @@ L3 & 全自主 Agent & 在明确目标和护栏内，端到端自主规划、执
 \end{itemize}
 
 
-\section*{四、升级判断表}
+\section*{升级判断表}
 
 {\footnotesize
 \begin{tabular}{|p{\dimexpr 0.559\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.441\columnwidth-2\tabcolsep\relax}|}
@@ -276,7 +256,7 @@ L3 & 全自主 Agent & 在明确目标和护栏内，端到端自主规划、执
 
 
 
-\section*{五、自主性不只是一个标签}
+\section*{自主性不只是一个标签}
 
 
 同一系统内部不同环节可以有不同的自主性：
@@ -306,7 +286,7 @@ L3 & 全自主 Agent & 在明确目标和护栏内，端到端自主规划、执
 
 
 
-\section*{六、落地检查清单}
+\section*{落地检查清单}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item [ ] 是否给系统标注了 L0–L3 等级？
@@ -319,7 +299,7 @@ L3 & 全自主 Agent & 在明确目标和护栏内，端到端自主规划、执
 \end{itemize}
 
 
-\section*{七、与知识地图的关系}
+\section*{相关文档}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item 概念边界见 \href{01-Agent术语表与概念边界.md}{Agent 术语表与概念边界}

@@ -1,9 +1,8 @@
 # Agent 技术雷达
 
-> 语言策略：`shared`。三语言内容一致，Java 为 canonical。
-> 地图节点：`08 生态与前沿 / 技术雷达`。本雷达为知识库基线（2026.08），季度更新；采用 Adopt / Trial / Assess / Hold 四级。
+> 语言策略：shared（Java canonical，P/T 同文）
 
-## 0. 使用说明
+## 级别定义
 
 - **Adopt**：知识库已有实践，默认采用；
 - **Trial**：值得试点，但有前提；

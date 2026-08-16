@@ -1,19 +1,5 @@
 # Loop Engineering 是什么？为什么说它是新瓶装旧酒？
 
-这几天 Loop Engineering 突然火起来，我第一反应是：这又是哪个新名词？怎么天天造新词？
-
-看了一圈之后，感觉它确实有点新瓶装旧酒。Agent Loop、Workflow Graph、Context Engineering、Skills、MCP、CI、测试验证，这些东西 JavaGuide 之前其实都聊过。换个名字重新包装一下，味道很熟悉了。
-
-代码 Agent 真能连续读文件、改代码、跑命令、处理 PR 之后，我们确实不能只盯着“下一句 Prompt 怎么写”。以前是人守在对话框前，一轮一轮补充提示；现在越来越多任务会由 `/loop`、`/goal`、CI、PR 评论或者定时任务触发。Agent 被叫醒后自己读材料、跑命令、写状态，卡住再把问题抛回来。
-
-说白了就是多让你花一些 Token，少一些人工成本。这下好懂了吧？
-
-这篇文章不站队，也不跟着造词。我会把 Loop Engineering 放回已有的几个概念里看：它借了哪些老东西，哪些地方只是换了个说法，哪些部分确实值得在项目里补上。
-
-从公开讨论看，这个词大概在 **2026 年 6 月上旬** 开始热起来。Addy Osmani 在 2026 年 6 月 7 日写了篇 Loop Engineering，随后 AI 圈开始反复讨论“让系统去提示 Agent”。
-
-我个人的感觉是：新鲜的是名字，能力早就在往这个方向走了。Claude Code、Codex 里的 `/loop`、`/goal`、Automations、Skills、Sub-agent、工作区隔离、MCP/Connector，解决的都是一类问题：**别让 Agent 只停在一轮回答里，给它边界，让它继续干活。**
-
 ## Loop Engineering 到底是什么？
 
 如果用一句话概括，可以这么理解：
@@ -38,9 +24,9 @@
 
 这个变化不小，但也没新到哪里去。
 
-## 它其实借了哪些老概念？
+## 它借了哪些老概念？
 
-Loop Engineering 其实很好理解，就是一些老概念的融合。
+Loop Engineering 很好理解，就是一些老概念的融合。
 
 ### Agent Loop / ReAct：内层循环早就存在
 
@@ -58,7 +44,7 @@ ReAct 也是这个思路：Reasoning 和 Acting 交替进行，模型走一步�
 
 我之前在 AI Agent 核心概念 里讲过，它适合处理路径不确定、需要根据证据调整方向的任务。查线上故障、读代码库、排查测试失败，都属于这一类。
 
-这篇主要看外层。内层是 Agent 自己每一轮“推理、行动、观察”的循环；外层则负责隔一段时间启动 Agent、把工作分出去、检查结果、保存状态，决定下一轮还要不要继续。
+本节只讨论外层 Loop：隔一段时间启动 Agent、分配工作、检查结果、保存状态，并决定下一轮是否继续。内层是 Agent 每一轮“推理、行动、观察”的循环。
 
 | 层级 | 谁在循环 | 每轮做什么 | 典型停止条件 |
 | --- | --- | --- | --- |
@@ -67,7 +53,7 @@ ReAct 也是这个思路：Reasoning 和 Acting 交替进行，模型走一步�
 
 ### Workflow / Graph / Loop：可控回边早就有
 
-在工作流图里，Loop 其实就是回边。
+在工作流图里，Loop 就是回边。
 
 ![Workflow、Graph、Loop 三者关系概览](../../../HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/workflow-graph-loop-relation.svg)
 

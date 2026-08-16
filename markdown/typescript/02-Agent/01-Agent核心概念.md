@@ -1,19 +1,5 @@
 # AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册
 
-第一次被 ChatGPT 震到的时候，很多人应该都还在研究 Prompt 怎么写。那时候它更像一个会聊天的知识库。你问，它答；你不问，它也不会自己动。三年过去，AI 已经不只是在聊天框里回复文字了。它开始会调用工具，会读文件，会跑代码，甚至能操作电脑界面。
-
-再往前走一步，就是现在大家反复提到的 AI Agent。
-
-OpenAI 有 Assistant API，Anthropic 有 Claude Agent，Coze、Dify 这类低代码平台也都在围绕 Agent 做能力封装。热度确实高，但很多人聊 Agent 时容易把概念讲得特别玄。
-
-这篇会把 AI Agent 拆开讲清楚。全文接近 7000 字，主要看这几块：
-
-1. Agent 是怎么一步步从聊天机器人进化到常驻自治系统的
-2. Agent、传统编程、Workflow 到底有什么区别，什么时候该用哪个
-3. Agent = LLM + Planning + Memory + Tools 这个公式每一层负责什么
-4. ReAct、Plan-and-Execute、Reflection、Multi-Agent 这些范式到底怎么选
-5. Agent 面临的真实挑战和落地时的工程选型建议
-
 ## AI Agent 的演进
 
 AI Agent 不是突然冒出来的。它大概经历了几次明显变化。
@@ -74,7 +60,7 @@ Harness Engineering 也开始被更多人讨论。
 
 很多人第一次接触 Agent，会把它和自动化脚本、Workflow 混在一起。
 
-其实可以先看一个最简单的区别：
+可以先看一个最简单的区别：
 
 ```
 传统编程：程序员写代码 → 执行结果
@@ -100,7 +86,7 @@ Agent 解决的是那些没法提前穷举所有情况的问题。Workflow 和�
 - 工具调用可以降低幻觉，但不能彻底消灭。LLM 在推理步骤里仍然可能生成错误判断，工具返回结果也不一定能把它拉回来
 - 多轮迭代、工具调用、日志回传、上下文压缩，每一项都在烧 Token。复杂任务跑一轮，账单可能真会让人清醒
 - Agent 能执行代码、调 API、读写文件，也就一定会面对 Prompt Injection 和越权操作风险。更现实的做法是权限最小化、沙箱隔离、高危操作人工确认
-- 深度多步推理任务里，LLM 还是容易局部最优，可能看起来一直在推进，其实已经偏题了
+- 深度多步推理任务里，LLM 还是容易局部最优，可能看起来一直在推进，已经偏题了
 - Agent 为什么做了某个决策、为什么调用了某个工具、是哪一步把上下文带偏了，排查起来很头疼
 
 后面比较确定的方向包括：更长上下文、分层记忆、多模态 GUI 操作、沙箱和权限体系、推理效率优化。
@@ -265,7 +251,7 @@ JSON Schema 是数据格式，MCP 是通信协议层。
 
 Prompt（提示词）可以简单理解为给大语言模型下达的指令。Prompt Engineering 就是怎么把这条指令写清楚，让模型输出更可控。关键在边界是否清晰——指令越模糊，模型越容易乱猜；指令越结构化，输出就越稳定。
 
-这块展开讲内容很多，可以单独看这篇：《提示词工程（Prompt Engineering）》。
+详见《提示词工程（Prompt Engineering）》。
 
 ## 什么是 Context Engineering？
 
@@ -277,7 +263,7 @@ Prompt Engineering 更偏提示词怎么写，Context Engineering 管得更宽�
 
 ![Context Engineering 和 Prompt Engineering 差别](../../../HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/context-engineering-vs-context-engineering-dimension-comparison.jpg)
 
-这块展开讲内容很多，可以单独看这篇：《提示词工程（Prompt Engineering）》 和 《上下文工程（Context Engineering）》。
+详见《提示词工程（Prompt Engineering）》和《上下文工程（Context Engineering）》。
 
 ## Agent 核心范式有哪些？
 
@@ -435,7 +421,7 @@ Node 只做一件事，读取状态、执行逻辑、写回结果。节点里可
 
 能确定，用 Workflow。不能确定，用 Agent。两者都有，用 Agentic Workflows。
 
-但有个常见认知偏差：很多人觉得任务“路径不确定”，其实是需求没拆清楚。把任务认真拆一遍后，往往会发现大部分场景是“LLM 在固定节点里做生成或判断”，这种用 Workflow 更稳，也更容易排查。
+但有个常见认知偏差：很多人觉得任务“路径不确定”，是需求没拆清楚。把任务认真拆一遍后，往往会发现大部分场景是“LLM 在固定节点里做生成或判断”，这种用 Workflow 更稳，也更容易排查。
 
 真正适合纯 Agent 的任务，是那种你提前写不出执行步骤的场景。比如“帮我排查这个线上故障”，查什么、怎么查、查到什么程度，很难事先规定死。
 
@@ -468,4 +454,4 @@ Node 只做一件事，读取状态、执行逻辑、写回结果。节点里可
 
 还有一块很容易忽略：工具描述。MCP 解决接入方式，JSON Schema 解决描述格式，但模型到底调不调这个工具、参数怎么填，最后都靠 description 里那几句话。这块省了力气，后面会双倍还回来。
 
-Agent 和工作流的选型其实没那么复杂，先把任务执行路径写出来，能写出来就用 Workflow，写不出来再上 Agent。这个判断先做好，比追框架有用得多。
+Agent 和工作流的选型没那么复杂，先把任务执行路径写出来，能写出来就用 Workflow，写不出来再上 Agent。这个判断先做好，比追框架有用得多。

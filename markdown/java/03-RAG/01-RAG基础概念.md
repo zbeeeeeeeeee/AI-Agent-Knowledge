@@ -1,19 +1,5 @@
 # 万字详解 RAG 基础概念
 
-做企业知识库问答时，很多团队的第一反应都是：把文档全塞给大模型，让它自己读。
-
-文档少的时候，这招确实能跑。一旦知识库涨到几十万字，问题很快就出来了：每次请求都可能撞 Token 上限，刚更新的内容模型也不一定知道。更现实一点，企业文档还要考虑权限、溯源、成本和延迟，不能靠“全塞进去”硬扛。
-
-RAG 要做的事其实很直接：在让大模型回答之前，先从知识库里找出相关内容，再把这些内容交给模型，让它基于证据生成答案。
-
-这篇文章接近 6200 字，主要讲清楚几件事：
-
-1. RAG 是什么、为什么需要它；
-2. 检索、增强、生成三个环节怎么配合；
-3. Embedding 和相似度度量到底在做什么；
-4. RAG 和传统搜索、微调、长上下文分别适合什么场景；
-5. RAG 的优势和坑分别在哪里。
-
 ## 什么是 RAG？
 
 **RAG（Retrieval-Augmented Generation，检索增强生成）** 就是把信息检索和大语言模型绑在一起用。系统先从知识库里检索出和当前问题相关的片段，知识库可以是数据库、文档集合，也可以是企业内部系统。然后把这些片段和原始问题一起喂给 LLM，让模型基于检索内容回答，而不是只靠训练时记住的知识。
@@ -235,34 +221,13 @@ Naive RAG 是起点，能跑通 Demo，但离生产通常还有距离。Advanced
 
 ## ⭐️ RAG 实战项目推荐
 
-推荐一个笔者开源的实战项目，基于 Spring Boot 4.0 + Java 21 + Spring AI + PostgreSQL + pgvector + RustFS + Redis，实现简历智能分析、AI模拟面试、知识库 RAG 检索等核心功能。非常适合作为学习和简历项目，学习门槛低。
+参考项目：Spring Boot 4.0 + Java 21 + Spring AI + PostgreSQL + pgvector + RustFS + Redis，覆盖简历分析、模拟面试、知识库 RAG。
 
-**系统架构如下**：
-
-![系统架构图](../../../HTML/万字详解 RAG 基础概念 _ JavaGuide_files/interview-guide-architecture-diagram.jpg)
-
-**效果图：**
-
-![Skill 出题 + JD 解析](../../../HTML/万字详解 RAG 基础概念 _ JavaGuide_files/page-skill-jd-parse.jpg)
-
-![简历分析详情](../../../HTML/万字详解 RAG 基础概念 _ JavaGuide_files/page-resume-analysis-detail.jpg)
-
-完整代码完全免费开源，没有 Pro 版本或者付费版！
-
-**项目地址** （欢迎 Star 鼓励）：
-
-- Github：<https://github.com/Snailclimb/interview-guide>
-- Gitee：<https://gitee.com/SnailClimb/interview-guide>
-
-项目详细介绍和系统学习教程地址（星球专属，性价比很高）： 《SpringAI 智能面试平台+RAG 知识库》。
-
-内容安排如下（已经更完，一共 18w+ 字）
-
-![配套教程内容概览](../../../HTML/万字详解 RAG 基础概念 _ JavaGuide_files/tutorial-overview.jpg)
+项目地址：<https://github.com/Snailclimb/interview-guide> · <https://gitee.com/SnailClimb/interview-guide>
 
 ## 总结
 
-RAG 说白了，就是先从知识库里找相关内容，再让 LLM 基于找到的内容回答。它的价值不是让模型“更神”，而是把回答拉回到可检索、可引用、可审计的证据上。
+RAG 就是先从知识库里找相关内容，再让 LLM 基于找到的内容回答。它的价值不是让模型“更神”，而是把回答拉回到可检索、可引用、可审计的证据上。
 
 几个关键点可以重点留意下：
 

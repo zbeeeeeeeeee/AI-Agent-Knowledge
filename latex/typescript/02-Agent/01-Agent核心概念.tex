@@ -143,30 +143,6 @@
 \maketitle
 \markboth{TypeScript 版 Agent 知识}{ TypeScript 版 Agent 知识}
 
-第一次被 ChatGPT 震到的时候，很多人应该都还在研究 Prompt 怎么写。那时候它更像一个会聊天的知识库。你问，它答；你不问，它也不会自己动。三年过去，AI 已经不只是在聊天框里回复文字了。它开始会调用工具，会读文件，会跑代码，甚至能操作电脑界面。
-
-
-
-再往前走一步，就是现在大家反复提到的 AI Agent。
-
-
-
-OpenAI 有 Assistant API，Anthropic 有 Claude Agent，Coze、Dify 这类低代码平台也都在围绕 Agent 做能力封装。热度确实高，但很多人聊 Agent 时容易把概念讲得特别玄。
-
-
-
-这篇会把 AI Agent 拆开讲清楚。全文接近 7000 字，主要看这几块：
-
-
-\begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item Agent 是怎么一步步从聊天机器人进化到常驻自治系统的
-  \item Agent、传统编程、Workflow 到底有什么区别，什么时候该用哪个
-  \item Agent = LLM + Planning + Memory + Tools 这个公式每一层负责什么
-  \item ReAct、Plan-and-Execute、Reflection、Multi-Agent 这些范式到底怎么选
-  \item Agent 面临的真实挑战和落地时的工程选型建议
-\end{enumerate}
-
-
 \section*{AI Agent 的演进}
 
 
@@ -285,7 +261,7 @@ Harness Engineering 也开始被更多人讨论。
 
 
 
-其实可以先看一个最简单的区别：
+可以先看一个最简单的区别：
 
 
 
@@ -328,7 +304,7 @@ Agent 解决的是那些没法提前穷举所有情况的问题。Workflow 和�
   \item 工具调用可以降低幻觉，但不能彻底消灭。LLM 在推理步骤里仍然可能生成错误判断，工具返回结果也不一定能把它拉回来
   \item 多轮迭代、工具调用、日志回传、上下文压缩，每一项都在烧 Token。复杂任务跑一轮，账单可能真会让人清醒
   \item Agent 能执行代码、调 API、读写文件，也就一定会面对 Prompt Injection 和越权操作风险。更现实的做法是权限最小化、沙箱隔离、高危操作人工确认
-  \item 深度多步推理任务里，LLM 还是容易局部最优，可能看起来一直在推进，其实已经偏题了
+  \item 深度多步推理任务里，LLM 还是容易局部最优，可能看起来一直在推进，已经偏题了
   \item Agent 为什么做了某个决策、为什么调用了某个工具、是哪一步把上下文带偏了，排查起来很头疼
 \end{itemize}
 
@@ -628,7 +604,7 @@ Prompt（提示词）可以简单理解为给大语言模型下达的指令。Pr
 
 
 
-这块展开讲内容很多，可以单独看这篇：《提示词工程（Prompt Engineering）》。
+详见《提示词工程（Prompt Engineering）》。
 
 
 
@@ -655,7 +631,7 @@ Prompt Engineering 更偏提示词怎么写，Context Engineering 管得更宽�
 
 
 
-这块展开讲内容很多，可以单独看这篇：《提示词工程（Prompt Engineering）》 和 《上下文工程（Context Engineering）》。
+详见《提示词工程（Prompt Engineering）》和《上下文工程（Context Engineering）》。
 
 
 
@@ -971,7 +947,7 @@ Node 只做一件事，读取状态、执行逻辑、写回结果。节点里可
 
 
 
-但有个常见认知偏差：很多人觉得任务“路径不确定”，其实是需求没拆清楚。把任务认真拆一遍后，往往会发现大部分场景是“LLM 在固定节点里做生成或判断”，这种用 Workflow 更稳，也更容易排查。
+但有个常见认知偏差：很多人觉得任务“路径不确定”，是需求没拆清楚。把任务认真拆一遍后，往往会发现大部分场景是“LLM 在固定节点里做生成或判断”，这种用 Workflow 更稳，也更容易排查。
 
 
 
@@ -1038,7 +1014,7 @@ Node 只做一件事，读取状态、执行逻辑、写回结果。节点里可
 
 
 
-Agent 和工作流的选型其实没那么复杂，先把任务执行路径写出来，能写出来就用 Workflow，写不出来再上 Agent。这个判断先做好，比追框架有用得多。
+Agent 和工作流的选型没那么复杂，先把任务执行路径写出来，能写出来就用 Workflow，写不出来再上 Agent。这个判断先做好，比追框架有用得多。
 
 
 \end{document}

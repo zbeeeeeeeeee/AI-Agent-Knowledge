@@ -143,45 +143,21 @@
 \maketitle
 \markboth{TypeScript 版 Agent 知识}{ TypeScript 版 Agent 知识}
 
-\begin{quote}
-本文回答：什么时候才需要多智能体？有哪些编排模式？Agent 之间怎么通信？为什么多数生产系统不应该一上来就上多 Agent？
-\end{quote}
-
-
-
-\section*{一、先问：真的需要多智能体吗}
-
-
-多智能体不是单 Agent 的“高级替代品”，而是用\textbf{通信成本、调试成本、Token 成本}换取\textbf{并行度与专业分工}。
-
-
-
-在决定上多智能体前，先确认三件事：
-
-
-\begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item 单 Agent 的失败，是因为“上下文太杂”，还是任务天然需要多个角色？
-  \item 任务是否可以被稳定拆成多个互不冲突的子任务？
-  \item 团队是否有能力观测和调试多 Agent 之间的消息流？
-\end{enumerate}
-
-
-如果只是上下文杂乱，优先做 Context Engineering、Memory 分层或 Skill 化；如果任务可稳定拆解，优先用 Workflow / Graph，而不是多 Agent。
-
-
-
-\textbf{适合多智能体的信号}：
-
+\section*{适用条件}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item 子任务需要不同的 System Prompt、工具集或记忆边界；
   \item 子任务可并行，且互不阻塞；
-  \item 需要一个 Agent 生成、另一个 Agent 审查的对抗式质量结构；
+  \item 需要生成、审查、验证角色分离；
   \item 不同角色由不同团队维护，需要独立发布与权限隔离。
 \end{itemize}
 
 
-\section*{二、五种核心编排模式 + 一种特殊模式}
+先用单 Agent + Workflow 验证；满足以上条件后再上多 Agent。
+
+
+
+\section*{编排模式}
 
 
 \subsection*{1. Orchestrator-Workers（编排者-工作者）}
@@ -324,7 +300,7 @@ Agent B ─写─▶ │  共享状态/事实 │ ◀─读─ Agent D
 \end{itemize}
 
 
-\section*{三、模式对比表}
+\section*{模式对比表}
 
 {\footnotesize
 \begin{tabular}{|p{\dimexpr 0.116\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.290\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.145\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.072\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.174\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.145\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.058\columnwidth-2\tabcolsep\relax}|}
@@ -348,7 +324,7 @@ Token 开销 & 中 & 中高 & 高 & 很高 & 高 & 最高 \\
 
 
 
-\section*{四、通信设计：多 Agent 真正的成本在这里}
+\section*{通信设计}
 
 
 \subsection*{1. 不要用自然语言“聊天”}
@@ -422,7 +398,7 @@ Agent 之间自由聊天会产生三个问题：信息丢失、格式漂移、To
 \end{itemize}
 
 
-\section*{五、状态与上下文边界}
+\section*{状态与上下文边界}
 
 
 多 Agent 系统最容易犯的错误是“全局共享一个上下文”。
@@ -439,7 +415,7 @@ Agent 之间自由聊天会产生三个问题：信息丢失、格式漂移、To
 \end{enumerate}
 
 
-\section*{六、失败模式库}
+\section*{失败模式库}
 
 {\footnotesize
 \begin{tabular}{|p{\dimexpr 0.105\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.421\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.474\columnwidth-2\tabcolsep\relax}|}
@@ -467,7 +443,7 @@ Agent 之间自由聊天会产生三个问题：信息丢失、格式漂移、To
 
 
 
-\section*{七、最小实现示例：Orchestrator-Workers（伪代码）}
+\section*{最小实现示例：Orchestrator-Workers}
 
 
 \begin{lstlisting}
@@ -502,7 +478,7 @@ function worker_call(card):
 
 
 
-\section*{八、选型决策表}
+\section*{选型决策表}
 
 {\footnotesize
 \begin{tabular}{|p{\dimexpr 0.245\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.377\columnwidth-2\tabcolsep\relax}|p{\dimexpr 0.377\columnwidth-2\tabcolsep\relax}|}
@@ -528,7 +504,7 @@ function worker_call(card):
 
 
 
-\section*{九、落地十步清单}
+\section*{落地十步清单}
 
 \begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item 用单 Agent + Workflow 跑通最小闭环；
@@ -544,7 +520,7 @@ function worker_call(card):
 \end{enumerate}
 
 
-\section*{十、延伸阅读}
+\section*{相关文档}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \href{01-Agent核心概念.md}{AI Agent 核心概念}：Multi-Agent、A2A 基础概念

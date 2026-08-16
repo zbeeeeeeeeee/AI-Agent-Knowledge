@@ -143,30 +143,6 @@
 \maketitle
 \markboth{Python 版 Agent 知识}{ Python 版 Agent 知识}
 
-做企业知识库问答时，很多团队的第一反应都是：把文档全塞给大模型，让它自己读。
-
-
-
-文档少的时候，这招确实能跑。一旦知识库涨到几十万字，问题很快就出来了：每次请求都可能撞 Token 上限，刚更新的内容模型也不一定知道。更现实一点，企业文档还要考虑权限、溯源、成本和延迟，不能靠“全塞进去”硬扛。
-
-
-
-RAG 要做的事其实很直接：在让大模型回答之前，先从知识库里找出相关内容，再把这些内容交给模型，让它基于证据生成答案。
-
-
-
-这篇文章接近 6200 字，主要讲清楚几件事：
-
-
-\begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item RAG 是什么、为什么需要它；
-  \item 检索、增强、生成三个环节怎么配合；
-  \item Embedding 和相似度度量到底在做什么；
-  \item RAG 和传统搜索、微调、长上下文分别适合什么场景；
-  \item RAG 的优势和坑分别在哪里。
-\end{enumerate}
-
-
 \section*{什么是 RAG？}
 
 
@@ -614,75 +590,18 @@ Naive RAG 是起点，能跑通 Demo，但离生产通常还有距离。Advanced
 \section*{⭐️ RAG 实战项目推荐}
 
 
-推荐一个笔者开源的实战项目，基于 Spring Boot 4.0 + Java 21 + Spring AI + PostgreSQL + pgvector + RustFS + Redis，实现简历智能分析、AI模拟面试、知识库 RAG 检索等核心功能。非常适合作为学习和简历项目，学习门槛低。
+参考项目：Spring Boot 4.0 + Java 21 + Spring AI + PostgreSQL + pgvector + RustFS + Redis，覆盖简历分析、模拟面试、知识库 RAG。
 
 
 
-\textbf{系统架构如下}：
-
-
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/interview-guide-architecture-diagram.jpg}
-\caption*{系统架构图}
-\end{figure}
-
-
-
-\textbf{效果图：}
-
-
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/page-skill-jd-parse.jpg}
-\caption*{Skill 出题 + JD 解析}
-\end{figure}
-
-
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/page-resume-analysis-detail.jpg}
-\caption*{简历分析详情}
-\end{figure}
-
-
-
-完整代码完全免费开源，没有 Pro 版本或者付费版！
-
-
-
-\textbf{项目地址} （欢迎 Star 鼓励）：
-
-
-\begin{itemize}[itemsep=1pt, topsep=2pt]
-  \item Github：<https://github.com/Snailclimb/interview-guide>
-  \item Gitee：<https://gitee.com/SnailClimb/interview-guide>
-\end{itemize}
-
-
-项目详细介绍和系统学习教程地址（星球专属，性价比很高）： 《SpringAI 智能面试平台+RAG 知识库》。
-
-
-
-内容安排如下（已经更完，一共 18w+ 字）
-
-
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/tutorial-overview.jpg}
-\caption*{配套教程内容概览}
-\end{figure}
+项目地址：<https://github.com/Snailclimb/interview-guide> · <https://gitee.com/SnailClimb/interview-guide>
 
 
 
 \section*{总结}
 
 
-RAG 说白了，就是先从知识库里找相关内容，再让 LLM 基于找到的内容回答。它的价值不是让模型“更神”，而是把回答拉回到可检索、可引用、可审计的证据上。
+RAG 就是先从知识库里找相关内容，再让 LLM 基于找到的内容回答。它的价值不是让模型“更神”，而是把回答拉回到可检索、可引用、可审计的证据上。
 
 
 

@@ -143,34 +143,6 @@
 \maketitle
 \markboth{Python 版 Agent 知识}{ Python 版 Agent 知识}
 
-别只盯模型。
-
-
-
-很多人第一次做 Agent，直觉都是先买更贵的模型。结果模型换了，Agent 还是会重复犯错，做到一半放弃，上下文一长就开始不稳定。这个时候继续调 Prompt，收益往往也很有限，因为问题可能根本不在模型本身。
-
-
-
-有个实验挺能说明这件事：同一个模型，只换了文件编辑接口的调用方式，编码基准分数从 6.7\% 跳到了 68.3\%。模型没有变，变的是它外面那套系统。也就是说，Agent 能不能稳定干活，很多时候取决于模型之外的环境、工具、反馈和约束。
-
-
-
-最近 AI Agent 开发圈里经常提到一个词：Harness Engineering。它讨论的就是这件事：决定 Agent 表现上限的，可能不是模型，而是你给模型搭的那套工作环境。
-
-
-
-这篇文章会把 Harness Engineering 拆开讲清楚。全文接近 7800 字，主要看这几块：
-
-
-\begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item Harness 是什么，为什么可以把 Agent 理解成 Model + Harness
-  \item 为什么同一个模型换一套接口，分数能从 6.7\% 变成 68.3\%
-  \item Harness 的六层架构分别解决什么问题
-  \item 从零搭 Harness 时，哪些事情应该先做，哪些可以后面再补
-  \item OpenAI、Anthropic、Stripe 这些团队到底怎么用 Harness
-\end{enumerate}
-
-
 \section*{Harness 基本概念}
 
 
@@ -771,7 +743,7 @@ Full Harness，三 Agent + 完整工具链 & 6 小时 & \$200 & 完整可用的�
 
 
 
-换句话说，Harness 里的每个组件都在假设"模型自己做不到这个"。模型变强后，这些假设要重新测试。Anthropic 也提到，模型越强，Harness 的设计空间会移动，旧的保护机制可能会变成冗余，所以 Harness 也要定期简化。
+即，Harness 里的每个组件都在假设"模型自己做不到这个"。模型变强后，这些假设要重新测试。Anthropic 也提到，模型越强，Harness 的设计空间会移动，旧的保护机制可能会变成冗余，所以 Harness 也要定期简化。
 
 
 
@@ -897,7 +869,7 @@ Böckeler 还提了几个判断，我觉得比案例本身更值得关注。
 
 
 
-她认为 Harness 可能会变成新的服务模板。很多组织其实只有两三个主要技术栈，未来团队可能会从一组预制 Harness 中选择，就像今天从服务模板里创建新服务一样。
+她认为 Harness 可能会变成新的服务模板。很多组织只有两三个主要技术栈，未来团队可能会从一组预制 Harness 中选择，就像今天从服务模板里创建新服务一样。
 
 
 

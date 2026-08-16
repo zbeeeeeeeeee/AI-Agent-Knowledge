@@ -1,19 +1,6 @@
 # Agent 术语表与概念边界
 
-> 本文是 Agent 知识库的**统一术语入口**。目标不是罗列名词，而是把最容易被混用的概念边界讲清楚：Agent、Chatbot、Workflow、RAG、MCP、A2A、Skills、Harness 等。
-
-## 为什么需要这一页
-
-Agent 领域的概念大量来自不同厂商和框架，同一个词在不同语境下含义不同：
-
-- 有人把“带工具的 Chatbot”叫 Agent；
-- 有人把“固定流程 + LLM 节点”叫 Agent；
-- 有人把 MCP 当作 Function Calling 的替代品；
-- 有人把 RAG 直接等同于长期记忆。
-
-如果团队内部口径不统一，设计评审、故障复盘、面试考察都会各说各话。本文约定：**Agent 知识库内的术语，以本页定义为准；文档冲突时，以本页为准。**
-
-## 一、29 个核心术语
+## 术语表
 
 ### 基础与系统
 
@@ -54,8 +41,7 @@ Agent 领域的概念大量来自不同厂商和框架，同一个词在不同�
 | Loop | Graph 中允许回溯和重试的回边 | 必须配终止条件和成本上限 |
 | LLM Gateway | 统一接入、路由、降级、限流、成本统计、审计的模型调用基础设施 | 不只是反向代理 |
 
-
-## 二、四组最关键的边界
+## 四组关键边界
 
 ### 1. Agent / Chatbot / Workflow / RAG
 
@@ -99,7 +85,7 @@ Agent 领域的概念大量来自不同厂商和框架，同一个词在不同�
 - Loop 是 Graph 中的回边，用于重试、回溯、迭代；
 - Agentic Workflow 是“固定骨架 + 局部自主”的组合。
 
-## 三、概念关系图
+## 概念关系图
 
 ```mermaid
 flowchart LR
@@ -116,7 +102,7 @@ flowchart LR
   AGW[Agent Gateway] --> LLM
 ```
 
-## 四、常见口径问题（FAQ）
+## FAQ
 
 **Q1：接了一个搜索工具的 Chatbot 是不是 Agent？**
 如果每轮路径由代码写死、LLM 不决定“下一步做什么”，更接近 Workflow；只有当 LLM 能根据环境反馈持续决策并行动时，才算 Agent。
@@ -133,14 +119,14 @@ flowchart LR
 **Q5：Multi-Agent 一定比单 Agent 强吗？**
 不一定。多 Agent 带来并行与专业化，但通信、调试、成本会明显上升。先证明单 Agent 无法满足，再上多 Agent。
 
-## 五、术语使用约定
+## 使用约定
 
-1. 写文档时优先使用本页定义；出现新术语先补充到本页再使用。
+1. 写文档时优先使用本术语表定义；出现新术语先补充到术语表再使用。
 2. 面试题、架构图、设计文档中的“Agent”不得同时混用 Chatbot 与 Workflow 含义。
 3. 涉及协议时明确写全称：MCP、A2A、JSON Schema，不自行造词。
 4. 术语变更必须同步更新 `知识地图总索引.md` 中对应节点。
 
-## 六、延伸阅读
+## 相关文档
 
 - [AI Agent 核心概念](../02-Agent/01-Agent核心概念.md)：Agent Loop、范式、MCP/A2A/Skills
 - [AI Agent 记忆系统](../02-Agent/02-Agent记忆系统.md)：Memory 与 RAG 的详细区别

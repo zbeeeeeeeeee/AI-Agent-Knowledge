@@ -143,31 +143,7 @@
 \maketitle
 \markboth{Python 版 Agent 知识}{ Python 版 Agent 知识}
 
-\begin{quote}
-本文是 Agent 知识库的\textbf{统一术语入口}。目标不是罗列名词，而是把最容易被混用的概念边界讲清楚：Agent、Chatbot、Workflow、RAG、MCP、A2A、Skills、Harness 等。
-\end{quote}
-
-
-
-\section*{为什么需要这一页}
-
-
-Agent 领域的概念大量来自不同厂商和框架，同一个词在不同语境下含义不同：
-
-
-\begin{itemize}[itemsep=1pt, topsep=2pt]
-  \item 有人把“带工具的 Chatbot”叫 Agent；
-  \item 有人把“固定流程 + LLM 节点”叫 Agent；
-  \item 有人把 MCP 当作 Function Calling 的替代品；
-  \item 有人把 RAG 直接等同于长期记忆。
-\end{itemize}
-
-
-如果团队内部口径不统一，设计评审、故障复盘、面试考察都会各说各话。本文约定：\textbf{Agent 知识库内的术语，以本页定义为准；文档冲突时，以本页为准。}
-
-
-
-\section*{一、29 个核心术语}
+\section*{术语表}
 
 
 \subsection*{基础与系统}
@@ -252,8 +228,7 @@ LLM Gateway & 统一接入、路由、降级、限流、成本统计、审计的
 
 
 
-
-\section*{二、四组最关键的边界}
+\section*{四组关键边界}
 
 
 \subsection*{1. Agent / Chatbot / Workflow / RAG}
@@ -342,7 +317,7 @@ RAG & 外部知识库里有什么相关材料 & 按需检索 \\
 \end{itemize}
 
 
-\section*{三、概念关系图}
+\section*{概念关系图}
 
 
 \begin{lstlisting}
@@ -362,7 +337,7 @@ flowchart LR
 
 
 
-\section*{四、常见口径问题（FAQ）}
+\section*{FAQ}
 
 
 \textbf{Q1：接了一个搜索工具的 Chatbot 是不是 Agent？} 如果每轮路径由代码写死、LLM 不决定“下一步做什么”，更接近 Workflow；只有当 LLM 能根据环境反馈持续决策并行动时，才算 Agent。
@@ -385,17 +360,17 @@ flowchart LR
 
 
 
-\section*{五、术语使用约定}
+\section*{使用约定}
 
 \begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item 写文档时优先使用本页定义；出现新术语先补充到本页再使用。
+  \item 写文档时优先使用本术语表定义；出现新术语先补充到术语表再使用。
   \item 面试题、架构图、设计文档中的“Agent”不得同时混用 Chatbot 与 Workflow 含义。
   \item 涉及协议时明确写全称：MCP、A2A、JSON Schema，不自行造词。
   \item 术语变更必须同步更新 \texttt{知识地图总索引.md} 中对应节点。
 \end{enumerate}
 
 
-\section*{六、延伸阅读}
+\section*{相关文档}
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item \href{../02-Agent/01-Agent核心概念.md}{AI Agent 核心概念}：Agent Loop、范式、MCP/A2A/Skills

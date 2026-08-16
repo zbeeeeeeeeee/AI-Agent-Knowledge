@@ -143,39 +143,6 @@
 \maketitle
 \markboth{TypeScript 版 Agent 知识}{ TypeScript 版 Agent 知识}
 
-前段时间面某大厂的时候，面试官问我：“你们 RAG 系统的向量检索怎么做的？”
-
-
-
-我当时回答：“用 MySQL 存 Embedding，查询时遍历计算相似度。”
-
-
-
-面试官的表情已经说明问题了。我们当时知识库有 50 多万条 Chunk，每次查询都要全表扫描，平均响应时间 3 秒以上。对一个问答系统来说，这个延迟基本等于劝退用户。
-
-
-
-后来才意识到，这就是典型的暴力搜索。Demo 阶段能跑，生产环境根本扛不住。真正上线时，至少要考虑向量数据库和 ANN 索引。
-
-
-
-向量存储和向量索引是大多数 RAG 应用绕不开的基础设施。数据规模、延迟要求、召回要求一上来，靠遍历计算相似度很快就会出问题。
-
-
-
-这篇文章围绕几个面试高频问题展开：
-
-
-\begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item RAG 为什么需要向量数据库；
-  \item Embedding 和向量检索是什么关系；
-  \item 余弦距离、内积、欧氏距离怎么选；
-  \item 向量索引算法是什么，常见算法有哪些；
-  \item 项目里为什么用 HNSW，HNSW 和 IVFFLAT 有什么区别；
-  \item 有哪些向量数据库，为什么选择 PostgreSQL + pgvector，为什么不直接用 MySQL 来做。
-\end{enumerate}
-
-
 \section*{Embedding 和向量检索是什么关系？}
 
 
@@ -206,7 +173,7 @@ RAG 的向量检索链路可以简化成这样：
 
 
 
-基础概念可以看 RAG 基础篇。本文重点放在后半段：这些向量怎么高效存储、索引和检索。
+范围：向量存储、索引和检索；基础概念见 RAG 基础篇。
 
 
 
@@ -910,14 +877,11 @@ MySQL 这边要分版本看。MySQL 8.x 系列，包括 8.4 LTS，没有官方 \
 
 
 
-关于 MySQL 和 PostgreSQL 的详细对比，可以参考我写的这篇文章：MySQL vs PostgreSQL，如何选择？。
-
-
 
 \section*{⭐️ RAG 实战项目推荐}
 
 
-推荐一个笔者开源的实战项目，基于 Spring Boot 4.0 + Java 21 + Spring AI + PostgreSQL + pgvector + RustFS + Redis，实现简历智能分析、AI模拟面试、知识库 RAG 检索等核心功能。非常适合作为学习和简历项目，学习门槛低。
+参考项目：Spring Boot 4.0 + Java 21 + Spring AI + PostgreSQL + pgvector + RustFS + Redis，覆盖简历分析、模拟面试、知识库 RAG。
 
 
 
@@ -953,32 +917,7 @@ MySQL 这边要分版本看。MySQL 8.x 系列，包括 8.4 LTS，没有官方 \
 
 
 
-完整代码完全免费开源，没有 Pro 版本或者付费版！
-
-
-
-\textbf{项目地址} （欢迎 Star 鼓励）：
-
-
-\begin{itemize}[itemsep=1pt, topsep=2pt]
-  \item Github：<https://github.com/Snailclimb/interview-guide>
-  \item Gitee：<https://gitee.com/SnailClimb/interview-guide>
-\end{itemize}
-
-
-项目详细介绍和系统学习教程地址（星球专属，性价比很高）： 《SpringAI 智能面试平台+RAG 知识库》。
-
-
-
-内容安排如下（已经更完，一共 18w+ 字）
-
-
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/tutorial-overview.jpg}
-\caption*{配套教程内容概览}
-\end{figure}
+项目地址：<https://github.com/Snailclimb/interview-guide> · <https://gitee.com/SnailClimb/interview-guide>
 
 
 

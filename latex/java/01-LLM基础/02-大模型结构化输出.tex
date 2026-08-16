@@ -143,42 +143,6 @@
 \maketitle
 \markboth{Java 版 Agent 知识}{ Java 版 Agent 知识}
 
-很多开发者第一次接大模型到业务系统里，都会经历一个很尴尬的阶段：本地 Demo 跑得挺顺，Prompt 里写一句“请返回 JSON”，模型也乖乖吐出一个对象；一到生产环境，问题就开始冒头。
-
-
-
-有时它会在 JSON 前面加一句“好的，以下是结果”；有时少一个必填字段；有时本来应该是数字的 \texttt{orderId} 变成字符串；更麻烦的是，边界条件一复杂，模型会补出一个业务系统根本不认识的枚举值。解析器一报错，整条链路就断了。
-
-
-
-问题不在于模型“不听话”，而在于我们把\textbf{自然语言承诺}错当成了\textbf{工程契约}。
-
-
-
-结构化输出要解决的核心问题，是把“模型看起来像返回 JSON”升级成“后端可以稳定消费的结构化数据”。RAG 要靠它抽取证据，Agent 要靠它选择工具，客服系统要靠它分类工单，订单系统要靠它把自然语言请求变成可校验的参数。
-
-
-
-本文会沿着一条主线展开：先看“只靠 Prompt 要 JSON”为什么不稳，再看怎么用 Schema 把输出变成契约，最后落到 Function Calling、MCP 和 Java 后端工具执行。
-
-
-
-具体会讲清楚：
-
-
-\begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item \textbf{为什么“请返回 JSON”不可靠}：格式漂移、字段缺失、类型错误、额外解释文本和边界条件崩溃分别怎么发生。
-  \item \textbf{JSON Mode、JSON Schema、Structured Outputs 的区别}：各自约束什么，不约束什么。
-  \item \textbf{Function Calling / Tool Calling 的底层链路}：模型只生成调用意图，真正执行工具的是业务侧。
-  \item \textbf{Function Calling、MCP Tool、普通 HTTP API、Agent Skill 的关系}：层次和边界。
-  \item \textbf{结构化输出的工程落地}：Schema 设计、服务端校验、失败重试、降级策略和工具调用安全。
-\end{enumerate}
-
-
-说明：OpenAI、Anthropic、Gemini、MCP 等产品和协议都在持续演进，生产系统应从官方文档最新展示获取能力描述。本文不引用未经验证的 benchmark，也不做绝对化性能结论。
-
-
-
 \section*{⭐️ 为什么“请返回 JSON”不可靠？}
 
 
@@ -354,7 +318,7 @@ JSON 语法是合法的，但业务类型不合法。\texttt{needManualReview} �
 \section*{⭐️ 怎样把 JSON 从格式要求变成工程契约？}
 
 
-很多人把 JSON Mode、JSON Schema、Structured Outputs 混着说，面试时也容易答散。但它们其实不在同一层：
+很多人把 JSON Mode、JSON Schema、Structured Outputs 混着说，面试时也容易答散。但它们不在同一层：
 
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
@@ -364,7 +328,7 @@ JSON 语法是合法的，但业务类型不合法。\texttt{needManualReview} �
 \end{itemize}
 
 
-也就是说，JSON Schema 不是结构化输出方式本身，而是结构化输出常用的“契约格式”。真正让模型按契约生成的，是 Structured Outputs、Function Calling / Tool Calling 等模型 API 能力。
+即，JSON Schema 不是结构化输出方式本身，而是结构化输出常用的“契约格式”。真正让模型按契约生成的，是 Structured Outputs、Function Calling / Tool Calling 等模型 API 能力。
 
 
 
@@ -699,7 +663,7 @@ MCP Tool 是 MCP 协议里的工具能力。根据 MCP 官方规范，MCP 允许
 
 
 
-换句话说：
+：
 
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]

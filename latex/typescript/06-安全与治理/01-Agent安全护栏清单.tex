@@ -144,17 +144,17 @@
 \markboth{TypeScript 版 Agent 知识}{ TypeScript 版 Agent 知识}
 
 \begin{quote}
-语言策略：\texttt{code}。正文三语言一致；工具风控代码按 TypeScript 生态实现。 地图节点：\texttt{06 安全与治理}。配套文档：\href{../00-概念与术语/02-Agent自主性分级.md}{Agent 自主性分级}、\href{../05-评测与质量/01-Agent评测体系.md}{Agent 评测体系}。
+语言策略：code（Java / Python / TypeScript）
 \end{quote}
 
 
 
-\section*{0. 结论先说}
+\section*{TL;DR}
 
 \begin{enumerate}[itemsep=1pt, topsep=2pt]
   \item Agent 的安全问题不是“模型安不安全”，而是\textbf{系统给模型开放了什么动作、动作是否可逆、过程是否可审计}。
   \item 生产环境默认只允许 L2 半自主：模型可以决定“做什么”，系统必须决定“能不能做”。
-  \item 本文给出一份可直接执行的上线检查清单和最小工具风控实现。
+  \item 上线检查清单和最小工具风控实现见下。
 \end{enumerate}
 
 

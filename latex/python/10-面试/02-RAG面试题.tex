@@ -143,30 +143,6 @@
 \maketitle
 \markboth{Python 版 Agent 知识}{ Python 版 Agent 知识}
 
-RAG 是 AI 应用开发里最容易被低估的模块。
-
-
-
-很多人以为 RAG 就是“文档切块 -> 转向量 -> 存向量库 -> 检索 -> 拼 Prompt”。Demo 阶段这么理解没问题，但一到真实业务，问题马上变复杂：文档解析不干净、Chunk 切碎了语义、Embedding 模型选错、召回结果不准、权限过滤漏了、知识库更新后旧版本还在、模型拿到证据却没有正确回答。
-
-
-
-所以，RAG 面试真正考的不是“你会不会接向量数据库”，而是：\textbf{你能不能把一个检索增强生成系统拆成可定位、可优化、可评测、可更新的工程链路。}
-
-
-
-这份 RAG 面试题根据 AI 专栏现有文章整理。建议你用下面这条主线复习：
-
-
-\begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item 先理解 RAG 解决什么问题，以及它和微调、长上下文、传统搜索的区别。
-  \item 再理解 Embedding、相似度、ANN 索引和向量数据库选型。
-  \item 接着理解文档处理、Chunk 策略、元数据和权限过滤。
-  \item 然后掌握 Hybrid Search、Query Rewrite、Rerank、上下文压缩等优化手段。
-  \item 最后补上 GraphRAG、知识库更新和评测闭环。
-\end{enumerate}
-
-
 \section*{面试官真正想考什么}
 
 

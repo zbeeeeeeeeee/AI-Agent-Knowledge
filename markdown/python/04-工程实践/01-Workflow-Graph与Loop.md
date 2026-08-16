@@ -1,18 +1,5 @@
 # AI 工作流中的 Workflow、Graph 与 Loop：从概念到实现
 
-刚上手 AI 工作流时，很容易有类似的困惑——这不就是传统工作流换了个壳吗？为什么不用 Camunda、Temporal 这些成熟引擎？甚至觉得把几个 Prompt 用 if-else 串起来就算“工作流”了。
-
-但真正上手做项目后，这些想法很快会被现实打脸。LLM 的输出天然不确定，单次生成往往不达标，工具调用随时可能失败，上下文窗口还有硬上限。光“跑一遍就完事”的线性流程不够用，你需要的是一套能**动态决策、自动修正、可控收敛**的执行机制。
-
-今天这篇文章就来系统梳理 AI 工作流中三个核心概念——**Workflow、Graph、Loop**，帮你建立从概念到实现的完整认知。本文接近 7300 字，建议收藏。通过本文你会搞懂：
-
-- 单轮对话和固定流程为什么不够用，动态决策、自动修正、可控收敛分别解决什么问题
-- Workflow、Graph、Loop 三者如何协作，为什么说 Workflow 是目标与过程，Graph 是结构与载体，Loop 是图上的控制模式
-- Graph 的核心元素 Node、Edge、State 分别是什么，State 的更新策略怎么选
-- Loop 的设计要点：固定次数循环 vs 条件驱动循环、嵌套循环的独立性、安全边界三要素
-- 用 LangGraph 构建文章审核工作流的完整代码实现
-- 高抽象 vs 低抽象工作流的区别，以及 Node、Edge、State 的抽象原则
-
 ## 为什么 AI 系统需要工作流？
 
 单轮对话能回答问题，但很难稳定地**交付结果**。线上真实任务很少是“问一句答一句”就完事——检索信息、调用工具、输出结构化结果、校验格式、失败重试、不满意再来一轮，这些步骤串起来才叫交付。靠一段超长 Prompt 把所有逻辑塞进去，早晚会炸。你需要的是一种**可分支、可循环、可观测**的执行路径。
@@ -102,7 +89,7 @@ AI 工作流与传统工作流的关键差异在于：路径选择依赖于运�
 
 在同一套「文章审核」里：**审核不通过**时，控制流不应结束，而应沿某条边回到「修改」或「重新生成」——这就是 Loop 在业务上的含义。技术上，它表现为图上的**回边（Back Edge）**。
 
-> 需要区分本文的 Loop 与 Agent 基础篇中的 **Agent Loop**。Agent Loop 是 Agent 的顶层运行引擎——整个 Agent 在一个 while 循环中反复执行“推理 → 行动 → 观察”直到任务完成。而本文的 Loop 是 Graph 内部的控制模式——特定节点子集通过回边形成的迭代修正循环。两者的关系是：Agent Loop 是外层循环，Graph Loop 可以嵌套在其中的某个节点或子图内。
+> Graph Loop 是 Graph 内部通过回边形成的迭代修正循环；Agent Loop 是 Agent 顶层“推理 → 行动 → 观察”运行引擎。Graph Loop 可嵌套在 Agent Loop 的节点或子图内。
 
 ![Loop 概览：循环机制示意](../../../HTML/AI 工作流中的 Workflow、Graph 与 Loop：从概念到实现 _ JavaGuide_files/loop-mechanism.svg)
 
@@ -143,7 +130,7 @@ AI 场景里，第二类通常更有代表性。因为“跑几次”往往不�
 
 ## 代码实现
 
-前面建立了 Node、Edge、State 的概念模型，接下来看这些概念如何映射到具体的框架。以下以 LangGraph（Python 生态）为例（Java 生态的 Spring AI Alibaba、TypeScript 生态的 LangGraph.js 概念一一对应，可对照阅读）。
+框架映射：以下以 LangGraph（Python 生态）为例（Java 生态的 Spring AI Alibaba、TypeScript 生态的 LangGraph.js 概念一一对应，可对照阅读）。
 
 ### 框架概念对照
 
@@ -164,7 +151,7 @@ Spring AI Alibaba 和 LangGraph 里几个关键概念的对应关系：
 
 ### 实现示例：用 LangGraph 构建文章审核工作流
 
-考虑到本文面向 Python 技术栈的读者，这里笔者就基于 LangGraph 来实现贯穿全文的“生成 → 审核 → 修改”工作流。
+实现：LangGraph，构建“生成 → 审核 → 修改”工作流。
 
 **第一步：定义状态和更新策略**
 
@@ -175,7 +162,6 @@ Spring AI Alibaba 和 LangGraph 里几个关键概念的对应关系：
 from typing import Annotated, TypedDict
 
 from langgraph.graph.message import add_messages
-
 
 class WorkflowState(TypedDict, total=False):
     input: str                                  # 用户输入（覆盖）
@@ -195,23 +181,19 @@ class WorkflowState(TypedDict, total=False):
 ```python
 import json
 
-
 def parse_score(response: str) -> float:
     """从模型输出中解析评分（实际项目建议用结构化输出 + json.loads）"""
     return float(json.loads(response).get("score", 0))
 
-
 def parse_feedback(response: str) -> str:
     """从模型输出中解析反馈"""
     return str(json.loads(response).get("feedback", ""))
-
 
 # 生成初稿节点
 def draft_node(state: WorkflowState, llm) -> dict:
     input_text = state.get("input", "")
     draft = llm.invoke(f"请根据以下要求撰写文章：{input_text}")
     return {"current_draft": draft, "next_node": "review"}
-
 
 # 质量审核节点
 def review_node(state: WorkflowState, llm) -> dict:
@@ -236,14 +218,12 @@ def review_node(state: WorkflowState, llm) -> dict:
         "next_node": next_node,
     }
 
-
 # 修改节点：根据审核反馈修正内容
 def revise_node(state: WorkflowState, llm) -> dict:
     draft = state.get("current_draft", "")
     feedback = state.get("review_feedback", "")
     revised = llm.invoke(f"请根据反馈修改文章。\n\n原文：{draft}\n\n反馈意见：{feedback}")
     return {"current_draft": revised, "next_node": "review"}
-
 
 # 输出节点
 def exit_node(state: WorkflowState) -> dict:
@@ -255,7 +235,6 @@ def exit_node(state: WorkflowState) -> dict:
 ```python
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
-
 
 def build_workflow(llm):
     workflow = StateGraph(WorkflowState)
@@ -284,7 +263,7 @@ def build_workflow(llm):
     return workflow.compile(checkpointer=saver)
 ```
 
-在这个实现中，可以看到：每个 Node 只做自己名字说的事（DraftNode 负责生成、ReviewNode 负责评估、ReviseNode 负责根据反馈修正），Edge（条件边）控制路由，State（`next_node`、`iteration_count`、`review_score`）驱动决策。Loop 通过 `review → revise → review` 的回边实现（审核不通过则由 ReviseNode 修正内容后重新进入审核），安全边界由 `iteration_count >= 3` 保证。持久化配置确保流程中断后可以从最近的 checkpoint 恢复，而不是从头开始——这对包含 Loop 的长时间运行工作流尤为重要：如果一个已迭代 2 轮的审核流程在第 3 轮中断，恢复后应该继续第 3 轮而不是重新从第 1 轮开始。
+在这个实现中，：每个 Node 只做自己名字说的事（DraftNode 负责生成、ReviewNode 负责评估、ReviseNode 负责根据反馈修正），Edge（条件边）控制路由，State（`next_node`、`iteration_count`、`review_score`）驱动决策。Loop 通过 `review → revise → review` 的回边实现（审核不通过则由 ReviseNode 修正内容后重新进入审核），安全边界由 `iteration_count >= 3` 保证。持久化配置确保流程中断后可以从最近的 checkpoint 恢复，而不是从头开始——这对包含 Loop 的长时间运行工作流尤为重要：如果一个已迭代 2 轮的审核流程在第 3 轮中断，恢复后应该继续第 3 轮而不是重新从第 1 轮开始。
 
 > 更完整的示例（包括人机协同、持久化、流式输出）可参考 [LangGraph 官方文档](https://langchain-ai.github.io/langgraph/)。
 
@@ -292,7 +271,7 @@ def build_workflow(llm):
 
 ![高抽象与低抽象工作流对比](../../../HTML/AI 工作流中的 Workflow、Graph 与 Loop：从概念到实现 _ JavaGuide_files/abstraction-comparison.svg)
 
-上图可以看到高抽象工作流将四个判断节点抽象成一个判断节点：评估是否达标。如果使用低抽象，那么当我们需要减少/添加新的判断节点时，需要花费时间去阅读源码寻找对应的节点。好的工作流关键看 Node、Edge、State 的抽象能否经得起复用与扩展，和步骤多少关系不大。
+上图高抽象工作流将四个判断节点抽象成一个判断节点：评估是否达标。如果使用低抽象，那么当需要减少/添加新的判断节点时，需要花费时间去阅读源码寻找对应的节点。好的工作流关键看 Node、Edge、State 的抽象能否经得起复用与扩展，和步骤多少关系不大。
 
 很多初学者设计工作流时，容易把每一步都写成具体动作，例如：调用模型生成文案；检查标题长度；检查语气是否合适；判断是否需要补资料；再调用模型修改。这样做短期可用，但流程会越来越碎，复用性也很差。更成熟的方式是把流程抽象到更稳定的结构层：
 

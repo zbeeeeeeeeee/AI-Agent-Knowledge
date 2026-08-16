@@ -143,29 +143,6 @@
 \maketitle
 \markboth{Java 版 Agent 知识}{ Java 版 Agent 知识}
 
-很多同学准备大模型面试时，第一反应是去背 Transformer、Attention、RLHF 这些词。不是说这些不重要，但对大部分后端转 AI 应用开发、AI 工程应用岗位来说，面试官更关心的是另一件事：
-
-
-
-\textbf{你是不是真的理解大模型调用链路里的工程约束。}
-
-
-
-比如 Token 为什么会影响成本和延迟？上下文窗口为什么不是越大越好？Temperature 为什么会影响结构化输出稳定性？Function Calling 为什么不能让模型直接执行真实业务操作？这些问题看起来基础，答不好就会暴露一个信号：你可能只是调过 API，还没有把大模型当作生产系统里的一个不稳定外部依赖来治理。
-
-
-
-这份大模型基础面试题主要根据 AI 专栏现有文章整理。它不是让你机械背题，而是帮你建立一条复习主线：
-
-
-\begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item 先理解 \textbf{Token、上下文窗口、采样参数}，知道模型为什么会不稳定。
-  \item 再理解 \textbf{API 调用工程}，知道一次模型调用在生产里要经过哪些治理环节。
-  \item 接着理解 \textbf{结构化输出与工具调用}，知道怎么让模型输出能被程序消费。
-  \item 最后理解 \textbf{AI 应用评测}，知道怎么判断你的 AI 应用到底有没有变好。
-\end{enumerate}
-
-
 \section*{面试官真正想考什么}
 
 
