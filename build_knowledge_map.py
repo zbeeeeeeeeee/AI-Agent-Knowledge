@@ -37,7 +37,7 @@ def N(title, status="nav", link=None, children=None, lang=None):
     return Node(title, status, link, children, lang)
 
 
-# 相对仓库根目录的权威入口。约定：概念/面试以 Java 版为 canonical，语言化代码按语言链接。
+# 相对仓库根目录的权威入口。约定：概念文档以 Java 版为 canonical，语言化代码按语言链接。
 J = "markdown/java"
 PY = "markdown/python"
 TS = "markdown/typescript"
@@ -74,12 +74,6 @@ DOC_INVENTORY = [
     ("行业场景方案", "08-应用与案例/02-行业场景方案.md", "shared"),
     ("Agent 技术雷达", "09-生态与前沿/01-Agent技术雷达.md", "shared"),
     ("论文精读清单", "09-生态与前沿/02-论文精读清单.md", "shared"),
-    ("AI Agent 面试题", "10-面试/01-AI-Agent面试题.md", "shared"),
-    ("RAG 面试题", "10-面试/02-RAG面试题.md", "shared"),
-    ("AI 系统设计面试题", "10-面试/03-AI系统设计面试题.md", "shared"),
-    ("AI 应用开发面试指南", "10-面试/04-AI应用开发面试指南.md", "shared"),
-    ("大模型基础面试题", "10-面试/05-大模型基础面试题.md", "shared"),
-    ("模拟面试题库", "10-面试/06-模拟面试题库.md", "shared"),
 ]
 # ============================================================
 # 分层索引数据：总入口只保留分类卡片与第一入口，全量节点移入附录
@@ -128,10 +122,6 @@ PORTAL = [
         ("Agent 技术雷达", "09-生态与前沿/01-Agent技术雷达.md", "shared"),
         ("论文精读清单", "09-生态与前沿/02-论文精读清单.md", "shared"),
     ]),
-    ("面试冲刺", "按面试题与模拟题库复习", [
-        ("AI 应用开发面试指南", "10-面试/04-AI应用开发面试指南.md", "shared"),
-        ("模拟面试题库", "10-面试/06-模拟面试题库.md", "shared"),
-    ]),
 ]
 
 QUICK_TASKS = [
@@ -150,7 +140,6 @@ QUICK_TASKS = [
     ("部署、灰度与回滚", "04-工程实践/06-Agent部署与发布.md", "code"),
     ("降低 Token 成本", "04-工程实践/09-成本与性能优化.md", "code"),
     ("看成功案例与反模式", "08-应用与案例/01-案例库与反模式索引.md", "shared"),
-    ("准备面试", "10-面试/04-AI应用开发面试指南.md", "shared"),
 ]
 
 CODE_DOCS = {rel for _, rel, mode in DOC_INVENTORY if mode == "code"}
@@ -204,7 +193,6 @@ TREE = Node(ROOT_TITLE, "nav", None, [
             N("后端工程师", "partial", f"{J}/README.md"),
             N("算法工程师", "partial", f"{J}/02-Agent/01-Agent核心概念.md"),
             N("架构师", "partial", f"{J}/07-系统设计/01-AI应用系统设计.md"),
-            N("面试冲刺", "full", f"{J}/10-面试/04-AI应用开发面试指南.md"),
         ]),
         N("按生命周期", "nav", None, [
             N("概念入门", "full", f"{J}/README.md"),
@@ -230,7 +218,7 @@ TREE = Node(ROOT_TITLE, "nav", None, [
     N("01 概念与分类", "partial", f"{J}/02-Agent/01-Agent核心概念.md", [
         N("Agent 定义与边界", "partial", f"{J}/02-Agent/01-Agent核心概念.md", [
             N("Agent 是什么", "full", f"{J}/02-Agent/01-Agent核心概念.md"),
-            N("Agent vs Chatbot", "partial", f"{J}/10-面试/06-模拟面试题库.md"),
+            N("Agent vs Chatbot", "full", f"{J}/00-概念与术语/01-Agent术语表与概念边界.md"),
             N("Agent vs Workflow", "full", f"{J}/02-Agent/01-Agent核心概念.md"),
             N("Agent vs RAG", "partial", f"{J}/02-Agent/02-Agent记忆系统.md"),
         ]),
@@ -582,7 +570,7 @@ def render_xmind_topics():
 
 def write_xmind(path):
     content = json.dumps(render_xmind_topics(), ensure_ascii=False, indent=2)
-    metadata = json.dumps({"creator": {"name": "AI Agent Knowledge Base", "version": "0.7.0"}}, ensure_ascii=False, indent=2)
+    metadata = json.dumps({"creator": {"name": "AI Agent Knowledge Base", "version": "0.9.0"}}, ensure_ascii=False, indent=2)
     manifest = json.dumps({"file-entries": {"content.json": {}, "metadata.json": {}}}, ensure_ascii=False, indent=2)
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr("manifest.json", manifest)
@@ -592,7 +580,7 @@ def write_xmind(path):
 
 def render_full_index_md():
     lines = []
-    lines.append("# AI Agent 全量节点索引（三语言版 v0.7，附录）")
+    lines.append("# AI Agent 全量节点索引（三语言版 v0.9，附录）")
     lines.append("")
     lines.append("> 本文件是知识库的**全量节点附录**：适合查完整节点、核对状态与三语言路径。日常快速查找请用 `知识地图总索引.md` 和 `知识地图-快速查找.md`。")
     lines.append("> 由 `build_knowledge_map.py` 生成；修改结构请改脚本后重新生成，避免图与文档漂移。")
@@ -637,7 +625,7 @@ def render_full_index_md():
                 cells.append("—")
         lines.append(f"| {title} | {emoji} {desc} | " + " | ".join(cells) + " |")
     lines.append("")
-    lines.append("## 3. 语言覆盖矩阵（20 篇 × 3 语言）")
+    lines.append(f"## 3. 语言覆盖矩阵（{len(DOC_INVENTORY)} 篇 × 3 语言）")
     lines.append("")
     lines.append("| # | 文档 | 语言策略 | Java | Python | TypeScript |")
     lines.append("| --- | --- | --- | --- | --- | --- |")
@@ -658,13 +646,13 @@ def render_full_index_md():
     lines.append(f"| 新手入门 | [01-LLM基础]({J}/01-LLM基础/01-LLM运行机制.md) → [02-Agent]({J}/02-Agent/01-Agent核心概念.md) → [03-RAG]({J}/03-RAG/01-RAG基础概念.md) | 建立完整概念地图 |")
     lines.append(f"| 后端开发 | 新手路径 → [04-工程实践]({J}/04-工程实践/01-Workflow-Graph与Loop.md) → [07-系统设计]({J}/07-系统设计/01-AI应用系统设计.md) | 能落地生产级 Agent 服务 |")
     lines.append(f"| 架构师 | [03 架构与运行机制]({J}/02-Agent/01-Agent核心概念.md) → [04 网关]({J}/04-工程实践/04-大模型网关.md) → [07 系统设计]({J}/07-系统设计/01-AI应用系统设计.md) | 能设计、拆解、治理 AI 系统 |")
-    lines.append(f"| 面试冲刺 | [AI 应用开发面试指南]({J}/10-面试/04-AI应用开发面试指南.md) → 6 份面试题 → [模拟题库]({J}/10-面试/06-模拟面试题库.md) | 能结构化答题 |")
+
     lines.append("")
     lines.append("## 5. 现状速览")
     lines.append("")
     lines.append("**已有强项**：LLM 运行机制、结构化输出、Agent Loop、记忆系统、RAG 基础与向量检索、Workflow/Graph/Loop、Harness、网关、系统设计。")
     lines.append("")
-    lines.append("**本轮已补齐**：术语表、自主性分级、多智能体编排；地图已升级为三语言视图。\n\n**主要缺口**：部署与可观测专项、评测体系、安全护栏专项、行业案例库、生态技术雷达。")
+    lines.append("**本轮已完成**：知识库聚焦工程主题；地图保持三语言视图。\n\n**剩余缺口**：在线 A/B 实验平台细节、沙箱分场景专项、多模态与 GUI Agent、行业合规细则。")
     lines.append("")
     lines.append("详见 [`知识地图-内容映射与成熟度.md`](知识地图-内容映射与成熟度.md) 与 [`知识地图-缺口与补全计划.md`](知识地图-缺口与补全计划.md)。")
     return "\n".join(lines) + "\n"
@@ -672,7 +660,7 @@ def render_full_index_md():
 
 def render_portal_md():
     lines = []
-    lines.append("# AI Agent 知识总索引（分层入口版 v0.7）")
+    lines.append("# AI Agent 知识总索引（分层入口版 v0.9）")
     lines.append("")
     lines.append("> 本页只做**分类与入口**，不做全量罗列。查任务用 `知识地图-快速查找.md`，查完整节点用 `知识地图-全量节点索引.md`，看全局结构用 `Agent知识地图.xmind`。")
     lines.append("")
@@ -683,7 +671,7 @@ def render_portal_md():
     lines.append("| L0 | `README.md` | 第一次进入仓库 |")
     lines.append("| L1 | 本页 | 想知道知识分几块、每块第一入口是什么 |")
     lines.append("| L2 | `知识地图-快速查找.md` | 按任务、角色、模块快速点进去 |")
-    lines.append("| L3 | `知识地图-全量节点索引.md` | 核对 177 个节点状态、三语言路径 |")
+    lines.append(f"| L3 | `知识地图-全量节点索引.md` | 核对 {len(list(iter_leaves(TREE)))} 个节点状态、三语言路径 |")
     lines.append("| 视觉 | `Agent知识地图.xmind` / `.mm` / `.mmd` | 全局结构评审与展示 |")
     lines.append("")
     lines.append("## 分类卡片")
@@ -694,7 +682,7 @@ def render_portal_md():
             counts, total, coverage = stats
             status_line = (f"🟢 {counts['full']} · 🟡 {counts['partial']} · 🔴 {counts['gap']} ｜覆盖率 {coverage:.0%}")
         else:
-            status_line = "面试冲刺入口"
+            status_line = "入口"
         lines.append(f"### {prefix}")
         lines.append("")
         lines.append(f"> {desc}。{status_line}。")
@@ -702,11 +690,10 @@ def render_portal_md():
         for label, rel, mode in docs:
             lines.append(f"- {entry_links(rel, mode, label)}")
         lines.append("")
-    lines.append("## 三条最常用路径")
+    lines.append("## 两条常用路径")
     lines.append("")
     lines.append("1. **新手**：`00 概念与术语` → `01 LLM基础` → `02 Agent` → `03 RAG` → `04 工程实践`")
     lines.append("2. **上线前**：`04 工程实践` → `05 评测` → `06 安全` → `07 部署`")
-    lines.append("3. **面试前**：`面试冲刺` → 模拟题库 → 回看薄弱节点")
     lines.append("")
     lines.append("## 下一步")
     lines.append("")
@@ -719,7 +706,7 @@ def render_portal_md():
 
 def render_quick_md():
     lines = []
-    lines.append("# 知识地图 · 快速查找（分层入口版 v0.7）")
+    lines.append("# 知识地图 · 快速查找（分层入口版 v0.9）")
     lines.append("")
     lines.append("> 三张表解决 90% 的查找：按模块、按任务、按角色。")
     lines.append("")
@@ -749,11 +736,10 @@ def render_quick_md():
     lines.append(f"| 新手 | [00 概念]({J}/00-概念与术语/01-Agent术语表与概念边界.md) → [01 LLM]({J}/01-LLM基础/01-LLM运行机制.md) → [02 Agent]({J}/02-Agent/01-Agent核心概念.md) | 建立完整概念 |")
     lines.append(f"| 后端 | 新手路径 → [04 工程实践]({J}/04-工程实践/01-Workflow-Graph与Loop.md) → [07 系统设计]({J}/07-系统设计/01-AI应用系统设计.md) | 落地生产服务 |")
     lines.append(f"| 架构师 | [03 架构]({J}/02-Agent/01-Agent核心概念.md) → [04 网关]({J}/04-工程实践/04-大模型网关.md) → [06 安全]({J}/06-安全与治理/01-Agent安全护栏清单.md) | 设计与治理 |")
-    lines.append(f"| 面试 | [面试指南]({J}/10-面试/04-AI应用开发面试指南.md) → [模拟题库]({J}/10-面试/06-模拟面试题库.md) | 结构化答题 |")
     lines.append("")
     lines.append("## 4. 三语言说明")
     lines.append("")
-    lines.append("`shared` 文档三语言同文，链接 Java canonical；`code` 文档给出 J/P/T 三个直达链接。完整 32×3 矩阵见 [`知识地图-全量节点索引.md`](知识地图-全量节点索引.md)。")
+    lines.append(f"`shared` 文档三语言同文，链接 Java canonical；`code` 文档给出 J/P/T 三个直达链接。完整 {len(DOC_INVENTORY)}×3 矩阵见 [`知识地图-全量节点索引.md`](知识地图-全量节点索引.md)。")
     return "\n".join(lines) + "\n"
 
 

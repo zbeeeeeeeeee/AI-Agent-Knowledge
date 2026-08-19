@@ -241,7 +241,7 @@ Agent知识/
         └── html-to-pdf.md   # This skill
 ```
 
-Categories: `01-LLM基础`, `02-Agent`, `03-RAG`, `04-工程实践`, `05-系统设计`, `06-面试`.
+Categories: `00-概念与术语`, `01-LLM基础`, `02-Agent`, `03-RAG`, `04-工程实践`, `05-评测与质量`, `06-安全与治理`, `07-系统设计`, `08-应用与案例`, `09-生态与前沿`.
 Markdown image refs are `../../../HTML/…` (one level deeper than before) so they resolve from
 both `markdown/<lang>/<cat>/` and `latex/<lang>/<cat>/`.
 
@@ -249,8 +249,7 @@ both `markdown/<lang>/<cat>/` and `latex/<lang>/<cat>/`.
 
 ```bash
 # Must run as user 'zhang' (Python deps + TeX Live live under /home/zhang)
-wsl -d Ubuntu-20.04 -u zhang -- bash -lc \
-  'cd /home/zhang/demos/latex_demos/Agent知识 && python3 convert.py && python3 build_pdfs.py'
+cd /path/to/ai-agent-knowledge && python3 convert.py && python3 build_pdfs.py
 ```
 - `convert.py` regenerates ALL markdown from HTML (deterministic; also (re)extracts Mermaid SVGs).
 - `build_pdfs.py` cleans TOC, generates `.tex`, converts images, runs `xelatex ×2`.

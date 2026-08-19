@@ -170,28 +170,24 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/loop-engineering-outer-loop.png}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/loop-engineering-outer-loop.png}
 \caption*{Loop Engineering 外层循环}
 \end{figure}
 
 
 
-网上很多文章会把它说成“停止提示 Agent，开始写提示 Agent 的系统”。
+常见表述是“停止提示 Agent，开始写提示 Agent 的系统”。该说法便于传播，但忽略了 Prompt：Loop 里的每次模型调用仍依赖 Prompt、上下文和工具描述。区别在于，工程重点转移到 Prompt 之外：谁来触发、带哪些材料、跑完后用什么证据判断。
 
 
 
-这句话挺好传播，但容易把 Prompt 说没了。Loop 里的每一次模型调用，还是要靠 Prompt、上下文和工具描述工作。区别在于，工程师开始把注意力放到 Prompt 外面：谁来触发、带哪些材料、跑完以后用什么证据判断。
-
-
-
-这个变化不小，但也没新到哪里去。
+变化明显，但核心概念不新。
 
 
 
 \section*{它借了哪些老概念？}
 
 
-Loop Engineering 很好理解，就是一些老概念的融合。
+Loop Engineering 由多个已有概念融合而成。
 
 
 
@@ -200,7 +196,7 @@ Loop Engineering 很好理解，就是一些老概念的融合。
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/agent-loop-flow.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/agent-loop-flow.jpg}
 \caption*{Agent Loop 工作流程}
 \end{figure}
 
@@ -222,11 +218,11 @@ ReAct 也是这个思路：Reasoning 和 Acting 交替进行，模型走一步�
 
 
 
-我之前在 AI Agent 核心概念 里讲过，它适合处理路径不确定、需要根据证据调整方向的任务。查线上故障、读代码库、排查测试失败，都属于这一类。
+Agent Loop 适合路径不确定、需要根据证据调整方向的任务，如线上故障排查、代码库阅读、测试失败排查。
 
 
 
-这篇主要看外层。内层是 Agent 自己每一轮“推理、行动、观察”的循环；外层则负责隔一段时间启动 Agent、把工作分出去、检查结果、保存状态，决定下一轮还要不要继续。
+以下讨论外层 Loop：隔一段时间启动 Agent、分配工作、检查结果、保存状态，并决定下一轮是否继续。内层是 Agent 每一轮“推理、行动、观察”的循环。
 
 
 {\footnotesize
@@ -252,13 +248,13 @@ ReAct 也是这个思路：Reasoning 和 Acting 交替进行，模型走一步�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/workflow-graph-loop-relation.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/workflow-graph-loop-relation.pdf}
 \caption*{Workflow、Graph、Loop 三者关系概览}
 \end{figure}
 
 
 
-比如“生成初稿 → 审核 → 不通过就修改 → 再审核”，这本来就是 Graph 里的条件边和回边。我之前在 AI 工作流中的 Workflow、Graph 与 Loop 里讲过，可靠的 Loop 至少要写清三件事：
+比如“生成初稿 → 审核 → 不通过就修改 → 再审核”，这本来就是 Graph 里的条件边和回边。可靠的 Loop 至少要写清三件事：
 
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
@@ -268,7 +264,7 @@ ReAct 也是这个思路：Reasoning 和 Acting 交替进行，模型走一步�
 \end{itemize}
 
 
-Loop Engineering 把这个思路挪到了代码 Agent 的日常工作里。以前你可能在 LangGraph 或 Spring AI Alibaba Graph 里写循环；现在这个循环会跨过 Claude Code、Codex、CI、GitHub、Issue 系统和本地仓库。
+Loop Engineering 将该思路用于代码 Agent 的日常工作。此前循环通常写在 LangGraph 或 Spring AI Alibaba Graph 中；现在循环跨过 Claude Code、Codex、CI、GitHub、Issue 系统和本地仓库。
 
 
 
@@ -289,7 +285,7 @@ Loop 一旦跑久，上下文问题很快就会冒出来。
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/context-engineering-vs-context-engineering-dimension-comparison.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/context-engineering-vs-context-engineering-dimension-comparison.jpg}
 \caption*{Context Engineering 和 Prompt Engineering 差别}
 \end{figure}
 
@@ -306,20 +302,20 @@ Loop 一旦跑久，上下文问题很快就会冒出来。
 \end{itemize}
 
 
-上下文管理没做好，Loop 很快就会变成高频率烧 Token。Agent 每一轮都重新读项目、重新猜规则、重新解释错误，最后越来越像一台很贵的复读机器。
+上下文管理不到位时，Loop 会高频消耗 Token：Agent 每轮重新读项目、重新猜规则、重新解释错误，最终退化为高成本重复。
 
 
 
 \subsection*{Harness Engineering：模型外面的执行环境}
 
 
-我之前在 Harness Engineering 里用过一个说法：Agent = Model + Harness。模型负责推理和生成，Harness 负责环境、工具、反馈、沙箱、权限、观测和恢复。
+Harness Engineering 的定义是 Agent = Model + Harness。模型负责推理和生成，Harness 负责环境、工具、反馈、沙箱、权限、观测和恢复。
 
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/harness-engineering-layers-arch.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/harness-engineering-layers-arch.jpg}
 \caption*{Harness 和 Prompt/Context Engineering 的关系}
 \end{figure}
 
@@ -342,13 +338,13 @@ Skills 这块很容易被低估。
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/skills-agent-execution-link.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/skills-agent-execution-link.jpg}
 \caption*{Agent 执行链路}
 \end{figure}
 
 
 
-如果每天早上都有一个自动 Loop 去处理 CI 失败，它不能每次都从零开始理解你的项目：
+每天早上自动 Loop 处理 CI 失败时，不能每次都从零开始理解项目：
 
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
@@ -366,13 +362,13 @@ Skills 这块很容易被低估。
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/agent-skills-progressive-disclosure.png}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/agent-skills-progressive-disclosure.png}
 \caption*{Skill 渐进式披露}
 \end{figure}
 
 
 
-有了 Skills，Loop 不用每次重新学习你的项目。
+通过 Skills，Loop 无需每次重新学习项目。
 
 
 
@@ -389,7 +385,7 @@ Skills 这块很容易被低估。
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/mcp-simple-diagram.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/mcp-simple-diagram.jpg}
 \caption*{MCP 图解}
 \end{figure}
 
@@ -399,7 +395,7 @@ MCP 不负责让模型变聪明，它负责让工具以统一方式被发现和�
 
 
 
-风险也跟着来了。无人值守的 Loop 拿到过大的写权限，可能改错数据、发错消息、重复调用昂贵接口，甚至被提示词注入诱导去读不该读的文件。MCP 接进 Loop 之后，权限、审计、限流、脱敏和人工确认都要补上。
+同时引入风险：无人值守的 Loop 拿到过大的写权限，可能改错数据、发错消息、重复调用昂贵接口，甚至被提示词注入诱导去读不该读的文件。MCP 接进 Loop 之后，权限、审计、限流、脱敏和人工确认都要补上。
 
 
 
@@ -410,11 +406,11 @@ MCP 不负责让模型变聪明，它负责让工具以统一方式被发现和�
 
 
 
-这次被单独拿出来讲，主要是因为“谁来提示 Agent”开始变成工程问题。
+该主题被单独提出，主要因为“谁来提示 Agent”已成为工程问题。
 
 
 
-以前大家更关心一句 Prompt 怎么写。现在要多想一步：这句 Prompt 由谁生成，什么时候生成，带哪些上下文，跑完以后用什么证据验收。
+过去关注单句 Prompt 的写法；现在还需明确：Prompt 由谁生成、何时生成、携带哪些上下文、完成后用什么证据验收。
 
 
 
@@ -422,12 +418,12 @@ MCP 不负责让模型变聪明，它负责让工具以统一方式被发现和�
 
 
 \begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item 你告诉它要做什么。
-  \item 它改代码。
-  \item 你跑测试。
-  \item 测试失败，你把报错贴回去。
-  \item 它再改。
-  \item 你再看 diff、再判断要不要继续。
+  \item 向 Agent 说明目标。
+  \item Agent 修改代码。
+  \item 运行测试。
+  \item 测试失败后，把报错贴回给 Agent。
+  \item Agent 继续修改。
+  \item 检查 diff，判断是否继续。
 \end{enumerate}
 
 
@@ -445,13 +441,13 @@ MCP 不负责让模型变聪明，它负责让工具以统一方式被发现和�
 \end{itemize}
 
 
-这里麻烦的是循环边界：哪些步骤能自动化，哪些步骤必须停下来让人看。
+难点在循环边界：哪些步骤能自动化，哪些步骤必须停下来让人看。
 
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/loop-engineering-outer-loop.png}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/loop-engineering-outer-loop.png}
 \caption*{Loop Engineering 外层循环}
 \end{figure}
 
@@ -460,19 +456,19 @@ MCP 不负责让模型变聪明，它负责让工具以统一方式被发现和�
 \section*{Claude Code 的 /loop、/goal 可以怎么理解？}
 
 
-我在 Claude Code 核心命令详解 里专门写过 \texttt{/loop}。这里顺手把 \texttt{/loop} 和 \texttt{/goal} 分开说一下，这俩都和 Loop Engineering 有关，但用法差得挺远。
+\texttt{/loop} 和 \texttt{/goal} 都与 Loop Engineering 有关，但用法差别明显。
 
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/claudecode-father-loop.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/claudecode-father-loop.jpg}
 \caption*{Claude Code 推荐使用 loop 命令}
 \end{figure}
 
 
 
-\texttt{/loop} 主要解决“过一会儿再看一次”的问题。它会在当前 session 里重复运行一个 prompt。你可以给固定间隔，比如每 5 分钟检查一次部署；也可以不给间隔，让 Claude 根据观察结果自己选择下一次等待多久。
+\texttt{/loop} 主要解决“过一会儿再看一次”的问题：在当前 session 中重复运行一个 prompt。可设置固定间隔（如每 5 分钟检查一次部署），也可不设间隔，让 Claude 根据观察结果选择下一次等待时长。
 
 
 
@@ -488,7 +484,7 @@ MCP 不负责让模型变聪明，它负责让工具以统一方式被发现和�
 
 
 
-\texttt{/goal} 主要解决“这个目标有没有完成”的问题。你给它一个可验证完成条件，Claude 会一轮一轮推进；每轮结束后，由一个独立的小模型基于对话里已经出现的证据判断条件是否满足。不满足就继续，满足就停止。
+\texttt{/goal} 主要解决“目标是否完成”的问题：给定可验证完成条件，Claude 逐轮推进；每轮结束后，由独立小模型基于对话中已出现的证据判断条件是否满足。不满足就继续，满足就停止。
 
 
 
@@ -499,7 +495,7 @@ MCP 不负责让模型变聪明，它负责让工具以统一方式被发现和�
 
 
 
-我自己的记法是：\texttt{/loop} 管下一次什么时候醒，\texttt{/goal} 管什么时候算做完。
+区分方式：\texttt{/loop} 管下一次何时启动，\texttt{/goal} 管何时算完成。
 
 
 
@@ -519,7 +515,7 @@ Stop hook 或 Agent SDK 里的控制循环会再往前走一步。每轮结束�
 
 
 
-我的使用习惯是：跑 \texttt{/loop} 前先收紧权限，写清楚轮询目标和停止条件；跑 \texttt{/goal} 前把完成条件写成可验证结果，并要求 Claude 展示测试、构建或 diff 检查结果。
+使用建议：跑 \texttt{/loop} 前收紧权限，写清轮询目标和停止条件；跑 \texttt{/goal} 前把完成条件写成可验证结果，并要求 Claude 展示测试、构建或 diff 检查结果。
 
 
 
@@ -551,7 +547,7 @@ Stop hook 或 Agent SDK 里的控制循环会再往前走一步。每轮结束�
 
 
 
-这张表也能解释我前面那句“新瓶装旧酒”。触发、调度、验证、审批这些工程动作都不新，只是现在被重新摆到了代码 Agent 周围。
+这张表也解释了“新瓶装旧酒”：触发、调度、验证、审批这些工程动作都不新，只是重新围绕代码 Agent 组织。
 
 
 
@@ -562,7 +558,7 @@ Stop hook 或 Agent SDK 里的控制循环会再往前走一步。每轮结束�
 
 
 
-假设目标是“每天自动处理 CI 失败”，个人建议第一版别上来就让 Agent 自动修代码，更不要自动合并。先做 triage 就够了。
+假设目标是“每天自动处理 CI 失败”。第一版不要让 Agent 自动修代码，更不要自动合并，先做 triage。
 
 
 
@@ -570,7 +566,7 @@ Stop hook 或 Agent SDK 里的控制循环会再往前走一步。每轮结束�
 
 
 
-我会把第一版压得很保守：
+第一版采用保守范围：
 
 
 \begin{enumerate}[itemsep=1pt, topsep=2pt]
@@ -587,7 +583,7 @@ Stop hook 或 Agent SDK 里的控制循环会再往前走一步。每轮结束�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/loop-engineering-ci-triage-loop.png}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/loop-engineering-ci-triage-loop.png}
 \caption*{CI 排查 Loop 示例}
 \end{figure}
 
@@ -605,7 +601,7 @@ Stop hook 或 Agent SDK 里的控制循环会再往前走一步。每轮结束�
 \end{itemize}
 
 
-这个 Loop 里能看到前面提到的几个部件：
+该 Loop 用到以下部件：
 
 
 {\footnotesize
@@ -638,14 +634,14 @@ Stop Condition & 测试通过、达到重试上限、遇到高风险操作 \\
 
 
 
-这块的价值不在“Agent 会写代码”本身。模型、上下文和工具决定代码写得怎么样；Loop 负责把反馈、记录和停止条件放进流程里。
+价值不在“Agent 会写代码”本身。模型、上下文和工具决定代码写得怎么样；Loop 负责把反馈、记录和停止条件放进流程里。
 
 
 
 \section*{什么场景值得做 Loop？}
 
 
-我一般看三点：任务会不会重复，验收信号硬不硬，失败后能不能回滚。
+判断标准有三点：任务是否重复，验收信号是否硬性，失败后能否回滚。
 
 
 
@@ -667,14 +663,14 @@ Stop Condition & 测试通过、达到重试上限、遇到高风险操作 \\
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
   \item 目标很虚，比如“让产品体验更好”“想一个增长策略”。
-  \item 验证信号很弱，只能靠 Agent 自己说“我觉得可以了”。
+  \item 验证信号弱，仅依赖 Agent 自评。
   \item 一旦做错影响很大，比如生产数据库写操作、权限系统变更、支付链路改造。
   \item 强依赖人的审美和业务判断，比如品牌文案定调、复杂产品取舍。
   \item 没有测试、没有日志、没有回滚方式的老项目大改。
 \end{itemize}
 
 
-有个很现实的判断：你自己都说不清怎么验收，就别急着 loop。先把目标拆小，把验收标准写出来。
+验收标准不明确时，不要急于启用 loop。先拆小目标，写清验收标准。
 
 
 
@@ -730,7 +726,7 @@ Loop 最怕“继续优化一下”这种指令。它会努力优化，但不知
 \subsection*{忘了成本上限}
 
 
-Loop 会放大 Token 消耗。一次任务里，Agent 会读文件、跑工具、解释报错、压缩上下文、调用子 Agent、再让审查 Agent 看一遍。循环次数一多，账单很快就有存在感。
+Loop 会放大 Token 消耗。一次任务里，Agent 会读文件、跑工具、解释报错、压缩上下文、调用子 Agent、再让审查 Agent 看一遍。循环次数一多，账单增长明显。
 
 
 
@@ -746,14 +742,14 @@ Loop 会放大 Token 消耗。一次任务里，Agent 会读文件、跑工具�
 \end{itemize}
 
 
-这属于架构约束，跟抠门没关系。
+预算控制属于架构约束，不是成本抠门。
 
 
 
 \subsection*{权限给得太大}
 
 
-Loop 可以自己跑，权限就不能像手动会话一样随意给。
+Loop 自主运行时，权限不能像手动会话一样随意授予。
 
 
 
@@ -788,13 +784,13 @@ L4 自动合并 & 通过策略后自动合并 & 只处理异常 \\
 
 
 
-绝大多数团队先做到 L1/L2 就已经有价值。L4 我会放得很晚：问题类型要固定，测试要能兜住，回滚也要顺手。只要牵到业务判断、权限、数据写入，就别急着自动合。
+绝大多数团队先做到 L1/L2 就有价值。L4 应放到最后：问题类型固定、测试能兜住、回滚顺手时才考虑。涉及业务判断、权限、数据写入时，不急于自动合并。
 
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/loop-engineering-safety-boundary.png}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/Loop Engineering 是什么？为什么说它是新瓶装旧酒？ _ JavaGuide_files/loop-engineering-safety-boundary.png}
 \caption*{Loop 的安全边界}
 \end{figure}
 
@@ -803,7 +799,7 @@ L4 自动合并 & 通过策略后自动合并 & 只处理异常 \\
 \section*{第一版先别急着自动修}
 
 
-第一次做 Loop，我不建议直接上无人值守自动修复。可以从只读 triage 开始。
+第一次做 Loop，不要直接上无人值守自动修复，从只读 triage 开始。
 
 
 
@@ -832,7 +828,7 @@ L4 自动合并 & 通过策略后自动合并 & 只处理异常 \\
 
 
 
-这个版本不花哨，但胜在稳。它不会乱改代码，也能帮你观察 Agent 会不会误读日志、会不会乱找文件、会不会重复调用工具。等它的 triage 稳了，再考虑给低风险修复权限。
+这个版本不花哨，但胜在稳定：它不会乱改代码，也便于观察 Agent 是否误读日志、乱找文件或重复调用工具。等它的 triage 稳了，再考虑给低风险修复权限。
 
 
 
@@ -861,11 +857,11 @@ stop_condition:
 
 
 
-这个文件可以是 Markdown、YAML、Issue comment、Linear 卡片或数据库记录。别纠结格式，重点是别只存在聊天记录里。
+这个文件可以是 Markdown、YAML、Issue comment、Linear 卡片或数据库记录。格式不限，关键是不要只存在聊天记录里。
 
 
 
-如果你要做自动修复，再补四条：
+启用自动修复时，再补四条：
 
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
@@ -879,11 +875,11 @@ stop_condition:
 \section*{总结}
 
 
-Loop Engineering 这个词确实有包装味。它把很多早就存在的东西合在一起：Agent Loop、ReAct、Workflow Graph、Context Engineering、Harness、Skills、MCP、Memory、CI、测试、代码审查。
+Loop Engineering 有包装成分，但融合了多个既有概念：Agent Loop、ReAct、Workflow Graph、Context Engineering、Harness、Skills、MCP、Memory、CI、测试、代码审查。
 
 
 
-但它提醒了一个变化：Agent 能连续读文件、改代码、跑测试、开 PR 之后，工程师不能只盯着下一句 Prompt，还要设计它能在哪些边界里自己推进。
+其核心变化是：Agent 能连续读文件、改代码、跑测试、开 PR 之后，工程师不能只盯着下一句 Prompt，还要设计它能在哪些边界里自己推进。
 
 
 

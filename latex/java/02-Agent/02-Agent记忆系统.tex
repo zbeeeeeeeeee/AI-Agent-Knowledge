@@ -148,7 +148,7 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-memory-taxonomy.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-memory-taxonomy.pdf}
 \caption*{Agent 记忆分类全景图}
 \end{figure}
 
@@ -160,7 +160,7 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-arch.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-arch.jpg}
 \caption*{AI Agent 记忆系统架构}
 \end{figure}
 
@@ -229,7 +229,7 @@ Token 级记忆 & 以自然语言或离散符号形式存储在外部数据库 &
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-lifestyle.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-lifestyle.jpg}
 \caption*{记忆操作的生命周期}
 \end{figure}
 
@@ -291,7 +291,7 @@ Token 级记忆 & 以自然语言或离散符号形式存储在外部数据库 &
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/context-utilization-40-percent-threshold-phenomenon.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/context-utilization-40-percent-threshold-phenomenon.pdf}
 \caption*{上下文利用率的 40\% 阈值现象}
 \end{figure}
 
@@ -341,7 +341,7 @@ Token 级记忆 & 以自然语言或离散符号形式存储在外部数据库 &
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-rag-vs-memory.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-rag-vs-memory.pdf}
 \caption*{长期记忆与 RAG（检索增强生成）的区别}
 \end{figure}
 
@@ -419,7 +419,7 @@ LLM 做事实抽取时，失败模式也要提前想清楚。它可能漏掉关�
 \subsection*{主流 Memory 产品如何对比？}
 
 
-下面这张表主要看几个公开项目或产品各自强调什么，不等于直接选型结论。最后还得看你自己的延迟要求、合规要求和数据形态。
+下面这张表只展示公开项目或产品各自的侧重点，不等于直接选型结论；最终取决于延迟要求、合规要求和数据形态。
 
 
 {\footnotesize
@@ -480,7 +480,7 @@ MemOS 则在论文和宣传里画了“文本 → KV Cache（激活）→ LoRA�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-evolution.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-evolution.jpg}
 \caption*{记忆系统的高级演化机制}
 \end{figure}
 
@@ -542,7 +542,7 @@ score = relevance × importance × decay(t)
 
 
 
-这点很多团队一开始会低估。大家舍不得“遗忘”，觉得信息存着总比丢了好。结果向量库里堆了几十万条记忆，每次 Top-K 里混着一堆过时噪音，Agent 给出的建议还停留在三年前。这个体验非常糟糕，而且很难靠调 Prompt 补回来。
+很多团队低估记忆淘汰的必要性，倾向保留所有信息。结果向量库堆入几十万条记忆，每次 Top-K 混入过时噪音，Agent 的建议停留在三年前。该问题很难靠调 Prompt 修复。
 
 
 
@@ -555,7 +555,7 @@ score = relevance × importance × decay(t)
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-retrieval-optimization.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-retrieval-optimization.jpg}
 \caption*{长期记忆的检索优化策略}
 \end{figure}
 
@@ -597,7 +597,7 @@ Mem0 在 LoCoMo 上达到 91.6，较旧算法 +20 分；LongMemEval 上达到 93
 
 
 
-很多时候你感觉“记忆没用”，并不是写入阶段完全失败，而是 Recall 跑偏，或者精排没有把真正相关的内容顶上来。优先看 trace 里的 query、过滤条件、融合权重，再决定要不要给提取链路加预算。别一上来就狂加写入逻辑，那很可能只是把噪声写得更快。
+“记忆没用”通常不是写入阶段完全失败，而是 Recall 跑偏，或精排未把真正相关内容顶上来。优先检查 trace 中的 query、过滤条件和融合权重，再决定是否给提取链路增加预算。不要急于增加写入逻辑，那可能只是把噪声写得更快。
 
 
 
@@ -675,7 +675,7 @@ Claude Code 的记忆系统采用双轨制：人工编写的 \texttt{CLAUDE.md}�
 
 
 
-适合写进去的内容有几类。技术栈和版本信息很重要，框架版本差异往往是 AI 犯错的源头。你不标 Spring Boot 版本，它就容易生成训练数据中更常见的版本用法。常用命令也应该写进去，比如构建、测试、lint、启动，并尽量放在代码块里。代码块里的命令 Claude 更倾向于照着跑，自然语言里的命令它可能会按自己的理解改写。
+适合写进去的内容有几类。技术栈和版本信息很重要，框架版本差异往往是 AI 犯错的源头。不标注 Spring Boot 版本时，模型容易生成训练数据中更常见的版本用法。常用命令也应该写进去，比如构建、测试、lint、启动，并尽量放在代码块里。代码块里的命令 Claude 更倾向于照着跑，自然语言里的命令它可能会按自己的理解改写。
 
 
 
@@ -856,7 +856,7 @@ Auto Memory 需要 Claude Code v2.1.59+，默认开启。
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-markdown-memory-boundary.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 _ JavaGuide_files/agent-memory-markdown-memory-boundary.pdf}
 \caption*{Markdown 记忆和传统长期记忆的适用边界}
 \end{figure}
 
@@ -889,7 +889,7 @@ Markdown 和向量库各有适用边界，不建议一刀切。
 
 
 
-Markdown 的局限也很明显。当你需要从海量非结构化文本里检索特定片段时，人工组织的 Markdown 会成为瓶颈，这时向量库的语义检索能力不可替代。
+Markdown 的局限也很明显：需要从海量非结构化文本中检索特定片段时，人工组织的 Markdown 会成为瓶颈，此时向量库的语义检索能力不可替代。
 
 
 
@@ -900,7 +900,7 @@ Markdown 的局限也很明显。当你需要从海量非结构化文本里检�
 \subsection*{Markdown 记忆应如何维护？}
 
 
-这里以 \texttt{CLAUDE.md} 为例。\texttt{CLAUDE.md} 不是写完就完事，项目会演进，规则也会过时。
+以 \texttt{CLAUDE.md} 为例。\texttt{CLAUDE.md} 不是写完就完事，项目会演进，规则也会过时。
 
 
 
@@ -916,11 +916,11 @@ Markdown 的局限也很明显。当你需要从海量非结构化文本里检�
 
 
 
-有两个预警信号很值得注意。第一，Claude 为已经写在文件里的规则道歉，比如“抱歉，我刚才忽略了 XX 规则”。这说明规则表述可能不够直接。第二，同一条规则在不同会话中反复被违反。这通常不是措辞问题，而是整份文件太长，规则被稀释了。解决方式不是继续改措辞，而是压缩整份文件。
+两个预警信号。第一，Claude 为已经写在文件里的规则道歉，比如“抱歉，我刚才忽略了 XX 规则”。这说明规则表述可能不够直接。第二，同一条规则在不同会话中反复被违反。这通常不是措辞问题，而是整份文件太长，规则被稀释了。解决方式不是继续改措辞，而是压缩整份文件。
 
 
 
-维护时可以用对话式审查：每隔几周，挑几条 \texttt{CLAUDE.md} 里的规则问 Claude，“如果我删掉这条规则，你会改变行为吗？”如果它说不会，这条规则可能就可以删。
+维护时做对话式审查：每隔几周挑几条 \texttt{CLAUDE.md} 规则询问 Claude“删除这条规则是否影响行为”；若无影响，可删除。
 
 
 

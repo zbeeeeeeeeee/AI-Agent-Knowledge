@@ -159,7 +159,7 @@ LLM Gateway 更像是：\textbf{API 网关能力 + 模型调用控制面}。
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/大模型网关详解：多模型路由、Fallback、限流与成本控制 _ JavaGuide_files/api-gateway-overview.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/大模型网关详解：多模型路由、Fallback、限流与成本控制 _ JavaGuide_files/api-gateway-overview.jpg}
 \caption*{传统 API 网关示意图}
 \end{figure}
 
@@ -175,7 +175,7 @@ LLM Gateway 则面对的是大模型调用，它除了处理普通 API 问题，
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/大模型网关详解：多模型路由、Fallback、限流与成本控制 _ JavaGuide_files/llm-gateway-overview.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/大模型网关详解：多模型路由、Fallback、限流与成本控制 _ JavaGuide_files/llm-gateway-overview.jpg}
 \caption*{LLM 网关示意图}
 \end{figure}
 
@@ -283,7 +283,7 @@ Gateway 的范围大得多。从请求进来到结果返回，中间经过的鉴
 
 
 
-你可以只有 Router，没有 Gateway，就做简单的模型路由功能。例如写一个函数，根据任务类型返回对应的模型。
+可以只有 Router 而没有 Gateway，实现简单的模型路由，例如写一个函数按任务类型返回对应模型。
 
 
 
@@ -340,7 +340,7 @@ MCP & 让模型或 Agent 以统一协议访问工具、资源和上下文 & Gate
 
 
 
-Gateway 反过来还能帮你把端到端延迟压下来：
+Gateway 反过来还能降低端到端延迟：
 
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
@@ -360,22 +360,22 @@ Gateway 反过来还能帮你把端到端延迟压下来：
 
 
 
-\subsection*{你真的需要 LLM Gateway 吗？}
+\subsection*{何时需要 LLM Gateway}
 
 
 很多项目一开始用不上完整的 LLM Gateway。
 
 
 
-Gateway 解决的是规模化之后的问题：多团队共用模型、多供应商切换、成本精细归因、合规审计留痕。如果你的场景还没长到这个阶段，提前搭完整 Gateway 只会增加维护负担，不会带来收益。
+Gateway 解决规模化之后的问题：多团队共用模型、多供应商切换、成本精细归因、合规审计留痕。场景未达到该阶段时，提前搭完整 Gateway 只会增加维护负担。
 
 
 
-如果你只是做内部工具、单模型、低流量、没有多租户、没有严格成本压力，也不需要复杂审计，那就先别过度设计。一个封装良好的 \texttt{LLMClient}，加上基础日志、超时、重试和错误处理，已经够用了。
+仅用于内部工具、单模型、低流量、无多租户、无严格成本压力且无需复杂审计时，不必过度设计。一个封装良好的 \texttt{LLMClient}，加上基础日志、超时、重试和错误处理，已经够用了。
 
 
 
-判断方式也不复杂，按你的实际情况对号入座：
+判断条件：
 
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
@@ -391,7 +391,7 @@ Gateway 解决的是规模化之后的问题：多团队共用模型、多供应
 
 
 
-你可以先不做完整 Gateway，但最好从第一天就把模型调用收在一个地方——一个统一的模块、一个统一的接口。后面不管是加日志、加限流、加路由、还是换供应商，改的都是这一个点，而不是满仓库 grep。
+第一版可以不做完整 Gateway，但模型调用应从第一天起收口到统一模块、统一接口。后面不管是加日志、加限流、加路由、还是换供应商，改的都是这一个点，而不是满仓库 grep。
 
 
 
@@ -543,7 +543,7 @@ Agentic 路由 & 多轮任务里动态切换模型和工具 & 复杂 Agent、长
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/大模型网关详解：多模型路由、Fallback、限流与成本控制 _ JavaGuide_files/llm-gateway-overview.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/大模型网关详解：多模型路由、Fallback、限流与成本控制 _ JavaGuide_files/llm-gateway-overview.jpg}
 \caption*{LLM 网关示意图}
 \end{figure}
 
@@ -830,7 +830,7 @@ Fallback 不是“失败就换一个模型再试”这么简单。
 
 
 
-第一，Fallback 必须和幂等绑定。用户点一次“生成报告”，主模型已经生成完了，但你的网关超时了，于是又切备用模型生成一次，最后落库两份报告，成本也扣两遍。
+第一，Fallback 必须和幂等绑定。用户点一次“生成报告”，主模型已经生成完毕，但网关超时后又切备用模型生成一次，最终落库两份报告，成本重复计费。
 
 
 
@@ -1108,11 +1108,11 @@ Gemini Context Caching & 通过 cached content 机制复用长上下文 & 长文
 
 
 
-Prompt cache 也不是开了就赚。显式缓存通常要区分写入和读取；自动缓存也会受支持模型、最小前缀长度、价格表变化影响。如果你的 system prompt、工具 Schema 或上下文每次都夹带时间戳、随机 ID、用户临时状态，前缀一直变，缓存命中率上不去，成本收益就会很差。稳定内容放前面、动态内容放后面，是使用供应商缓存时最重要的 Prompt 结构原则。
+Prompt cache 也不是开了就赚。显式缓存通常要区分写入和读取；自动缓存也会受支持模型、最小前缀长度、价格表变化影响。若 system prompt、工具 Schema 或上下文每次都夹带时间戳、随机 ID、用户临时状态，前缀持续变化，缓存命中率上不去，成本收益会很差。稳定内容放前面、动态内容放后面，是使用供应商缓存时最重要的 Prompt 结构原则。
 
 
 
-\section*{如何让你设计一个 LLM Gateway，你会怎么做？}
+\section*{LLM Gateway 设计路径}
 
 
 \subsection*{一个生产级 LLM Gateway 长什么样？}
@@ -1349,11 +1349,11 @@ LiteLLM 的优势是供应商覆盖和接入速度。它更适合把不同供应
 
 
 
-不过，LiteLLM 这类基础设施组件生产使用一定要做版本锁定、镜像固定和供应链扫描。2026 年 3 月，LiteLLM 官方通报过一次 PyPI 发布链路被污染事件，受影响版本包括 \texttt{1.82.7} 和 \texttt{1.82.8}；官方同时说明 GitHub 源码、Docker 镜像和 LiteLLM Cloud 不受影响。这类事件提醒我们：AI Gateway 往往持有大量上游 API Key，一旦依赖链被污染，影响面会比普通业务库更大。
+不过，LiteLLM 这类基础设施组件生产使用必须做版本锁定、镜像固定和供应链扫描。2026 年 3 月，LiteLLM 官方通报过一次 PyPI 发布链路被污染事件，受影响版本包括 \texttt{1.82.7} 和 \texttt{1.82.8}；官方同时说明 GitHub 源码、Docker 镜像和 LiteLLM Cloud 不受影响。AI Gateway 往往持有大量上游 API Key，依赖链被污染时影响面比普通业务库更大。
 
 
 
-Cloudflare AI Gateway 更像托管在边缘网络上的 AI 流量入口。如果你的系统已经在 Cloudflare 上，用它补日志、分析、缓存、限流、重试和 Fallback 的接入成本会比较低。它的官方文档还提供动态路由、Bring Your Own Keys、请求 / 响应 DLP 扫描、日志 payload 采集开关等能力。对安全合规要求没到“必须私有化”的团队，这些能力能少做不少平台工程。
+Cloudflare AI Gateway 更像托管在边缘网络上的 AI 流量入口。若系统已在 Cloudflare 上，用它补日志、分析、缓存、限流、重试和 Fallback 的接入成本较低。它的官方文档还提供动态路由、Bring Your Own Keys、请求 / 响应 DLP 扫描、日志 payload 采集开关等能力。对安全合规要求没到“必须私有化”的团队，这些能力能少做不少平台工程。
 
 
 
@@ -1361,11 +1361,11 @@ Kong AI Gateway 的定位更企业化。它适合把 LLM 流量纳入 Kong 既�
 
 
 
-Inworld Router 更强调实时路由和实验能力。它通过条件路由、动态分层、流量切分和 sticky user assignment，把用户分层、任务复杂度、延迟目标、成本目标这些业务规则落到模型选择上。它适合实时语音、对话式 AI、AI 编程工具、用户分层和 A/B 测试这类场景。它不是开源路由库；如果你的要求是源码审计、完全自控发布节奏、私有化部署或明确 SLA，要按官方文档和商务条款单独确认。
+Inworld Router 更强调实时路由和实验能力。它通过条件路由、动态分层、流量切分和 sticky user assignment，把用户分层、任务复杂度、延迟目标、成本目标这些业务规则落到模型选择上。它适合实时语音、对话式 AI、AI 编程工具、用户分层和 A/B 测试这类场景。它不是开源路由库；若要求源码审计、完全自控发布节奏、私有化部署或明确 SLA，需按官方文档和商务条款单独确认。
 
 
 
-LLMRouter 更偏研究和算法工具箱。它能帮你理解和验证 KNN、SVM、MLP、Elo、Graph、个性化、多轮和 Agentic Router 这类策略，但如果要做生产 Gateway，还要补限流、审计、成本、权限、合规和运维能力。
+LLMRouter 更偏研究和算法工具箱。它可用于理解和验证 KNN、SVM、MLP、Elo、Graph、个性化、多轮和 Agentic Router 等策略；做生产 Gateway 时，还需补限流、审计、成本、权限、合规和运维能力。
 
 
 
@@ -1376,7 +1376,7 @@ LLMRouter 更偏研究和算法工具箱。它能帮你理解和验证 KNN、SVM
 
 
 
-如果你要快速接入很多模型和供应商，优先看 LiteLLM 这类成熟统一接口。它能让团队很快从“到处写 SDK”切到“统一入口”。
+需要快速接入大量模型和供应商时，优先选 LiteLLM 这类成熟统一接口。它能让团队很快从“到处写 SDK”切到“统一入口”。
 
 
 
@@ -1451,11 +1451,7 @@ TTFT & 首 Token 延迟，影响流式体验 \\
 \section*{总结}
 
 
-面试里问到大模型网关，不要只回答“统一转发模型请求”。这个说法太浅了。
-
-
-
-更完整的回答应该是：LLM Gateway 负责把模型调用收口，统一处理模型接入、路由、Fallback、限流、Token 预算、成本归因、日志审计和质量回放。LLM Router 只是其中负责“选哪个模型”的一部分。
+大模型网关不等于“统一转发模型请求”。完整定义是：LLM Gateway 负责把模型调用收口，统一处理模型接入、路由、Fallback、限流、Token 预算、成本归因、日志审计和质量回放。LLM Router 只是其中负责“选哪个模型”的一部分。
 
 
 

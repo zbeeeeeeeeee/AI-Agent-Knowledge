@@ -4,13 +4,13 @@
 
 ### Harness 到底是什么？
 
-可以先用一个粗暴但好记的说法：Agent = Model + Harness。你不是模型，那你做的东西大概率就是 Harness。
+Agent = Model + Harness。除模型外，其余组件大概率属于 Harness。
 
 这个说法有点绝对，但抓住了重点。Harness 指的是模型之外的整套系统：系统提示词、工具调用、文件系统、沙箱环境、编排逻辑、钩子中间件、反馈回路、约束机制。模型只提供推理和生成能力，Harness 把状态、工具、反馈、执行环境和安全边界串起来，Agent 才能真正开始干活。
 
 LangChain 的 Vivek Trivedi 写过一篇《The Anatomy of an Agent Harness》，里面有个思路很值得记：先分清模型负责什么，再看剩下的系统该补什么。用这条线一切，很多 Agent 问题就不再是“模型行不行”，而是“系统有没有把模型需要的东西准备好”。
 
-可以把模型想成 CPU，把 Harness 想成操作系统。CPU 再强，OS 如果天天崩，体验也不会好。你买了最新的 M5 芯片，但系统卡死、驱动乱飞，实际体验可能还不如旧芯片配一个稳定系统。
+模型可类比 CPU，Harness 可类比操作系统。CPU 再强，OS 不稳定则体验不佳：最新 M5 芯片配不稳定系统，实际体验可能不如旧芯片配稳定系统。
 
 ![Agent = Model + Harness](../../../HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/harness-agent-equals-model-harness-arch.jpg)
 
@@ -26,7 +26,7 @@ Prompt Engineering、Context Engineering、Harness Engineering 不太适合放�
 | Context Engineering | 该给 Agent 看什么 | 在合适时机给模型提供正确且必要的信息 | 上下文管理、RAG、记忆注入、Token 优化 |
 | Harness Engineering | 系统怎么持续执行、纠偏、观测和恢复 | 长链路任务中的持续正确、偏差修正、故障恢复 | 文件系统、沙箱、约束执行、反馈回路、观测 |
 
-简单任务里，Prompt 可能就够了。比如让模型改一句文案，提示词说清楚，效果通常不会差。需要外部知识时，Context 更重要，你得把资料、检索结果、历史状态放到合适位置。到了长链路、可执行、低容错的商业场景，Harness 才会变成主要矛盾，因为 Agent 需要的不只是“会回答”，还要能执行、验证、回滚、继续推进。
+简单任务里，Prompt 可能就够了。比如让模型改一句文案，提示词说清楚，效果通常不会差。需要外部知识时，Context 更重要，需把资料、检索结果、历史状态放到合适位置。到了长链路、可执行、低容错的商业场景，Harness 才会变成主要矛盾，因为 Agent 需要的不只是“会回答”，还要能执行、验证、回滚、继续推进。
 
 这也是一线团队会把大量精力放在 Harness 上的原因。不是他们不会写 Prompt，而是 Prompt 解决不了所有执行问题。
 
@@ -45,7 +45,7 @@ Prompt Engineering、Context Engineering、Harness Engineering 不太适合放�
 | 判断自己有没有做对 | 提供沙箱、测试工具、浏览器自动化 | 验证闭环 |
 | 长任务中保持连贯 | 做上下文压缩、记忆文件、进度追踪 | 上下文管理 |
 
-把这些“模型做不了，但你又希望 Agent 能做到”的部分补齐，就是 Harness 的组件清单。LangChain 也把它拆成了几块：文件系统负责持久化，Bash 执行负责通用工具，沙箱负责隔离风险，记忆机制负责跨会话积累，上下文压缩负责对抗长上下文带来的质量下降。
+把“模型做不了但 Agent 需要具备”的部分补齐，就是 Harness 的组件清单。LangChain 也把它拆成了几块：文件系统负责持久化，Bash 执行负责通用工具，沙箱负责隔离风险，记忆机制负责跨会话积累，上下文压缩负责对抗长上下文带来的质量下降。
 
 ## Harness 进阶
 
@@ -53,7 +53,7 @@ Prompt Engineering、Context Engineering、Harness Engineering 不太适合放�
 
 前面是从“模型缺什么，系统补什么”的角度看 Harness。如果换成系统设计视角，一个成熟的 Harness 通常会有清晰的分层。
 
-我之前在 YouTube 上看到过一个六层体系，比较适合拿来理解 Harness 的全貌：
+一个适合理解 Harness 全貌的六层体系：
 
 ![Harness Engineering 六层架构](../../../HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/harness-engineering-six-layer-architecture.svg)
 
@@ -74,7 +74,7 @@ Prompt Engineering、Context Engineering、Harness Engineering 不太适合放�
 
 ### 为什么瓶颈经常不在模型？
 
-第一次听到这个结论，很多人会觉得反直觉。模型不够聪明，那等更强的模型出来不就好了？但不少实验和实践都在指向另一个结论：模型当然重要，但在很多 Agent 场景里，真正卡住效果的是基础设施。
+该结论看似反直觉：模型能力不足时，直觉方案是等待更强模型。但多项实验表明，模型虽然重要，多数 Agent 场景的瓶颈仍在基础设施。
 
 前面提到的 [Can.ac](http://can.ac/) 实验就是一个典型例子。同一个模型，只换了工具调用格式，效果能差十倍。LangChain 的实践也类似，他们优化了 Agent 运行环境，包括文档组织方式、验证回路、追踪系统，在 Terminal Bench 2.0 上从全球第 30 名升到第 5 名，得分从 52.8% 提升到 66.5%。模型没有换，换的是 Harness。
 
@@ -132,7 +132,7 @@ Anthropic 也遇到过类似问题，他们称之为“上下文焦虑”。Sonn
 | 定期垃圾回收 | 清理速度要跟得上生成速度 | OpenAI 的后台清理 Agent |
 | 可观测性集成 | 把性能优化从感觉问题变成可测量的问题 | OpenAI 接入 Chrome DevTools |
 
-### 你的 Harness 到哪个阶段了？
+### Harness 建设阶段评估
 
 可以用下面这个表粗略判断一下。这里不需要追求一步到 Level 4，很多团队能从 Level 0 到 Level 1，收益就已经很明显。
 
@@ -151,7 +151,7 @@ Anthropic 也遇到过类似问题，他们称之为“上下文焦虑”。Sonn
 | 问题 | 现状 | 谁在关注 |
 | --- | --- | --- |
 | 棕地项目怎么改造 | 公开成功案例几乎都是绿地项目，缺少成熟方法论 | Böckeler 把它比作“在从没用过静态分析的代码库上跑静态分析”。她还提出 Ambient Affordances：环境本身的结构特性，比如类型系统、模块边界、框架抽象，会影响 Harness 能做到什么程度 |
-| 怎么验证 Agent 做对了事 | 大家更擅长限制它别做错，但验证功能正确性还很弱 | Böckeler 批评：用 AI 生成的测试来验证 AI 生成的代码，仍然像“用同一双眼睛检查自己的作业” |
+| 怎么验证 Agent 做对了事 | 现有实践更擅长限制它别做错，功能正确性验证仍然薄弱 | Böckeler 批评：用 AI 生成的测试来验证 AI 生成的代码，仍然像“用同一双眼睛检查自己的作业” |
 | AI 生成代码的长期可维护性 | LLM 代码经常重新实现已有功能，长期效果还不好判断 | Greg Brockman 提出过这个问题，但目前没有清晰答案 |
 | Harness 该做厚还是做薄 | Manus 五次重写越做越简单，OpenAI 五个月越做越复杂 | 场景决定。通用产品更追求最小化，特定产品可以高度定制。模型变强后，已有 Harness 也应该定期简化，Anthropic 已经做过类似验证 |
 | 单 Agent 还是多 Agent | Hashimoto 坚持单 Agent，Carlini 使用 16 个并行 Agent | 规模决定。小项目单 Agent 往往够用，大项目更容易走向专业化分工 |
@@ -184,7 +184,7 @@ OpenAI、Anthropic、Stripe、Hashimoto 这些案例基本都是在新项目里�
 
 OpenAI 的 `AGENTS.md` 大约只有 100 行，作用更像目录，指向 `docs/` 目录下更深层的设计文档、架构图、执行计划和质量评级。这就是渐进式披露：先给最关键的信息，需要更多细节时再加载。
 
-这和到一个新城市很像。你不需要一上来背完整本旅游指南，先给一张地图，再告诉你想了解某个景点时去翻哪一页，就够用了。
+该策略类似到新城市先看地图：不必一次读完旅游指南，先提供地图，需要了解某景点时再查阅对应章节。
 
 Agent Skills 也可以看成渐进式披露的一种实现。它保留少量元数据，比如名称和描述，详细规则和执行流程只在触发时再加载进上下文。这个思路和 OpenAI 把 `AGENTS.md` 当目录很接近，只是 Skills 把这个模式标准化了。相关阅读：《Agent Skills 详解：是什么？怎么用？和 Prompt、MCP 有什么区别？》。
 
@@ -271,7 +271,7 @@ Anthropic 发现 Sonnet 4.5 在上下文快满时会变得犹豫，甚至提前�
 
 流程很简单：当 Agent 上下文接近饱和时，先把当前任务状态、已完成工作、待办事项结构化提取出来；然后启动一个新的干净 Agent，把交接文档给它；新 Agent 从干净状态继续做。
 
-这有点像程序遇到内存泄漏。你不一定非要手动释放每个内存块，也可以重启进程，再从检查点恢复状态。听起来粗暴，但长任务里，一个干净的新 Agent 往往比一个塞满历史信息的 Agent 表现更好。
+该策略类似进程内存泄漏后的重启恢复：不必手动释放每个内存块，可从检查点恢复状态。方法直接，但长任务中新启动的 Agent 往往比塞满历史信息的 Agent 表现更好。
 
 这个思路和 Carlini 的编译器项目也很接近。他跑了 2000 个 Claude Code 会话，每个会话都相对独立，从干净状态开始。Anthropic 只是把“重启和恢复”做得更正式。
 
@@ -340,7 +340,7 @@ Birgitta Böckeler 是 Thoughtworks 的 Distinguished Engineer，她在 Martin F
 | Architectural Constraints | 确保 Agent 不跑偏 | 自定义 Linter、结构测试、LLM Agent 充当约束 |
 | Garbage Collection | 对抗熵积累 | 定期运行清理 Agent，扫描不一致和违规 |
 
-Böckeler 还提了几个判断，我觉得比案例本身更值得关注。
+Böckeler 还提出几个更值得关注的判断。
 
 她认为 Harness 可能会变成新的服务模板。很多组织只有两三个主要技术栈，未来团队可能会从一组预制 Harness 中选择，就像今天从服务模板里创建新服务一样。
 

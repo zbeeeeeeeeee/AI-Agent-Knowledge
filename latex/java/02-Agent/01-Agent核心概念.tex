@@ -150,11 +150,11 @@ AI Agent 不是突然冒出来的。它大概经历了几次明显变化。
 
 
 
-\textbf{2022 年，ChatGPT 这类产品刚火的时候}，大家主要还在和模型“对话”。能力很强，但它只能基于已有知识回答问题，不能主动调用外部工具，也不能自己完成操作。
+\textbf{2022 年，ChatGPT 这类产品刚火时}，主要应用仍是与模型“对话”。模型能基于已有知识回答问题，不能主动调用外部工具，也不能自己完成操作。
 
 
 
-当时最重要的玩法是 Prompt Engineering。你把提示词写得越清楚，它回答得越稳。
+当时最重要的方法是 Prompt Engineering：提示词越清晰，回答越稳定。
 
 
 
@@ -174,7 +174,7 @@ LLM 可以调用外部 API，不再只是生成文字。RAG 也开始大规模�
 
 
 
-\textbf{2023 年底，大家开始重视编排。}
+\textbf{2023 年底，业界开始重视编排。}
 
 
 
@@ -238,7 +238,7 @@ Harness Engineering 也开始被更多人讨论。
 
 
 
-大家不再只盯着模型参数、上下文长度和 Prompt 技巧，开始更关注模型外面的工程环境。
+关注点从模型参数、上下文长度和 Prompt 技巧扩展到模型之外的工程环境。
 
 
 
@@ -257,7 +257,7 @@ Harness Engineering 也开始被更多人讨论。
 \subsection*{Agent、传统编程和 Workflow 区别？}
 
 
-很多人第一次接触 Agent，会把它和自动化脚本、Workflow 混在一起。
+Agent 容易与自动化脚本、Workflow 混淆。
 
 
 
@@ -316,7 +316,7 @@ Agent 解决的是那些没法提前穷举所有情况的问题。Workflow 和�
 \section*{什么是 AI Agent？}
 
 
-如果你看过 LangChain 的 Agent 源码，会发现它的核心并不神秘，很多时候就是一个 while 循环。
+LangChain 的 Agent 源码核心并不复杂，多数时候是一个 while 循环。
 
 
 
@@ -334,7 +334,7 @@ AI Agent 可以理解为一个能感知环境、做决策、执行动作的软�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/agent-core-arch.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/agent-core-arch.jpg}
 \caption*{AI Agent 核心架构}
 \end{figure}
 
@@ -348,7 +348,7 @@ AI Agent 可以理解为一个能感知环境、做决策、执行动作的软�
 
 
 
-\textbf{Tools（工具）}：让 LLM 能真正操作外部世界，比如查数据、调 API、读文件、执行代码。没有工具，Agent 很多时候只能停留在”建议你怎么做”。
+\textbf{Tools（工具）}：让 LLM 能真正操作外部世界，比如查数据、调 API、读文件、执行代码。没有工具，Agent 大多只能停留在“给出建议”。
 
 
 
@@ -369,7 +369,7 @@ Agent Loop 是 Agent 真正跑起来的地方。
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/agent-loop-flow.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/agent-loop-flow.jpg}
 \caption*{Agent Loop 工作流程}
 \end{figure}
 
@@ -560,7 +560,7 @@ MCP 提供了一套基于 JSON-RPC 2.0 的统一通信协议，经常被叫作 A
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/mcp-simple-diagram.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/mcp-simple-diagram.jpg}
 \caption*{MCP 图解}
 \end{figure}
 
@@ -604,7 +604,7 @@ Prompt（提示词）可以简单理解为给大语言模型下达的指令。Pr
 
 
 
-这块展开讲内容很多，可以单独看这篇：《提示词工程（Prompt Engineering）》。
+详见《提示词工程（Prompt Engineering）》。
 
 
 
@@ -625,13 +625,13 @@ Prompt Engineering 更偏提示词怎么写，Context Engineering 管得更宽�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/context-engineering-vs-context-engineering-dimension-comparison.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/context-engineering-vs-context-engineering-dimension-comparison.jpg}
 \caption*{Context Engineering 和 Prompt Engineering 差别}
 \end{figure}
 
 
 
-这块展开讲内容很多，可以单独看这篇：《提示词工程（Prompt Engineering）》 和 《上下文工程（Context Engineering）》。
+详见《提示词工程（Prompt Engineering）》和《上下文工程（Context Engineering）》。
 
 
 
@@ -659,7 +659,7 @@ LLM 自己容易缺少实时信息，也容易幻觉。ReAct 就让它“走一�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/ReAct-LLM.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/ReAct-LLM.jpg}
 \caption*{ReAct-LLM}
 \end{figure}
 
@@ -711,7 +711,7 @@ ReAct 落地时一般需要这几个组件配合：
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/agent-react-flow.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/agent-react-flow.jpg}
 \caption*{ReAct 模式流程}
 \end{figure}
 
@@ -803,7 +803,7 @@ Multi-Agent 是多个独立 Agent 协作完成复杂任务。
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/agent-multi-agent-arch.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/agent-multi-agent-arch.jpg}
 \caption*{Multi-Agent 系统架构}
 \end{figure}
 
@@ -850,7 +850,7 @@ A2A 协议就是给 Agent 之间定义接口契约。
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/agent-a2a.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/agent-a2a.jpg}
 \caption*{A2A 协议架构}
 \end{figure}
 
@@ -869,7 +869,7 @@ Agentic Workflows 是吴恩达（Andrew Ng）最近重点倡导的概念，可�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/agent-agentic-workflows.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI Agent 核心概念：Agent Loop、Plan-and-Execute、A2A、Agentic Workflows、Tools 注册 _ JavaGuide_files/agent-agentic-workflows.jpg}
 \caption*{智能体工作流核心模式}
 \end{figure}
 
@@ -901,15 +901,15 @@ Agentic Workflows 是吴恩达（Andrew Ng）最近重点倡导的概念，可�
 
 
 
-很多人一听 Agent，就默认应该让模型自己规划、自己调用工具、自己跑完全程。听起来很智能，实际落地不一定稳。
+常见误解是 Agent 必须由模型自行规划、调用工具并跑完全程；实际落地中，这种全自主模式稳定性不足。
 
 
 
-纯 Agent 里，LLM 是决策者。每一步要不要调工具、调哪个工具、下一步怎么走，主要靠模型推理。你给它一个任务，它自己尝试把任务跑完。
+纯 Agent 里，LLM 是决策者。每一步是否调工具、调哪个工具、下一步怎么走，主要靠模型推理；给定任务后，模型自行尝试跑完。
 
 
 
-AI 工作流里，LLM 只是流程里的一个节点。整条流程的骨架，比如步骤顺序、条件跳转、失败重试，都是你提前设计好的。控制权在图结构里，不在模型手里。
+AI 工作流里，LLM 只是流程中的一个节点。步骤顺序、条件跳转、失败重试等流程骨架提前设计，控制权在图结构中，不在模型手里。
 
 
 
@@ -947,11 +947,11 @@ Node 只做一件事，读取状态、执行逻辑、写回结果。节点里可
 
 
 
-但有个常见认知偏差：很多人觉得任务“路径不确定”，是需求没拆清楚。把任务认真拆一遍后，往往会发现大部分场景是“LLM 在固定节点里做生成或判断”，这种用 Workflow 更稳，也更容易排查。
+常见认知偏差是把任务“路径不确定”当作需求未拆清。认真拆分后，多数场景可归为“LLM 在固定节点做生成或判断”，此类场景用 Workflow 更稳、更易排查。
 
 
 
-真正适合纯 Agent 的任务，是那种你提前写不出执行步骤的场景。比如“帮我排查这个线上故障”，查什么、怎么查、查到什么程度，很难事先规定死。
+真正适合纯 Agent 的任务，是无法预先写出执行步骤的场景。比如“帮我排查这个线上故障”，查什么、怎么查、查到什么程度，很难事先规定死。
 
 
 

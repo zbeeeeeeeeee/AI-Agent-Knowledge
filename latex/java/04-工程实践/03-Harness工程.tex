@@ -149,7 +149,7 @@
 \subsection*{Harness 到底是什么？}
 
 
-可以先用一个粗暴但好记的说法：Agent = Model + Harness。你不是模型，那你做的东西大概率就是 Harness。
+Agent = Model + Harness。除模型外，其余组件大概率属于 Harness。
 
 
 
@@ -161,13 +161,13 @@ LangChain 的 Vivek Trivedi 写过一篇《The Anatomy of an Agent Harness》，
 
 
 
-可以把模型想成 CPU，把 Harness 想成操作系统。CPU 再强，OS 如果天天崩，体验也不会好。你买了最新的 M5 芯片，但系统卡死、驱动乱飞，实际体验可能还不如旧芯片配一个稳定系统。
+模型可类比 CPU，Harness 可类比操作系统。CPU 再强，OS 不稳定则体验不佳：最新 M5 芯片配不稳定系统，实际体验可能不如旧芯片配稳定系统。
 
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/harness-agent-equals-model-harness-arch.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/harness-agent-equals-model-harness-arch.jpg}
 \caption*{Agent = Model + Harness}
 \end{figure}
 
@@ -182,7 +182,7 @@ Prompt Engineering、Context Engineering、Harness Engineering 不太适合放�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/harness-engineering-layers-arch.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/harness-engineering-layers-arch.jpg}
 \caption*{Harness 和 Prompt/Context Engineering 的关系}
 \end{figure}
 
@@ -203,7 +203,7 @@ Harness Engineering & 系统怎么持续执行、纠偏、观测和恢复 & 长�
 
 
 
-简单任务里，Prompt 可能就够了。比如让模型改一句文案，提示词说清楚，效果通常不会差。需要外部知识时，Context 更重要，你得把资料、检索结果、历史状态放到合适位置。到了长链路、可执行、低容错的商业场景，Harness 才会变成主要矛盾，因为 Agent 需要的不只是“会回答”，还要能执行、验证、回滚、继续推进。
+简单任务里，Prompt 可能就够了。比如让模型改一句文案，提示词说清楚，效果通常不会差。需要外部知识时，Context 更重要，需把资料、检索结果、历史状态放到合适位置。到了长链路、可执行、低容错的商业场景，Harness 才会变成主要矛盾，因为 Agent 需要的不只是“会回答”，还要能执行、验证、回滚、继续推进。
 
 
 
@@ -243,7 +243,7 @@ Harness Engineering & 系统怎么持续执行、纠偏、观测和恢复 & 长�
 
 
 
-把这些“模型做不了，但你又希望 Agent 能做到”的部分补齐，就是 Harness 的组件清单。LangChain 也把它拆成了几块：文件系统负责持久化，Bash 执行负责通用工具，沙箱负责隔离风险，记忆机制负责跨会话积累，上下文压缩负责对抗长上下文带来的质量下降。
+把“模型做不了但 Agent 需要具备”的部分补齐，就是 Harness 的组件清单。LangChain 也把它拆成了几块：文件系统负责持久化，Bash 执行负责通用工具，沙箱负责隔离风险，记忆机制负责跨会话积累，上下文压缩负责对抗长上下文带来的质量下降。
 
 
 
@@ -257,13 +257,13 @@ Harness Engineering & 系统怎么持续执行、纠偏、观测和恢复 & 长�
 
 
 
-我之前在 YouTube 上看到过一个六层体系，比较适合拿来理解 Harness 的全貌：
+一个适合理解 Harness 全貌的六层体系：
 
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/harness-engineering-six-layer-architecture.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/harness-engineering-six-layer-architecture.pdf}
 \caption*{Harness Engineering 六层架构}
 \end{figure}
 
@@ -305,7 +305,7 @@ L6 & 约束、校验与恢复层 & 出错了怎么办 & 预设规则拦截错误
 \subsection*{为什么瓶颈经常不在模型？}
 
 
-第一次听到这个结论，很多人会觉得反直觉。模型不够聪明，那等更强的模型出来不就好了？但不少实验和实践都在指向另一个结论：模型当然重要，但在很多 Agent 场景里，真正卡住效果的是基础设施。
+该结论看似反直觉：模型能力不足时，直觉方案是等待更强模型。但多项实验表明，模型虽然重要，多数 Agent 场景的瓶颈仍在基础设施。
 
 
 
@@ -334,7 +334,7 @@ Dex Horthy 观察到一个很有意思的现象：168K token 的上下文窗口�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/context-utilization-40-percent-threshold-phenomenon.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/context-utilization-40-percent-threshold-phenomenon.pdf}
 \caption*{上下文利用率的 40\% 阈值现象}
 \end{figure}
 
@@ -432,7 +432,7 @@ Agent 专业化分工 & 每个 Agent 携带更少无关信息，留在 Smart Zon
 
 
 
-\subsection*{你的 Harness 到哪个阶段了？}
+\subsection*{Harness 建设阶段评估}
 
 
 可以用下面这个表粗略判断一下。这里不需要追求一步到 Level 4，很多团队能从 Level 0 到 Level 1，收益就已经很明显。
@@ -471,7 +471,7 @@ Level 4：自治循环 & 无人值守并行化、自动清理、自修复 & 架�
 \hline
 棕地项目怎么改造 & 公开成功案例几乎都是绿地项目，缺少成熟方法论 & Böckeler 把它比作“在从没用过静态分析的代码库上跑静态分析”。她还提出 Ambient Affordances：环境本身的结构特性，比如类型系统、模块边界、框架抽象，会影响 Harness 能做到什么程度 \\
 \hline
-怎么验证 Agent 做对了事 & 大家更擅长限制它别做错，但验证功能正确性还很弱 & Böckeler 批评：用 AI 生成的测试来验证 AI 生成的代码，仍然像“用同一双眼睛检查自己的作业” \\
+怎么验证 Agent 做对了事 & 现有实践更擅长限制它别做错，功能正确性验证仍然薄弱 & Böckeler 批评：用 AI 生成的测试来验证 AI 生成的代码，仍然像“用同一双眼睛检查自己的作业” \\
 \hline
 AI 生成代码的长期可维护性 & LLM 代码经常重新实现已有功能，长期效果还不好判断 & Greg Brockman 提出过这个问题，但目前没有清晰答案 \\
 \hline
@@ -540,11 +540,11 @@ OpenAI 的 \texttt{AGENTS.md} 大约只有 100 行，作用更像目录，指向
 
 
 
-这和到一个新城市很像。你不需要一上来背完整本旅游指南，先给一张地图，再告诉你想了解某个景点时去翻哪一页，就够用了。
+该策略类似到新城市先看地图：不必一次读完旅游指南，先提供地图，需要了解某景点时再查阅对应章节。
 
 
 
-Agent Skills 也可以看成渐进式披露的一种实现。它保留少量元数据，比如名称和描述，详细规则和执行流程只在触发时再加载进上下文。这个思路和 OpenAI 把 \texttt{AGENTS.md} 当目录很接近，只是 Skills 把这个模式标准化了。相关阅读可以看这篇：Agent Skills 详解：是什么？怎么用？和 Prompt、MCP 有什么区别？。
+Agent Skills 也可以看成渐进式披露的一种实现。它保留少量元数据，比如名称和描述，详细规则和执行流程只在触发时再加载进上下文。这个思路和 OpenAI 把 \texttt{AGENTS.md} 当目录很接近，只是 Skills 把这个模式标准化了。相关阅读：《Agent Skills 详解：是什么？怎么用？和 Prompt、MCP 有什么区别？》。
 
 
 
@@ -611,7 +611,7 @@ Anthropic 在这个方向上有两个值得细看的实践。一个是 Carlini �
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/anthropic-three-agent-collaborative-architecture-inspired-by-gan.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/anthropic-three-agent-collaborative-architecture-inspired-by-gan.pdf}
 \caption*{Anthropic 三智能体协同架构（受 GAN 启发）}
 \end{figure}
 
@@ -710,7 +710,7 @@ Anthropic 发现 Sonnet 4.5 在上下文快满时会变得犹豫，甚至提前�
 
 
 
-这有点像程序遇到内存泄漏。你不一定非要手动释放每个内存块，也可以重启进程，再从检查点恢复状态。听起来粗暴，但长任务里，一个干净的新 Agent 往往比一个塞满历史信息的 Agent 表现更好。
+该策略类似进程内存泄漏后的重启恢复：不必手动释放每个内存块，可从检查点恢复状态。方法直接，但长任务中新启动的 Agent 往往比塞满历史信息的 Agent 表现更好。
 
 
 
@@ -756,7 +756,7 @@ Stripe 的 Minions 系统是另一个极端：高度自动化、无人值守。�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/stripe-hybrid-state-machine-orchestration-architecture.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/stripe-hybrid-state-machine-orchestration-architecture.pdf}
 \caption*{Stripe 混合状态机编排架构}
 \end{figure}
 
@@ -833,7 +833,7 @@ Ghostty 项目里的 \texttt{AGENTS.md} 很有代表性。每一行都对应一�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/continuously-evolving-harness-error-prevention-feedback-loop.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/一文搞懂 Harness Engineering：六层架构、上下文管理与一线团队实战 _ JavaGuide_files/continuously-evolving-harness-error-prevention-feedback-loop.pdf}
 \caption*{持续进化的 Harness 防错反馈闭环}
 \end{figure}
 
@@ -865,7 +865,7 @@ Garbage Collection & 对抗熵积累 & 定期运行清理 Agent，扫描不一�
 
 
 
-Böckeler 还提了几个判断，我觉得比案例本身更值得关注。
+Böckeler 还提出几个更值得关注的判断。
 
 
 

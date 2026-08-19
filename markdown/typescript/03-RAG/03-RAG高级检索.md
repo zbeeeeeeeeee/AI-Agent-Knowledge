@@ -104,6 +104,5 @@ function rrfFusion(rankedLists: ScoredDoc[][], k = 60, topN = 20): ScoredDoc[] {
 
 ## 9. 延伸阅读
 
-- [RAG 面试题](../10-面试/02-RAG面试题.md)
 - [Agent 评测体系](../05-评测与质量/01-Agent评测体系.md)
 - [AI 应用系统设计](../07-系统设计/01-AI应用系统设计.md)

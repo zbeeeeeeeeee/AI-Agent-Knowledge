@@ -6,7 +6,6 @@
       <node TEXT="🟡 后端工程师 ≡" LINK="markdown/java/README.md"/>
       <node TEXT="🟡 算法工程师 ≡" LINK="markdown/java/02-Agent/01-Agent核心概念.md"/>
       <node TEXT="🟡 架构师 ≡" LINK="markdown/java/07-系统设计/01-AI应用系统设计.md"/>
-      <node TEXT="🟢 面试冲刺 ≡" LINK="markdown/java/10-面试/04-AI应用开发面试指南.md"/>
     </node>
     <node TEXT="按生命周期">
       <node TEXT="🟢 概念入门 ≡" LINK="markdown/java/README.md"/>
@@ -32,7 +31,7 @@
   <node TEXT="🟡 01 概念与分类 ≡" LINK="markdown/java/02-Agent/01-Agent核心概念.md">
     <node TEXT="🟡 Agent 定义与边界 ≡" LINK="markdown/java/02-Agent/01-Agent核心概念.md">
       <node TEXT="🟢 Agent 是什么 ≡" LINK="markdown/java/02-Agent/01-Agent核心概念.md"/>
-      <node TEXT="🟡 Agent vs Chatbot ≡" LINK="markdown/java/10-面试/06-模拟面试题库.md"/>
+      <node TEXT="🟢 Agent vs Chatbot ≡" LINK="markdown/java/00-概念与术语/01-Agent术语表与概念边界.md"/>
       <node TEXT="🟢 Agent vs Workflow ≡" LINK="markdown/java/02-Agent/01-Agent核心概念.md"/>
       <node TEXT="🟡 Agent vs RAG ≡" LINK="markdown/java/02-Agent/02-Agent记忆系统.md"/>
     </node>

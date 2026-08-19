@@ -7,6 +7,7 @@ Converts SVG images to PDF before LaTeX compilation.
 
 import os
 import re
+import shutil
 import sys
 import subprocess
 from pathlib import Path
@@ -17,13 +18,15 @@ try:
 except ImportError:
     HAS_CAIROSVG = False
 
-BASE_DIR = Path("/home/zhang/demos/latex_demos/Agent知识")
+BASE_DIR = Path(__file__).resolve().parent
 MD_DIR = BASE_DIR / "markdown"
 TEX_DIR = BASE_DIR / "latex"
 PDF_DIR = BASE_DIR / "pdf"
 HTML_DIR = BASE_DIR / "HTML"
-TEXLIVE_BIN = "/home/zhang/texlive/bin/x86_64-linux"
-os.environ["PATH"] = f"{TEXLIVE_BIN}:{os.environ.get('PATH', '')}"
+_xelatex = shutil.which("xelatex")
+TEXLIVE_BIN = os.environ.get("TEXLIVE_BIN", str(Path(_xelatex).parent) if _xelatex else "")
+if TEXLIVE_BIN:
+    os.environ["PATH"] = f"{TEXLIVE_BIN}:{os.environ.get('PATH', '')}"
 
 LATEX_PREAMBLE = r"""\documentclass[9pt,a4paper,twocolumn]{ctexart}
 
@@ -392,10 +395,18 @@ def fix_image_format(tex_content, tex_dir):
                     return f'\\includegraphics[{opts}]{{{alt}}}'
             return m.group(0)
 
-        if ext == '.svg' and HAS_CAIROSVG:
-            new_path = convert_svg_to_pdf(img_path)
-            if new_path:
-                return f'\\includegraphics[{opts}]{{{new_path}}}'
+        if ext == '.svg':
+            if HAS_CAIROSVG:
+                new_path = convert_svg_to_pdf(img_path)
+                if new_path:
+                    return f'\\includegraphics[{opts}]{{{new_path}}}'
+            pdf_path = img_path.with_suffix('.pdf')
+            if not pdf_path.exists():
+                cached_pdf = HTML_DIR / '_converted' / img_path.parent.name / (img_path.stem + '.pdf')
+                if cached_pdf.exists():
+                    pdf_path = cached_pdf
+            if pdf_path.exists():
+                return f'\\includegraphics[{opts}]{{{pdf_path}}}'
         elif ext == '.webp':
             new_path = convert_webp_to_png(img_path)
             if new_path:

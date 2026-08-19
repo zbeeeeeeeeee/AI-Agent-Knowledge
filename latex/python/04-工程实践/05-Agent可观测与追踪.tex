@@ -152,7 +152,7 @@
 \section*{TL;DR}
 
 \begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item 普通服务监控只能告诉你“接口慢不慢”，Agent 可观测必须回答“它为什么这么走”。
+  \item 普通服务监控只回答“接口慢不慢”，Agent 可观测还需回答“为什么这么走”。
   \item 最小可用能力是三项：\textbf{Trace 记录决策轨迹、指标聚合趋势、回放复现问题}。
   \item 可观测不是上线后补，而是在 Agent Loop 里埋点：LLM 调用、工具调用、状态变更、审批事件都必须留痕。
 \end{enumerate}

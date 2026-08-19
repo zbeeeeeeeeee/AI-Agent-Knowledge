@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup, Tag
 from markdownify import markdownify as md
 
 
-BASE_DIR = Path("/home/zhang/demos/latex_demos/Agent知识")
+BASE_DIR = Path(__file__).resolve().parent
 HTML_DIR = BASE_DIR / "HTML"
 OUTPUT_DIR = BASE_DIR / "markdown"
 
@@ -40,13 +40,6 @@ CATEGORY_MAP = [
     ]),
     ("05-系统设计", [
         "AI 应用系统设计",
-        "AI 系统设计面试题",
-    ]),
-    ("06-面试", [
-        "AI Agent 面试题",
-        "RAG 面试题",
-        "大模型基础面试题",
-        "AI 应用开发面试指南",
     ]),
 ]
 

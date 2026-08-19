@@ -156,7 +156,7 @@ Embedding 的过程是：把一段文本交给 Embedding 模型，模型输出�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/rag-embedding-vector-retrieval.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/rag-embedding-vector-retrieval.jpg}
 \caption*{Embedding 和向量检索是什么关系？}
 \end{figure}
 
@@ -194,7 +194,7 @@ RAG（Retrieval-Augmented Generation）的核心是语义检索。系统把文�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/rag-why-need-vector-store.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/rag-why-need-vector-store.jpg}
 \caption*{RAG 场景为什么需要向量数据库？}
 \end{figure}
 
@@ -318,11 +318,11 @@ BM25 关键词 & 字面匹配，基于词频统计 & 遇到同义词或改写容
 
 
 
-面试里如果被问“为什么 RAG 常用余弦相似度”，可以这样答：文本语义检索更关心方向是否接近，而不是向量长度本身；余弦距离对长度不敏感，更适合判断语义相似。如果 Embedding 模型输出已经归一化，内积和余弦在排序上通常等价，内积计算会更直接。
+RAG 常用余弦相似度的原因：文本语义检索更关心方向是否接近，而不是向量长度本身；余弦距离对长度不敏感，更适合判断语义相似。如果 Embedding 模型输出已经归一化，内积和余弦在排序上通常等价，内积计算会更直接。
 
 
 
-具体用哪个，不要凭感觉选。要看 Embedding 模型是否归一化、官方推荐的 metric，以及向量库索引是否支持对应 operator class。
+具体选择依据 Embedding 模型是否归一化、官方推荐的 metric，以及向量库索引是否支持对应 operator class。
 
 
 
@@ -345,7 +345,7 @@ BM25 关键词 & 字面匹配，基于词频统计 & 遇到同义词或改写容
 
 
 
-用生活化一点的比喻：
+类比：
 
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
@@ -360,13 +360,13 @@ BM25 关键词 & 字面匹配，基于词频统计 & 遇到同义词或改写容
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/rag-vector-index-algorithms-Bjze1jhj.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/rag-vector-index-algorithms-Bjze1jhj.jpg}
 \caption*{向量索引算法分类}
 \end{figure}
 
 
 
-多数时候我们谈向量索引，谈的是 ANN 算法。选对并调好 ANN 索引，直接影响 RAG 或向量搜索系统的性能和成本。调得好，性能提升可能是百倍甚至千倍；调不好，也可能召回掉得很难看。
+多数场景下，向量索引指 ANN 算法。选对并调好 ANN 索引，直接影响 RAG 或向量搜索系统的性能和成本：调得好，性能可提升百倍甚至千倍；调不好，召回会明显下降。
 
 
 
@@ -405,7 +405,7 @@ ANN 是现代向量检索的主流。它接受一个工程取舍：不保证 100
 
 
 
-这里先区分两个层级：
+先区分两个层级：
 
 
 {\footnotesize
@@ -449,10 +449,10 @@ IVF\_RABITQ & 聚类 + 随机旋转比特量化 & 内存占用低，召回率优
 
 
 
-\section*{你的项目使用的什么向量索引算法？}
+\section*{项目示例：向量索引算法选型}
 
 
-这里以 《SpringAI 智能面试平台+RAG 知识库》项目为例。
+以 《Spring AI 招聘知识库平台》项目为例。
 
 
 
@@ -470,7 +470,7 @@ IVF\_RABITQ & 聚类 + 随机旋转比特量化 & 内存占用低，召回率优
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/rag-hnsw-architecture.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/rag-hnsw-architecture.jpg}
 \caption*{HNSW 索引架构}
 \end{figure}
 
@@ -651,7 +651,7 @@ IVFFLAT 用 K-Means 把向量空间切成多个桶。查询时先找最近的几
 
 
 
-如果你的业务本来就依赖关键词检索，比如电商搜索、文档检索、复杂过滤和聚合分析，或者团队已经有 ES 技术栈，那么复用 ES / OpenSearch 的向量能力会比较自然。
+若业务依赖关键词检索（如电商搜索、文档检索、复杂过滤和聚合分析），或团队已有 ES 技术栈，复用 ES / OpenSearch 的向量能力更自然。
 
 
 
@@ -708,10 +708,10 @@ Milvus 功能比较全面，社区也大；Weaviate 内置 AI 模块，支持 Gr
 \end{itemize}
 
 
-\section*{你为什么选择 PostgreSQL + pgvector？}
+\section*{PostgreSQL + pgvector 选型依据}
 
 
-这里以 《SpringAI 智能面试平台+RAG 知识库》项目为例。这个项目需要同时存结构化数据，比如简历、面试记录，也要存向量数据，也就是文档 Embedding。
+以 《Spring AI 招聘知识库平台》项目为例。该项目同时存储结构化数据（简历、岗位记录）和向量数据（文档 Embedding）。
 
 
 
@@ -871,7 +871,7 @@ MySQL 这边要分版本看。MySQL 8.x 系列，包括 8.4 LTS，没有官方 \
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/mysql9-vector-cannot-be-used-as-any-type-of-key.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/mysql9-vector-cannot-be-used-as-any-type-of-key.jpg}
 \caption*{VECTOR 列不能用作任何类型的键，包括主键、外键、唯一键和分区键}
 \end{figure}
 
@@ -881,7 +881,7 @@ MySQL 这边要分版本看。MySQL 8.x 系列，包括 8.4 LTS，没有官方 \
 \section*{⭐️ RAG 实战项目推荐}
 
 
-参考项目：Spring Boot 4.0 + Java 21 + Spring AI + PostgreSQL + pgvector + RustFS + Redis，覆盖简历分析、模拟面试、知识库 RAG。
+参考项目：Spring Boot 4.0 + Java 21 + Spring AI + PostgreSQL + pgvector + RustFS + Redis，覆盖简历解析、岗位匹配、知识库 RAG。
 
 
 
@@ -891,7 +891,7 @@ MySQL 这边要分版本看。MySQL 8.x 系列，包括 8.4 LTS，没有官方 \
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/interview-guide-architecture-diagram.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/interview-guide-architecture-diagram.jpg}
 \caption*{系统架构图}
 \end{figure}
 
@@ -903,7 +903,7 @@ MySQL 这边要分版本看。MySQL 8.x 系列，包括 8.4 LTS，没有官方 \
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/page-skill-jd-parse.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/page-skill-jd-parse.jpg}
 \caption*{Skill 出题 + JD 解析}
 \end{figure}
 
@@ -911,7 +911,7 @@ MySQL 这边要分版本看。MySQL 8.x 系列，包括 8.4 LTS，没有官方 \
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/page-resume-analysis-detail.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 向量索引算法和向量数据库 _ JavaGuide_files/page-resume-analysis-detail.jpg}
 \caption*{简历分析详情}
 \end{figure}
 
@@ -940,29 +940,11 @@ HNSW 更适合低延迟和高召回，IVFFLAT 更适合内存和构建成本敏�
 
 
 
-面试里常问这些：
-
-
-\begin{itemize}[itemsep=1pt, topsep=2pt]
-  \item 什么是 Embedding？为什么需要把文本转成向量？
-  \item RAG 场景为什么需要向量数据库？
-  \item 余弦相似度和欧氏距离有什么区别？RAG 场景下用哪个？
-  \item ANN 算法为什么可以接受不是 100\% 精确的结果？
-  \item 有哪些向量索引算法？各自优缺点是什么？
-  \item HNSW 和 IVFFLAT 有什么区别？
-  \item HNSW 的 \texttt{ef\_search} 参数怎么调？调大和调小分别会怎样？
-  \item 向量数据库和传统数据库最核心的区别是什么？
-  \item 如果向量数据从 100 万增长到 1 亿，架构上需要做什么调整？
-  \item pgvector 的 HNSW 索引在什么情况下会失效或退化为更慢的扫描？
-  \item 为什么选择 PostgreSQL + pgvector？
-\end{itemize}
-
-
-动手时建议先把 HNSW 的图结构、IVF 的聚类原理理解清楚，再用 pgvector 或 Milvus 搭一个最小 Demo，比较不同索引参数下的召回率和延迟。\texttt{ef\_search}、\texttt{nprobe} 这些参数不要凭感觉调，最好拿真实业务问题做评测。
+先理解 HNSW 的图结构和 IVF 的聚类原理，再用 pgvector 或 Milvus 搭最小 Demo，比较不同索引参数下的召回率和延迟。\texttt{ef\_search}、\texttt{nprobe} 参数应基于真实业务问题评测。
 
 
 
-向量数据库选型和索引调优，直接决定 RAG 系统能不能在生产环境站稳脚跟。选错了，就是检索慢、召回差、成本炸三连。
+向量数据库选型和索引调优决定 RAG 系统能否用于生产环境；选型或调参错误会导致检索慢、召回差、成本高。
 
 
 \end{document}

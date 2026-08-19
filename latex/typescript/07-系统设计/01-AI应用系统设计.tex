@@ -185,14 +185,14 @@ AI 应用把部分决策交给概率模型，故障不一定落在某一行代�
 
 
 
-如果你对大模型 API 的调用链还不熟，可以先看 大模型 API 调用工程实践：流式输出、重试、限流与结构化返回。如果是想补 Token、上下文窗口和采样参数这些基础，再看 LLM 运行机制：Token、上下文窗口与采样参数怎么影响输出。
+补充阅读：大模型 API 调用工程实践（流式输出、重试、限流与结构化返回）；Token、上下文窗口和采样参数基础见 LLM 运行机制。
 
 
 
 \section*{生产级 AI 应用的标准分层架构}
 
 
-小 G 更推荐按职责拆层。不同公司命名会有差异，但生产系统里的边界大体一致。
+推荐按职责拆层。不同公司命名会有差异，但生产系统里的边界大体一致。
 
 
 
@@ -257,7 +257,7 @@ interface AiRequest {
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI 应用系统设计：从 Prompt Demo 到生产级架构 _ JavaGuide_files/llm-gateway-overview.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI 应用系统设计：从 Prompt Demo 到生产级架构 _ JavaGuide_files/llm-gateway-overview.jpg}
 \caption*{LLM 网关示意图}
 \end{figure}
 
@@ -304,17 +304,17 @@ Prompt 在生产环境里应该被当成一种可版本化配置，不能散落�
 
 
 
-Langfuse 官方文档把 Prompt Management、Tracing、Evaluation 放在同一套 LLM 工程平台里，也是在解决这个问题：Prompt 不只影响生成文本，还会影响检索、工具调用、成本和评测结果。你可以不用 Langfuse，但这几类数据最好能在自己的系统里串起来。
+Langfuse 官方文档把 Prompt Management、Tracing、Evaluation 放在同一套 LLM 工程平台中，原因相同：Prompt 不只影响生成文本，还影响检索、工具调用、成本和评测结果。不强制使用 Langfuse，但这类数据应在自己的系统中串起来。
 
 
 
-Prompt 写法本身可以看 大模型提示词工程（Prompt Engineering）是什么？提示词技巧有哪些？。如果你关心的是“哪些信息该进上下文、进多少、什么时候压缩”，更适合看 上下文工程（Context Engineering）是什么？和 Prompt Engineering 有什么区别？。
+Prompt 写法见 大模型提示词工程（Prompt Engineering）是什么？提示词技巧有哪些？。“哪些信息该进上下文、进多少、什么时候压缩”见 上下文工程（Context Engineering）是什么？和 Prompt Engineering 有什么区别？。
 
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI 应用系统设计：从 Prompt Demo 到生产级架构 _ JavaGuide_files/context-engineering-vs-context-engineering-dimension-comparison.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI 应用系统设计：从 Prompt Demo 到生产级架构 _ JavaGuide_files/context-engineering-vs-context-engineering-dimension-comparison.jpg}
 \caption*{Context Engineering 和 Prompt Engineering 差别}
 \end{figure}
 
@@ -327,7 +327,7 @@ Prompt 写法本身可以看 大模型提示词工程（Prompt Engineering）是
 
 
 
-小 G 建议把它拆开：
+推荐按以下边界拆分：
 
 
 {\footnotesize
@@ -352,7 +352,7 @@ Tool & 查询订单、创建工单、发邮件、改配置、查数据库 & 运�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI 应用系统设计：从 Prompt Demo 到生产级架构 _ JavaGuide_files/agent-memory-rag-vs-memory.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI 应用系统设计：从 Prompt Demo 到生产级架构 _ JavaGuide_files/agent-memory-rag-vs-memory.pdf}
 \caption*{长期记忆与 RAG（检索增强生成）的区别}
 \end{figure}
 
@@ -535,7 +535,7 @@ fallback 链 & 主模型失败后切备用模型 & 大多数生产系统 & 备�
 
 
 
-OpenTelemetry 文档里的 GenAI registry 能看到 \texttt{gen\_ai.request.model}、\texttt{gen\_ai.response.model}、\texttt{gen\_ai.usage.input\_tokens}、\texttt{gen\_ai.usage.output\_tokens}、\texttt{gen\_ai.response.time\_to\_first\_chunk}、retrieval、tool 等字段。不过 OpenTelemetry 站内也提示 GenAI 语义约定已迁移到独立仓库，落地时不要只复制一篇旧文档里的字段名，最好锁定当前版本并做字段映射。无论你用 Langfuse、LangSmith，还是自建观测平台，都建议尽量向通用字段靠拢，后续迁移和统一监控会轻松很多。
+OpenTelemetry 文档里的 GenAI registry 能看到 \texttt{gen\_ai.request.model}、\texttt{gen\_ai.response.model}、\texttt{gen\_ai.usage.input\_tokens}、\texttt{gen\_ai.usage.output\_tokens}、\texttt{gen\_ai.response.time\_to\_first\_chunk}、retrieval、tool 等字段。不过 OpenTelemetry 站内也提示 GenAI 语义约定已迁移到独立仓库，落地时不要只复制旧文档里的字段名，应锁定当前版本并做字段映射。无论选择 Langfuse、LangSmith 还是自建观测平台，都建议尽量向通用字段靠拢，后续迁移和统一监控更轻松。
 
 
 
@@ -579,7 +579,7 @@ Tool Calling 很容易让人产生错觉：模型返回了一个函数名和参�
 
 
 
-Anthropic、OpenAI 和 Google 的官方工具/函数调用文档都强调工具定义、参数结构和调用处理；Google 的文档还明确提醒，对会发送订单、更新数据库等有明显后果的函数调用，要在执行前让用户确认。落到工程里，再补一条硬规则：\textbf{别让模型替你做权限判断}。
+Anthropic、OpenAI 和 Google 的官方工具/函数调用文档都强调工具定义、参数结构和调用处理；Google 的文档还明确提醒，对会发送订单、更新数据库等有明显后果的函数调用，要在执行前让用户确认。工程实现增加硬规则：\textbf{模型不得代替系统做权限判断}。
 
 
 
@@ -587,13 +587,13 @@ Anthropic、OpenAI 和 Google 的官方工具/函数调用文档都强调工具�
 
 
 
-工具调用这块如果想从概念补起，可以先看 大模型结构化输出：从 JSON 契约到 Function Calling 落地。如果你的工具要被多个模型、Agent 或 IDE 复用，再看 什么是 Model Context Protocol（MCP）？和 Function Calling、Agent 什么关系？。
+相关阅读：大模型结构化输出：从 JSON 契约到 Function Calling 落地；需要跨模型、Agent 或 IDE 复用工具时，见 什么是 Model Context Protocol（MCP）？和 Function Calling、Agent 什么关系？。
 
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI 应用系统设计：从 Prompt Demo 到生产级架构 _ JavaGuide_files/structured-output-function-calling-function-calling-pipeline.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI 应用系统设计：从 Prompt Demo 到生产级架构 _ JavaGuide_files/structured-output-function-calling-function-calling-pipeline.jpg}
 \caption*{Function Calling 完整调用链路：模型只生成调用意图，真正执行工具的是业务侧}
 \end{figure}
 
@@ -628,7 +628,7 @@ type ToolRiskLevel = "READ_ONLY" | "WRITE_LOW_RISK" | "WRITE_HIGH_RISK";
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/AI 应用系统设计：从 Prompt Demo 到生产级架构 _ JavaGuide_files/structured-output-function-calling-tool-call-security.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/AI 应用系统设计：从 Prompt Demo 到生产级架构 _ JavaGuide_files/structured-output-function-calling-tool-call-security.jpg}
 \caption*{工具调用安全风险分层：按风险等级匹配不同的控制策略}
 \end{figure}
 
@@ -683,7 +683,7 @@ Prompt 注入污染 & 文档里写着“忽略前面规则” & 文档内容分�
 
 
 
-小 G 的经验是：RAG 和 Memory 的结果不要直接拼成一段“背景资料”。要给模型清晰标注来源、时间、权限和可信度。模型看到的上下文越有结构，越不容易把“用户偏好”“公司制度”“工具结果”混成一类信息。
+实践中，RAG 和 Memory 的结果不要直接拼成一段“背景资料”。要给模型清晰标注来源、时间、权限和可信度。模型看到的上下文越有结构，越不容易把“用户偏好”“公司制度”“工具结果”混成一类信息。
 
 
 
@@ -730,7 +730,7 @@ Tool & 工具名称、参数、权限结果、执行耗时、返回摘要、错�
 
 
 
-Langfuse、LangSmith、Google Vertex AI 和 OpenTelemetry 的官方文档里，都能看到 tracing、datasets、evaluators、token usage、latency 这类对象。工具可以不同，但你要抓的信号大体相同。
+Langfuse、LangSmith、Google Vertex AI 和 OpenTelemetry 的官方文档都包含 tracing、datasets、evaluators、token usage、latency 等对象。工具可不同，需采集的信号大体相同。
 
 
 
@@ -822,7 +822,7 @@ Prompt 注入、上下文分区和工具权限是连在一起的，前面提到�
 \section*{TypeScript 后端落地建议}
 
 
-如果用 TypeScript 做生产级 AI 应用，小 G 建议按“领域能力”拆模块，别按供应商 SDK 拆模块。
+用 TypeScript 构建生产级 AI 应用时，按“领域能力”拆模块，不要按供应商 SDK 拆模块。
 
 
 
@@ -960,34 +960,11 @@ Controller
 
 
 
-如果你只做一个企业知识库问答，第一阶段可以先落地 \texttt{ai-api}、\texttt{ai-prompt}、\texttt{ai-gateway}、\texttt{ai-rag}、\texttt{ai-observability}。Memory、Tool、Eval 可以逐步补齐。但 Trace 和 Prompt 版本不要拖到后面，它们是后续排查问题的地基。
+仅构建企业知识库问答时，第一阶段可先落地 \texttt{ai-api}、\texttt{ai-prompt}、\texttt{ai-gateway}、\texttt{ai-rag}、\texttt{ai-observability}。Memory、Tool、Eval 可以逐步补齐。但 Trace 和 Prompt 版本不要拖到后面，它们是后续排查问题的地基。
 
 
 
-如果想从 TypeScript 后端调用大模型 API 的细节入手，可以先看 大模型 API 调用工程实践；如果团队准备把模型调用统一成基础设施，建议把 大模型网关详解 单独读一遍。
-
-
-
-\section*{面试怎么讲这套架构}
-
-
-面试官问“你怎么设计一个生产级 AI 应用”，别上来就说“我会用 LangChain”。
-
-
-
-更稳的回答方式是：
-
-
-\begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item 先讲 Demo 和生产差距：稳定性、权限、成本、观测、评测、数据治理。
-  \item 再讲分层：入口层、编排层、Prompt/Context、RAG/Memory/Tool、模型网关、异步任务、评测观测。
-  \item 讲关键链路：一次请求如何鉴权、检索、组装上下文、调用模型、校验输出、记录 Trace。
-  \item 讲治理能力：Prompt 版本、模型 fallback、Token 预算、工具权限、PII 脱敏。
-  \item 最后讲评测闭环：固定样本集、线上失败样本回放、LLM-as-Judge 和人工复核结合。
-\end{enumerate}
-
-
-如果你是按面试路线复习，可以直接看 AI 系统设计面试题总结。RAG、Agent 和大模型基础也分别有 RAG 面试题总结、AI Agent 面试题总结 和 大模型基础面试题总结。
+需要从 TypeScript 后端调用大模型 API 的细节入手时，先看 大模型 API 调用工程实践；团队准备把模型调用统一成基础设施时，单独读一遍 大模型网关详解。
 
 
 
@@ -1001,73 +978,6 @@ Controller
   \item \textbf{可观测和评测决定系统能不能持续变好}，没有 Trace 和回放，优化基本靠猜。
   \item \textbf{安全策略要靠代码强制执行}，Prompt 只能辅助，不能替代权限、脱敏、审计和二次确认。
 \end{enumerate}
-
-
-\section*{高频面试问题}
-
-
-\textbf{1. Prompt Demo 到生产系统最大的差距是什么？}
-
-
-
-差距在工程治理。Demo 关注模型能不能答，生产系统关注稳定性、权限隔离、成本控制、可观测、评测回放和数据合规。
-
-
-
-\textbf{2. 为什么需要模型网关？}
-
-
-
-模型网关把供应商差异、模型路由、fallback、限流、熔断、Token 预算、成本统计和观测统一起来，避免业务代码直接耦合某个模型 API。
-
-
-
-\textbf{3. 同步、流式、异步怎么选？}
-
-
-
-短小任务走同步，长答案和聊天走流式，报告生成、批量处理、多工具任务走异步。判断时重点看任务耗时、用户是否需要首字反馈、是否需要重试和恢复。
-
-
-
-\textbf{4. Prompt 为什么要做版本管理？}
-
-
-
-Prompt 会直接影响输出质量、工具调用、检索策略和成本。版本管理可以支持灰度、回滚、审计和离线评测回放。
-
-
-
-\textbf{5. Tool Calling 的安全边界在哪里？}
-
-
-
-模型只能提出工具调用意图，参数校验、权限校验、敏感操作确认和审计必须由后端系统完成。
-
-
-
-\textbf{6. RAG 和 Memory 有什么区别？}
-
-
-
-RAG 管共享知识源，例如企业文档和产品手册；Memory 管个性化长期事实，例如用户偏好和历史决策。二者可以协作，但要分区注入上下文，避免污染。
-
-
-
-\textbf{7. AI 应用可观测要看哪些指标？}
-
-
-
-至少看 Prompt 版本、检索命中、工具调用、模型输出、输入输出 Token、TTFT、总延迟、成功率、错误率、成本和评测分数。
-
-
-
-\textbf{8. LLM-as-Judge 能不能替代人工评测？}
-
-
-
-不能。它适合自动化回归、线上抽样和大规模初筛，但关键业务仍需要规则校验、人工复核和用户反馈闭环。
-
 
 
 \section*{参考资料}

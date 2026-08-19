@@ -146,7 +146,7 @@
 \section*{为什么 AI 系统需要工作流？}
 
 
-单轮对话能回答问题，但很难稳定地\textbf{交付结果}。线上真实任务很少是“问一句答一句”就完事——检索信息、调用工具、输出结构化结果、校验格式、失败重试、不满意再来一轮，这些步骤串起来才叫交付。靠一段超长 Prompt 把所有逻辑塞进去，早晚会炸。你需要的是一种\textbf{可分支、可循环、可观测}的执行路径。
+单轮对话能回答问题，但很难稳定地\textbf{交付结果}。线上真实任务很少是“问一句答一句”：检索信息、调用工具、输出结构化结果、校验格式、失败重试、不满意再来一轮，这些步骤串起来才是交付。靠一段超长 Prompt 塞入所有逻辑不可维护，需要\textbf{可分支、可循环、可观测}的执行路径。
 
 
 
@@ -164,7 +164,7 @@
 
 
 
-以一个简单例子来看：当我们让 AI 写一篇文章时，一次生成的结果往往不够理想。直觉做法是手动复制结果，再附加新要求继续提问，但这种方式既不高效，也会快速消耗上下文。如果将这一过程结构化为“\textbf{审查 → 修改 → 再审查}”的循环，并设定停止条件（如达到质量标准或触达迭代上限），稳定性会明显好很多。
+以文章写作为例：一次生成的结果往往不够理想。手动复制结果并追加新要求继续提问，既不高效，也会快速消耗上下文。将这一过程结构化为“\textbf{审查 → 修改 → 再审查}”循环，并设定停止条件（如达到质量标准或触达迭代上限），稳定性会明显提升。
 
 
 
@@ -177,7 +177,7 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/_converted/AI 工作流中的 Workflow、Graph 与 Loop：从概念到实现 _ JavaGuide_files/traditional-vs-ai-workflow.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/_converted/AI 工作流中的 Workflow、Graph 与 Loop：从概念到实现 _ JavaGuide_files/traditional-vs-ai-workflow.pdf}
 \caption*{传统 Workflow 与 AI Workflow 对比}
 \end{figure}
 
@@ -205,7 +205,7 @@ AI 工作流与传统工作流的关键差异在于：路径选择依赖于运�
 \subsection*{AI 工作流的特点}
 
 
-到了 AI 场景，同样的“流程”一词，含义不太一样了。相比传统工作流强调的顺序性与确定性，AI 工作流需要处理的是一个充满不确定性的执行环境。我们面对的不再只是“按步骤执行”，还包括：
+到了 AI 场景，“流程”一词的含义不同。传统工作流强调顺序性与确定性；AI 工作流处理的是充满不确定性的执行环境，不再只是“按步骤执行”，还包括：
 
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
@@ -216,7 +216,7 @@ AI 工作流与传统工作流的关键差异在于：路径选择依赖于运�
 \end{itemize}
 
 
-所以 AI Workflow 与传统 Workflow 都有流程，差别在于前者更强调动态决策和状态驱动。一旦我们想要表达“下一步不唯一”或者“不满意就再来一轮”，线性列表就不够用，自然会落到 Graph（结构）与 Loop（回溯）这两类概念上。
+AI Workflow 与传统 Workflow 都有流程，差别在于前者更强调动态决策和状态驱动。表达“下一步不唯一”或“不满意就再来一轮”时，线性列表不够用，需要落到 Graph（结构）与 Loop（回溯）两类概念上。
 
 
 
@@ -226,7 +226,7 @@ AI 工作流与传统工作流的关键差异在于：路径选择依赖于运�
 \subsection*{Graph：工作流的结构}
 
 
-沿用贯穿案例：假如我们要搭一条「生成初稿 → 质量审核 → 不达标则修改 → 再回到审核」的路径。这里每一步对应图的 \textbf{Node}，步骤之间的走向由 \textbf{Edge} 表达，整条链路读写的共享上下文就是 \textbf{State}。
+沿用案例：搭建「生成初稿 → 质量审核 → 不达标则修改 → 再回到审核」路径。每一步对应图的 \textbf{Node}，步骤之间的走向由 \textbf{Edge} 表达，整条链路读写的共享上下文就是 \textbf{State}。
 
 
 
@@ -284,7 +284,7 @@ AI 工作流与传统工作流的关键差异在于：路径选择依赖于运�
 \end{itemize}
 
 
-如果只看 Node 和 Edge，我们会得到一张“能跑起来的路径图”；加上 State，这张图才能在运行时做决策。
+只看 Node 和 Edge，只能得到一张“能跑起来的路径图”；加上 State，这张图才能在运行时做决策。
 
 
 
@@ -307,13 +307,13 @@ Graph Loop 是 Graph 内部通过回边形成的迭代修正循环；Agent Loop 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/_converted/AI 工作流中的 Workflow、Graph 与 Loop：从概念到实现 _ JavaGuide_files/loop-mechanism.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/_converted/AI 工作流中的 Workflow、Graph 与 Loop：从概念到实现 _ JavaGuide_files/loop-mechanism.pdf}
 \caption*{Loop 概览：循环机制示意}
 \end{figure}
 
 
 
-很多人第一次接触 AI 工作流时，会把 \texttt{Loop} 理解成“多跑几次”。这不算错，但还不够准确。更准确地说：\textbf{Loop 是图结构上的一种控制模式}。当某条边根据当前状态把控制流送回到先前节点时，就形成了 Loop，正如上图所示，重点在判断是否达标，在循环的内部 LLM 会根据提示词的要求对结果进行“评分”，如果满足就会输出，否则“打回重写”。
+\texttt{Loop} 常被理解为“多跑几次”，但准确含义是\textbf{图结构上的一种控制模式}：某条边根据当前状态把控制流送回先前节点时，就形成 Loop。如上图所示，循环内部由 LLM 按提示词对结果评分，满足条件则输出，否则打回重写。
 
 
 
@@ -326,7 +326,7 @@ Graph Loop 是 Graph 内部通过回边形成的迭代修正循环；Agent Loop 
 \end{enumerate}
 
 
-AI 场景里，第二类通常更有代表性。因为“跑几次”往往不是先验确定的，而是由内容质量、工具执行结果、外部反馈共同决定的。但是实际开发中两者必须同时使用，因为 LLM 的不确定性可能会导致生成的内容一直不合格，此时我们就需要参考固定次数循环思想对内容进行降级兜底处理。
+AI 场景里，第二类通常更有代表性：“跑几次”往往不是先验确定的，而是由内容质量、工具执行结果、外部反馈共同决定。实际开发中两者必须同时使用：LLM 的不确定性可能导致内容一直不合格，此时需要按固定次数循环进行降级兜底。
 
 
 
@@ -357,7 +357,7 @@ AI 场景里，第二类通常更有代表性。因为“跑几次”往往不�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/_converted/AI 工作流中的 Workflow、Graph 与 Loop：从概念到实现 _ JavaGuide_files/workflow-graph-loop-relation.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/_converted/AI 工作流中的 Workflow、Graph 与 Loop：从概念到实现 _ JavaGuide_files/workflow-graph-loop-relation.pdf}
 \caption*{Workflow、Graph、Loop 三者关系概览}
 \end{figure}
 
@@ -371,9 +371,9 @@ AI 场景里，第二类通常更有代表性。因为“跑几次”往往不�
 
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
-  \item 当我们说“先生成初稿，再审核，不达标就修改，直到达标后输出”，我们描述的是 \textbf{Workflow}。
-  \item 当我们把 \texttt{生成节点 → 检查节点 → 修正节点} 画成节点与连线，并让它们共享同一份状态时，我们得到的是 \textbf{Graph}。
-  \item 当我们规定“审核不通过就回到修改，直到评分达标或达到上限”为止，我们定义的就是 \textbf{Loop}。
+  \item “先生成初稿，再审核，不达标就修改，直到达标后输出”描述的是 \textbf{Workflow}。
+  \item 把 \texttt{生成节点 → 检查节点 → 修正节点} 画成节点与连线，并共享同一份状态，得到的是 \textbf{Graph}。
+  \item 规定“审核不通过就回到修改，直到评分达标或达到上限”，得到的是 \textbf{Loop}。
 \end{itemize}
 
 
@@ -384,7 +384,7 @@ AI 场景里，第二类通常更有代表性。因为“跑几次”往往不�
 \section*{代码实现}
 
 
-前面建立了 Node、Edge、State 的概念模型，接下来看这些概念如何映射到具体的框架。以下以 Spring AI Alibaba Graph（Java 生态）和 LangGraph（Python 生态）为例。
+框架映射：以下以 Spring AI Alibaba Graph（Java 生态）和 LangGraph（Python 生态）为例。
 
 
 
@@ -612,7 +612,7 @@ public static CompiledGraph buildWorkflow(ChatModel chatModel) throws GraphState
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/_converted/AI 工作流中的 Workflow、Graph 与 Loop：从概念到实现 _ JavaGuide_files/abstraction-comparison.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/_converted/AI 工作流中的 Workflow、Graph 与 Loop：从概念到实现 _ JavaGuide_files/abstraction-comparison.pdf}
 \caption*{高抽象与低抽象工作流对比}
 \end{figure}
 
@@ -645,7 +645,7 @@ public static CompiledGraph buildWorkflow(ChatModel chatModel) throws GraphState
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/_converted/AI 工作流中的 Workflow、Graph 与 Loop：从概念到实现 _ JavaGuide_files/graph-core-elements.pdf}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/_converted/AI 工作流中的 Workflow、Graph 与 Loop：从概念到实现 _ JavaGuide_files/graph-core-elements.pdf}
 \caption*{Graph 核心元素：Node、Edge、State}
 \end{figure}
 
@@ -766,32 +766,5 @@ Loop 会自然放大 Token 与延迟。设计时要提前思考：
 理解图结构、状态流转和可控循环这几层抽象，比追某个框架的 API 变化更有长期价值。具体语言和框架跟着团队技术栈走就行。
 
 
-
-\section*{面试准备要点}
-
-
-\textbf{高频问题}：
-
-
-\begin{enumerate}[itemsep=1pt, topsep=2pt]
-  \item \textbf{为什么 AI 系统需要工作流？} → LLM 输出不确定，需要动态决策、自动修正和可控收敛
-  \item \textbf{Workflow、Graph、Loop 三者什么关系？} → Workflow 是目标与过程，Graph 是结构与载体，Loop 是图上的控制模式
-  \item \textbf{Graph Loop 和 Agent Loop 有什么区别？} → Agent Loop 是 Agent 的顶层运行引擎（推理→行动→观察循环），Graph Loop 是 Graph 内部的回溯控制模式（特定节点子集通过回边迭代修正），两者可以嵌套
-  \item \textbf{Loop 如何防止死循环？} → 三要素：继续条件、退出条件、安全边界（最大轮次 + 超时 + Token 预算）
-  \item \textbf{State 的更新策略怎么选？} → 单值字段用 Replace，累积字段用 Append，并行写入字段必须用 Reducer
-  \item \textbf{条件边和动态路由的区别？} → 条件边候选集在设计时确定、运行时做选择；动态路由候选集在运行时才确定；实际是一个连续谱系
-  \item \textbf{怎么理解 Graph 的抽象设计？} → Node 抽象职责边界（产出什么），Edge 抽象流转规则（何时去哪），State 抽象必须持久记住的信息
-\end{enumerate}
-
-
-\textbf{追问准备}：
-
-
-\begin{itemize}[itemsep=1pt, topsep=2pt]
-  \item 工作流中断后怎么恢复？（持久化 + checkpoint 机制）
-  \item 节点内的错误怎么处理？（瞬时错误重试、LLM 可恢复错误循环回去、用户可修复错误转人工、意外错误冒泡）
-  \item Spring AI Alibaba 和 LangGraph 的循环实现有什么区别？（前者可用条件边回指或 LoopAgent，后者需自行维护计数器）
-  \item 工作流有哪些特有的安全风险？（State 污染影响路由、Loop 放大攻击消耗 Token）
-\end{itemize}
 
 \end{document}

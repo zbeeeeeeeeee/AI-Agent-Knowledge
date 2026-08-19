@@ -152,7 +152,7 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/rag-simplified-architecture-diagram.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/rag-simplified-architecture-diagram.jpg}
 \caption*{RAG 示意图}
 \end{figure}
 
@@ -163,7 +163,7 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/rag-llm-challenges.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/rag-llm-challenges.jpg}
 \caption*{RAG（检索增强生成）如何解决 LLM 的核心挑战}
 \end{figure}
 
@@ -193,7 +193,7 @@ LLM 训练数据再大，也绕不开几个问题。RAG 正好可以在这些地
 
 
 
-LLM 编造事实这件事大家都遇到过。RAG 通过提供明确参考文本，让模型尽量基于证据回答，确实能降低幻觉概率。但别指望它彻底消除幻觉。检索错误、上下文噪声、引用错配、模型不遵循指令，都可能导致错误答案。生产级 RAG 通常还要配引用校验、答案评估、拒答机制和人工反馈闭环。
+LLM 会编造事实。RAG 通过提供明确参考文本，让模型尽量基于证据回答，能降低幻觉概率，但不能彻底消除幻觉。检索错误、上下文噪声、引用错配、模型不遵循指令，都可能导致错误答案。生产级 RAG 通常还要配引用校验、答案评估、拒答机制和人工反馈闭环。
 
 
 
@@ -273,7 +273,7 @@ RAG 的工程链路通常分两个阶段：离线索引和在线检索生成。�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/rag-rag-engineering-link.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/rag-rag-engineering-link.jpg}
 \caption*{索引和检索阶段的简化流程图}
 \end{figure}
 
@@ -336,7 +336,7 @@ Embedding 就是把文本变成一串数字。更准确地说，它会把文本�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/rag-2-embedding-map-text-to-semantic-space.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/rag-2-embedding-map-text-to-semantic-space.jpg}
 \caption*{Embedding：把文本映射到语义空间}
 \end{figure}
 
@@ -393,7 +393,7 @@ Embedding 模型也不是“实时理解世界”的东西。它主要负责把�
 
 
 
-面试里如果被问“为什么用余弦相似度”，可以这样答：RAG 关注的是语义方向是否接近，而不是向量长度本身；余弦相似度对长度不敏感，更适合文本语义检索。实际项目里还要和 Embedding 模型推荐的距离度量、向量库索引类型保持一致，否则可能导致索引无法命中或召回效果下降。
+RAG 常用余弦相似度的原因：RAG 关注的是语义方向是否接近，而不是向量长度本身；余弦相似度对长度不敏感，更适合文本语义检索。实际项目里还要和 Embedding 模型推荐的距离度量、向量库索引类型保持一致，否则可能导致索引无法命中或召回效果下降。
 
 
 
@@ -402,7 +402,7 @@ Embedding 模型也不是“实时理解世界”的东西。它主要负责把�
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/rag-rag-vs-search-engine.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/rag-rag-vs-search-engine.jpg}
 \caption*{RAG 与传统搜索引擎的区别}
 \end{figure}
 
@@ -434,15 +434,15 @@ RAG 会把检索到的多个知识片段一起放进 LLM 上下文，让模型�
 \section*{RAG 和微调怎么选？}
 
 
-“为什么不直接微调？”是 RAG 面试里很高频的问题。
+RAG 与微调的选型问题很常见。
 
 
 
-可以这样区分：RAG 解决的是模型不知道新知识或私有知识的问题，微调更适合解决模型不会按你的方式说话或做事的问题。
+二者区分：RAG 解决模型缺少新知识或私有知识的问题，微调解决输出风格、格式和任务行为不符合要求的问题。
 
 
 
-打个比方。你有一本很厚的员工手册，经常要查里面的规定。RAG 的思路是随查随用，把手册放在外面，每次回答前先翻一下。微调的思路是把手册背下来，让模型把这些知识内化进去。手册三天两头改版时，RAG 换个索引就行；微调要重新准备数据、训练和评测，成本完全不一样。
+类比：员工手册经常需要查阅。RAG 是随查随用，把手册放在外部，每次回答前检索；微调是把手册内容内化进模型。手册频繁改版时，RAG 更新索引即可；微调需要重新准备数据、训练和评测，成本差异明显。
 
 
 {\footnotesize
@@ -471,7 +471,7 @@ RAG 会把检索到的多个知识片段一起放进 LLM 上下文，让模型�
 
 
 
-面试时可以这样收尾：知识变动频繁、需要引用来源，优先 RAG；输出风格和任务行为不稳定，考虑微调；既要懂领域表达又要查实时知识，可以两者结合。
+选型结论：知识变动频繁、需要引用来源，优先 RAG；输出风格和任务行为不稳定，考虑微调；既要懂领域表达又要查实时知识，可以两者结合。
 
 
 
@@ -515,7 +515,7 @@ RAG 这两年一直在迭代，大致可以分成三个阶段。
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/rag-2-evolution-stages.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/万字详解 RAG 基础概念 _ JavaGuide_files/rag-2-evolution-stages.jpg}
 \caption*{RAG 演进阶段}
 \end{figure}
 
@@ -555,7 +555,7 @@ Naive RAG 是起点，能跑通 Demo，但离生产通常还有距离。Advanced
 
 
 
-\textbf{数据隔离也更容易做。} 你可以在检索层实现多租户隔离和访问控制（ACL），确保用户只能看到自己权限范围内的数据。相比把敏感数据放进微调训练集，RAG 这套架构更适合做权限和合规治理。
+\textbf{数据隔离也更容易做。} 检索层可实现多租户隔离和访问控制（ACL），确保用户只能看到权限范围内的数据。相比把敏感数据放进微调训练集，RAG 这套架构更适合做权限和合规治理。
 
 
 
@@ -579,7 +579,7 @@ Naive RAG 是起点，能跑通 Demo，但离生产通常还有距离。Advanced
 
 
 
-\textbf{工程复杂度也不低。} 你要维护向量数据库，处理文档增量索引，持续优化检索策略，还要做权限过滤、引用溯源和评测闭环。相比直接调用 LLM API，RAG 的运维负担明显更重。
+\textbf{工程复杂度也不低。} 需要维护向量数据库，处理文档增量索引，持续优化检索策略，并完成权限过滤、引用溯源和评测闭环。相比直接调用 LLM API，RAG 的运维负担明显更重。
 
 
 
@@ -590,7 +590,7 @@ Naive RAG 是起点，能跑通 Demo，但离生产通常还有距离。Advanced
 \section*{⭐️ RAG 实战项目推荐}
 
 
-参考项目：Spring Boot 4.0 + Java 21 + Spring AI + PostgreSQL + pgvector + RustFS + Redis，覆盖简历分析、模拟面试、知识库 RAG。
+参考项目：Spring Boot 4.0 + Java 21 + Spring AI + PostgreSQL + pgvector + RustFS + Redis，覆盖简历解析、岗位匹配、知识库 RAG。
 
 
 
@@ -601,11 +601,11 @@ Naive RAG 是起点，能跑通 Demo，但离生产通常还有距离。Advanced
 \section*{总结}
 
 
-RAG 就是先从知识库里找相关内容，再让 LLM 基于找到的内容回答。它的价值不是让模型“更神”，而是把回答拉回到可检索、可引用、可审计的证据上。
+RAG 先从知识库检索相关内容，再让 LLM 基于检索结果回答。其价值不是提升模型能力，而是把回答拉回可检索、可引用、可审计的证据上。
 
 
 
-几个关键点可以重点留意下：
+关键点：
 
 
 \begin{enumerate}[itemsep=1pt, topsep=2pt]
@@ -615,29 +615,11 @@ RAG 就是先从知识库里找相关内容，再让 LLM 基于找到的内容�
 \end{enumerate}
 
 
-它的局限也要意识到。检索质量决定上限，上下文噪声会干扰生成，延迟、工程复杂度、Token 成本都是真实存在的。
+其局限同样明确：检索质量决定上限，上下文噪声会干扰生成，延迟、工程复杂度和 Token 成本真实存在。
 
 
 
-Demo 跑通不代表生产可用，RAG 最难的部分往往不是“接一个向量库”，而是持续评估和优化召回质量。
+Demo 跑通不等于生产可用；RAG 的难点通常不是接入向量库，而是持续评估和优化召回质量。
 
-
-
-面试里常问这些：
-
-
-\begin{itemize}[itemsep=1pt, topsep=2pt]
-  \item 什么是 RAG？为什么需要 RAG？
-  \item RAG 和传统搜索引擎有什么区别？
-  \item RAG 和微调怎么选？什么时候用 RAG，什么时候微调，什么时候两者结合？
-  \item RAG 系统中 Embedding 模型怎么选？为什么？
-  \item 余弦相似度、内积和欧氏距离有什么区别？
-  \item RAG 的幻觉问题怎么解决？RAG 一定不会产生幻觉吗？
-  \item 什么是 Lost in the Middle 问题？怎么应对？
-  \item 长上下文窗口是否会取代 RAG？
-  \item RAG 系统的评估指标有哪些？
-  \item RAG 的优势和局限性是什么？
-  \item 什么场景适合用 RAG？什么场景不适合？
-\end{itemize}
 
 \end{document}

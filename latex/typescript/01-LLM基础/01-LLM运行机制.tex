@@ -146,7 +146,7 @@
 \section*{⭐️ Token 和上下文为什么决定成本与效果？}
 
 
-当你在输入法里打“今天天气真”，它会自动建议“好”——大模型做的事情本质上一样。只不过它看的不是前面几个字，而是前面几千甚至几十万个字。每次只“补”一个 Token（文本碎片），然后把这个碎片加进上下文，再预测下一个，如此循环，直到生成完整回答。
+输入法输入“今天天气真”时，会自动建议“好”。大模型同理，只是参考的不是前几个字，而是前几千到几十万个字。每次只“补”一个 Token（文本碎片），再把该碎片加进上下文并预测下一个，循环直到生成完整回答。
 
 
 
@@ -165,7 +165,7 @@
 \end{itemize}
 
 
-你可以把 Token 理解为“模型的阅读单位”。我们人类读中文是一个字一个字地看，读英文是一个词一个词地看。但模型既不按字、也不按词——它用一套自己的“拆字规则”（叫 Tokenizer）把文本切成大小不等的碎片，每个碎片就是一个 Token。
+Token 是模型的阅读单位。人类读中文逐字、读英文逐词，模型既不逐字也不逐词，而是通过 Tokenizer 把文本切成大小不等的碎片，每个碎片是一个 Token。
 
 
 
@@ -182,7 +182,7 @@
 
 
 
-你可以把 Token 想象成乐高积木。常用的“积木块”比较大（比如“你好”可能是一个 Token），不常用的词会被拆成更小的基础块拼起来。
+Token 可类比乐高积木：常用的“积木块”较大（如“你好”可能是一个 Token），不常用词会拆成更小的基础块。
 
 
 
@@ -228,15 +228,15 @@ Token 划分直接影响模型理解能力。中文分词歧义和生僻字/低�
 
 
 \begin{itemize}[itemsep=1pt, topsep=2pt]
-  \item 原文：\texttt{你好，我是小 G。}
-  \item 切分：\texttt{[你好]} \texttt{[，]} \texttt{[我是]} \texttt{[小 G]} \texttt{[。]}
+  \item 原文：\texttt{你好，我是助手。}
+  \item 切分：\texttt{[你好]} \texttt{[，]} \texttt{[我是]} \texttt{[助手]} \texttt{[。]}
   \item 统计：原文 9 字符 → Token 数 5 个 → 压缩比约 1.8 倍
 \end{itemize}
 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/LLM 运行机制：Token、上下文窗口与采样参数怎么影响输出 _ JavaGuide_files/llm-token-process.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/LLM 运行机制：Token、上下文窗口与采样参数怎么影响输出 _ JavaGuide_files/llm-token-process.jpg}
 \caption*{Token 化过程示例}
 \end{figure}
 
@@ -333,7 +333,7 @@ Gemini & 按分辨率计算 & \textasciitilde\{\}258 tokens（标准） \\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/LLM 运行机制：Token、上下文窗口与采样参数怎么影响输出 _ JavaGuide_files/llm-context-window.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/LLM 运行机制：Token、上下文窗口与采样参数怎么影响输出 _ JavaGuide_files/llm-context-window.jpg}
 \caption*{上下文窗口（Context Window）= LLM 的「工作记忆」}
 \end{figure}
 
@@ -349,7 +349,7 @@ Gemini & 按分辨率计算 & \textasciitilde\{\}258 tokens（标准） \\
 \end{itemize}
 
 
-因此，你真正能塞进 Prompt 的“有效业务内容”往往远小于标称上限。
+因此，真正能塞进 Prompt 的有效业务内容往往远小于标称上限。
 
 
 
@@ -619,7 +619,7 @@ DeepSeek & Context Caching & 10\textasciitilde\{\}30 分钟 & 输入价格约 25
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{/home/zhang/demos/latex_demos/Agent知识/HTML/LLM 运行机制：Token、上下文窗口与采样参数怎么影响输出 _ JavaGuide_files/llm-temperature-params.jpg}
+\includegraphics[width=0.85\textwidth]{/home/mao/demos/latex_demos/ai-agent-knowledge/HTML/LLM 运行机制：Token、上下文窗口与采样参数怎么影响输出 _ JavaGuide_files/llm-temperature-params.jpg}
 \caption*{Temperature 参数：控制模型输出的随机性}
 \end{figure}
 
@@ -908,7 +908,7 @@ JSON / 结构化输出 & 0 \textasciitilde\{\} 0.3 & 1.0 & 保持默认 & 配合
 \section*{总结}
 
 
-回顾这篇扫盲内容，核心就是处理好三个维度的工程权衡：
+核心是三个维度的工程权衡：
 
 
 \begin{enumerate}[itemsep=1pt, topsep=2pt]
@@ -918,7 +918,7 @@ JSON / 结构化输出 & 0 \textasciitilde\{\} 0.3 & 1.0 & 保持默认 & 配合
 \end{enumerate}
 
 
-打好这层参数与原理的地基，再去看 Agent 编排、RAG 检索或是 MCP 工具调用，你会发现那些高阶架构的本质，无非是在更好地调度这些底层 Token，更精准地管理这个上下文窗口。
+掌握参数与原理后，Agent 编排、RAG 检索和 MCP 工具调用的本质，是更精准地调度 Token 并管理上下文窗口。
 
 
 \end{document}
